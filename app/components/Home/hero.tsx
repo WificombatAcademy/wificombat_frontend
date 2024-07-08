@@ -1,9 +1,10 @@
+"use client"
 import Link from "next/link"
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Pagination } from 'swiper/modules';
+import { Pagination, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import 'swiper/css/autoplay';
+import 'swiper/css/navigation';
 
 const slides = [
     {heading1: "Shape Your Gaming Career Pathway", 
@@ -19,11 +20,11 @@ const slides = [
     bgColor: "bg-blue-500", buttonBlack: true },
 
     {heading1: "Dive into the Robotics and IoT Career Pathway", 
-    heading2: `Ready to turn your passion for gaming into a career? Dive into the world of game development and start your game career pathway`,
+    heading2: `Step into the world of Robotics and IoT with our exclusive career pathway program. Design and implement groundbreaking technologies`,
     bgColor: "bg-yellow-500", buttonBlack: true },
 
-    {heading1: "Shape Your Gaming Career Pathway", 
-     heading2: `Ready to turn your passion for gaming into a career? Dive into the world of game development and start your game career pathway`,
+    {heading1: "Navigate the AI Career Pathway", 
+     heading2: `Dive into the exciting world of artificial intelligence. Gain expertise, innovate, and lead the way in AI technology with our specialized career pathway.`,
     bgColor: "bg-blue-300", buttonBlack: true },
 ]
 
@@ -31,40 +32,53 @@ export const Hero = () => {
     return (
         <section className="text-white">
             <Swiper 
-            modules={[ Pagination ]}
+            modules={[ Pagination, Navigation ]}
             spaceBetween={50}
             slidesPerView={1}
-            autoplay={{ delay:5000 }}
+            navigation
             pagination={{ clickable: true }}
-            className="relative"
+            className="relative text-white"
             >
-                
-            </Swiper>
-            <div className="relative isolate overflow-hidden pb-[7rem] md:py-[7rem] lg:py-[10rem] bg-black-500">
-                <div className="max-md:mt-[4rem] w-[93%] md:w-[90%] mx-auto flex flex-col md:flex-row md:items-center gap-10">
-                    <div className="w-full md:basis-[50%]">
-                        <h1 className="font-semibold text-3xl md:text-4xl lg:text-5xl md:w-[85%]">
-                            Shape Your Gaming Career Pathway
-                        </h1>
+                {slides.map((slide, index) => (
+                    <SwiperSlide key={index} className="relative">
+                        <div className={`relative isolate overflow-hidden pb-[7rem] md:py-[7rem] lg:py-[10rem] ${slide.bgColor}`}>
+                            <div className="max-md:mt-[4rem] w-[93%] md:w-[90%] mx-auto flex flex-col md:flex-row md:items-center gap-10">
+                                <div className="w-full md:basis-[50%]">
+                                    <h1 className="font-semibold text-3xl md:text-4xl lg:text-5xl md:w-[85%]">
+                                        {slide.heading1}
+                                    </h1>
 
-                        <p className="mt-5 text-lg md:text-xl">
-                            Ready to turn your passion for gaming into a career? 
-                            Dive into the world of game development and start your game career pathway
-                        </p>
-                        
-                        <div className="mt-9 md:mt-14">
-                            <Link 
-                            href={`/register`}
-                            style={{background:
-                            "conic-gradient(from 173.86deg at 50% 50%, #FFB600 -13.12deg, #BC00DD 120deg, #0784C3 181.87deg, #FFB600 346.88deg, #BC00DD 480deg)",
-                            }}
-                            className="px-16 py-5 font-medium text-white shadow-sm rounded-lg">
-                                Register
-                            </Link>
-                       </div>
-                    </div>
-                </div>
-            </div>
+                                    <p className="mt-5 text-lg md:text-xl md:h-[4rem]">
+                                        {slide.heading2}
+                                    </p>
+                                    
+                                    <div className="mt-9 md:mt-14">
+                                        {slide.buttonBlack ? 
+                                        <>
+                                        <Link
+                                            href="/register"
+                                            className="rounded-lg bg-[#131314] px-16 py-4 font-medium text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                                        >
+                                            Register
+                                        </Link>
+                                        </> : 
+                                        <>
+                                        <Link 
+                                        href={`/register`}
+                                        style={{background:
+                                        `conic-gradient(from 173.86deg at 50% 50%, #FFB600 -13.12deg, #BC00DD 120deg, #0784C3 181.87deg, #FFB600 346.88deg, #BC00DD 480deg)`,
+                                        }}
+                                        className="px-16 py-5 font-medium text-white shadow-sm rounded-lg transition duration-300 hover:bg-opacity-90">
+                                            Register
+                                        </Link>
+                                        </>}
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </SwiperSlide>
+                ))}
+            </Swiper>
         </section>
     )
 }

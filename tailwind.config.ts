@@ -12,7 +12,7 @@ const config: Config = {
         'black-500': '#131314',
         'purple-500': '#BC00DD',
         'blue-500': '#0784C3',
-        'yellow-500': '#0784C3',
+        'yellow-500': '#FFB700',
         'blue-300': '#6BCAFA'
       }
     },
