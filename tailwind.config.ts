@@ -10,7 +10,9 @@ const config: Config = {
     extend: {
       colors: {
         'black-200': '#CBCBCD',
+        'black-300': '#B1B1B4',
         'black-500': '#131314',
+        'black-600': '#636369',
         'black-700': '#4B4B4E',
         'black-800': '#323234',
         'purple-50': '#FBE5FF',
