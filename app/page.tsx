@@ -1,4 +1,5 @@
 import Navbar from "./components/general/navbar";
+import { CareerPath } from "./components/Home/career-path";
 import { CareerPathway } from "./components/Home/career-pathway";
 import { Hero } from "./components/Home/hero";
 
@@ -8,6 +9,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <CareerPathway />
+      <CareerPath />
     </div>
   );
 }

@@ -39,7 +39,7 @@ export const Design = ({title} : Props) => {
                     />
                     </svg>
 
-                    <h2 className="text-center md:text-3xl text-2xl lg:text-5xl uppercase font-medium">
+                    <h2 className="mt-2 text-center md:text-3xl text-2xl lg:text-5xl uppercase font-medium">
                         {title}
                     </h2>
                 </div>

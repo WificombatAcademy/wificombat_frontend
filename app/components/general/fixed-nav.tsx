@@ -14,14 +14,12 @@ const FixedNav = (props: Props) => {
     const scrollToView = useScrollToView();
     const { isVisible } = useNavbarVisibility();
     const activeSection = useActiveSection([
-        "showcase",
-        "about-us",
-        "courses",
-        "program",
-        "e-learning",
-        "community",
-        "blog",
-    ]);
+        "careerPathway",
+        "students",
+        "schools",
+        "portfolioandProjects",
+        "playGames",
+      ]);
     const handleNav = () => {
     setNav(!nav);
     }
@@ -50,73 +48,56 @@ const FixedNav = (props: Props) => {
       {/* <MobileNav closeNav={closeNav} handleNav={handleNav} nav={nav}/> */}
       <ul className="mx-auto flex max-w-6xl items-center justify-between lg:justify-center gap-4 max-lg:pr-4">
         <Link
-          href="/#showcase"
-          onClick={() => scrollToView("showcase")}
+          href="/#careerPathway"
+          onClick={() => scrollToView("careerPathway")}
           className={`px-2.5 py-2 text-lg capitalize text-white hover:text-[#0784C3] max-lg:hidden ${
-            activeSection === "showcase" ? "border-t-4 border-blue-500" : ""
+            activeSection === "careerPathway" ? "border-t-4 border-blue-500" : ""
           }`}
         >
-          showcase
+          Career Pathway
         </Link>
         <Link
-          href="/#about-us"
-          onClick={() => scrollToView("about-us")}
+          href="/#students"
+          onClick={() => scrollToView("students")}
           className={`px-2.5 py-2 text-lg capitalize text-white hover:text-[#0784C3] max-lg:hidden ${
-            activeSection === "about-us" ? "border-t-2 border-blue-500" : ""
+            activeSection === "students" ? "border-t-2 border-blue-500" : ""
           }`}
         >
-          about us
+          Students
         </Link>
         <Link
-          href="/#courses"
-          onClick={() => scrollToView("courses")}
+          href="/#schools"
+          onClick={() => scrollToView("schools")}
           className={`px-2.5 py-2 text-lg capitalize text-white hover:text-[#0784C3] max-lg:hidden ${
-            activeSection === "courses" ? "border-t-2 border-blue-500" : ""
+            activeSection === "schools" ? "border-t-2 border-blue-500" : ""
           }`}
         >
-          Courses
+          Schools
         </Link>
-        <Link
-          href="/#program"
-          onClick={() => scrollToView("program")}
-          className={`px-2.5 py-2 text-lg capitalize text-white hover:text-[#0784C3] max-lg:hidden ${
-            activeSection === "program" ? "border-t-2 border-blue-500" : ""
-          }`}
-        >
-          Programs
-        </Link>
-
         <Link href="/">
           <Image
             src="/wificombat.svg"
             alt="homepage"
-            className="h-20 w-20 md:h-24 md:w-24 px-2.5 py-2"
+            className="md:h-24 w-24 px-2.5 py-2 object-contain"
             width={"96"}
             height={"96"}
           />
         </Link>
         <Link
-          href="/#e-learning"
-          onClick={() => scrollToView("e-learning")}
+          href="/#portfolioAndProjects"
+          onClick={() => scrollToView("portfolioAndProjects")}
           className={`px-2.5 py-2 text-lg capitalize text-white hover:text-[#0784C3] max-lg:hidden ${
-            activeSection === "e-learning" ? "border-t-2 border-blue-500" : ""
+            activeSection === "portfolioAndProjects" ? "border-t-2 border-blue-500" : ""
           }`}
         >
-          E- Learning
+          Portfolio & Projects
         </Link>
         <Link
-          href="/#community"
-          onClick={() => scrollToView("community")}
+          href="/#playGames"
+          onClick={() => scrollToView("playGames")}
           className="px-2.5 py-2 text-lg capitalize text-white hover:text-[#0784C3] max-lg:hidden"
         >
-          Community
-        </Link>
-        <Link
-          href="/#blog"
-          onClick={() => scrollToView("blog")}
-          className="px-2.5 py-2 text-lg capitalize text-white hover:text-[#0784C3] max-lg:hidden"
-        >
-          Blog & News
+          Play Games
         </Link>
         <Link
           href="/login"

@@ -2,10 +2,12 @@ import { Design } from "../general/header-design"
 
 export const CareerPathway = () => {
     return (
-        <section className="relative">
+        <section 
+        id="careerPathway"
+        className="relative">
            <Design title={"CAREER PATHWAYS"}/>
 
-           <div className="mt-12 md:mt-16 lg:mt-20 mb-20 xl:mt-[5.5rem] w-[93%] md:w-[90] mx-auto">
+           <div className="mt-12 md:mt-16 lg:mt-20 xl:mt-[5.5rem] mb-20 w-[93%] md:w-[90] lg:w-[88%] mx-auto">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-10 lg:gap-16">
                     <div className="w-full md:basis-[50%]">
                         <h3 className="md:w-[90%] font-semibold text-lg md:text-3xl">

@@ -14,11 +14,11 @@ const StaticNav = (props: Props) => {
     const scrollToView = useScrollToView();
     const { removeNavbar } = useNavbarVisibility();
     const activeSection = useActiveSection([
-        "CareerPathway",
-        "Students",
-        "Schools",
-        "PortfolioandProjects",
-        "PlayGames",
+        "careerPathway",
+        "students",
+        "schools",
+        "portfolioandProjects",
+        "playGames",
       ]);
     const handleNav = () => {
     setNav(!nav);
