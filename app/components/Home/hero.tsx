@@ -31,7 +31,9 @@ const slides = [
 
 export const Hero = () => {
     return (
-        <section className="text-white">
+        <section 
+        id="home"
+        className="text-white">
             <Swiper 
             modules={[ Pagination, Navigation, Autoplay ]}
             spaceBetween={50}

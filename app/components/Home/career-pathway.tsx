@@ -14,7 +14,7 @@ export const CareerPathway = () => {
                             Career Pathway for Tech: Empowering Kids to Find Their Path in Technology
                         </h3>
 
-                        <p className="mt-4 md:mt-6 md:w-[90%] md:text-xl text-black-700 leading-8">
+                        <p className="mt-4 md:mt-6 md:w-[90%] lg:w-[85%] md:text-xl text-black-700 leading-8">
                         <span className="font-semibold">Explore six dynamic career pathways in technology,</span> including AI for innovation, Robotics 
                         & IoT for automation, Multimedia for creative expression, Coding for software mastery, 
                         Software Engineering/DevOps for infrastructure optimization, and Gaming for immersive 
