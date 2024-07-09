@@ -5,6 +5,7 @@ import { CareerPathway } from "./components/Home/career-pathway";
 import { CareerRoadmap } from "./components/Home/career-roadmap";
 import { Courses } from "./components/Home/courses";
 import { Hero } from "./components/Home/hero";
+import Impact from "./components/Home/Impact";
 import { SchoolCurriculum } from "./components/Home/school-curriculum";
 
 export default function Home() {
@@ -18,6 +19,7 @@ export default function Home() {
       <Benefits />
       <SchoolCurriculum />
       <Courses />
+      <Impact />
     </div>
   );
 }
