@@ -4,6 +4,7 @@ import { CareerPath } from "./components/Home/career-path";
 import { CareerPathway } from "./components/Home/career-pathway";
 import { CareerRoadmap } from "./components/Home/career-roadmap";
 import { Hero } from "./components/Home/hero";
+import { SchoolCurriculum } from "./components/Home/school-curriculum";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <CareerPath />
       <CareerRoadmap />
       <Benefits />
+      <SchoolCurriculum />
     </div>
   );
 }
