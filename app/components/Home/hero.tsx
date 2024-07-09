@@ -33,7 +33,7 @@ export const Hero = () => {
     return (
         <section className="text-white">
             <Swiper 
-            modules={[ Pagination, Navigation,  ]}
+            modules={[ Pagination, Navigation, Autoplay ]}
             spaceBetween={50}
             slidesPerView={1}
             navigation

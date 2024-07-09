@@ -1,4 +1,5 @@
 import Navbar from "./components/general/navbar";
+import { CareerPathway } from "./components/Home/career-pathway";
 import { Hero } from "./components/Home/hero";
 
 export default function Home() {
@@ -6,6 +7,7 @@ export default function Home() {
     <div className="mx-auto relative container w-full max-w-[2000px]">
       <Navbar />
       <Hero />
+      <CareerPathway />
     </div>
   );
 }
