@@ -8,7 +8,7 @@ type Props = {
 
 export const BenefitCard = ({desc, borderColor, bgColor, title}: Props) => {
     return (
-        <div className={`w-full p-4 shadow-lg rounded-lg border-t-4 ${borderColor}`}>
+        <div className={`w-full p-4 md:py-6 shadow-lg rounded-lg border-t-4 ${borderColor}`}>
             <div className="flex gap-4">
                 <div className={`w-16 h-16 flex-shrink-0 ${bgColor} rounded-full`}></div>
 

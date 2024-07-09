@@ -1,5 +1,6 @@
 import { Design } from "../general/header-design"
 import { CurriculumCard } from "./curriculum-card"
+import { Onboarding } from "./onboarding"
 
 export const SchoolCurriculum = () => {
     return (
@@ -14,12 +15,17 @@ export const SchoolCurriculum = () => {
                 Eu in euismod elit dui. Arcu aliquet nunc ali.
                 </p>
 
-                <div className="mt-14 md:mt-24 md:w-[90%] mx-auto grid grid-cols-1 lg:grid-cols-3 gap-9">
+                <div className="mt-14 md:mt-24 mb-20 md:w-[90%] mx-auto grid grid-cols-1 lg:grid-cols-3 gap-9">
                     <CurriculumCard borderColor="border-purple-500" bgColor="bg-purple-50" title="Elementary"/>
                     <CurriculumCard borderColor="border-blue-500" bgColor="bg-blue-50" title="Junior High School"/>
                     <CurriculumCard borderColor="border-yellow-500" bgColor="bg-yellow-50" title="Senior High School"/>
                 </div>
+
+                <div className="md:w-[90%] mx-auto">
+                    <Onboarding />
+                </div>
            </div>
+
         </section>
     )
 }
