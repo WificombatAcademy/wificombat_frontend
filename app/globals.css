@@ -3,11 +3,33 @@
 @tailwind utilities;
 :root {
   --swiper-theme-color: #fff !important;
-  --swiper-theme-bullet: 20px !important;
+  /* --swiper-theme-bullet: 20px !important; */
   --swiper-navigation-size: 35px !important;
 }
+.swiper-button-prev {
+  left:2rem !important; 
+}
+.swiper-button-next {
+  right:2rem !important; 
+}
+.swiper-pagination-bullet {
+  width: 10px !important;
+  height: 10px !important;
+  background-color: #fff !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+  /* transition: all ease; */
+}
+.swiper-pagination-bullet::before{
+  opacity: 1 !important; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+}
+.swiper-pagination-bullet-size {
+  width: 10px !important;
+  height: 10px !important;
+}
 
-.swiper-button-prev, .swiper-button-next{
-  /* background-color: white; */
-  color: white;
+@media (max-width:768px) {
+  :root {
+    --swiper-navigation-size: 0px !important;
+  }
 }

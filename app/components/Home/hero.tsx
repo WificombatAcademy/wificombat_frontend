@@ -37,18 +37,18 @@ export const Hero = () => {
             slidesPerView={1}
             navigation
             pagination={{ clickable: true }}
-            className="relative text-white"
+            className="relative text-white w-full"
             >
                 {slides.map((slide, index) => (
-                    <SwiperSlide key={index} className="relative">
+                    <SwiperSlide key={index} className="relative w-[93%] md:w-[90%] mx-auto">
                         <div className={`relative isolate overflow-hidden pb-[7rem] md:py-[7rem] lg:py-[10rem] ${slide.bgColor}`}>
-                            <div className="max-md:mt-[4rem] w-[93%] md:w-[90%] mx-auto flex flex-col md:flex-row md:items-center gap-10">
+                            <div className="relative max-md:mt-[4rem] w-[93%] md:w-[85%] mx-auto flex flex-col md:flex-row md:items-center gap-10">
                                 <div className="w-full md:basis-[50%]">
                                     <h1 className="font-semibold text-3xl md:text-4xl lg:text-5xl md:w-[85%]">
                                         {slide.heading1}
                                     </h1>
 
-                                    <p className="mt-5 text-lg md:text-xl md:h-[4rem]">
+                                    <p className="mt-5 text-lg md:text-xl h-[7.4rem] md:h-[5rem]">
                                         {slide.heading2}
                                     </p>
                                     
@@ -57,7 +57,7 @@ export const Hero = () => {
                                         <>
                                         <Link
                                             href="/register"
-                                            className="rounded-lg bg-[#131314] px-16 py-4 font-medium text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                                            className="rounded-lg bg-[#131314] px-16 py-5 font-medium text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                                         >
                                             Register
                                         </Link>
