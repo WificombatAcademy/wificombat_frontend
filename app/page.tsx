@@ -1,3 +1,4 @@
+import Footer from "./components/general/Footer";
 import Navbar from "./components/general/navbar";
 import { Benefits } from "./components/Home/benefits";
 import { CareerPath } from "./components/Home/career-path";
@@ -5,6 +6,7 @@ import { CareerPathway } from "./components/Home/career-pathway";
 import { CareerRoadmap } from "./components/Home/career-roadmap";
 import { Courses } from "./components/Home/courses";
 import { Community } from "./components/Home/elearn-community";
+import { FAQ } from "./components/Home/faq";
 import { Hero } from "./components/Home/hero";
 import Impact from "./components/Home/Impact";
 import { SchoolCurriculum } from "./components/Home/school-curriculum";
@@ -24,6 +26,8 @@ export default function Home() {
       <Impact />
       <Testimonials />
       <Community />
+      <FAQ />
+      {/* <Footer /> */}
     </div>
   );
 }
