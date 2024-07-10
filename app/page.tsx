@@ -4,7 +4,7 @@ import { Benefits } from "./components/home/benefits";
 import CareerPath  from "./components/home/career-path";
 import { CareerPathway } from "./components/home/career-pathway";
 import { CareerRoadmap } from "./components/home/career-roadmap";
-import { Courses } from "./components/home/courses";
+import { Courses } from "./components/home/Courses";
 import { Community } from "./components/home/elearn-community";
 import { FAQ } from "./components/home/faq";
 import { Hero } from "./components/home/hero";
@@ -17,12 +17,12 @@ export default function Home() {
     <div className="mx-auto relative container w-full max-w-[2000px]">
       <Navbar />
       <Hero />
-      {/* <CareerPathway /> */}
-      {/* <CareerPath /> */}
-      {/* <CareerRoadmap /> */}
-      {/* <Benefits /> */}
+      <CareerPathway />
+      <CareerPath />
+      <CareerRoadmap />
+      <Benefits />
       <SchoolCurriculum />
-      {/* <Courses /> */}
+      <Courses />
       <Impact />
       <Testimonials />
       <Community />
