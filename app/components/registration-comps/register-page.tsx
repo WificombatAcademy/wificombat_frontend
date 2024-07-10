@@ -5,6 +5,12 @@ import { useRouter } from "next/navigation";
 import { IoChevronBackOutline } from "react-icons/io5"
 import { RegisterDesign } from "./register-design";
 
+const images = [
+    {image:"/student-reg.png", hoverColor: "hover:shadow-green-600"},
+    {image:"/parent-reg.png", hoverColor: "hover:shadow-purple-300"},
+    {image: "/educator-reg.png", hoverColor: "hover:shadow-blue-500"}
+]
+
 export const Register = () => {
     const router = useRouter();
     return (
@@ -24,35 +30,21 @@ export const Register = () => {
             
             
                 <div className="z-[2] relative md:w-[90%] lg:w-[80%] mx-auto mt-[4rem] md:mt-[7rem] flex max-lg:flex-wrap items-center justify-center lg:justify-between gap-6 lg:gap-9">
-                    <div className="w-[40%] lg:w-[33%]">
+                       {images.map((image, index) => (
+                         <div 
+                         key={index}
+                         className="w-[40%] lg:w-[33%]">
+                        <Link href={`/`}>
                         <Image
-                        width={250}
-                        height={250}
-                        src={`/student-reg.png`}
-                        alt="student"
-                        className="w-full object-cover cursor-pointer transition ease-in-out duration-300"
-                        />
-                    </div>
-
-                    <div className="w-[40%] lg:w-[33%]">
-                        <Image
-                        width={250}
-                        height={250}
-                        src={`/parent-reg.png`}
-                        alt="student"
-                        className="w-full object-cover cursor-pointer transition ease-in-out duration-300"
-                        />
-                    </div>
-
-                    <div className="w-[40%] lg:w-[33%]">
-                        <Image
-                        width={250}
-                        height={250}
-                        src={`/educator-reg.png`}
-                        alt="student"
-                        className="w-full object-cover cursor-pointer transition ease-in-out duration-300"
-                        />
-                    </div>
+                         width={250}
+                         height={250}
+                         src={image.image}
+                         alt="student"
+                         className={`w-full object-contain rounded-xl cursor-pointer transition ease-in-out duration-300 hover:scale-105 hover:shadow-lg ${image.hoverColor}`}
+                         />
+                        </Link>
+                         </div>
+                       ))}
                 </div>
 
                 <div className="mt-[4rem] w-[90%] md:w-[70%] mx-auto flex items-center justify-center 
