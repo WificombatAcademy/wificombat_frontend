@@ -1,4 +1,4 @@
-import Footer from "./components/general/Footer";
+import Footer from "./components/general/footer";
 import Navbar from "./components/general/navbar";
 import { Benefits } from "./components/Home/benefits";
 import { CareerPath } from "./components/Home/career-path";

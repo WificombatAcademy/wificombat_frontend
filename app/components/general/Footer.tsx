@@ -35,7 +35,7 @@ const navLinkTitles = [
 const Footer = () => {
   return (
     <footer className="text-left">
-      <div className="w-full mx-auto  bg-[#131314] px-6 py-6 md:py-20">
+      <div className="w-full mx-auto  bg-[#131314] px-6 py-6 md:py-20 lg:px-8">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
             <Link href="/" className="flex items-center">
