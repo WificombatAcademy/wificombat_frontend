@@ -1,16 +1,16 @@
-import Navbar from "./components/general/navbar";
-import Footer from "./components/general/page-footer";
-import { Benefits } from "./components/home/benefits";
-import CareerPath  from "./components/home/career-path";
-import { CareerPathway } from "./components/home/career-pathway";
-import { CareerRoadmap } from "./components/home/career-roadmap";
-import { Courses } from "./components/home/Courses";
-import { Community } from "./components/home/elearn-community";
-import { FAQ } from "./components/home/faq";
-import { Hero } from "./components/home/hero";
-import Impact from "./components/home/Impact";
-import { SchoolCurriculum } from "./components/home/school-curriculum";
-import { Testimonials } from "./components/home/testimonials";
+import Navbar from "./components/General/navbar";
+import Footer from "./components/General/page-footer";
+import { Benefits } from "./components/Home/benefits";
+import CareerPath from "./components/Home/career-path";
+import { CareerPathway } from "./components/Home/career-pathway";
+import { CareerRoadmap } from "./components/Home/career-roadmap";
+import { Courses } from "./components/Home/Courses";
+import { Community } from "./components/Home/elearn-community";
+import { FAQ } from "./components/Home/faq";
+import { Hero } from "./components/Home/hero";
+import Impact from "./components/Home/Impact";
+import { SchoolCurriculum } from "./components/Home/school-curriculum";
+import { Testimonials } from "./components/Home/testimonials";
 
 export default function Home() {
   return (

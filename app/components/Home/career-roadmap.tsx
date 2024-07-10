@@ -1,13 +1,11 @@
-import { Design } from "../general/header-design"
+import { Design } from "../General/header-design";
 
 export const CareerRoadmap = () => {
-    return (
-        <section  className="relative">
-           <Design title="CAREER ROADMAP}"/>
+  return (
+    <section className="relative">
+      <Design title="CAREER ROADMAP}" />
 
-           <div className="h-[900px]">
-
-           </div>
-        </section>
-    )
-}
+      <div className="h-[900px]"></div>
+    </section>
+  );
+};

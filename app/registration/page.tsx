@@ -1,4 +1,4 @@
-import { Register } from "../components/registration-comps/register-page";
+import { Register } from "../components/Registration-Comps/register-page";
 
 export default function Page () {
     return (
