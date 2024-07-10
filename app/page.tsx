@@ -17,12 +17,12 @@ export default function Home() {
     <div className="mx-auto relative container w-full max-w-[2000px]">
       <Navbar />
       <Hero />
-      <CareerPathway />
-      <CareerPath />
-      <CareerRoadmap />
-      <Benefits />
+      {/* <CareerPathway /> */}
+      {/* <CareerPath /> */}
+      {/* <CareerRoadmap /> */}
+      {/* <Benefits /> */}
       <SchoolCurriculum />
-      <Courses />
+      {/* <Courses /> */}
       <Impact />
       <Testimonials />
       <Community />
