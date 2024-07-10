@@ -19,9 +19,10 @@ const Impact = () => {
 
       <div className='my-16 h-full w-full md:w-[90%] lg:w-[88%] mx-auto'>
         <div className='flex flex-col justify-center gap-6 max-sm:flex-row max-sm:flex-wrap lg:flex-row lg:justify-around'>
-          {serviceTab.map((x) => {
+          {serviceTab.map((x, index) => {
             return (
               <CircularProgressBar
+              key={index}
                 startDegree={0}
                 endDegree={66}
                 gradientColors={[

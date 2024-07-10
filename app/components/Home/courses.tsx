@@ -79,7 +79,7 @@ export const Courses = () => {
               spaceBetween: 20,
             },
             640: {
-              slidesPerView: 3,
+              slidesPerView: 1,
               spaceBetween: 10,
             },
             1000: {
@@ -97,9 +97,9 @@ export const Courses = () => {
             {coursesData.map((course, index) => (
                 <SwiperSlide key={course.id} className='pt-5 md:pt-12 pb-8 relative flex items-center justify-center overflow-visible'>
                     <div className={`inset-0 overflow-visible ${index === activeSlide ? 'absolute' : 'hidden'}`}>
-                        <div className='flex-shrink-0 absolute w-full h-[500px] bottom-0 bg-purple-500 left-5 rounded-2xl max-md:hidden'></div>
+                        <div className='flex-shrink-0 absolute w-full h-[500px] lg:h-[550px] bottom-0 bg-purple-500 left-5 rounded-2xl max-lg:hidden'></div>
                     </div>
-                    <div className='z-[2] relative h-[500px] bg-white p-6 text-2xl shadow-lg rounded-2xl'>
+                    <div className='z-[2] relative h-[500px] lg:h-[550px] bg-white p-6 text-2xl shadow-lg rounded-2xl'>
                         <div className='w-full h-[240px] bg-black-300 rounded-2xl border border-purple-500'></div>
 
                         <div className='mt-4 w-full flex items-center justify-between'>
