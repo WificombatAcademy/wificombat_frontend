@@ -1,4 +1,4 @@
-import { HeadingDesign } from "../General/heading-design-bg";
+import HeadingDesign from "../General/heading-design-bg";
 
 export const CareerRoadmap = () => {
   return (
