@@ -1,4 +1,4 @@
-import { HeaderDesign } from "../General/header-design-bg";
+import { HeaderDesign } from "../General/heading-design-bg";
 import { BenefitCard } from "./benefits-card";
 
 export const Benefits = () => {

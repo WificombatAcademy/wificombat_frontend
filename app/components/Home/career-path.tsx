@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import CareerCard from "./career-card";
-import { HeaderDesign } from "../General/header-design-bg";
+import { HeaderDesign } from "../General/heading-design-bg";
 
 const CareerPath = () => {
   return (

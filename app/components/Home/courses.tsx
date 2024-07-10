@@ -9,7 +9,7 @@ import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import { useState } from "react";
 import { FaRegClock } from "react-icons/fa";
 import Link from "next/link";
-import { HeaderDesign } from "../General/header-design-bg";
+import { HeaderDesign } from "../General/heading-design-bg";
 
 const coursesData = [
   {
