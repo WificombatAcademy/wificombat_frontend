@@ -1,7 +1,7 @@
 import { Design } from "../general/header-design"
 import { CareerCard } from "./career-card"
 
-export const CareerPath = () => {
+const CareerPath = () => {
     return (
         <section  className="relative">
            <Design title={"CAREER PATH"}/>
@@ -42,3 +42,5 @@ export const CareerPath = () => {
         </section>
     )
 }
+
+export default CareerPath
