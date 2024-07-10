@@ -8,7 +8,7 @@ export const Benefits = () => {
 
         <div className="mt-12 md:mt-16 mb-20 w-[93%] md:w-[90] lg:w-[88%] mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-9">
-                <BenefitCard 
+                <BenefitCard
                 borderColor="border-blue-500" 
                 bgColor="bg-blue-500"
                 desc="Gain in-depth knowledge and practical skills in high-demand tech fields like coding, 
