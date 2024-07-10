@@ -1,4 +1,3 @@
-import Navbar from "./components/General/general-nav";
 import Footer from "./components/General/page-footer";
 import { Benefits } from "./components/Home/benefits";
 import CareerPath from "./components/Home/career-path";
@@ -11,11 +10,12 @@ import { Hero } from "./components/Home/hero";
 import Impact from "./components/Home/Impact";
 import { SchoolCurriculum } from "./components/Home/school-curriculum";
 import { Testimonials } from "./components/Home/testimonials";
+import GeneralNav from "./components/General/general-nav";
 
 export default function Home() {
   return (
     <div className="mx-auto relative container w-full max-w-[2000px]">
-      <Navbar />
+      <GeneralNav />
       <Hero />
       <CareerPathway />
       <CareerPath />

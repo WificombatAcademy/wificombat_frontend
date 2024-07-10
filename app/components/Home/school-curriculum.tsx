@@ -1,11 +1,11 @@
-import { HeaderDesign } from "../General/heading-design-bg";
+import { HeadingDesign } from "../General/heading-design-bg";
 import { CurriculumCard } from "./curriculum-card";
 import { Onboarding } from "./onboarding";
 
 export const SchoolCurriculum = () => {
   return (
     <section className="relative">
-      <HeaderDesign title={"CAREER PATHWAY SCHOOL CURRICULUM"} />
+      <HeadingDesign title={"CAREER PATHWAY SCHOOL CURRICULUM"} />
 
       <div className="w-[93%] md:w-[90%] lg:w-[88%] mx-auto">
         <p className="md:w-[80%] lg:w-[70%] mx-auto mt-6 md:mt-9 lg:mt-12 text-center font-medium">

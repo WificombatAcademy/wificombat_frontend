@@ -1,7 +1,7 @@
 import FixedNav from "./fixed-nav";
 import StaticNav from "./static-nav";
 
-const Navbar = () => {
+const GeneralNav = () => {
 
   return (
     <>
@@ -11,4 +11,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default GeneralNav;

@@ -9,7 +9,7 @@ import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import { useState } from "react";
 import { FaRegClock } from "react-icons/fa";
 import Link from "next/link";
-import { HeaderDesign } from "../General/heading-design-bg";
+import { HeadingDesign } from "../General/heading-design-bg";
 
 const coursesData = [
   {
@@ -57,7 +57,7 @@ export const Courses = () => {
   const [activeSlide, setActiveSlide] = useState(0);
   return (
     <section className="relative mt-16">
-      <HeaderDesign title="courses" />
+      <HeadingDesign title="courses" />
 
       <div className="mt-9 md:mt-14 w-full bg-blue-200 py-14">
         <h3 className="w-[95%] md:w-[85%] lg:w-[75%] mx-auto text-center text-2xl md:text-3xl font-semibold">

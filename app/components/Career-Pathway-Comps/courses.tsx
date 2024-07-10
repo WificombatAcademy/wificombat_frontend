@@ -1,9 +1,9 @@
-import { HeaderDesign } from "../General/heading-design-bg";
+import { HeadingDesign } from "../General/heading-design-bg";
 
 export const PathwayCoursea = () => {
   return (
     <section>
-      <HeaderDesign title="CAREER PATHWAYS COURSES" />
+      <HeadingDesign title="CAREER PATHWAYS COURSES" />
     </section>
   );
 };
