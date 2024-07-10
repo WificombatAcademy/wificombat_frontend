@@ -4,7 +4,7 @@ export const CareerPathway = () => {
     return (
         <section 
         className="relative">
-           <Design title={"CAREER PATHWAYS"}/>
+           <Design title="CAREER PATHWAYS"/>
 
            <div className="mt-12 md:mt-16 lg:mt-20 xl:mt-[5.5rem] mb-20 w-[93%] md:w-[90] lg:w-[88%] mx-auto">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-10 lg:gap-16">
