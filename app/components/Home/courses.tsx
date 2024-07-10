@@ -100,7 +100,7 @@ export const Courses = () => {
                         <div className='flex-shrink-0 absolute w-full h-[500px] bottom-0 bg-purple-500 left-5 rounded-2xl max-md:hidden'></div>
                     </div>
                     <div className='z-[2] relative h-[500px] bg-white p-6 text-2xl shadow-lg rounded-2xl'>
-                        <div className='w-full h-[240px] bg-black-300 rounded-2xl'></div>
+                        <div className='w-full h-[240px] bg-black-300 rounded-2xl border border-purple-500'></div>
 
                         <div className='mt-4 w-full flex items-center justify-between'>
                             <div className='flex items-center gap-2 text-black-600'>
