@@ -3,7 +3,6 @@ import { Design } from "../general/header-design"
 export const CareerPathway = () => {
     return (
         <section 
-        id="career-pathway"
         className="relative">
            <Design title={"CAREER PATHWAYS"}/>
 

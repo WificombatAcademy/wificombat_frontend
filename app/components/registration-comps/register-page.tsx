@@ -6,9 +6,9 @@ import { IoChevronBackOutline } from "react-icons/io5"
 import { RegisterDesign } from "./register-design";
 
 const images = [
-    {image:"/student-reg.png", hoverColor: "hover:shadow-green-600"},
-    {image:"/parent-reg.png", hoverColor: "hover:shadow-purple-300"},
-    {image: "/educator-reg.png", hoverColor: "hover:shadow-blue-500"}
+    {image:"/student-reg.png", hoverColor: "hover:shadow-green-600", role:"Student"},
+    {image:"/parent-reg.png", hoverColor: "hover:shadow-purple-300", role:"Parent"},
+    {image: "/educator-reg.png", hoverColor: "hover:shadow-blue-500", role: "Educator"}
 ]
 
 export const Register = () => {
@@ -35,13 +35,15 @@ export const Register = () => {
                          key={index}
                          className="w-[40%] lg:w-[33%]">
                         <Link href={`/`}>
-                        <Image
-                         width={250}
-                         height={250}
-                         src={image.image}
-                         alt="student"
-                         className={`w-full object-contain rounded-xl cursor-pointer transition ease-in-out duration-300 hover:scale-105 hover:shadow-lg ${image.hoverColor}`}
-                         />
+                            <Image
+                            width={250}
+                            height={250}
+                            src={image.image}
+                            alt="student"
+                            className={`w-full object-contain rounded-xl cursor-pointer transition ease-in-out duration-300 
+                                hover:scale-105 hover:shadow-lg ${image.hoverColor}`}
+                            />
+                            <div className="mt-4 text-center font-semibold text-lg md:text-xl">{image.role}</div>
                         </Link>
                          </div>
                        ))}
