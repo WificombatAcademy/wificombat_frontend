@@ -1,10 +1,10 @@
 import Image from "next/image"
 
 type Props = {
-    title: string;
+    heading: string;
 }
 
-export const HeadingDesign = ({title} : Props) => {
+export const HeadingDesign = ({heading} : Props) => {
     return (
         <div className="relative">
             <div className="relative flex flex-col gap-5 items-center justify-center">
@@ -40,7 +40,7 @@ export const HeadingDesign = ({title} : Props) => {
                     </svg>
 
                     <h2 className="mt-2 text-center md:text-3xl text-2xl lg:text-5xl uppercase font-medium">
-                        {title}
+                        {heading}
                     </h2>
                 </div>
             </div>
