@@ -17,7 +17,7 @@ const coursesData = [
         level: "Beginner",
         duration: "4 weeks",
         title: "Artificial Intelligence: The Basics of Artificial Intelligence",
-        link: "/register",
+        link: "/registration",
     },
 
     {
@@ -25,7 +25,7 @@ const coursesData = [
         level: "Beginner",
         duration: "4 weeks",
         title: "Artificial Intelligence: The Basics of Artificial Intelligence",
-        link: "/register",
+        link: "/registration",
     },
 
     {
@@ -33,7 +33,7 @@ const coursesData = [
         level: "Beginner",
         duration: "4 weeks",
         title: "Artificial Intelligence: The Basics of Artificial Intelligence",
-        link: "/register",
+        link: "/registration",
     },
 
     {
@@ -41,7 +41,7 @@ const coursesData = [
         level: "Beginner",
         duration: "4 weeks",
         title: "Artificial Intelligence: The Basics of Artificial Intelligence",
-        link: "/register",
+        link: "/registration",
     },
 
     {
@@ -49,7 +49,7 @@ const coursesData = [
         level: "Beginner",
         duration: "4 weeks",
         title: "Artificial Intelligence: The Basics of Artificial Intelligence",
-        link: "/register",
+        link: "/registration",
     },
 ]
 
@@ -107,12 +107,12 @@ export const Courses = () => {
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M3 22V8H7V22H3ZM10 22V2H14V22H10ZM17 22V14H21V22H17Z" fill="#636369"/>
                                 </svg>
-                                <p className='font-semibold text-sm md:text-lg'>{course.level}</p>
+                                <p className='font-semibold text-sm lg:text-lg'>{course.level}</p>
                             </div>
 
                             <div className='flex items-center gap-2 text-black-600'>
                                 <FaRegClock />
-                                <p className='font-semibold text-sm md:text-lg'>{course.duration}</p>
+                                <p className='font-semibold text-sm lg:text-lg'>{course.duration}</p>
                             </div>
                         </div>
 

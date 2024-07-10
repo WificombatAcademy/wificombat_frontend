@@ -43,7 +43,6 @@ const testimonialData = [
 
 export const Testimonials = () => {
   const [activeSlide, setActiveSlide] = useState(0);
-  console.log("activeslide: ", activeSlide)
   return (
     <div className="w-full py-7 md:py-10 bg-black-500">
         <div

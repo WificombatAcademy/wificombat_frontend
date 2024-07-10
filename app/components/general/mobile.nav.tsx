@@ -5,11 +5,11 @@ import { Dispatch, Fragment, SetStateAction } from "react";
 import { FaXmark } from "react-icons/fa6";
 
 export const navigation = [
-  { name: "Career Pathway", href: "/#careerPathway" },
-  { name: "Students", href: "/#students" },
-  { name: "Schools", href: "/#schools" },
-  { name: "Portfolio & Projects", href: "/#portfolioAndProjects" },
-  { name: "Play Games", href: "/#playGames" },
+  { name: "Career Pathway", href: "/career-pathway" },
+  { name: "Students", href: "/students" },
+  { name: "Schools", href: "/schools" },
+  { name: "Portfolio & Projects", href: "/portfolio-and-projects" },
+  { name: "Play Games", href: "/play-games" },
   { name: "Login", href: "/login" },
 ];
 

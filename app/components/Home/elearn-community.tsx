@@ -12,7 +12,7 @@ export const Community = () => {
 
                     <div className="mt-8 mb-3 flex items-center justify-center">
                         <Link
-                            href="/register"
+                            href="/registration"
                         >
                             <button
                                 className="rounded-lg bg-[#131314] px-16 py-5 font-medium text-white shadow-sm hover:bg-black/80 

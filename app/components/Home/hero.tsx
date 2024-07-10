@@ -60,7 +60,7 @@ export const Hero = () => {
                                         {slide.buttonBlack ? 
                                         <>
                                         <Link
-                                            href="/register"
+                                            href="/registration"
                                             className="rounded-lg bg-[#131314] px-16 py-5 font-medium text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                                         >
                                             Register
@@ -68,7 +68,7 @@ export const Hero = () => {
                                         </> : 
                                         <>
                                         <Link 
-                                        href={`/register`}
+                                        href={`/registration`}
                                         style={{background:
                                         `conic-gradient(from 173.86deg at 50% 50%, #FFB600 -13.12deg, #BC00DD 120deg, #0784C3 181.87deg, #FFB600 346.88deg, #BC00DD 480deg)`,
                                         }}

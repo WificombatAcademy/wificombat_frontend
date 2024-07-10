@@ -6,21 +6,23 @@ import { RiMenu2Line } from 'react-icons/ri';
 import { motion, useAnimation } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import SideBar from './mobile.nav';
+import { usePathname } from 'next/navigation';
 
 type Props = {}
 
 const FixedNav = (props: Props) => {
+    const pathname = usePathname();
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [nav, setNav] = useState(false);
     const scrollToView = useScrollToView();
     const { isVisible } = useNavbarVisibility();
     const activeSection = useActiveSection([
-        "careerPathway",
-        "students",
-        "schools",
-        "portfolioandProjects",
-        "playGames",
-      ]);
+      "career-pathway",
+      "students",
+      "schools",
+      "portfolio-and-projects",
+      "play-games",
+    ]);
 
     const controls = useAnimation();
 
@@ -41,30 +43,30 @@ const FixedNav = (props: Props) => {
       initial={{ y: -100 }}
       >
         <SideBar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-      <ul className="mx-auto flex max-w-6xl items-center justify-between lg:justify-center gap-4 max-lg:pr-4">
+        <ul className="mx-auto flex max-w-6xl items-center justify-between lg:justify-center gap-4 max-lg:pr-4">
         <Link
-          href="/#careerPathway"
-          onClick={() => scrollToView("careerPathway")}
+          href="/career-pathway"
+          onClick={() => scrollToView("career-pathway")}
           className={`px-2.5 py-2 text-lg capitalize text-white hover:text-[#0784C3] max-lg:hidden ${
-            activeSection === "careerPathway" ? "border-b-4 border-blue-500" : ""
+            pathname === "/career-pathway" ? "border-b-4 border-blue-500" : ""
           }`}
         >
           Career Pathway
         </Link>
         <Link
-          href="/#students"
+          href="/students"
           onClick={() => scrollToView("students")}
           className={`px-2.5 py-2 text-lg capitalize text-white hover:text-[#0784C3] max-lg:hidden ${
-            activeSection === "students" ? "border-t-2 border-blue-500" : ""
+            pathname === "/students" ? "border-t-2 border-blue-500" : ""
           }`}
         >
           Students
         </Link>
         <Link
-          href="/#schools"
+          href="/schools"
           onClick={() => scrollToView("schools")}
           className={`px-2.5 py-2 text-lg capitalize text-white hover:text-[#0784C3] max-lg:hidden ${
-            activeSection === "schools" ? "border-t-2 border-blue-500" : ""
+            pathname === "/schools" ? "border-t-2 border-blue-500" : ""
           }`}
         >
           Schools
@@ -79,18 +81,20 @@ const FixedNav = (props: Props) => {
           />
         </Link>
         <Link
-          href="/#portfolioAndProjects"
-          onClick={() => scrollToView("portfolioAndProjects")}
+          href="/portfolio-and-projects"
+          onClick={() => scrollToView("portfolio-and-projects")}
           className={`px-2.5 py-2 text-lg capitalize text-white hover:text-[#0784C3] max-lg:hidden ${
-            activeSection === "portfolioAndProjects" ? "border-t-2 border-blue-500" : ""
+            pathname === "portfolio-and-projects" ? "border-t-2 border-blue-500" : ""
           }`}
         >
           Portfolio & Projects
         </Link>
         <Link
-          href="/#playGames"
-          onClick={() => scrollToView("playGames")}
-          className="px-2.5 py-2 text-lg capitalize text-white hover:text-[#0784C3] max-lg:hidden"
+          href="/play-games"
+          onClick={() => scrollToView("play-games")}
+          className={`px-2.5 py-2 text-lg capitalize text-white hover:text-[#0784C3] max-lg:hidden"${
+            pathname === "/play-games" ? "border-t-2 border-blue-500" : ""
+          }`}
         >
           Play Games
         </Link>
