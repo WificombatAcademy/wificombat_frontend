@@ -2,7 +2,7 @@ import Navbar from "./components/General/general-navbar";
 import Footer from "./components/General/page-footer";
 import { Benefits } from "./components/Home/benefits";
 import CareerPath from "./components/Home/career-path";
-import { CareerPathway } from "./components/Home/career-pathway";
+import { CareerPathway } from "./components/Home/career-way";
 import { CareerRoadmap } from "./components/Home/career-roadmap";
 import { Courses } from "./components/Home/courses";
 import { Community } from "./components/Home/elearn-community";

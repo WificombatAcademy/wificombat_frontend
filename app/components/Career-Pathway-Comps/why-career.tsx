@@ -1,4 +1,4 @@
-import { HeaderDesign } from "../General/design";
+import { HeaderDesign } from "../General/header-design-bg";
 
 export const WhyCareerPathway = () => {
   return (
