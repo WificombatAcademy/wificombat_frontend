@@ -1,7 +1,6 @@
 "use client";
 import { FreeMode, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { HeaderDesign } from "../General/design";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -10,6 +9,7 @@ import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import { useState } from "react";
 import { FaRegClock } from "react-icons/fa";
 import Link from "next/link";
+import { HeaderDesign } from "../General/design";
 
 const coursesData = [
   {
