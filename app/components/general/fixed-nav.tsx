@@ -5,11 +5,12 @@ import { useActiveSection, useNavbarVisibility, useScrollToView, } from "../../h
 import { RiMenu2Line } from 'react-icons/ri';
 import { motion, useAnimation } from 'framer-motion';
 import { useEffect, useState } from 'react';
-// import MobileNav from '../Navbar/MobileNav';
+import SideBar from './mobile.nav';
 
 type Props = {}
 
 const FixedNav = (props: Props) => {
+    const [sidebarOpen, setSidebarOpen] = useState(false);
     const [nav, setNav] = useState(false);
     const scrollToView = useScrollToView();
     const { isVisible } = useNavbarVisibility();
@@ -20,12 +21,6 @@ const FixedNav = (props: Props) => {
         "portfolioandProjects",
         "playGames",
       ]);
-    const handleNav = () => {
-    setNav(!nav);
-    }
-    const closeNav = () => {
-        setNav(false);
-    }
 
     const controls = useAnimation();
 
@@ -45,7 +40,7 @@ const FixedNav = (props: Props) => {
       animate={controls}
       initial={{ y: -100 }}
       >
-      {/* <MobileNav closeNav={closeNav} handleNav={handleNav} nav={nav}/> */}
+        <SideBar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       <ul className="mx-auto flex max-w-6xl items-center justify-between lg:justify-center gap-4 max-lg:pr-4">
         <Link
           href="/#careerPathway"
@@ -107,7 +102,7 @@ const FixedNav = (props: Props) => {
         </Link>
         <div className='pr-3'>
           <RiMenu2Line 
-          onClick={handleNav}
+          onClick={() => setSidebarOpen(true)}
           size={25}
           className="text-gray-300 lg:hidden"/>
         </div>
