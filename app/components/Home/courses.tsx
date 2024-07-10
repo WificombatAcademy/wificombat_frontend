@@ -53,7 +53,7 @@ const coursesData = [
   },
 ];
 
-export const Courses = () => {
+export const HomeCourses = () => {
   const [activeSlide, setActiveSlide] = useState(0);
   return (
     <section className="relative mt-16">

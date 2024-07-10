@@ -3,7 +3,7 @@ import { Benefits } from "./components/Home/benefits";
 import CareerPath from "./components/Home/career-path";
 import { CareerPathway } from "./components/Home/career-way";
 import { CareerRoadmap } from "./components/Home/career-roadmap";
-import { Courses } from "./components/Home/courses";
+import { HomeCourses } from "./components/Home/courses";
 import { Community } from "./components/Home/elearn-community";
 import { FAQ } from "./components/Home/faq";
 import { Hero } from "./components/Home/hero";
@@ -22,7 +22,7 @@ export default function Home() {
       <CareerRoadmap />
       <Benefits />
       <SchoolCurriculum />
-      <Courses />
+      <HomeCourses />
       <Impact />
       <Testimonials />
       <Community />
