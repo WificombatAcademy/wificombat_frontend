@@ -1,4 +1,4 @@
-import { Design } from "../General/header-design";
+import { Design } from "../General/Header-design";
 import { CurriculumCard } from "./curriculum-card";
 import { Onboarding } from "./onboarding";
 
