@@ -6,7 +6,7 @@ type Props = {
     linkTo: string;
 }
 
-export const CareerCard = ({desc, pathway, linkTo}: Props) => {
+const CareerCard = ({desc, pathway, linkTo}: Props) => {
     return (
         <div className="w-full bg-white shadow-lg rounded-2xl">
             <div className="w-full h-[220px] bg-black-200 px-4 flex items-end rounded-tl-2xl rounded-tr-2xl">
@@ -28,3 +28,5 @@ export const CareerCard = ({desc, pathway, linkTo}: Props) => {
         </div>
     )
 }
+
+export default CareerCard

@@ -1,5 +1,7 @@
+"use client"
+import React from "react"
 import { Design } from "../general/header-design"
-import { CareerCard } from "./career-card"
+import CareerCard from "./career-card"
 
 const CareerPath = () => {
     return (
