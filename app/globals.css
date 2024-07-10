@@ -40,8 +40,10 @@
 }
 
 .courses-swiper-pagination .swiper-pagination-bullet-active {
+  position: relative;
   width: 18px !important;
   height: 18px !important;
+  top: 1px;
   background-color: #fff; /* Active bullet color */
   border: 4px solid #BC00DD; /* Active bullet border color */
 }
