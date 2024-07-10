@@ -1,9 +1,9 @@
-import { Design } from "../General/Header-design";
+import {  HeaderDesign } from "../General/design";
 
 export const CareerRoadmap = () => {
   return (
     <section className="relative">
-      <Design title="CAREER ROADMAP}" />
+      <HeaderDesign title="CAREER ROADMAP}" />
 
       <div className="h-[900px]"></div>
     </section>

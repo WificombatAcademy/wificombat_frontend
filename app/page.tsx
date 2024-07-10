@@ -4,7 +4,7 @@ import { Benefits } from "./components/Home/benefits";
 import CareerPath from "./components/Home/career-path";
 import { CareerPathway } from "./components/Home/career-pathway";
 import { CareerRoadmap } from "./components/Home/career-roadmap";
-import { Courses } from "./components/Home/Courses";
+import { Courses } from "./components/Home/courses";
 import { Community } from "./components/Home/elearn-community";
 import { FAQ } from "./components/Home/faq";
 import { Hero } from "./components/Home/hero";

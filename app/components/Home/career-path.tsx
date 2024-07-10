@@ -1,12 +1,12 @@
 "use client";
 import React from "react";
-import { Design } from "../General/Header-design";
 import CareerCard from "./career-card";
+import { HeaderDesign } from "../General/design";
 
 const CareerPath = () => {
   return (
     <section className="relative">
-      <Design title="CAREER PATH" />
+      <HeaderDesign title="CAREER PATH" />
 
       <div className="mt-12 md:mt-16 mb-20 w-[93%] md:w-[90] lg:w-[88%] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9">

@@ -1,7 +1,7 @@
 "use client";
 import { FreeMode, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Design } from "../General/Header-design";
+import { HeaderDesign } from "../General/design";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -57,7 +57,7 @@ export const Courses = () => {
   const [activeSlide, setActiveSlide] = useState(0);
   return (
     <section className="relative mt-16">
-      <Design title="courses" />
+      <HeaderDesign title="courses" />
 
       <div className="mt-9 md:mt-14 w-full bg-blue-200 py-14">
         <h3 className="w-[95%] md:w-[85%] lg:w-[75%] mx-auto text-center text-2xl md:text-3xl font-semibold">

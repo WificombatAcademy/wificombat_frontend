@@ -3,7 +3,7 @@ import { OnboardingCard } from "./onboarding-card"
 export const Onboarding = () => {
     return (
         <div className="space-y-9 md:space-y-32 lg:space-y-40">
-            <OnboardingCard 
+            <OnboardingCard
             buttonText="Take Assement" 
             title="Take Our Assessment: Discover Your Path to Success"
             desc="Ready to unlock your potential? Take our assessment today and 
