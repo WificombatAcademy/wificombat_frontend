@@ -58,10 +58,10 @@ const SideBar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
               >
-                <div className="absolute top-4 left-[-2.5rem]">
+               <div className="absolute right-full top-0 flex w-16 justify-center pt-5">
                   <button
                     type="button"
-                    className=""
+                    className="-m-2.5 p-2.5"
                     onClick={() => setSidebarOpen(false)}
                   >
                     <span className="sr-only">Close sidebar</span>
@@ -84,7 +84,7 @@ const SideBar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                     height={"96"}
                 />
                 </div>
-                <nav className="flex flex-1 flex-col">
+                <nav className="mt-4 flex flex-1 flex-col">
                   <ul role="list" className="flex flex-1 flex-col gap-y-7">
                     <li>
                       <ul role="list" className="-mx-2 space-y-5 text-lg">
