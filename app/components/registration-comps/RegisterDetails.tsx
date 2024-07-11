@@ -3,7 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation";
 import { IoChevronBackOutline } from "react-icons/io5"
-import { RegisterDesign } from "./register-design";
+import { RegisterDesign } from "./RegisterDesign";
 
 const images = [
     {image:"/student-reg.png", hoverColor: "hover:shadow-green-600", role:"Student"},
