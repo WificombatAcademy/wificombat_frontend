@@ -51,7 +51,9 @@ export const CareerPathwayCourses = () => {
 
             <div className="w-[93%] md:w-[90%] lg:w-[88%] mx-auto mt-9 md:mt-16 mb-20 space-y-8">
                 {pathwayCourses.map((pathway,index) => (
-                    <div className="bg-blue-50 border border-blue-200 py-8 px-5 md:px-8 flex flex-col rounded-3xl">
+                    <div 
+                    key={index}
+                    className="bg-blue-50 border border-blue-200 py-8 px-5 md:px-8 flex flex-col rounded-3xl">
                         <div className="flex justify-between">
                                 <div className="flex gap-2 md:gap-5 lg:gap-8">
                                     <div className="w-[50px] h-[50px] md:w-[80px] md:h-[80px] lg:w-[100px] lg:h-[100px] bg-primary-gray rounded-full"></div>
