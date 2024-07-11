@@ -1,6 +1,6 @@
 import Footer from "./components/General/page-footer";
 import { Benefits } from "./components/Home/benefits";
-import CareerPath from "./components/Home/career-path";
+import { CareerPath } from "./components/Home/career-path";
 import { CareerPathway } from "./components/Home/career-way";
 import { CareerRoadmap } from "./components/Home/career-roadmap";
 import { HomeCourses } from "./components/Home/courses";
