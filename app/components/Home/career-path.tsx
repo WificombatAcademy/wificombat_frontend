@@ -1,6 +1,4 @@
-"use client";
 import HeadingDesign from "../General/headingDesign";
-import React from "react";
 import CareerCard from "./career-card";
 
 export const CareerPath = () => {
