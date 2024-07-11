@@ -1,6 +1,6 @@
 // import { GeneralNavbar } from "../components/General/general-nav";
-import { CareerPathwayHero } from "../components/Career-Pathway-Comps/hero";
-import { WhyCareerPathway } from "../components/Career-Pathway-Comps/why-career";
+import { CareerPathwayHero } from "../components/CareerPathwayComps/hero";
+import { WhyCareerPathway } from "../components/CareerPathwayComps/why-career";
 import FixedNav from "../components/general/FixedNav";
 import StaticNav from "../components/general/StaticNav";
 
