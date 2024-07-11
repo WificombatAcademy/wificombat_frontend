@@ -16,6 +16,7 @@ export const Register = () => {
     return (
         <section className="relative w-full h-screen bg-white flex items-center justify-center overflow-y-visible">
             <RegisterDesign />
+            
             <div className="w-[90%] md:w-[85%] mx-auto">
                <div className="lg:relative">                 
                     <IoChevronBackOutline
