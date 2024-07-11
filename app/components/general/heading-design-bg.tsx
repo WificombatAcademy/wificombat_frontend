@@ -4,7 +4,7 @@ type Props = {
     heading: string;
 }
 
-const HeadingDesign = ({heading} : Props) => {
+export const HeadingDesign = ({heading} : Props) => {
     return (
         <div className="relative">
             <div className="relative flex flex-col gap-5 items-center justify-center">
@@ -59,5 +59,3 @@ const HeadingDesign = ({heading} : Props) => {
         </div>
     )
 }
-
-export default HeadingDesign

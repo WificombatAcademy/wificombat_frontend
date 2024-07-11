@@ -1,5 +1,5 @@
 "use client";
-import HeadingDesign from "../General/heading-design-bg";
+import { HeadingDesign } from "../General/heading-design-bg";
 import React from "react";
 import CareerCard from "./career-card";
 

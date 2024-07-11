@@ -1,4 +1,4 @@
-import HeadingDesign from "../General/heading-design-bg";
+import { HeadingDesign } from "../General/heading-design-bg";
 import { CurriculumCard } from "./curriculum-card";
 import { Onboarding } from "./onboarding";
 
