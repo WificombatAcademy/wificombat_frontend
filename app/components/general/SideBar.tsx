@@ -7,6 +7,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export const navigation = [
+  { name: "Home", href: "/" },
   { name: "Career Pathway", href: "/career-pathway" },
   { name: "Students", href: "/students" },
   { name: "Schools", href: "/schools" },
@@ -65,15 +66,15 @@ const SideBar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
               >
-                <div className="absolute right-full top-0 flex w-16 justify-center pt-5">
+                <div className="absolute right-full top-0 flex w-16 justify-center pt-5 border-none border-transparent">
                   <button
                     type="button"
                     className="-m-2.5 p-2.5"
                     onClick={() => setSidebarOpen(false)}
                   >
-                    <span className="sr-only">Close sidebar</span>
+                    <span className="sr-only border-none">Close sidebar</span>
                     <FaXmark
-                      className="h-6 w-6 text-white"
+                      className="h-6 w-6 text-white border-none"
                       aria-hidden="true"
                     />
                   </button>
@@ -101,7 +102,7 @@ const SideBar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                                 pathname === item.href
                                   ? "text-[#F2F2F3]"
                                   : "text-gray-400 hover:text-white hover:bg-gray-800",
-                                "group flex gap-x-3 rounded-md p-3 text-lg leading-6 font-semibold"
+                                "group flex gap-x-3 rounded-md p-3 text-lg leading-6 font-medium"
                               )}
                               style={
                                 pathname === item.href
