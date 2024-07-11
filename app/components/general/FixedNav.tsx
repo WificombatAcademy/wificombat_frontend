@@ -98,7 +98,7 @@ const FixedNav = (props: Props) => {
         <Link
           href="/play-games"
           onClick={() => scrollToView("play-games")}
-          className={`px-2.5 py-2 text-lg capitalize text-white hover:text-[#0784C3] max-lg:hidden"${
+          className={`px-2.5 py-2 text-lg capitalize text-white hover:text-[#0784C3] max-lg:hidden ${
             pathname === "/play-games" ? "border-t-2 border-blue-500" : ""
           }`}
         >
