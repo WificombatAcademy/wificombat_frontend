@@ -25,7 +25,7 @@ const StaticNav = (props: Props) => {
 
   return (
     <motion.nav
-      className={`max-w-screen z-20 w-full overflow-x-hidden bg-black transition-all duration-300 ease-in-out
+      className={`max-w-screen z-20 w-full bg-black transition-all duration-300 ease-in-out
       ${removeNavbar ? "hidden" : "relative"}
       `}
     >
