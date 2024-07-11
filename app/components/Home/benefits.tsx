@@ -1,5 +1,4 @@
-
-import { HeadingDesign } from "../General/heading-design-bg";
+import HeadingDesign from "../General/headingDesign";
 import { BenefitCard } from "./benefits-card";
 
 export const Benefits = () => {
