@@ -1,6 +1,6 @@
 import Image from "next/image"
 
-export const RegisterDesign = () => {
+const RegisterDesign = () => {
     return (
         <div className="absolute inset-0 w-full max-md:hidden">
             {/* 1ST DESIGN FROM TOP */}
@@ -46,3 +46,5 @@ export const RegisterDesign = () => {
         </div>
     )
 }
+
+export default RegisterDesign
