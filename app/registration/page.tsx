@@ -1,4 +1,4 @@
-import RegisterDetails from "../components/Registration-Comps/RegisterDetails";
+import RegisterDetails from "../components/Registration-Comps/RegisterDetail";
 
 
 export default function Page () {
