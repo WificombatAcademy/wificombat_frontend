@@ -10,9 +10,8 @@ import { Hero } from "./components/Home/hero";
 import Impact from "./components/Home/Impact";
 import { SchoolCurriculum } from "./components/Home/school-curriculum";
 import { Testimonials } from "./components/Home/testimonials";
-import FixedNav from "./components/General/fixed-nav";
-import StaticNav from "./components/General/static-nav";
-
+import FixedNav from "./components/General/FixedNav";
+import StaticNav from "./components/General/StaticNav";
 
 export default function Home() {
   return (

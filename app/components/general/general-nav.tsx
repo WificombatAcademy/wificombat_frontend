@@ -1,8 +1,7 @@
-import FixedNav from "./fixed-nav";
-import StaticNav from "./static-nav";
+import FixedNav from "./FixedNav";
+import StaticNav from "./StaticNav";
 
 export const GeneralNavbar = () => {
-
   return (
     <div>
       <StaticNav />
