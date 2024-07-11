@@ -1,49 +1,53 @@
-"use client"
-import Image from 'next/image'
-import Link from 'next/link'
-import { useActiveSection, useNavbarVisibility, useScrollToView, } from "../../hooks";
-import { RiMenu2Line } from 'react-icons/ri';
-import { motion, useAnimation } from 'framer-motion';
-import { useEffect, useState } from 'react';
-import SideBar from './mobile.nav';
-import { usePathname } from 'next/navigation';
+"use client";
+import Image from "next/image";
+import Link from "next/link";
+import {
+  useActiveSection,
+  useNavbarVisibility,
+  useScrollToView,
+} from "../../hooks";
+import { RiMenu2Line } from "react-icons/ri";
+import { motion, useAnimation } from "framer-motion";
+import { useEffect, useState } from "react";
+import SideBar from "./SideBar";
+import { usePathname } from "next/navigation";
 
-type Props = {}
+type Props = {};
 
 const FixedNav = (props: Props) => {
-    const pathname = usePathname();
-    const [sidebarOpen, setSidebarOpen] = useState(false);
-    const [nav, setNav] = useState(false);
-    const scrollToView = useScrollToView();
-    const { isVisible } = useNavbarVisibility();
-    const activeSection = useActiveSection([
-      "career-pathway",
-      "students",
-      "schools",
-      "portfolio-and-projects",
-      "play-games",
-    ]);
+  const pathname = usePathname();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [nav, setNav] = useState(false);
+  const scrollToView = useScrollToView();
+  const { isVisible } = useNavbarVisibility();
+  const activeSection = useActiveSection([
+    "career-pathway",
+    "students",
+    "schools",
+    "portfolio-and-projects",
+    "play-games",
+  ]);
 
-    const controls = useAnimation();
+  const controls = useAnimation();
 
-    useEffect(() => {
-        if (isVisible) {
-        controls.start({ y: 0, transition: { duration: 0.3 } });
-        } else {
-        controls.start({ y: -100 });
-        }
-    }, [isVisible, controls]);
+  useEffect(() => {
+    if (isVisible) {
+      controls.start({ y: 0, transition: { duration: 0.3 } });
+    } else {
+      controls.start({ y: -100 });
+    }
+  }, [isVisible, controls]);
 
   return (
     <motion.nav
       className={`max-w-screen z-20 w-full overflow-x-hidden bg-black transition-all duration-300 ease-in-out sm:w-full
-      ${ isVisible ? 'fixed left-0 top-0' : 'hidden'}
+      ${isVisible ? "fixed left-0 top-0" : "hidden"}
       `}
       animate={controls}
       initial={{ y: -100 }}
-      >
-        <SideBar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-        <ul className="mx-auto flex max-w-6xl items-center justify-between lg:justify-center gap-4 max-lg:pr-4">
+    >
+      <SideBar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+      <ul className="mx-auto flex max-w-6xl items-center justify-between lg:justify-center gap-4 max-lg:pr-4">
         <Link
           href="/career-pathway"
           onClick={() => scrollToView("career-pathway")}
@@ -84,7 +88,9 @@ const FixedNav = (props: Props) => {
           href="/portfolio-and-projects"
           onClick={() => scrollToView("portfolio-and-projects")}
           className={`px-2.5 py-2 text-lg capitalize text-white hover:text-[#0784C3] max-lg:hidden ${
-            pathname === "portfolio-and-projects" ? "border-t-2 border-blue-500" : ""
+            pathname === "portfolio-and-projects"
+              ? "border-t-2 border-blue-500"
+              : ""
           }`}
         >
           Portfolio & Projects
@@ -104,15 +110,16 @@ const FixedNav = (props: Props) => {
         >
           Login
         </Link>
-        <div className='pr-3'>
-          <RiMenu2Line 
-          onClick={() => setSidebarOpen(true)}
-          size={25}
-          className="text-gray-300 lg:hidden"/>
+        <div className="pr-3">
+          <RiMenu2Line
+            onClick={() => setSidebarOpen(true)}
+            size={25}
+            className="text-gray-300 lg:hidden"
+          />
         </div>
       </ul>
     </motion.nav>
-  )
-}
+  );
+};
 
-export default FixedNav
+export default FixedNav;
