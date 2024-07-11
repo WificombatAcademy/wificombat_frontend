@@ -1,14 +1,12 @@
-// import { GeneralNavbar } from "../components/General/general-nav";
+
 import { CareerPathwayHero } from "../components/CareerPathwayComps/hero";
 import { WhyCareerPathway } from "../components/CareerPathwayComps/why-career";
-import FixedNav from "../components/general/FixedNav";
-import StaticNav from "../components/general/StaticNav";
+import GeneralNavbar from "../components/general/GeneralNavbar";
 
 export default function Page() {
   return (
     <div>
-      <FixedNav />
-      <StaticNav />
+      <GeneralNavbar />
       <CareerPathwayHero />
       <WhyCareerPathway />
     </div>

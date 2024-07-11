@@ -1,5 +1,3 @@
-
-import Image from "next/image";
 import CareerCard from "./career-card";
 import HeadingDesign from "../general/headingDesign";
 
