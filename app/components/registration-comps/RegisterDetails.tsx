@@ -11,7 +11,7 @@ const images = [
     {image: "/educator-reg.png", hoverColor: "hover:shadow-blue-500", role: "Educator"}
 ]
 
-export const Register = () => {
+export const RegisterDetails = () => {
     const router = useRouter();
     return (
         <section className="relative w-full h-screen bg-white flex items-center justify-center overflow-y-visible">
