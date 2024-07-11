@@ -8,7 +8,7 @@ import GeneralNavbar from "../components/general/GeneralNavbar";
 
 export default function Page() {
   return (
-    <div>
+    <div className="mx-auto relative container w-full max-w-[2000px]">
       <GeneralNavbar />
       <CareerPathwayHero />
       <WhyCareerPathway />

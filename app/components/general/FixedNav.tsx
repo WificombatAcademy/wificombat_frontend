@@ -61,7 +61,7 @@ const FixedNav = (props: Props) => {
           href="/students"
           onClick={() => scrollToView("students")}
           className={`px-2.5 py-2 text-lg capitalize text-white hover:text-[#0784C3] max-lg:hidden ${
-            pathname === "/students" ? "border-t-2 border-blue-500" : ""
+            pathname === "/students" ? "border-b-4 border-blue-500" : ""
           }`}
         >
           Students
@@ -70,7 +70,7 @@ const FixedNav = (props: Props) => {
           href="/schools"
           onClick={() => scrollToView("schools")}
           className={`px-2.5 py-2 text-lg capitalize text-white hover:text-[#0784C3] max-lg:hidden ${
-            pathname === "/schools" ? "border-t-2 border-blue-500" : ""
+            pathname === "/schools" ? "border-b-4 border-blue-500" : ""
           }`}
         >
           Schools
@@ -89,7 +89,7 @@ const FixedNav = (props: Props) => {
           onClick={() => scrollToView("portfolio-and-projects")}
           className={`px-2.5 py-2 text-lg capitalize text-white hover:text-[#0784C3] max-lg:hidden ${
             pathname === "portfolio-and-projects"
-              ? "border-t-2 border-blue-500"
+              ? "border-b-4 border-blue-500"
               : ""
           }`}
         >
@@ -99,7 +99,7 @@ const FixedNav = (props: Props) => {
           href="/play-games"
           onClick={() => scrollToView("play-games")}
           className={`px-2.5 py-2 text-lg capitalize text-white hover:text-[#0784C3] max-lg:hidden ${
-            pathname === "/play-games" ? "border-t-2 border-blue-500" : ""
+            pathname === "/play-games" ? "border-b-4 border-blue-500" : ""
           }`}
         >
           Play Games
@@ -107,7 +107,7 @@ const FixedNav = (props: Props) => {
         <Link
           href="/login"
           className={`px-2.5 py-2 text-lg capitalize text-white hover:text-[#0784C3] max-lg:hidden ${
-            pathname === "/play-games" ? "border-t-2 border-blue-500" : ""
+            pathname === "/play-games" ? "border-b-4 border-blue-500" : ""
           }`}
         >
           Login

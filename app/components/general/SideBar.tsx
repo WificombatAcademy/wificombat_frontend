@@ -131,14 +131,3 @@ const SideBar = ({ sidebarOpen, setSidebarOpen }: Props) => {
 };
 
 export default SideBar;
-
-
-
-
-{/* <Image
-src="/wificombat.svg"
-alt="homepage"
-className="mt-6 md:h-24 w-24 px-2.5 py-2 object-contain"
-width={"96"}
-height={"96"}
-/> */}
