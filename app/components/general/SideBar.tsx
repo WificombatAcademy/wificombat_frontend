@@ -1,16 +1,18 @@
 "use client";
 import Image from "next/image";
 import { Dialog, Transition } from "@headlessui/react";
-import { Dispatch, Fragment, SetStateAction } from "react";
-import { FaXmark } from "react-icons/fa6";
+import { Fragment, useState } from "react";
+import { FaMinus, FaPlus, FaXmark } from "react-icons/fa6";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { schoolLinks, studentLinks } from "@/app/utils/types-and-links";
+import { PopupProps } from "./Popup";
 
 export const navigation = [
   { name: "Home", href: "/" },
   { name: "Career Pathway", href: "/career-pathway" },
-  { name: "Students", href: "/students" },
-  { name: "Schools", href: "/schools" },
+  { name: "Students", href: "#" },
+  { name: "Schools", href: "#" },
   { name: "Portfolio & Projects", href: "/portfolio-and-projects" },
   { name: "Play Games", href: "/play-games" },
   { name: "Login", href: "/login" },
@@ -18,22 +20,36 @@ export const navigation = [
 
 type Props = {
   sidebarOpen: boolean;
-  setSidebarOpen: (open:boolean) => void;
-}
+  setSidebarOpen: (open: boolean) => void;
+};
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
+
+const Popup = ({ links, onClose }:PopupProps) => (
+  <div className=" shadow-md px-4 text-gray-200 rounded  z-50">
+    <ul>
+      {links.map((link, index) => (
+        <li key={index}>
+          <Link href={link.href} className="block px-2 py-2 hover:bg-gray-200" onClick={onClose}>
+            {link.label}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  </div>
+);
+
 const SideBar = ({ sidebarOpen, setSidebarOpen }: Props) => {
   const pathname = usePathname();
+  const [schoolsPopupVisible, setSchoolsPopupVisible] = useState(false);
+  const [studentsPopupVisible, setStudentsPopupVisible] = useState(false);
+
   return (
     <Transition.Root show={sidebarOpen} as={Fragment}>
-      <Dialog
-        as="div"
-        className="relative z-50 lg:hidden"
-        onClose={setSidebarOpen}
-      >
+      <Dialog as="div" className="relative z-50 lg:hidden" onClose={setSidebarOpen}>
         <Transition.Child
           as={Fragment}
           enter="transition-opacity ease-linear duration-300"
@@ -73,37 +89,45 @@ const SideBar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                     onClick={() => setSidebarOpen(false)}
                   >
                     <span className="sr-only border-none">Close sidebar</span>
-                    <FaXmark
-                      className="h-6 w-6 text-white border-none"
-                      aria-hidden="true"
-                    />
+                    <FaXmark className="h-6 w-6 text-white border-none" aria-hidden="true" />
                   </button>
                 </div>
               </Transition.Child>
-              {/* Sidebar component, swap this element with another sidebar if you like */}
               <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-[#0C0C0D] px-6 pb-4 ring-1 ring-white/10">
                 <div className="flex h-16 shrink-0 items-center">
-                <Image
-                  src="/wificombat.svg"
-                  alt="homepage"
-                  className="mt-6 md:h-24 w-24 mb-4 px-2.5 py-2 object-contain"
-                  width={"96"}
-                  height={"96"} />
+                  <Image
+                    src="/wificombat.svg"
+                    alt="homepage"
+                    className="mt-6 md:h-24 w-24 mb-4 px-2.5 py-2 object-contain"
+                    width={"96"}
+                    height={"96"}
+                  />
                 </div>
                 <nav className="flex flex-1 flex-col">
                   <ul role="list" className="flex flex-1 flex-col gap-y-7">
                     <li>
                       <ul role="list" className="-mx-2 space-y-1">
                         {navigation.map((item) => (
-                          <li key={item.name}>
+                          <li key={item.name} className="relative">
                             <Link
                               href={`${item.href}`}
                               className={classNames(
                                 pathname === item.href
                                   ? "text-[#F2F2F3]"
-                                  : "text-gray-400 hover:text-white hover:bg-gray-800",
+                                  : "text-gray-400",
                                 "group flex gap-x-3 rounded-md p-3 text-lg leading-6 font-medium"
                               )}
+                              onClick={() => {
+                                if (item.name === "Schools") {
+                                  setSchoolsPopupVisible(!schoolsPopupVisible);
+                                  setStudentsPopupVisible(false);
+                                } else if (item.name === "Students") {
+                                  setStudentsPopupVisible(!studentsPopupVisible);
+                                  setSchoolsPopupVisible(false);
+                                } else {
+                                  setSidebarOpen(false);
+                                }
+                              }}
                               style={
                                 pathname === item.href
                                   ? {
@@ -114,7 +138,23 @@ const SideBar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                               }
                             >
                               {item.name}
+                              {item.name === "Schools" && (
+                                <span className="ml-auto">
+                                  {schoolsPopupVisible ? <FaMinus size={18}/> : <FaPlus size={18}/>}
+                                </span>
+                              )}
+                              {item.name === "Students" && (
+                                <span className="ml-auto">
+                                  {studentsPopupVisible ? <FaMinus size={18}/> : <FaPlus size={18}/>}
+                                </span>
+                              )}
                             </Link>
+                            {item.name === "Schools" && schoolsPopupVisible && (
+                              <Popup links={schoolLinks} onClose={() => setSchoolsPopupVisible(false)} />
+                            )}
+                            {item.name === "Students" && studentsPopupVisible && (
+                              <Popup links={studentLinks} onClose={() => setStudentsPopupVisible(false)} />
+                            )}
                           </li>
                         ))}
                       </ul>

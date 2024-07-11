@@ -2,7 +2,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
-  useActiveSection,
   useNavbarVisibility,
   useScrollToView,
 } from "../../hooks";
@@ -11,22 +10,18 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import SideBar from "./SideBar";
 import { usePathname } from "next/navigation";
+import Popup from "./Popup";
+import { schoolLinks, studentLinks } from "@/app/utils/types-and-links";
 
 type Props = {};
 
 const StaticNav = (props: Props) => {
   const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [nav, setNav] = useState(false);
+  const [schoolsPopupVisible, setSchoolsPopupVisible] = useState(false);
+  const [studentsPopupVisible, setStudentsPopupVisible] = useState(false);
   const scrollToView = useScrollToView();
   const { removeNavbar } = useNavbarVisibility();
-  const activeSection = useActiveSection([
-    "career-pathway",
-    "students",
-    "schools",
-    "portfolio-and-projects",
-    "play-games",
-  ]);
 
   return (
     <motion.nav
@@ -45,24 +40,36 @@ const StaticNav = (props: Props) => {
         >
           Career Pathway
         </Link>
-        <Link
-          href="/students"
-          onClick={() => scrollToView("students")}
-          className={`px-2.5 py-2 text-lg capitalize text-white hover:text-[#0784C3] max-lg:hidden ${
-            pathname === "/students" ? "border-b-4 border-blue-500" : ""
-          }`}
+        <div
+          className="relative max-lg:hidden"
+          onMouseEnter={() => setStudentsPopupVisible(true)}
+          onMouseLeave={() => setStudentsPopupVisible(false)}
+          onClick={() => setStudentsPopupVisible(!studentsPopupVisible)}
         >
-          Students
-        </Link>
-        <Link
-          href="/schools"
-          onClick={() => scrollToView("schools")}
-          className={`px-2.5 py-2 text-lg capitalize text-white hover:text-[#0784C3] max-lg:hidden ${
-            pathname === "/schools" ? "border-b-4 border-blue-500" : ""
-          }`}
+          <li
+            className={`px-2.5 py-2 text-lg capitalize text-white hover:text-[#0784C3] max-lg:hidden cursor-pointer ${
+              pathname.startsWith("/students") ? "border-b-4 border-blue-500" : ""
+            }`}
+          >
+            Students
+          </li>
+          {studentsPopupVisible && <Popup links={studentLinks} />}
+        </div>
+        <div 
+        className="relative max-lg:hidden"
+        onMouseEnter={() => setSchoolsPopupVisible(true)}
+        onMouseLeave={() => setSchoolsPopupVisible(false)}
+        onClick={() => setSchoolsPopupVisible(!schoolsPopupVisible)}
         >
-          Schools
-        </Link>
+          <li
+            className={`px-2.5 py-2 text-lg capitalize text-white hover:text-[#0784C3] max-lg:hidden cursor-pointer ${
+              pathname.startsWith("/schools") ? "border-b-4 border-blue-500" : ""
+            }`}
+          >
+            Schools
+          </li>
+          {schoolsPopupVisible && <Popup links={schoolLinks} />}
+        </div>
         <Link href="/">
           <Image
             src="/wificombat.svg"
