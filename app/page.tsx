@@ -18,11 +18,11 @@ export default function Home() {
       <GeneralNav />
       <Hero />
       <CareerPathway />
-      <CareerPath />
+      {/* <CareerPath /> */}
       <CareerRoadmap />
       <Benefits />
       <SchoolCurriculum />
-      <HomeCourses />
+      {/* <HomeCourses /> */}
       <Impact />
       <Testimonials />
       <Community />
