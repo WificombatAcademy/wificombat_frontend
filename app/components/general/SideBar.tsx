@@ -69,7 +69,7 @@ const SideBar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                 <div className="absolute right-full top-0 flex w-16 justify-center pt-5 border-none border-transparent">
                   <button
                     type="button"
-                    className="-m-2.5 p-2.5"
+                    className="-m-2.5 p-2.5 outline-none focus:outline-none"
                     onClick={() => setSidebarOpen(false)}
                   >
                     <span className="sr-only border-none">Close sidebar</span>
@@ -86,7 +86,7 @@ const SideBar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                 <Image
                   src="/wificombat.svg"
                   alt="homepage"
-                  className="mt-6 md:h-24 w-24 px-2.5 py-2 object-contain"
+                  className="mt-6 md:h-24 w-24 mb-4 px-2.5 py-2 object-contain"
                   width={"96"}
                   height={"96"} />
                 </div>
