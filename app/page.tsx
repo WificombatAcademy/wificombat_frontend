@@ -1,4 +1,4 @@
-import Footer from "./components/general/Footer";
+import Footer from "./components/General/Footer";
 import { Benefits } from "./components/Home/benefits";
 import { CareerPath } from "./components/Home/career-path";
 import { CareerPathway } from "./components/Home/career-way";
@@ -10,8 +10,8 @@ import { Hero } from "./components/Home/hero";
 import Impact from "./components/Home/Impact";
 import { SchoolCurriculum } from "./components/Home/school-curriculum";
 import { Testimonials } from "./components/Home/testimonials";
-import FixedNav from "./components/general/FixedNav";
-import StaticNav from "./components/general/StaticNav";
+import FixedNav from "./components/General/FixedNav";
+import StaticNav from "./components/General/StaticNav";
 
 export default function Home() {
   return (
