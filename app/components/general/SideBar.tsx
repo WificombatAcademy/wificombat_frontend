@@ -6,7 +6,7 @@ import { FaMinus, FaPlus, FaXmark } from "react-icons/fa6";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { schoolLinks, studentLinks } from "@/app/utils/types-and-links";
-import { PopupProps } from "./Popup";
+import { link, PopupProps } from "./Popup";
 
 export const navigation = [
   { name: "Home", href: "/" },
@@ -27,13 +27,16 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
+const isSubLinkActive = (links:link[], pathname:string) => {
+  return links.some(link => pathname === link.href);
+};
 
 const Popup = ({ links, onClose }:PopupProps) => (
-  <div className=" shadow-md px-4 text-gray-200 rounded  z-50">
+  <div className=" shadow-md px-4 text-gray-200 rounded z-50">
     <ul>
       {links.map((link, index) => (
         <li key={index}>
-          <Link href={link.href} className="block px-2 py-2 hover:bg-gray-200" onClick={onClose}>
+          <Link href={link.href} className="block px-2 py-2 active:bg-gray-300 active:text-gray-900 cursor-pointer transition-colors duration-200" onClick={onClose}>
             {link.label}
           </Link>
         </li>
@@ -62,7 +65,7 @@ const SideBar = ({ sidebarOpen, setSidebarOpen }: Props) => {
           <div className="fixed inset-0 bg-gray-900/80" />
         </Transition.Child>
 
-        <div className="fixed inset-0 flex">
+        <div className="fixed inset-0 flex justify-end">
           <Transition.Child
             as={Fragment}
             enter="transition ease-in-out duration-300 transform"
@@ -106,16 +109,19 @@ const SideBar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                 <nav className="flex flex-1 flex-col">
                   <ul role="list" className="flex flex-1 flex-col gap-y-7">
                     <li>
-                      <ul role="list" className="-mx-2 space-y-1">
+                      <ul role="list" className="-mx-2 px-2 space-y-1">
                         {navigation.map((item) => (
                           <li key={item.name} className="relative">
                             <Link
                               href={`${item.href}`}
                               className={classNames(
-                                pathname === item.href
-                                  ? "text-[#F2F2F3]"
+                                pathname === item.href || 
+                                (item.name === "Schools" && isSubLinkActive(schoolLinks, pathname)) 
+                                || (item.name === "Students" && isSubLinkActive(studentLinks, pathname))
+
+                                  ? "text-[#F2F2F3] border-b border-blue-500"
                                   : "text-gray-400",
-                                "group flex gap-x-3 rounded-md p-3 text-lg leading-6 font-medium"
+                                "group flex gap-x-3 py-2 text-lg leading-6 font-medium"
                               )}
                               onClick={() => {
                                 if (item.name === "Schools") {
@@ -128,14 +134,6 @@ const SideBar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                                   setSidebarOpen(false);
                                 }
                               }}
-                              style={
-                                pathname === item.href
-                                  ? {
-                                      background:
-                                        "conic-gradient(from 173.86deg at 50% 50%, #FFB600 -13.12deg, #BC00DD 120deg, #0784C3 181.87deg, #FFB600 346.88deg, #BC00DD 480deg)",
-                                    }
-                                  : {}
-                              }
                             >
                               {item.name}
                               {item.name === "Schools" && (

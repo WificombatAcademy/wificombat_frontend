@@ -16,7 +16,7 @@ export const Benefits = () => {
             desc="Gain in-depth knowledge and practical skills in high-demand tech fields like coding, 
                 robotics, multimedia design, IoT, and AI. Our courses are designed to build a strong foundation 
                 and advance your expertise."
-            title="Comprehensive Skill Development "
+            title="Comprehensive Skill Development"
           />
 
           <BenefitCard

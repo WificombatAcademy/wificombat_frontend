@@ -72,6 +72,9 @@
   border-radius: 50%;
   overflow: hidden; /* This ensures the image stays within the container */
 }
+.polygon {
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
 
 @media (max-width:768px) {
   :root {
