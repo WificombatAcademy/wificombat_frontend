@@ -1,4 +1,4 @@
-import HeadingDesign from "../../general/headingDesign";
+import HeadingDesign from "../../general/HeaderDesign";
 
 export const TechSkill = () => {
   return (

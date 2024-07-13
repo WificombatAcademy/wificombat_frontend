@@ -1,12 +1,10 @@
-import HeadingDesign from "../general/headingDesign";
+import HeadingDesign from "../general/HeaderDesign";
 import { BenefitCard } from "./benefits-card";
-
 
 export const Benefits = () => {
   return (
     <section className="relative">
-      <HeadingDesign heading="benefits"/>
-
+      <HeadingDesign heading="benefits" />
 
       <div className="mt-12 md:mt-16 mb-20 w-[93%] md:w-[90] lg:w-[88%] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-9">

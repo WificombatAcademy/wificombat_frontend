@@ -1,11 +1,11 @@
-import HeadingDesign from "../general/headingDesign"
+import HeadingDesign from "../general/HeaderDesign";
 
 export const Catalog = () => {
-    return (
-        <section>
-            <HeadingDesign heading="catalog"/>
+  return (
+    <section>
+      <HeadingDesign heading="catalog" />
 
-            <div className="h-[600px]"></div>
-        </section>
-    )
-}
+      <div className="h-[600px]"></div>
+    </section>
+  );
+};

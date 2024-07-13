@@ -5,7 +5,7 @@ type Props = {
     title: string;
     desc?: string;
     listdesc?: string[];
-    buttonText: string;
+    buttonText?: string;
 }
 
 export const OnboardingCard = ({buttonText, title, desc,listdesc, reverse}: Props) => {
@@ -25,14 +25,16 @@ export const OnboardingCard = ({buttonText, title, desc,listdesc, reverse}: Prop
                             ))}
                     </ul>}
                 </>}
-               <div className="mt-14">
+
+              {buttonText &&  
+                <div className="mt-14">
                     <Link
                     href="/registration"
                     className="rounded-lg bg-[#131314] px-16 py-5 font-medium text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                     >
                     {buttonText}
                     </Link>
-               </div>
+               </div>}
             </div>
 
             <div className={`w-full md:basis-[50%] ${!reverse && "flex items-center justify-center"}`}>

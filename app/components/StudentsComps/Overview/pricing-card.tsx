@@ -10,11 +10,11 @@ type Props = {
 
 export const PricingCard = ({billing, price, color}: Props) => {
     return (
-        <div className="relative w-full bg-white py-5 md:py-7 px-4 text-black-500 rounded-3xl">
+        <div className="relative w-full bg-white py-5 md:py-7 lg:py-9 px-4 text-black-500 rounded-3xl">
             {/* ABOSLUTE BLUR */}
             <div className="absolute flex items-center justify-end inset-0">
 
-            <div className="absolute right-[6.8rem] top-3">
+            <div className="absolute right-[5.7rem] lg:right-[6.6rem] top-3">
                 <div className="relative flex items-center justify-center">
                     <PiStarFourFill size={24} className="text-white z-10" />
                     <div className="absolute w-full h-full bg-black-500/0 rounded-full"></div>
@@ -43,7 +43,7 @@ export const PricingCard = ({billing, price, color}: Props) => {
                 <p className="mt-3 
                 w-[80%] lg:w-[70%]">Lorem ipsum dolor sit amet consectetur. Facilisis arcu </p>
 
-                <h3 className="text-black-500 mt-4 text-2xl md:text-4xl font-medium">{price}</h3>
+                <h3 className="text-black-500 mt-8 md:mt-10 text-2xl md:text-4xl font-medium">{price}</h3>
 
                 <div className="mt-7 w-full text-white">
                     <Link href={`/registration`} className="w-full flex items-center justify-center font-medium 

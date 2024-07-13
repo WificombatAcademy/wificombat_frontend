@@ -1,12 +1,12 @@
-import HeadingDesign from "../general/headingDesign";
+import HeadingDesign from "../general/HeaderDesign";
 
 export const WhyCareerPathway = () => {
   return (
     <section className="relative">
-      <HeadingDesign heading="why career pathway?"/>
+      <HeadingDesign heading="why career pathway?" />
 
       <div className="w-[93%] md:w-[90%] lg:w-[88%] mx-auto">
-      <p className="md:w-[88%] mx-auto mt-6 md:mt-9 lg:mt-12 md:text-2xl text-center font-medium">
+        <p className="md:w-[88%] mx-auto mt-6 md:mt-9 lg:mt-12 md:text-2xl text-center font-medium">
           Lorem ipsum dolor sit amet consectetur. A ornare rhoncus ipsum
           consequat facilisis maecenas bibendum euismod velit. Purus com
         </p>
