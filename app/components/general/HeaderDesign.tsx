@@ -40,7 +40,7 @@ const HeadingDesign = ({ heading }: Props) => {
                 />
                 </svg>
 
-                <h2 className="mt-2 text-center md:text-3xl text-2xl lg:text-5xl uppercase fomt-bold md:font-medium">
+                <h2 className="w-[90%] mx-auto mt-2 text-center md:text-3xl text-2xl lg:text-5xl uppercase font-semibold md:font-medium">
                     {heading}
                 </h2>
             </div>

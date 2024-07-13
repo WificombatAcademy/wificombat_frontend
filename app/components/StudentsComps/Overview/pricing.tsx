@@ -22,7 +22,7 @@ export const PricingPlan = ({ pricingPage }: Props) => {
         } py-10 md:py-14 lg:py-20 bg-blue-50`}
       >
         {pricingPage && (
-          <h2 className="mt-2 mb-6 text-center md:text-3xl text-2xl lg:text-5xl uppercase fomt-bold md:font-medium">
+          <h2 className="mt-2 mb-6 text-center md:text-3xl text-2xl lg:text-5xl uppercase font-semibold md:font-medium">
             PRICING PLAN
           </h2>
         )}
