@@ -34,7 +34,7 @@ export const CareerPathwayCurriculum = () => {
 
           <div className="mt-10 md:mt-16 flex flex-col lg:flex-row gap-16 items-center lg:items-start justify-between">
             <div 
-            className="w-full lg:basis-[13%] py-3 px-2 md:px-3 flex flex-wrap lg:flex-col items-center justify-between rounded shadow-xl max-lg:px-4 border">
+            className="w-full lg:basis-[13%] py-3 px-2 md:px-3 flex flex-wrap lg:flex-col items-center max-sm:justify-between rounded shadow-xl max-lg:px-4 border">
                 {pathsCurriculum.map((curriculum,index) => (
                   <div 
                   key={index}
@@ -42,7 +42,7 @@ export const CareerPathwayCurriculum = () => {
                   style={{ 
                     clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)" }
                   }
-                className={`w-[33%] lg:w-[85%] py-7 md:py-14 lg:py- px-2 text-center font-medium break-words cursor-pointer
+                className={`w-[33%] md:w-[25%] lg:w-[85%] py-7 md:py-14 lg:py- px-2 text-center font-medium break-words cursor-pointer
                    ${index === activePathIndex  ? `bg-purple-500 text-white` : `transition-colors duration-500 hover:bg-gray-200`}`}>{curriculum.module} Path</div>
                 ))}
             </div>

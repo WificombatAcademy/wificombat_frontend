@@ -1,5 +1,9 @@
 import { FaqCard } from "./faq-card"
 
+type Props = {
+    noSpace?: boolean;
+}
+
 const faq = [
     { title: "What career pathways are available on your platform?",
      content: "Our platform is designed for kids and teens, typically ranging from 8 to 18 years old.",
@@ -26,10 +30,10 @@ const faq = [
     },
 ]
 
-export const FAQ = () => {
+export const FAQ = ({noSpace}: Props) => {
     return (
         <div className="">
-            <div className="h-[17rem] md:h-[18rem]"></div>
+        <div className={`${noSpace ? "h-[2rem]" : "h-[17rem] md:h-[18rem]" }`}></div>
 
             <div>
                 <h2 className="w-[90%] mx-auto font-semibold text-2xl md:text-3xl lg:text-5xl text-center">Frequently Asked Questions</h2>

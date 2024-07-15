@@ -75,6 +75,18 @@
 .polygon {
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
 }
+.gradient-text {
+  background: linear-gradient(
+    to bottom, 
+    #BC00DD, 
+    #0784C3, 
+    #FFB600
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 
 @media (max-width:768px) {
   :root {

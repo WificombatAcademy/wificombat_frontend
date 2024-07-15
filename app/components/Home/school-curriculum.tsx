@@ -2,7 +2,11 @@ import { CurriculumCard } from "./curriculum-card";
 import { Onboarding } from "./onboarding";
 import HeadingDesign from "../general/HeaderDesign";
 
-export const SchoolCurriculum = () => {
+type Props = {
+  dontShowOnboarding: boolean;
+}
+
+export const SchoolCurriculum = ({dontShowOnboarding}: Props) => {
   return (
     <section className="relative">
       <HeadingDesign heading="Career Pathway school curriculum" />
@@ -15,7 +19,7 @@ export const SchoolCurriculum = () => {
           volutpat. Eu in euismod elit dui. Arcu aliquet nunc ali.
         </p>
 
-        <div className="mt-14 md:mt-24 mb-20 grid grid-cols-1 lg:grid-cols-3 gap-9">
+        <div className="mt-14 md:mt-24 mb-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9">
           <CurriculumCard
             borderColor="border-purple-500"
             bgColor="bg-purple-50"
@@ -33,9 +37,10 @@ export const SchoolCurriculum = () => {
           />
         </div>
 
+        {!dontShowOnboarding && 
         <div className="">
           <Onboarding />
-        </div>
+        </div>}
       </div>
     </section>
   );
