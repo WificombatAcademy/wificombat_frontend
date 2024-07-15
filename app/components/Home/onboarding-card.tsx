@@ -1,14 +1,16 @@
 import Link from "next/link"
+import { FaCircleCheck } from "react-icons/fa6";
 
 type Props = {
     reverse?: boolean;
     title: string;
     desc?: string;
     listdesc?: string[];
+    checkmark?:boolean;
     buttonText?: string;
 }
 
-export const OnboardingCard = ({buttonText, title, desc,listdesc, reverse}: Props) => {
+export const OnboardingCard = ({buttonText, checkmark, title, desc,listdesc, reverse}: Props) => {
     return (
         <div className={`w-full flex flex-col ${reverse? "md:flex-row-reverse" : "md:flex-row"} md:items-center md:justify-between gap-16`}>
             <div className="w-full md:basis-[50%]">
@@ -19,10 +21,13 @@ export const OnboardingCard = ({buttonText, title, desc,listdesc, reverse}: Prop
                 </> :
                 <>
                     {listdesc && 
-                    <ul className="pt-4 text-black-700 space-y-4 list-disc">
-                            {listdesc.map((item, index) => (
-                                <li key={index} className="ml-4">{item}</li>
-                            ))}
+                    <ul className={`pt-4 text-black-700 space-y-4 ${checkmark ? "pt-7" : "list-disc"}`}>
+                        {listdesc.map((item, index) => (
+                            <div key={index} className={`${checkmark && "flex items-center gap-1"}`}>
+                                 {checkmark && <FaCircleCheck size={25} className="text-yellow-500"/>}
+                                <li key={index} className={`ml-4 ${ checkmark && "font-medium mb-2"}`}>{item}</li>
+                            </div>
+                        ))}
                     </ul>}
                 </>}
 

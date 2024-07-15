@@ -15,7 +15,7 @@ export const CareerPath = () => {
           />
 
           <CareerCard
-            linkTo="/register"
+            linkTo="/coding-pathway"
             pathway="Coding"
             desc="This pathway emphasizes problem-solving, algorithm development, and mastering various programming languages."
           />
