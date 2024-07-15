@@ -5,17 +5,22 @@ import HeadingDesign from "../../general/HeaderDesign";
 import CareerCard from "../../Home/career-card";
 import Link from "next/link";
 
+type CareerPathwayCurriculumProps = {
+  schoolCurriculum?: boolean;
+};
+
 const levels: CurriculumLevel[] = ["Beginner", "Intermediate", "Advanced"];
 
-export const CareerPathwayCurriculum = () => {
+export const CareerPathwayCurriculum = ({schoolCurriculum}: CareerPathwayCurriculumProps) => {
   const [activePathIndex, setActivePathIndex] = useState(0);
   const [selectedLevel, setSelectedLevel] = useState<CurriculumLevel>("Beginner");
+  const headingText = schoolCurriculum ? "school curriculum" : "career pathway curriculum";
 
   const activePath: PathCurriculumType = pathsCurriculum[activePathIndex];
 
   return (
     <section>
-      <HeadingDesign heading="career pathway curriculum" />
+      <HeadingDesign heading={headingText}/>
 
       <div className="mt-8 md:mt-10 lg:mt-20 mb-20">
         <div className="w-[93%] md:w-[90%] lg:w-[88%] mx-auto">
