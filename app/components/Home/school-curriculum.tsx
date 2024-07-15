@@ -3,7 +3,7 @@ import { Onboarding } from "./onboarding";
 import HeadingDesign from "../general/HeaderDesign";
 
 type Props = {
-  dontShowOnboarding: boolean;
+  dontShowOnboarding?: boolean;
 }
 
 export const SchoolCurriculum = ({dontShowOnboarding}: Props) => {
