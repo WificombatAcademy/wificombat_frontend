@@ -83,7 +83,7 @@ const StaticNav = (props: Props) => {
           href="/portfolio-and-projects"
           onClick={() => scrollToView("portfolio-and-projects")}
           className={`px-2.5 py-2 text-lg capitalize text-white hover:text-[#0784C3] max-lg:hidden ${
-            pathname === "portfolio-and-projects"
+            pathname === "/portfolio-and-projects"
               ? "border-b-4 border-blue-500"
               : ""
           }`}
