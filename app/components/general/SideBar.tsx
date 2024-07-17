@@ -15,7 +15,7 @@ export const navigation = [
   { name: "Schools", href: "#" },
   { name: "Portfolio & Projects", href: "/portfolio-and-projects" },
   { name: "Play Games", href: "/play-games" },
-  { name: "Login", href: "/login" },
+  { name: "Login", href: "https://elearn.wificombatacademy.com/login/" },
 ];
 
 type Props = {

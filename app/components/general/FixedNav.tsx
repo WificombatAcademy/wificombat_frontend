@@ -112,7 +112,7 @@ const [studentsPopupVisible, setStudentsPopupVisible] = useState(false);
           Play Games
         </Link>
         <Link
-          href="/login"
+          href="https://elearn.wificombatacademy.com/login/"
           className={`px-2.5 py-2 text-lg capitalize text-white hover:text-[#0784C3] max-lg:hidden ${
             pathname === "/play-games" ? "border-b-4 border-blue-500" : ""
           }`}

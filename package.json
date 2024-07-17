@@ -12,6 +12,7 @@
     "@headlessui/react": "^1.7.18",
     "framer-motion": "^11.2.13",
     "next": "^14.0.4",
+    "next-nprogress-bar": "^2.3.13",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.2.1",

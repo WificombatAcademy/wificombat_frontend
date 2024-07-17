@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Raleway } from "next/font/google";
 import "./globals.css";
+import Providers from "./utils/progress-bar";
 
 const raleway = Raleway({
   weight: ["200", "300", "400", "500", "600"],
@@ -19,7 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={raleway.className}>{children}</body>
+      <Providers>
+        <body className={raleway.className}>{children}</body>
+      </Providers>
     </html>
   );
 }

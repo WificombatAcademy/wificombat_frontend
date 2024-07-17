@@ -100,7 +100,7 @@ const StaticNav = (props: Props) => {
           Play Games
         </Link>
         <Link
-          href="/login"
+          href="https://elearn.wificombatacademy.com/login/"
           className="px-2.5 py-2 text-lg capitalize text-[#0784C3] hover:text-[#0784C3] max-lg:hidden"
         >
           Login
