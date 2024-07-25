@@ -4,7 +4,7 @@ import { FaPlus } from "react-icons/fa6";
 type Props = {
     pathway: string;
     desc: string;
-    linkTo: string;
+    linkTo?: string;
     subject?: string;
     level?: string;
     bgColor?: string;
@@ -15,7 +15,7 @@ type Props = {
 const CareerCard = ({ bgColor ,desc, pathway, linkTo, level, subject, textWhite, pathways }: Props) => {
     return (
         <div className="h-full">
-            <Link href={linkTo}>
+            <Link href={`${linkTo && linkTo}`}>
                 <div className="w-full flex flex-col h-full bg-white pb-3 shadow-lg rounded-2xl cursor-pointer">
                     <div className={`w-full h-[220px] 2xl:h-[250px] min-[2000px]:h-[300px] ${bgColor} px-4 flex items-end rounded-tl-2xl rounded-tr-2xl`}>
                         <div>
