@@ -24,16 +24,19 @@ export const SchoolCurriculum = ({dontShowOnboarding}: Props) => {
             borderColor="border-purple-500"
             bgColor="bg-purple-50"
             title="Elementary"
+            star="/star-1.svg"
           />
           <CurriculumCard
             borderColor="border-blue-500"
             bgColor="bg-blue-50"
             title="Junior High School"
+            star="/star-2.svg"
           />
           <CurriculumCard
-            borderColor="border-yellow-500"
-            bgColor="bg-yellow-50"
+            borderColor="border-black-500"
+            bgColor="bg-black-50"
             title="Senior High School"
+            star="/star-3.svg"
           />
         </div>
 

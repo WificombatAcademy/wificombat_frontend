@@ -4,7 +4,7 @@ type Props = {
     borderColor: string,
     bgColor: string;
     title: string;
-
+    star: string;
 }
 
 const listItems = [
@@ -18,7 +18,7 @@ const listItems = [
     "Lorem ipsum dolor sit amet c8"
 ];
 
-export const CurriculumCard = ({bgColor, borderColor, title}: Props) => {
+export const CurriculumCard = ({bgColor, borderColor, title, star}: Props) => {
     return (
         <div className={`w-full py-6 px-4 rounded-3xl border-t-4 ${borderColor} ${bgColor}`}>
             <div className="w-full flex items-center justify-center">
@@ -30,7 +30,11 @@ export const CurriculumCard = ({bgColor, borderColor, title}: Props) => {
                 <ul className="mt-5 space-y-3">
                     {listItems.map((item, index) => (
                         <div key={index} className="flex items-center gap-2">
-                            <Image src={`/star.png`} width={24} height={24} alt="star" className="object-contain flex-shrink-0"/>
+                            <Image src={star} 
+                            width={24} 
+                            height={24} 
+                            alt="star" 
+                            className="object-contain flex-shrink-0"/>
                             <li className="text-black-500">{item}</li>
                         </div>
                     ))}

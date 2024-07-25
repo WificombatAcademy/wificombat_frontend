@@ -15,6 +15,7 @@ export const Benefits = () => {
                 robotics, multimedia design, IoT, and AI. Our courses are designed to build a strong foundation 
                 and advance your expertise."
             title="Comprehensive Skill Development"
+            image="/skill-1.png"
           />
 
           <BenefitCard
@@ -24,6 +25,7 @@ export const Benefits = () => {
                 to advanced learners. Personalized assessments help you find the right starting point 
                 and progress at your own pace."
             title="Tailored Learning Experience"
+            image="/skill-2.png"
           />
 
           <BenefitCard
@@ -32,6 +34,7 @@ export const Benefits = () => {
             desc="Engage in interactive, hands-on projects that simulate real-world scenarios. This practical 
                 approach ensures you not only understand the concepts but also know how to apply them effectively."
             title="Hands-On Learning"
+            image="/skill-3.png"
           />
 
           <BenefitCard
@@ -41,6 +44,7 @@ export const Benefits = () => {
                 Our pathways are aligned with current market trends and demands, ensuring you're ready to meet 
                 employer expectations."
             title="Career Readiness"
+            image="/skill-4.png"
           />
 
           <BenefitCard
@@ -49,6 +53,7 @@ export const Benefits = () => {
             desc="Utilize cutting-edge learning tools and resources, including solar-powered tablets for sustainable 
                 learning, advanced software, and state-of-the-art labs to enhance your educational experience."
             title="Innovative Learning Tools"
+            image="/skill-5.png"
           />
 
           <BenefitCard
@@ -58,6 +63,7 @@ export const Benefits = () => {
                 relevant skills, projects, and achievements, we help them create a compelling portfolio that aligns with their 
                 future career goals. "
             title="Portfolio Building"
+            image="/skill-6.png"
           />
         </div>
       </div>
