@@ -18,7 +18,7 @@ export const CareerPath = () => {
           />
 
           <CareerCard
-            linkTo="/register"
+            linkTo="/gaming-pathway"
             pathway="Gaming"
             desc="This pathway covers everything from concept art and storytelling to coding and game mechanics."
             bgColor="bg-blue-300"
@@ -26,7 +26,7 @@ export const CareerPath = () => {
           />
 
           <CareerCard
-            linkTo="/register"
+            linkTo="/robotics-pathway"
             pathway="Robotics/IOT"
             desc="This pathway combines mechanical engineering, electronics, and computer science to create innovative solutions."
             bgColor="bg-purple-500"
@@ -34,7 +34,7 @@ export const CareerPath = () => {
           />
 
           <CareerCard
-            linkTo="/register"
+            linkTo="/ai-pathway"
             pathway="AI"
             desc="This pathway focuses on building algorithms that enable computers to perform tasks that typically require human intelligence."
             bgColor="bg-black-500"
@@ -43,7 +43,7 @@ export const CareerPath = () => {
           />
 
           <CareerCard
-            linkTo="/register"
+            linkTo="/multimedia-pathway"
             pathway="Multimedia"
             desc="This pathway provides the tools and techniques to produce captivating content across various digital platforms."
             bgColor="bg-blue-500"

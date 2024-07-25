@@ -28,7 +28,7 @@ export const CareerPathway = () => {
           </div>
 
           <div className="w-full md:basis-[50%]">
-            <div className="w-full h-[300px] bg-primary-gray rounded-2xl"></div>
+            <div className="w-full h-[300px] 2xl:h-[350px] bg-primary-gray rounded-2xl"></div>
           </div>
         </div>
       </div>

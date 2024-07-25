@@ -56,7 +56,8 @@ export const Hero = () => {
                                 xl:h-[20rem] 2xl:h-[24rem] flex flex-col md:flex-row md:items-center gap-10">
                                 <div className="w-full md:basis-[50%]">
                                     <h1 className={`${merriweather.className} 
-                                    text-3xl md:text-4xl lg:text-5xl xl:w-[90%] max-md:leading-[45px] lg:leading-[67.2px] font-bold`}>
+                                    text-3xl md:text-4xl lg:text-5xl 2xl:text-6xl xl:w-[90%] 
+                                    max-md:leading-[45px] lg:leading-[67.2px] 2xl:leading-[78px] font-bold`}>
                                         {slide.heading1}
                                     </h1>
 
