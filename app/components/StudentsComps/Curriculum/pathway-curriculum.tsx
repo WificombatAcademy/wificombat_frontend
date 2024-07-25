@@ -53,7 +53,7 @@ export const CareerPathwayCurriculum = ({schoolCurriculum}: CareerPathwayCurricu
                     alignItems: "center",
                     justifyContent: "center",
                   }}
-                  className={`px-2 text-center font-medium break-words cursor-pointer text-sm
+                  className={`px-2 lg:px-7 lg:leading-[24.5px] text-center font-medium break-words cursor-pointer text-sm
                     ${index === activePathIndex ? `bg-purple-500 text-white` : `transition-colors duration-500 hover:bg-gray-200`}`}
                 >
                   {curriculum.module} Path

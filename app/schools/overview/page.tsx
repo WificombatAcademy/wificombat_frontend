@@ -17,7 +17,7 @@ export default function Page() {
       <TeachAndLearnWithWifi/>
       <EmpowerLearningJourney />
       <SchoolCurriculum dontShowOnboarding />
-      <PerfectCurriculumThatAligns/>
+      {/* <PerfectCurriculumThatAligns/> */}
       <Impact />
       <FAQ noSpace/>
       <JoinOtherSchools />
