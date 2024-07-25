@@ -36,7 +36,7 @@ export const FAQ = ({noSpace}: Props) => {
         <div className={`${noSpace ? "h-[2rem]" : "h-[17rem] md:h-[18rem]" }`}></div>
 
             <div>
-                <h2 className="w-[90%] mx-auto font-semibold text-2xl md:text-3xl lg:text-5xl text-center">Frequently Asked Questions</h2>
+                <h2 className="w-[90%] mx-auto font-semibold pt-4 text-2xl md:text-3xl lg:text-5xl text-center">Frequently Asked Questions</h2>
                 <p className='mt-3 md:mt-5 w-[90%] md:w-[75%] lg:w-[65%] mx-auto md:text-xl text-center'>
                     Feel free to contact our support team if you have any additional questions or specific 
                     inquiries not covered in this FAQ. Happy learning!

@@ -22,15 +22,15 @@ const Impact = () => {
           {serviceTab.map((x, index) => {
             return (
               <CircularProgressBar
-              key={index}
+                key={index}
                 startDegree={0}
                 endDegree={66}
                 gradientColors={[
-                  '#f1b30b',
-                  '#c71fb8',
+                  '#BC00DD',
+                  '#BC00DD',
                   // '#00ff00',
-                  '#3f5bcb',
-                  '#318da2',
+                  '#BC00DD',
+                  '#BC00DD',
                 ]}
                 size={25}
                 width={500}

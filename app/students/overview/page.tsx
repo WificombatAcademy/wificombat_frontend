@@ -1,5 +1,6 @@
 import Footer from "@/app/components/general/Footer";
 import GeneralNavbar from "@/app/components/general/GeneralNavbar";
+import { FAQ } from "@/app/components/Home/faq";
 import Impact from "@/app/components/Home/Impact";
 import { IntroducingCareerPath } from "@/app/components/StudentsComps/Overview/career-path";
 import { EmpowerLearningJourney } from "@/app/components/StudentsComps/Overview/empower-journey";
@@ -17,6 +18,7 @@ export default function Page() {
       <IntroducingCareerPath />
       <PricingPlan/>
       <Impact />
+      <FAQ noSpace={true}/>
       <Footer />
     </div>
   );
