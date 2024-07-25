@@ -6,8 +6,8 @@ export const Benefits = () => {
     <section className="relative">
       <HeadingDesign heading="benefits" />
 
-      <div className="mt-12 md:mt-16 mb-20 w-[93%] md:w-[90] lg:w-[88%] mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-9">
+      <div className="mt-12 md:mt-16 mb-20 w-[93%] md:w-[90] lg:w-[88%] 2xl:w-[80%] mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-9 2xl:gap-14">
           <BenefitCard
             borderColor="border-blue-500"
             bgColor="bg-blue-500"
