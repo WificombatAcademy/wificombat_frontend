@@ -4,7 +4,7 @@ export default function Page() {
     return (
         <div className="mx-auto relative container w-full max-w-[2000px]">
             <GeneralNavbar />
-            <div className="w-full fixed top-0 h-screen bg-purple-500 flex items-center justify-center">
+            <div className="w-full fixed top-0 h-screen bg-blue-500 flex items-center justify-center">
                 <h1 className="text-4xl lg:text-5xl text-black-500 font-bold">Coming Soon</h1>
             </div>
         </div>
