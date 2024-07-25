@@ -11,17 +11,17 @@ export const WhyCodingPathway = () => {
                     Et amet nibh eget elit. Lacus ante lorem vulputate sollicitudin nunc viverra tortor. Quis gravida 
                     quam erat amet amet velit. Velit tortor vivamus aliquam at imperdiet commodo.</p>
 
-                 <div className="mt-9 md:mt-16 flex flex-col md:flex-row justify-center gap-9">
+                 <div className="mt-9 md:mt-16 flex flex-col md:flex-row justify-center gap-9 xl:gap-12">
 
-                    <div className="relative w-[8rem] h-[8rem] md:w-[15rem] md:h-[15rem] lg:w-[19rem] lg:h-[19rem]">
+                    <div className="relative w-[8rem] h-[8rem] md:w-[15rem] md:h-[15rem] lg:w-[19rem] lg:h-[22rem]">
                         <div className="polygon bg-primary-gray w-full h-full"></div>
                     </div>
 
-                    <div className="relative w-[8rem] h-[8rem] md:w-[15rem] md:h-[15rem] lg:w-[19rem] lg:h-[19rem]">
+                    <div className="relative w-[8rem] h-[8rem] md:w-[15rem] md:h-[15rem] lg:w-[19rem] lg:h-[22rem]">
                         <div className="polygon bg-primary-gray w-full h-full"></div>
                     </div>
 
-                    <div className="relative w-[8rem] h-[8rem] md:w-[15rem] md:h-[15rem] lg:w-[19rem] lg:h-[19rem]">
+                    <div className="relative w-[8rem] h-[8rem] md:w-[15rem] md:h-[15rem] lg:w-[19rem] lg:h-[22rem]">
                         <div className="polygon bg-primary-gray w-full h-full"></div>
                     </div>
 
