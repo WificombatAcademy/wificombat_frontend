@@ -52,7 +52,8 @@ export const Hero = () => {
                 {slides.map((slide, index) => (
                     <SwiperSlide key={index} className="relative">
                         <div className={`relative isolate overflow-x-hidden pb-[7rem] md:py-[7rem] lg:py-[10rem] ${slide.bgColor}`}>
-                            <div className="relative h-fit max-md:mt-[4rem] w-[93%] md:w-[80%] lg:w-[80%] mx-auto md:h-[16rem] xl:h-[20rem] 2xl:h-[24rem] flex flex-col md:flex-row md:items-center gap-10">
+                            <div className="relative max-md:mt-[2rem] w-[93%] md:w-[80%] lg:w-[80%] mx-auto h-[18rem] md:h-[16rem] 
+                                xl:h-[20rem] 2xl:h-[24rem] flex flex-col md:flex-row md:items-center gap-10">
                                 <div className="w-full md:basis-[50%]">
                                     <h1 className={`${merriweather.className} 
                                     text-3xl md:text-4xl lg:text-5xl xl:w-[90%] max-md:leading-[45px] lg:leading-[67.2px] font-bold`}>
