@@ -17,7 +17,7 @@ const CareerCard = ({ bgColor ,desc, pathway, linkTo, level, subject, textWhite,
         <div className="h-full">
             <Link href={`${linkTo && linkTo}`}>
                 <div className="w-full flex flex-col h-full bg-white pb-3 shadow-lg rounded-2xl cursor-pointer">
-                    <div className={`w-full h-[220px] 2xl:h-[250px] min-[2000px]:h-[300px] ${bgColor} px-4 flex items-end rounded-tl-2xl rounded-tr-2xl`}>
+                    <div className={`w-full h-[220px] 2xl:h-[250px] min-[2000px]:h-[300px] ${bgColor ?? "bg-black-200"} px-4 flex items-end rounded-tl-2xl rounded-tr-2xl`}>
                         <div>
                             <h3 className={`${textWhite ? "text-white": ""}  my-3 text-lg md:text-2xl text-black-500 font-semibold`}>
                                 {pathway} Pathway</h3>
@@ -37,6 +37,7 @@ const CareerCard = ({ bgColor ,desc, pathway, linkTo, level, subject, textWhite,
                             </Link>
                     </div>} */}
 
+                    {pathways && 
                     <div className="mt-3 flex flex-wrap items-center gap-2">
                         {pathways?.map((pathway, index) => (
                             <div 
@@ -50,7 +51,7 @@ const CareerCard = ({ bgColor ,desc, pathway, linkTo, level, subject, textWhite,
                         text-center flex items-center justify-center text-black-600">
                             <FaPlus size={14}/>
                         </div>
-                    </div>
+                    </div>}
 
                     </div>
                 </div>

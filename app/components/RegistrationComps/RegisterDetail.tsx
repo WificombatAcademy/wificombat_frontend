@@ -7,7 +7,7 @@ import RegisterDesign from "./RegisterDesign";
 
 const images = [
     {image:"/student-reg.png", hoverColor: "hover:shadow-green-600", role:"Student"},
-    {image:"/parent-reg.png", hoverColor: "hover:shadow-purple-300", role:"Parent"},
+    // {image:"/parent-reg.png", hoverColor: "hover:shadow-purple-300", role:"Parent"},
     {image: "/educator-reg.png", hoverColor: "hover:shadow-blue-500", role: "Educator"}
 ]
 
@@ -30,12 +30,13 @@ const RegisterDetails = () => {
                </div>
             
             
-                <div className="z-[2] relative md:w-[90%] lg:w-[80%] mx-auto mt-[4rem] md:mt-[7rem] flex max-lg:flex-wrap items-center justify-center lg:justify-between gap-6 lg:gap-9">
+                <div className="z-[2] relative md:w-[90%] lg:w-[80%] mx-auto mt-[4rem] md:mt-[7rem] flex max-lg:flex-wrap 
+                items-center justify-center lg:justify-center gap-6 lg:gap-9">
                        {images.map((image, index) => (
                          <div 
                          key={index}
                          className="w-[40%] lg:w-[33%]">
-                        <Link href={`/`}>
+                        <Link href={`/login`}>
                             <Image
                             width={250}
                             height={250}

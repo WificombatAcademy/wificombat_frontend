@@ -41,14 +41,23 @@ export const CareerPathwayCurriculum = ({schoolCurriculum}: CareerPathwayCurricu
             <div 
             className="w-full lg:basis-[13%] py-3 px-2 md:px-3 flex flex-wrap lg:flex-col items-center max-sm:justify-between rounded shadow-xl max-lg:px-4 border">
                 {pathsCurriculum.map((curriculum,index) => (
-                  <div 
+                  <div
                   key={index}
                   onClick={() => setActivePathIndex(index)}
-                  style={{ 
-                    clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)" }
-                  }
-                className={`w-[33%] md:w-[25%] lg:w-[85%] py-7 md:py-14 lg:py- px-2 text-center font-medium break-words cursor-pointer
-                   ${index === activePathIndex  ? `bg-purple-500 text-white` : `transition-colors duration-500 hover:bg-gray-200`}`}>{curriculum.module} Path</div>
+                  style={{
+                    clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
+                    width: "120px",  // Adjust this value to the desired width
+                    height: "120px", // Adjust this value to the desired height
+                    lineHeight: "1.2",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                  className={`px-2 text-center font-medium break-words cursor-pointer text-sm
+                    ${index === activePathIndex ? `bg-purple-500 text-white` : `transition-colors duration-500 hover:bg-gray-200`}`}
+                >
+                  {curriculum.module} Path
+                </div>
                 ))}
             </div>
 
@@ -57,6 +66,7 @@ export const CareerPathwayCurriculum = ({schoolCurriculum}: CareerPathwayCurricu
                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9">
                   {activePath.curriculum[selectedLevel].map((course, index) => (
                     <CareerCard
+                    linkTo="/coding-pathway"
                     key={index}
                     pathway={course.module}
                     subject={course.subject}

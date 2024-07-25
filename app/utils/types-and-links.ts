@@ -33,6 +33,35 @@ export const schoolLinks = [
 
   export const pathsCurriculum = [
     {
+      module: "Coding",
+      curriculum: {
+        Beginner: [
+          { module:"Coding", subject: "Web Design", level: "Level 1" },
+          { module:"Coding", subject: "Web Design", level: "Level 2" },
+          { module:"Coding", subject: "Web Development", level: "Level 1" },
+          { module:"Coding", subject: "Web Development", level: "Level 2" },
+          { module:"Coding", subject: "Frontend Development", level: "Level 1" },
+          { module:"Coding", subject: "Frontend Development", level: "Level 2" },
+        ],
+        Intermediate: [
+          { module:"Coding", subject: "Web Design", level: "Level 15" },
+          { module:"Coding", subject: "Web Design", level: "Level 23" },
+          { module:"Coding", subject: "Web Development", level: "Level 15" },
+          { module:"Coding", subject: "Web Development", level: "Level 23" },
+          { module:"Coding", subject: "Frontend Development", level: "Level 15" },
+          { module:"Coding", subject: "Frontend Development", level: "Level 23" },
+        ],
+        Advanced: [
+          { module:"Coding", subject: "Web Design", level: "Level 45" },
+          { module:"Coding", subject: "Web Design", level: "Level 50" },
+          { module:"Coding", subject: "Web Development", level: "Level 45" },
+          { module:"Coding", subject: "Web Development", level: "Level 50" },
+          { module:"Coding", subject: "Frontend Development", level: "Level 45" },
+          { module:"Coding", subject: "Frontend Development", level: "Level 50" },
+        ],
+      },
+    },
+    {
       module: "Gaming",
       curriculum: {
         Beginner: [
@@ -61,35 +90,6 @@ export const schoolLinks = [
           { module: "Gaming", subject: "Game Development", level: "Level 50" },
           { module: "Gaming", subject: "Character Development", level: "Level 45" },
           { module: "Gaming", subject: "Character Development", level: "Level 50" },
-        ],
-      },
-    },
-    {
-      module: "Coding",
-      curriculum: {
-        Beginner: [
-          { module:"Coding", subject: "Web Design", level: "Level 1" },
-          { module:"Coding", subject: "Web Design", level: "Level 2" },
-          { module:"Coding", subject: "Web Development", level: "Level 1" },
-          { module:"Coding", subject: "Web Development", level: "Level 2" },
-          { module:"Coding", subject: "Frontend Development", level: "Level 1" },
-          { module:"Coding", subject: "Frontend Development", level: "Level 2" },
-        ],
-        Intermediate: [
-          { module:"Coding", subject: "Web Design", level: "Level 15" },
-          { module:"Coding", subject: "Web Design", level: "Level 23" },
-          { module:"Coding", subject: "Web Development", level: "Level 15" },
-          { module:"Coding", subject: "Web Development", level: "Level 23" },
-          { module:"Coding", subject: "Frontend Development", level: "Level 15" },
-          { module:"Coding", subject: "Frontend Development", level: "Level 23" },
-        ],
-        Advanced: [
-          { module:"Coding", subject: "Web Design", level: "Level 45" },
-          { module:"Coding", subject: "Web Design", level: "Level 50" },
-          { module:"Coding", subject: "Web Development", level: "Level 45" },
-          { module:"Coding", subject: "Web Development", level: "Level 50" },
-          { module:"Coding", subject: "Frontend Development", level: "Level 45" },
-          { module:"Coding", subject: "Frontend Development", level: "Level 50" },
         ],
       },
     },
