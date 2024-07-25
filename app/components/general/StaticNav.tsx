@@ -32,13 +32,13 @@ const StaticNav = (props: Props) => {
       <SideBar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       <ul className="mx-auto flex max-w-6xl items-center justify-between lg:justify-center gap-4 max-lg:pr-4">
         <Link
-          href="/career-pathway"
-          onClick={() => scrollToView("career-pathway")}
+          href="/features"
+          onClick={() => scrollToView("features")}
           className={`px-2.5 py-2 text-lg capitalize text-white hover:text-[#0784C3] max-lg:hidden ${
-            pathname === "/career-pathway" ? "border-b-4 border-blue-500" : ""
+            pathname === "/features" ? "border-b-4 border-blue-500" : ""
           }`}
         >
-          Career Pathway
+          Features
         </Link>
         <div
           className="relative max-lg:hidden"
@@ -100,8 +100,10 @@ const StaticNav = (props: Props) => {
           Play Games
         </Link>
         <Link
-          href="https://elearn.wificombatacademy.com/login/"
-          className="px-2.5 py-2 text-lg capitalize text-[#0784C3] hover:text-[#0784C3] max-lg:hidden"
+           href="/login"
+           className={`xl:absolute right-[7%] 2xl:right-[5%] px-8 py-3 text-lg capitalize bg-white font-bold 
+             rounded-lg max-lg:hidden transition-colors duration-300 bg-opacity-90
+           }`}
         >
           Login
         </Link>

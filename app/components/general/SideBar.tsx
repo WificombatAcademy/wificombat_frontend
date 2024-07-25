@@ -10,7 +10,7 @@ import { link, PopupProps } from "./Popup";
 
 export const navigation = [
   { name: "Home", href: "/" },
-  { name: "Career Pathway", href: "/career-pathway" },
+  { name: "Features", href: "/features" },
   { name: "Students", href: "#" },
   { name: "Schools", href: "#" },
   { name: "Portfolio & Projects", href: "/portfolio-and-projects" },

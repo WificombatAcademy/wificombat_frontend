@@ -1,12 +1,7 @@
 import type { Metadata } from "next";
-import { Raleway } from "next/font/google";
 import "./globals.css";
 import Providers from "./utils/progress-bar";
-
-const raleway = Raleway({
-  weight: ["200", "300", "400", "500", "600"],
-  subsets: ["latin"],
-});
+import { raleway } from "./fonts";
 
 export const metadata: Metadata = {
   title: "Wificombat-Elearning",
