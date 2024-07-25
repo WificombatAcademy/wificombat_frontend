@@ -46,7 +46,7 @@ const HeadingDesign = ({ heading }: Props) => {
             </div>
         </div>
 
-
+{/* 
         <div className="absolute inset-0">
             <div className="absolute top-0 right-0">
                 <Image 
@@ -56,7 +56,7 @@ const HeadingDesign = ({ heading }: Props) => {
                 height={201} 
                 className="w-12 md:w-20 lg:w-40 object-contain"/>
             </div>
-        </div>
+        </div> */}
     </div>
   )
 }
