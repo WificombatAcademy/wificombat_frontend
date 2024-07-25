@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { FaPlus } from "react-icons/fa6";
 
 type Props = {
     pathway: string;
@@ -36,13 +37,19 @@ const CareerCard = ({ bgColor ,desc, pathway, linkTo, level, subject, textWhite,
                             </Link>
                     </div>} */}
 
-                    <div className="mt-3 flex flex-wrap items-center gap-1">
+                    <div className="mt-3 flex flex-wrap items-center gap-2">
                         {pathways?.map((pathway, index) => (
-                            <div className="bg-black-50 py-1 px-2 rounded border text-center flex items-center justify-center
+                            <div 
+                            key={index}
+                            className="bg-black-50 py-1 px-2 rounded-lg border text-center flex items-center justify-center
                             text-black-600 text-xs capitalize">
                                 {pathway}
                             </div>
                         ))}
+                        <div className="bg-black-50 py-1 px-2 rounded-lg border 
+                        text-center flex items-center justify-center text-black-600">
+                            <FaPlus size={14}/>
+                        </div>
                     </div>
 
                     </div>

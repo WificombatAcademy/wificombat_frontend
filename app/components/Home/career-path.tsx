@@ -51,7 +51,7 @@ export const CareerPath = () => {
           />
 
           <CareerCard
-            linkTo="/register"
+            linkTo="/techpreneurship-pathway"
             pathway="Techpreneurship"
             desc="This pathway teaches you how to develop, market, and manage tech-based startups and ventures."
             bgColor="bg-yellow-500"
