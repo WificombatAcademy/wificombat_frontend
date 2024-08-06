@@ -71,7 +71,7 @@ const AssessmentForm = () => {
                 disabled={currentStep <= 0}
                 onClick={prev}
                 className="py-2 px-4 border border-[#D0D5DD] shadow-md rounded-lg
-                disabled:text-gray-400">
+                disabled:text-gray-400 disabled:cursor-not-allowed">
                     Previous
                 </button>  
 
@@ -80,10 +80,10 @@ const AssessmentForm = () => {
                 </div>
 
                 <button
-                disabled={currentStep >= 8}
+                disabled={currentStep >= 7}
                 onClick={next}
                 className="py-2 px-4 border border-[#D0D5DD] shadow-md rounded-lg
-                disabled:text-gray-400">
+                disabled:text-gray-400 disabled:cursor-not-allowed">
                     Next
                 </button> 
             </div>
@@ -106,6 +106,7 @@ const AssessmentForm = () => {
                 <form 
                 onSubmit={handleSubmit(processForm)}
                 className="z-20 relative text-black-500">
+
                     {currentStep === 0 && (
                         <div className="form-box max-md:mt-32 md:w-[70%] lg:w-[50%] mx-auto 
                         py-10 px-5 md:px-8 rounded-3xl">
@@ -217,7 +218,19 @@ const AssessmentForm = () => {
 
                            
                             <div className="mt-5 w-full p-3 rounded-lg space-y-4">
-                            
+                                {FormDataSchema.shape.activities._def.values.map((activities, index) => (
+                                   <div 
+                                   className="flex items-center gap-4"
+                                   >
+                                        <div className="py-4 px-6 bg-blue-50 text-blue-500 text-lg font-bold rounded-lg">
+                                            {index + 1}
+                                        </div>
+
+                                        <label 
+                                        className="w-full py-4 px-5 bg-blue-50 rounded-lg font-medium"
+                                        >{activities}</label>
+                                   </div>
+                                ))}
                             </div>
 
                             <div className="h-4">
@@ -227,6 +240,151 @@ const AssessmentForm = () => {
                             <Navigations />
                         </div>
                     )}
+
+                    {currentStep === 4 && (
+                        <div className="form-box max-md:mt-32 md:w-[70%] lg:w-[50%] mx-auto 
+                        py-10 px-5 md:px-8 rounded-3xl">
+                            <h1 className={`${merriweather.className} font-bold text-lg md:text-2xl text-center`}>
+                                Part 2: Scenario-Based Questions
+                            </h1>
+
+                            <div className="mt-6 w-full bg-blue-500 text-white 
+                            font-bold text-lg md:text-xl 2xl:text-2xl py-6 px-[10px] text-center rounded-2xl">
+                                What do you like to do when you play games?
+                            </div>
+
+                            <div className="mt-5 w-full p-3 rounded-lg
+                            space-y-4">
+                                {FormDataSchema.shape.gamePreference._def.values.map((gamePreference) => (
+                                   <div 
+                                   className="w-full py-4 px-5 bg-blue-50 rounded-lg">
+                                        <input
+                                        type="checkbox"
+                                        value={gamePreference}
+                                        {...register("gamePreference")}
+                                        className="mr-2 border-none border-transparent rounded-full"
+                                        />
+                                        <label className="font-medium">{gamePreference}</label>
+                                   </div>
+                                ))}
+                            </div>
+
+                            <div className="h-4">
+                            {errors.gamePreference && <p className="text-red-500 h-fit">{errors.gamePreference.message}</p>}
+                            </div>
+
+                            <Navigations />
+                        </div>
+                    )}
+
+                    {currentStep === 5 && (
+                        <div className="form-box max-md:mt-32 md:w-[70%] lg:w-[50%] mx-auto 
+                        py-10 px-5 md:px-8 rounded-3xl">
+                            <h1 className={`${merriweather.className} font-bold text-lg md:text-2xl text-center`}>
+                                Part 2: Scenario-Based Questions
+                            </h1>
+
+                            <div className="mt-6 w-full bg-blue-500 text-white 
+                            font-bold text-lg md:text-xl 2xl:text-2xl py-6 px-[10px] text-center rounded-2xl">
+                                If you could make a toy do something, what would you chose?
+                            </div>
+
+                            <div className="mt-5 w-full p-3 rounded-lg
+                            space-y-4">
+                                {FormDataSchema.shape.toyAction._def.values.map((toyAction) => (
+                                   <div 
+                                   className="w-full py-4 px-5 bg-blue-50 rounded-lg">
+                                        <input
+                                        type="checkbox"
+                                        value={toyAction}
+                                        {...register("toyAction")}
+                                        className="mr-2 border-none border-transparent rounded-full"
+                                        />
+                                        <label className="font-medium">{toyAction}</label>
+                                   </div>
+                                ))}
+                            </div>
+
+                            <div className="h-4">
+                            {errors.toyAction && <p className="text-red-500 h-fit">{errors.toyAction.message}</p>}
+                            </div>
+
+                            <Navigations />
+                        </div>
+                    )}
+
+                    {currentStep === 6 && (
+                        <div className="form-box max-md:mt-32 md:w-[70%] lg:w-[50%] mx-auto 
+                        py-10 px-5 md:px-8 rounded-3xl">
+                            <h1 className={`${merriweather.className} font-bold text-lg md:text-2xl text-center`}>
+                                Part 2: Scenario-Based Questions
+                            </h1>
+
+                            <div className="mt-6 w-full bg-blue-500 text-white 
+                            font-bold text-lg md:text-xl 2xl:text-2xl py-6 px-[10px] text-center rounded-2xl">
+                                What do you like to do when you draw or colour?
+                            </div>
+
+                            <div className="mt-5 w-full p-3 rounded-lg
+                            space-y-4">
+                                {FormDataSchema.shape.drawingPreference._def.values.map((drawingPreference) => (
+                                   <div 
+                                   className="w-full py-4 px-5 bg-blue-50 rounded-lg">
+                                        <input
+                                        type="checkbox"
+                                        value={drawingPreference}
+                                        {...register("drawingPreference")}
+                                        className="mr-2 border-none border-transparent rounded-full"
+                                        />
+                                        <label className="font-medium">{drawingPreference}</label>
+                                   </div>
+                                ))}
+                            </div>
+
+                            <div className="h-4">
+                            {errors.drawingPreference && <p className="text-red-500 h-fit">{errors.drawingPreference.message}</p>}
+                            </div>
+
+                            <Navigations />
+                        </div>
+                    )}
+
+                    {currentStep === 7 && (
+                        <div className="form-box max-md:mt-32 md:w-[70%] lg:w-[50%] mx-auto 
+                        py-10 px-5 md:px-8 rounded-3xl">
+                            <h1 className={`${merriweather.className} font-bold text-lg md:text-2xl text-center`}>
+                                Part 2: Scenario-Based Questions
+                            </h1>
+
+                            <div className="mt-6 w-full bg-blue-500 text-white 
+                            font-bold text-lg md:text-xl 2xl:text-2xl py-6 px-[10px] text-center rounded-2xl">
+                                What would you like a robot to do for you?
+                            </div>
+
+                            <div className="mt-5 w-full p-3 rounded-lg
+                            space-y-4">
+                                {FormDataSchema.shape.robotTask._def.values.map((robotTask) => (
+                                   <div 
+                                   className="w-full py-4 px-5 bg-blue-50 rounded-lg">
+                                        <input
+                                        type="checkbox"
+                                        value={robotTask}
+                                        {...register("robotTask")}
+                                        className="mr-2 border-none border-transparent rounded-full"
+                                        />
+                                        <label className="font-medium">{robotTask}</label>
+                                   </div>
+                                ))}
+                            </div>
+
+                            <div className="h-4">
+                            {errors.robotTask && <p className="text-red-500 h-fit">{errors.robotTask.message}</p>}
+                            </div>
+
+                            <Navigations />
+                        </div>
+                    )}
+
                 </form>
             </div>
 
@@ -234,6 +392,5 @@ const AssessmentForm = () => {
         </section>
     )
 }
-
 
 export default AssessmentForm

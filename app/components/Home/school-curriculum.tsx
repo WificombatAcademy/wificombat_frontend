@@ -44,6 +44,7 @@ export const SchoolCurriculum = ({dontShowOnboarding}: Props) => {
         <div className="">
           <Onboarding />
         </div>}
+        
       </div>
     </section>
   );

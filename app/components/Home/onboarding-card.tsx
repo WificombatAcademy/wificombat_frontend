@@ -8,9 +8,10 @@ type Props = {
     listdesc?: string[];
     checkmark?:boolean;
     buttonText?: string;
+    linkTo?: string;
 }
 
-export const OnboardingCard = ({buttonText, checkmark, title, desc,listdesc, reverse}: Props) => {
+export const OnboardingCard = ({buttonText, checkmark, title, desc,listdesc, reverse, linkTo}: Props) => {
     return (
         <div className={`w-full flex flex-col ${reverse? "md:flex-row-reverse" : "md:flex-row"} md:items-center md:justify-between gap-16`}>
             <div className="w-full md:basis-[50%]">
@@ -34,7 +35,7 @@ export const OnboardingCard = ({buttonText, checkmark, title, desc,listdesc, rev
               {buttonText &&  
                 <div className="mt-14">
                     <Link
-                    href="/registration"
+                    href={linkTo ?? "/registration"}
                     className="rounded-lg bg-[#131314] px-16 py-5 font-medium text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                     >
                     {buttonText}

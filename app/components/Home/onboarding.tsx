@@ -4,7 +4,8 @@ export const Onboarding = () => {
     return (
         <div className="space-y-9 md:space-y-32 lg:space-y-40">
             <OnboardingCard
-            buttonText="Take Assement" 
+            linkTo="/assessment"
+            buttonText="Take Assessment" 
             title="Take Our Assessment: Discover Your Path to Success"
             desc="Ready to unlock your potential? Take our assessment today and 
             uncover the perfect career pathway tailored just for you. Start your 
