@@ -39,9 +39,9 @@ export const FormDataSchema = z.object({
      'Tell a story',
      'Make funny characters',
      'Create something new']),
-     
+
   robotTask: z.enum([
-    'Play with me',
+    'Play with you',
      'Help you with chores',
      'Talk to you',
      'Look cool']),
