@@ -2,10 +2,19 @@ import { z } from 'zod';
 
 export const FormDataSchema = z.object({
   name: z.string().min(1, "Name is required"),
-  age: z.enum(['6-8', '9-12', '13-15', '16-18']),
-  gender: z.enum(['Male', 'Female', 'Prefer not to say']),
+  age: z.enum([
+    '6-8 years old',
+     '9-12 years old',
+     '13-15 years old',
+     '16-18 years old',
+  ]),
+  gender: z.enum([
+    'Male', 
+    'Female', 
+    'Prefer not to say']),
   activities: z.array(
-    z.enum(['Playing games on a tablet or computer', 
+    z.enum([
+        'Playing games on a tablet or computer', 
         'Drawing pictures or coloring', 
         'Building with blocks or LEGOs', 
         'Solving simple puzzles'])

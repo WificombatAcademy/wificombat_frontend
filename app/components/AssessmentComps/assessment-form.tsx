@@ -9,14 +9,33 @@ import AssessmentDesign from "./assessment-design";
 import { useState } from "react";
 import { FormDataSchema } from "@/app/utils/schema";
 import { merriweather } from "@/app/fonts";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 type Inputs = z.infer<typeof FormDataSchema>
+
+const initialActivities = [
+    'Playing games on a tablet or computer',
+    'Drawing pictures or coloring',
+    'Building with blocks or LEGOs',
+    'Solving simple puzzles',
+  ];
 
 const AssessmentForm = () => {
     const router = useRouter();
     const [previousStep, setPreviousStep] = useState(0)
     const [currentStep, setCurrentStep] = useState(0)
     const delta = currentStep - previousStep
+    const [activities, setActivities] = useState(initialActivities);
+
+    const onDragEnd = (result:any) => {
+      if (!result.destination) return;
+  
+      const reorderedActivities = Array.from(activities);
+      const [removed] = reorderedActivities.splice(result.source.index, 1);
+      reorderedActivities.splice(result.destination.index, 0, removed);
+  
+      setActivities(reorderedActivities);
+    };
 
     const {
         register,
@@ -35,10 +54,22 @@ const AssessmentForm = () => {
       }
 
     const Navigations = () => {
+        const prev = () => {
+            if(currentStep !== 0) {
+                setCurrentStep(currentStep - 1)
+            }
+        }
+
+        const next = () => {
+            if(currentStep !== 8) {
+                setCurrentStep(currentStep + 1)
+            }
+        }
         return (
             <div className="mt-16 w-full flex items-center justify-between text-black-500">
                 <button
                 disabled={currentStep <= 0}
+                onClick={prev}
                 className="py-2 px-4 border border-[#D0D5DD] shadow-md rounded-lg
                 disabled:text-gray-400">
                     Previous
@@ -50,6 +81,7 @@ const AssessmentForm = () => {
 
                 <button
                 disabled={currentStep >= 8}
+                onClick={next}
                 className="py-2 px-4 border border-[#D0D5DD] shadow-md rounded-lg
                 disabled:text-gray-400">
                     Next
@@ -72,6 +104,7 @@ const AssessmentForm = () => {
 
 
                 <form 
+                onSubmit={handleSubmit(processForm)}
                 className="z-20 relative text-black-500">
                     {currentStep === 0 && (
                         <div className="form-box max-md:mt-32 md:w-[70%] lg:w-[50%] mx-auto 
@@ -81,14 +114,114 @@ const AssessmentForm = () => {
                             </h1>
 
                             <div className="mt-8 space-y-4">
-                                <h3 className="font-medium">Name</h3>
+                                <label className="font-medium">Name</label>
 
                                 <input 
                                 type="text"
                                 placeholder="Enter your name"
-                                required
+                                {...register("name")}
                                 className="outline-none w-full p-3 border border-black-300 rounded-lg placeholder:text-[#656765]"
                                 />
+                            </div>
+
+                            <div className="h-4">
+                             {errors.name && <p className="text-red-500 h-fit">{errors.name.message}</p>}
+                            </div>
+
+                            <Navigations />
+                        </div>
+                    )}
+
+                    {currentStep === 1 && (
+                        <div className="form-box max-md:mt-32 md:w-[70%] lg:w-[50%] mx-auto 
+                        py-10 px-5 md:px-8 rounded-3xl">
+                            <h1 className={`${merriweather.className} font-bold text-lg md:text-2xl text-center`}>
+                                Part 1: Introductory Questions
+                            </h1>
+
+                            <div className="mt-6 w-full bg-blue-500 text-white 
+                            font-bold text-lg md:text-xl 2xl:text-2xl py-6 px-[10px] text-center rounded-2xl">
+                                What is your age?
+                            </div>
+
+                            <div className="mt-5 w-full p-3 rounded-lg
+                            space-y-4">
+                                {FormDataSchema.shape.age._def.values.map((age) => (
+                                   <div className="w-full py-4 px-5 bg-blue-50 rounded-lg">
+                                        <input
+                                        type="radio"
+                                        value={age}
+                                        {...register("age")}
+                                        className="mr-2 border-none border-transparent rounded-full"
+                                        />
+                                        <label className="font-medium">{age}</label>
+                                   </div>
+                                ))}
+                            </div>
+
+                            <div className="h-4">
+                            {errors.age && <p className="text-red-500 h-fit">{errors.age.message}</p>}
+                            </div>
+
+                            <Navigations />
+                        </div>
+                    )}
+
+                    {currentStep === 2 && (
+                        <div className="form-box max-md:mt-32 md:w-[70%] lg:w-[50%] mx-auto 
+                        py-10 px-5 md:px-8 rounded-3xl">
+                            <h1 className={`${merriweather.className} font-bold text-lg md:text-2xl text-center`}>
+                                Part 1: Introductory Questions
+                            </h1>
+
+                            <div className="mt-6 w-full bg-blue-500 text-white 
+                            font-bold text-lg md:text-xl 2xl:text-2xl py-6 px-[10px] text-center rounded-2xl">
+                                What is your gender?
+                            </div>
+
+                            <div className="mt-5 w-full p-3 rounded-lg
+                            space-y-4">
+                                {FormDataSchema.shape.gender._def.values.map((gender) => (
+                                   <div 
+                                   className="w-full py-4 px-5 bg-blue-50 rounded-lg">
+                                        <input
+                                        type="radio"
+                                        value={gender}
+                                        {...register("gender")}
+                                        className="mr-2 border-none border-transparent rounded-full"
+                                        />
+                                        <label className="font-medium">{gender}</label>
+                                   </div>
+                                ))}
+                            </div>
+
+                            <div className="h-4">
+                            {errors.gender && <p className="text-red-500 h-fit">{errors.gender.message}</p>}
+                            </div>
+
+                            <Navigations />
+                        </div>
+                    )}
+
+                     {currentStep === 3 && (
+                        <div className="form-box max-md:mt-32 md:w-[70%] lg:w-[50%] mx-auto 
+                        py-10 px-5 md:px-8 rounded-3xl">
+                            <h1 className={`${merriweather.className} font-bold text-lg md:text-2xl text-center`}>
+                            Part 2: Scenario-Based Questions
+                            </h1>
+
+                            <div className="mt-6 w-full bg-blue-500 text-white 
+                            font-bold text-lg md:text-xl 2xl:text-2xl py-6 px-[10px] text-center rounded-2xl">
+                                Arrange these activities based on your choice
+                            </div>
+
+                           
+                            <div className="mt-5 w-full p-3 rounded-lg space-y-4">
+                            
+                            </div>
+
+                            <div className="h-4">
+                            {errors.activities && <p className="text-red-500 h-fit">{errors.activities.message}</p>}
                             </div>
 
                             <Navigations />
