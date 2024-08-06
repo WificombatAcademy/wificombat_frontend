@@ -3,6 +3,7 @@ import { StartCodingToday } from "../components/CodingPathwayComps/start-coding"
 import Footer from "../components/general/Footer";
 import GeneralNavbar from "../components/general/GeneralNavbar";
 import Link from "next/link";
+import RecommendationDesign from "../components/AssessmentComps/recommendation-design";
 
 const reasons = [
     {title: "Pathway Highlights", desc:"Coding is like building with blocks, but with computers! You can make games, apps, and even robots come to life. Imagine the fun!"},
@@ -22,12 +23,10 @@ export default function Page() {
             <GeneralNavbar />
             <div className="w-full relative">
                 {/* SUMMARY */}
-                <div className="absolute inset-0">
+                <RecommendationDesign />
 
-                </div>
-
-                <div className="w-[90%] md:w-[70%] lg:w-[65%] mx-auto">
-                    <h1 className="mt-14 md:mt-20 lg:mt-28 text-center font-semibold text-xl md:text-2xl lg:text-3xl">
+                <div className="relative z-[5] w-[90%] md:w-[70%] lg:w-[65%] mx-auto">
+                    <h1 className="pt-14 md:pt-20 lg:pt-28 text-center font-semibold text-xl md:text-2xl lg:text-3xl">
                     Hi Jimmy, your assessment indicates a strong aptitude for logical thinking and problem-solving, 
                     which are essential for a successful coding career.
                     </h1>
@@ -36,7 +35,7 @@ export default function Page() {
 
 
                 {/* PATHWAY */}
-                <div className="mt-16 md:mt-24 w-full bg-blue-50 py-12">
+                <div className="relative z-[5] mt-16 md:mt-24 w-full bg-blue-50 py-12">
                     <div className="w-[93%] md:w-[90%] mx-auto
                     flex flex-col md:flex-row md:items-center gap-10 md:gap-14 lg:gap-20 text-black-500">
 
@@ -79,7 +78,7 @@ export default function Page() {
                 {/* PATHWAY */}
 
                 {/* REASONS */}
-                <div className="w-[90%] mx-auto py-12 md:py-16">
+                <div className="relative z-[5] w-[90%] mx-auto py-12 md:py-16">
                     <h2 className="font-semibold text-xl md:text-2xl lg:text-4xl">Reasons For Recommendation</h2>
 
                     <div className="mt-12 md:mt-16 w-full grid grid-cols-1 md:grid-cols-2 gap-16">
@@ -112,7 +111,7 @@ export default function Page() {
                 {/* REASONS */}
 
                 {/* ALTERNATIVE PATHS */}
-                <div className="mt-12 mb-12 w-[90%] mx-auto">
+                <div className="relative z-[5] mt-12 mb-12 w-[90%] mx-auto">
                     <h3 className="font-semibold text-xl md:text-2xl lg:text-3xl">
                     Alternative Paths
                     </h3>
@@ -126,7 +125,7 @@ export default function Page() {
                         {alt_paths.map((path, index) => (
                             <div 
                             key={index}
-                            className="font-semibold px-4 py-[10px] border border-black-500 max-md:text-sm rounded-lg">
+                            className="font-semibold px-4 py-[10px] border border-black-500 max-md:text-sm rounded-lg cursor-pointer">
                                 {path} Pathway
                             </div>
                         ))}
@@ -135,7 +134,7 @@ export default function Page() {
                 {/* ALTERNATIVE PATHS */}
 
             </div>
-            
+
             <StartCodingToday/>
             <Footer />
         </div>

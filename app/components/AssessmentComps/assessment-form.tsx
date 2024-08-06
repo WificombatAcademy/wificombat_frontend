@@ -10,6 +10,7 @@ import { useState } from "react";
 import { FormDataSchema } from "@/app/utils/schema";
 import { merriweather } from "@/app/fonts";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import Link from "next/link";
 
 type Inputs = z.infer<typeof FormDataSchema>
 
@@ -66,26 +67,48 @@ const AssessmentForm = () => {
             }
         }
         return (
-            <div className="mt-16 w-full flex items-center justify-between text-black-500">
-                <button
-                disabled={currentStep <= 0}
-                onClick={prev}
-                className="py-2 px-4 border border-[#D0D5DD] shadow-md rounded-lg
-                disabled:text-gray-400 disabled:cursor-not-allowed">
-                    Previous
-                </button>  
+            <div>
+                {
+                currentStep === 7 ? 
+                <>
+                    <div className="mt-16 flex items-center justify-center">
+                        <div>
+                            <Link
+                                href={"/recommendation"}
+                                className={`bg-[#131314] xl:text-lg text-white focus-visible:outline-black 
+                                    rounded-lg px-16 py-5 font-medium  shadow-sm hover:bg-opacity-80 
+                                    focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 `}
+                            >
+                                Submit
+                            </Link>
+                        </div>
+                    </div>
+                </> : 
 
-                <div>
-                    {currentStep + 1} of 8
-                </div>
+                <>
+                    <div className="mt-16 w-full flex items-center justify-between text-black-500">
+                        <button
+                        disabled={currentStep <= 0}
+                        onClick={prev}
+                        className="py-2 px-4 border border-[#D0D5DD] shadow-md rounded-lg
+                        disabled:text-gray-400 disabled:cursor-not-allowed">
+                            Previous
+                        </button>  
 
-                <button
-                disabled={currentStep >= 7}
-                onClick={next}
-                className="py-2 px-4 border border-[#D0D5DD] shadow-md rounded-lg
-                disabled:text-gray-400 disabled:cursor-not-allowed">
-                    Next
-                </button> 
+                        <div>
+                            {currentStep + 1} of 8
+                        </div>
+
+                        <button
+                        disabled={currentStep >= 7}
+                        onClick={next}
+                        className="py-2 px-4 border border-[#D0D5DD] shadow-md rounded-lg
+                        disabled:text-gray-400 disabled:cursor-not-allowed">
+                            Next
+                        </button> 
+                    </div>
+                </>
+                }
             </div>
         )
     }
