@@ -86,6 +86,10 @@
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+.form-box{
+  box-shadow: 2px 4px 8px 0px #B1B1B133,
+   -2px 0px 4px 0px #B1B1B133;
+}
 
 
 @media (max-width:768px) {
