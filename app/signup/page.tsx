@@ -8,6 +8,7 @@ import Image from "next/image";
 import { IoChevronBackOutline } from "react-icons/io5";
 import Link from "next/link";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
+import OtpModal from "../utils/otp-modal";
 
 const schema = z.object({
     email: z.string().email("Invalid email address"),
@@ -34,6 +35,7 @@ export default function Page () {
     const [isLoading, setIsLoading] = useState(false);
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+    const [isModalOpen, setModalOpen] = useState(false);
 
     const togglePasswordVisibility = () => {
         setPasswordVisible(!passwordVisible);
@@ -71,6 +73,7 @@ export default function Page () {
         try {
           console.log("Form data:", data);
           await new Promise((resolve) => setTimeout(resolve, 2000));
+          setModalOpen(true)
         } catch (error) {
           console.error("Signup error:", error);
         } finally {
@@ -247,6 +250,7 @@ export default function Page () {
                                 <div className="mt-4 mb-10 lg:mb-16 text-sm flex items-start gap-3 font-medium">
                                     <input 
                                     type="checkbox"
+                                    required
                                     className="relative top-1 accent-blue-500" />
 
                                     <div className="md:w-[80%] lg:w-[60%]">
@@ -292,7 +296,12 @@ export default function Page () {
                         </div>
                     </div>
                 </div>
+
+            {/* {isModalOpen && */}
+            <OtpModal isOpen={isModalOpen} onClose={() => setModalOpen(false)}/>
+            {/* } */}
             </div>
+
         </div>
     )
 }
