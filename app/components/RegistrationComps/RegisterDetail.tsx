@@ -36,7 +36,7 @@ const RegisterDetails = () => {
                          <div 
                          key={index}
                          className="w-[40%] lg:w-[33%]">
-                        <Link href={`/login`}>
+                        <Link href={`/signup`}>
                             <Image
                             width={250}
                             height={250}
