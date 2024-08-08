@@ -92,7 +92,15 @@ export default function Page () {
                     alt=""
                     />
 
-                    <div className="absolute inset-0 bg-[#26002C80] opacity-90 rounded-tr-[100px]"></div>
+                    <div className="absolute inset-0 bg-[#26002C80] opacity-90 rounded-tr-[100px]">
+                        <Image
+                        className="absolute top-10 left-10"
+                        src="/assets/auth/logo.svg"
+                        width={54}
+                        height={54}
+                        alt=""
+                        />
+                    </div>
                 </div>
 
                 <div className="relative w-full flex flex-col lg:flex-none overflow-y-auto lg:basis-[50%] mx-auto 

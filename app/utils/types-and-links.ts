@@ -11,7 +11,21 @@ export const schoolLinks = [
     { href: "/students/pricing", label: "Pricing Plan" },
   ];
 
-  export type CurriculumLevel = "Beginner" | "Intermediate" | "Advanced";
+  export const pathway = [
+    'Coding',
+    'Gaming',
+    'Multimedia',
+    'AI',
+    'Robotics/IOT',
+    'Techpreneurship'
+  ]
+  export const stage = [
+    'Beginner',
+    'Intermediate',
+    'Advanced',
+  ]
+
+    export type CurriculumLevel = "Beginner" | "Intermediate" | "Advanced";
 
   export type Course = {
     module: string;

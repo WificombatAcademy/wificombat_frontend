@@ -5,7 +5,7 @@ type Props = {
   pricingPage?: boolean;
 };
 
-const pricingPlans = [
+export const pricingPlans = [
   { id: 1, pricing: "₦10,000", billing: "Monthly", color: "bg-[#E866FF66]" },
   { id: 2, pricing: "₦40,000", billing: "Quarterly", color: "bg-[#FFC53366]" },
   { id: 3, pricing: "₦100,000", billing: "Yearly", color: "bg-[#96969C66]" },
@@ -38,6 +38,7 @@ export const PricingPlan = ({ pricingPage }: Props) => {
               price={plans.pricing}
               billing={plans.billing}
               color={plans.color}
+              linkTo="/registration"
             />
           ))}
         </div>
