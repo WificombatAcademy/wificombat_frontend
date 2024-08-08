@@ -82,7 +82,7 @@ const schema = z.object({
 const Profile = () => {
   const [countries, setCountries] = useState([]);
   const [countryStates, setCountryStates] = useState([]);
-  const [step, setStep] = useState(STEPS.PAYMENT_PLAN);
+  const [step, setStep] = useState(STEPS.STUDENT_INFO);
   const [selectedPlan, setSelectedPlan] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -587,6 +587,11 @@ const Profile = () => {
                         />
                     ))}
                     </div>
+                    {errors.payment?.plan && (
+                    <p className="h-[1rem] text-[#F00101]">
+                        {errors.payment.plan.message}
+                    </p>
+                    )}
 
                       <div>
                         <div className="mt-10 lg:mt-14">
@@ -605,9 +610,112 @@ const Profile = () => {
 
                   {step === STEPS.PAYMENT_DESC && (
                     <>
-                      <div>
-                       
-                      </div>
+                      <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-7 lg:gap-12">
+                            <div>
+                                <Image 
+                                src={"/hero-1.png"}
+                                alt={"pathway"}
+                                width={500}
+                                height={500}
+                                className="w-full h-full object-cover border-none"
+                                />
+                            </div>
+
+                            <div className="w-full">
+                                <div className="w-full flex items-center justify-between gap-5">
+                                    <p className="mt-4 text-lg md:text-xl text-black-800">
+                                    Career Pathway:
+                                    </p>
+
+                                    <p className="mt-4 text-lg md:text-xl text-black-500 font-semibold">
+                                    {watch("student.pathway")}
+                                    </p>
+                                </div>
+
+                                <div className="w-full flex items-center justify-between gap-5">
+                                    <p className="mt-4 text-lg md:text-xl text-black-800">
+                                    Stage:
+                                    </p>
+
+                                    <p className="mt-4 text-lg md:text-xl text-black-500 font-semibold">
+                                    {watch("student.stage")}
+                                    </p>
+                                </div>
+
+                                <div className="w-full flex items-center justify-between gap-5">
+                                    <p className="mt-4 text-lg md:text-xl text-black-800">
+                                    Course:
+                                    </p>
+
+                                    <p className="mt-4 text-lg md:text-xl text-black-500 font-semibold">
+                                    03
+                                    </p>
+                                </div>
+
+                                <div className="w-full flex items-center justify-between gap-5">
+                                    <p className="mt-4 text-lg md:text-xl text-black-800">
+                                    Module:
+                                    </p>
+
+                                    <p className="mt-4 text-lg md:text-xl text-black-500 font-semibold">
+                                    10
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="mt-6 flex flex-col">
+                            <div className="flex items-center justify-between">
+                                <p className="mt-4 text-lg md:text-xl text-black-800">
+                                Plan
+                                </p>
+
+                                <p className="mt-4 text-lg md:text-xl text-black-500 font-semibold">
+                                {watch("payment.plan")}
+                                </p>
+                            </div>
+
+                            <div className="mt-5 flex items-center justify-between">
+                                <p className="mt-4 text-lg md:text-xl text-black-800">
+                                Amount
+                                </p>
+
+                                <p className="mt-4 text-lg md:text-xl text-black-500 font-semibold">
+                                ₦10,000.00
+                                </p>
+                            </div>
+
+                            <div className="mt-5 flex items-center justify-between">
+                                <p className="mt-4 text-lg md:text-xl text-black-800">
+                                Discount
+                                </p>
+
+                                <p className="mt-4 text-lg md:text-xl text-black-500 font-semibold">
+                                ₦0.00
+                                </p>
+                            </div>
+
+                            <div className="mt-5 flex items-center justify-between">
+                                <p className="mt-4 text-lg md:text-xl text-black-800 font-semibold">
+                                Total
+                                </p>
+
+                                <p className="mt-4 text-lg md:text-xl text-black-500 font-semibold">
+                                ₦10,000.00
+                                </p>
+                            </div>
+                        </div>
+
+
+                        <div className="mt-10 lg:mt-14">
+                            <button
+                            type="submit"
+                            disabled
+                            className="flex w-full justify-center rounded-md disabled:bg-[#B1B1B4] active:bg-[#131314] bg-[#131314] p-4 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-purple-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600"
+                            >
+                            Pay Now
+                            </button>
+                        </div>
                     </>
                   )}
 
