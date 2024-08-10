@@ -170,8 +170,10 @@ const AssessmentForm = () => {
 
                             <div className="mt-5 w-full p-3 rounded-lg
                             space-y-4">
-                                {FormDataSchema.shape.age._def.values.map((age) => (
-                                   <div className="w-full py-4 px-5 bg-blue-50 rounded-lg">
+                                {FormDataSchema.shape.age._def.values.map((age,index) => (
+                                   <div 
+                                       key={index}
+                                       className="w-full py-4 px-5 bg-blue-50 rounded-lg">
                                         <input
                                         type="radio"
                                         value={age}
@@ -205,8 +207,9 @@ const AssessmentForm = () => {
 
                             <div className="mt-5 w-full p-3 rounded-lg
                             space-y-4">
-                                {FormDataSchema.shape.gender._def.values.map((gender) => (
+                                {FormDataSchema.shape.gender._def.values.map((gender, index) => (
                                    <div 
+                                    key={index}
                                    className="w-full py-4 px-5 bg-blue-50 rounded-lg">
                                         <input
                                         type="radio"
@@ -243,6 +246,7 @@ const AssessmentForm = () => {
                             <div className="mt-5 w-full p-3 rounded-lg space-y-4">
                                 {FormDataSchema.shape.activities._def.values.map((activities, index) => (
                                    <div 
+                                    key={index}
                                    className="flex items-center gap-4"
                                    >
                                         <div className="py-4 px-6 bg-blue-50 text-blue-500 text-lg font-bold rounded-lg">
@@ -278,8 +282,9 @@ const AssessmentForm = () => {
 
                             <div className="mt-5 w-full p-3 rounded-lg
                             space-y-4">
-                                {FormDataSchema.shape.gamePreference._def.values.map((gamePreference) => (
+                                {FormDataSchema.shape.gamePreference._def.values.map((gamePreference, index) => (
                                    <div 
+                                    key={index}
                                    className="w-full py-4 px-5 bg-blue-50 rounded-lg">
                                         <input
                                         type="checkbox"
@@ -314,8 +319,9 @@ const AssessmentForm = () => {
 
                             <div className="mt-5 w-full p-3 rounded-lg
                             space-y-4">
-                                {FormDataSchema.shape.toyAction._def.values.map((toyAction) => (
+                                {FormDataSchema.shape.toyAction._def.values.map((toyAction, index) => (
                                    <div 
+                                    key={index}
                                    className="w-full py-4 px-5 bg-blue-50 rounded-lg">
                                         <input
                                         type="checkbox"
@@ -350,8 +356,9 @@ const AssessmentForm = () => {
 
                             <div className="mt-5 w-full p-3 rounded-lg
                             space-y-4">
-                                {FormDataSchema.shape.drawingPreference._def.values.map((drawingPreference) => (
+                                {FormDataSchema.shape.drawingPreference._def.values.map((drawingPreference, index) => (
                                    <div 
+                                    key={index}
                                    className="w-full py-4 px-5 bg-blue-50 rounded-lg">
                                         <input
                                         type="checkbox"
@@ -386,8 +393,9 @@ const AssessmentForm = () => {
 
                             <div className="mt-5 w-full p-3 rounded-lg
                             space-y-4">
-                                {FormDataSchema.shape.robotTask._def.values.map((robotTask) => (
+                                {FormDataSchema.shape.robotTask._def.values.map((robotTask, index) => (
                                    <div 
+                                    key={index}
                                    className="w-full py-4 px-5 bg-blue-50 rounded-lg">
                                         <input
                                         type="checkbox"
