@@ -13,7 +13,11 @@ export default function Page() {
   return (
     <div className="mx-auto relative container w-full max-w-[2000px]">
       <GeneralNavbar />
-      <StudentsHero bgColor={true}/>
+      <StudentsHero 
+      headerOne="Lorem ipsum dolor sit amet consectetur."
+      headerTwo="Lorem ipsum dolor sit amet consectetur. A integer viverra libero sit. Adipiscing vel 
+      at non platea posuere massa porttitor. Viverra purus luctus posuere massa neque laoreet sed viverra."
+      bgColor={true}/>
       <TeachAndLearnWithWifi/>
       <EmpowerLearningJourney />
       <SchoolCurriculum dontShowOnboarding />

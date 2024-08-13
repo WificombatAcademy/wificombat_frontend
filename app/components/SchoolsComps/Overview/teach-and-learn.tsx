@@ -17,16 +17,40 @@ export const TeachAndLearnWithWifi = () => {
                 <div className="flex flex-col items-center justify-center">
 
                     <div className="relative md:top-8 w-[8rem] h-[8rem] md:w-[15rem] md:h-[15rem]">
-                        <div className="polygon bg-primary-gray w-full h-full"></div>
+                        <div className="polygon w-full h-full">
+                            <Image 
+                            src={`/teach-and-learn-1.png`}
+                            alt="skill"
+                            width={414}
+                            height={427}
+                            className="w-full h-full object-cover"
+                            />
+                        </div>
                     </div>
 
                     <div className="flex gap-7 items-center justify-center">
                         <div className="relative w-[8rem] h-[8rem] md:w-[15rem] md:h-[15rem]">
-                            <div className="polygon bg-primary-gray w-full h-full"></div>
+                            <div className="polygon w-full h-full">
+                                <Image 
+                                src={`/teach-and-learn-2.png`}
+                                alt="skill"
+                                width={414}
+                                height={427}
+                                className="w-full h-full object-cover"
+                                />
+                            </div>
                         </div>
 
                         <div className="relative w-[8rem] h-[8rem] md:w-[15rem] md:h-[15rem]">
-                            <div className="polygon bg-primary-gray w-full h-full"></div>
+                            <div className="polygon w-full h-full">
+                                <Image 
+                                src={`/teach-and-learn-3.png`}
+                                alt="skill"
+                                width={414}
+                                height={427}
+                                className="w-full h-full object-cover"
+                                />
+                            </div>
                         </div>
                     </div>
                     
@@ -39,7 +63,7 @@ export const TeachAndLearnWithWifi = () => {
                         <Image
                           width={24}
                           height={24}
-                          src={`/star.png`}
+                          src={`/star-1.svg`}
                           alt="star"
                           className="object-contain aspect-auto"
                         />
