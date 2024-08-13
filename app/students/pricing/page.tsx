@@ -8,7 +8,7 @@ export default function Page() {
     <div className="mx-auto relative container w-full max-w-[2000px]">
       <GeneralNavbar />
       <PricingPlan pricingPage={true}/>
-      <HaveAccessTo />
+      {/* <HaveAccessTo /> */}
       <Footer />
     </div>
   );

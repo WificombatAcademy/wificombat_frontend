@@ -1,46 +1,54 @@
 import Link from "next/link";
 
-const productLinkData = [
-  { id: "Programs", link: "Programs" },
-  { id: "Courses", link: "Courses" },
-  { id: "BSS", link: "BSS" },
-  { id: "E-Learning", link: "E-Learning" },
-  { id: "Consultation", link: "Consultation" },
+const pathwayData = [
+  { id: "Coding", link: "coding-pathway" },
+  { id: "Gaming", link: "gaming-pathway" },
+  { id: "Multimedia", link: "multimedia-pathway" },
+  { id: "Robotics and IOT ", link: "robotics-pathway" },
+  { id: "Artificial Intelligence", link: "artificial-pathway" },
+  { id: "Techprenuership", link: "techprenuership-pathway" },
 ];
 
-const companyLinkData = [
-  { id: "About Us", link: "About Us" },
-  { id: "Events", link: "Events" },
-  { id: "Blog & News", link: "Blog & News" },
-  { id: "Community", link: "Community" },
+const featuresData = [
+  { id: "Gamification", link: "features" },
+  { id: "Portfolio", link: "" },
+  { id: "Curriculum", link: "" },
+  { id: "Mentorship", link: "" },
 ];
+
+const companyData = [
+  { id: "About Us", link: "" },
+  { id: "Events", link: "" },
+  { id: "Blog & News", link: "" },
+  { id: "Community", link: "" },
+];
+
 
 const getInTouch = [
   { id: "Contact Us", link: "Contact Us" },
   { id: "FAQs", link: "FAQs" },
+  { id: "Security", link: "" },
+  { id: "Privacy Policy", link: "" },
+  { id: "Terms and Conditions", link: "" },
 ];
 
-const locationData = [
-  { id: "Nigeria", link: "Nigeria" },
-  { id: "Canada", link: "Canada" },
-];
 
 const navLinkTitles = [
-  { id: "Products", title: "Products" },
+  { id: "Career Pathway", title: "Career Pathway" },
+  { id: "Features", title: "Features" },
   { id: "Company", title: "Company" },
   { id: "Get In Touch", title: "Get In Touch" },
-  { id: "Location", title: "Location" },
 ];
 
 const Footer = () => {
   return (
     <footer className="text-left">
-      <div className="w-full mx-auto  bg-[#131314] px-6 py-6 md:py-20 lg:px-8">
+      <div className="w-full mx-auto  bg-[#131314] px-6 py-6 md:py-20 lg:px-12">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
             <Link href="/" className="flex items-center">
               <span className="self-center whitespace-nowrap text-xl font-semibold text-white md:text-4xl">
-                Wificombat Academy
+                Wificombat E-learn
               </span>
             </Link>
 
@@ -49,9 +57,11 @@ const Footer = () => {
               with us{" "}
             </p>
 
-            <button className="rounded-lg bg-white px-14 py-4 text-black transition-all hover:translate-y-1">
-              Book Now
-            </button>
+            <Link href={`/assessment`}>
+              <button className="rounded-lg bg-white px-14 py-4 text-black font-medium transition-all hover:translate-y-1">
+                Start Learning
+              </button>
+            </Link>
           </div>
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 sm:gap-8 md:grid-cols-4">
             {navLinkTitles.map((navLinkTitle) => (
@@ -60,25 +70,36 @@ const Footer = () => {
                   {navLinkTitle.title}
                 </h2>
                 <ul className="font-medium text-white">
-                  {navLinkTitle.id === "Products" &&
-                    productLinkData.map((productLink) => (
+                  {navLinkTitle.id === "Career Pathway" &&
+                    pathwayData.map((pathway) => (
                       <li
-                        key={productLink.id}
+                        key={pathway.id}
                         className="mb-3 lg:mb-4 lg:text-lg"
                       >
                         <Link href={`/`} className="hover:underline">
-                          {productLink.link}
+                          {pathway.id}
+                        </Link>
+                      </li>
+                    ))}
+                  {navLinkTitle.id === "Features" &&
+                    featuresData.map((features) => (
+                      <li
+                        key={features.id}
+                        className="mb-3 lg:mb-4 lg:text-lg"
+                      >
+                        <Link href={`/`} className="hover:underline">
+                          {features.id}
                         </Link>
                       </li>
                     ))}
                   {navLinkTitle.id === "Company" &&
-                    companyLinkData.map((companyLink) => (
+                    companyData.map((company) => (
                       <li
-                        key={companyLink.id}
+                        key={company.id}
                         className="mb-3 lg:mb-4 lg:text-lg"
                       >
                         <Link href={`/`} className="hover:underline">
-                          {companyLink.link}
+                          {company.id}
                         </Link>
                       </li>
                     ))}
@@ -89,18 +110,7 @@ const Footer = () => {
                         className="mb-3 lg:mb-4 lg:text-lg"
                       >
                         <Link href={`/`} className="hover:underline">
-                          {getInTouchLink.link}
-                        </Link>
-                      </li>
-                    ))}
-                  {navLinkTitle.id === "Location" &&
-                    locationData.map((locationLink) => (
-                      <li
-                        key={locationLink.id}
-                        className="mb-3 lg:mb-4 lg:text-lg"
-                      >
-                        <Link href={`/`} className="hover:underline">
-                          {locationLink.link}
+                          {getInTouchLink.id}
                         </Link>
                       </li>
                     ))}

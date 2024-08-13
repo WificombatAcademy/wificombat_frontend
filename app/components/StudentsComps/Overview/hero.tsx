@@ -3,9 +3,12 @@ import Link from "next/link"
 
 type Props = {
     bgColor ?: boolean;
+    headerOne: string;
+    headerTwo: string;
+    whiteButton?: boolean;
 }
 
-export const StudentsHero = ({bgColor}: Props) => {
+export const StudentsHero = ({bgColor, headerOne, headerTwo, whiteButton}: Props) => {
     return (
         <section 
         id="home"
@@ -17,13 +20,11 @@ export const StudentsHero = ({bgColor}: Props) => {
                         <h1 className={`${merriweather.className} 
                             text-3xl md:text-4xl lg:text-5xl 2xl:text-6xl 
                             max-md:leading-[45px] lg:leading-[67.2px] 2xl:leading-[78px] font-bold`}>
-                            Empower K-12 Students with Tech Pathways.
+                            {headerOne}
                         </h1>
 
                         <p className="mt-5 font-semibold text-lg md:text-xl lg:w-[85%]">
-                        Join a global network of schools offering top-notch education in coding, multimedia design, AI, 
-                        gaming, robotics, and IoT. Our platform provides the curriculum, tools, and guidance to help students 
-                        apply their skills and thrive in diverse tech industries. 
+                            {headerTwo}
                         </p>
                         
                         <div className="mt-10 lg:mt-16"> 

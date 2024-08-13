@@ -114,7 +114,7 @@ const [studentsPopupVisible, setStudentsPopupVisible] = useState(false);
         <Link
           href="/login"
           className={`xl:absolute right-[7%] 2xl:right-[5%] px-8 py-3 text-lg capitalize bg-white font-bold 
-            rounded-lg max-lg:hidden transition-colors duration-300 bg-opacity-90
+            rounded-lg max-lg:hidden transition-colors duration-300 hover:bg-opacity-90
           }`}
         >
           Login

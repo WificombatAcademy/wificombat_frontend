@@ -19,14 +19,14 @@ export const PricingPlan = ({ pricingPage }: Props) => {
       <div
         className={`w-full ${
           !pricingPage && "mt-9 "
-        } py-10 md:py-14 lg:py-20 bg-blue-50`}
+        } py-10 md:py-14 lg:py-20`}
       >
         {pricingPage && (
-          <h2 className="mt-2 mb-6 text-center md:text-3xl text-2xl lg:text-5xl uppercase font-semibold md:font-medium">
+          <h2 className="mt-8 lg:mt-10 mb-6 text-center md:text-3xl text-2xl lg:text-5xl uppercase font-semibold md:font-medium">
             PRICING PLAN
           </h2>
         )}
-        <p className="md:w-[80%] lg:w-[50%] mx-auto mt-3 md:text-xl text-center font-semibold">
+        <p className="md:w-[80%] lg:w-[50%] mx-auto mt-7 md:text-xl text-center font-semibold">
           Lorem ipsum dolor sit amet consectetur. Facilisis arcu adipiscing mi
           ullamcorper. A aliquet non pellentesque vulputate
         </p>

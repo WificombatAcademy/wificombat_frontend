@@ -12,7 +12,11 @@ export default function Page() {
   return (
     <div className="mx-auto relative container w-full max-w-[2000px]">
       <GeneralNavbar />
-      <StudentsHero />
+      <StudentsHero 
+      headerOne="Empower K-12 Students with Tech Pathways."
+      headerTwo="Join a global network of schools offering top-notch education in coding, multimedia design, AI, 
+      gaming, robotics, and IoT. Our platform provides the curriculum, tools, and guidance to help students 
+      apply their skills and thrive in diverse tech industries. "/>
       <TechSkill />
       <EmpowerLearningJourney />
       <IntroducingCareerPath />
