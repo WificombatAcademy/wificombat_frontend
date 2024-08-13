@@ -77,13 +77,13 @@ export const CareerPathwayCurriculum = ({schoolCurriculum}: CareerPathwayCurricu
                </div>
              )}
 
-             <div className="mt-10 w-full flex items-center justify-center">
+             {/* <div className="mt-10 w-full flex items-center justify-center">
                 <Link 
                   href={`/registration`}
                   className="px-16 md:px-24 py-5 font-medium text-white shadow-sm bg-black-500 rounded-lg transition duration-300 hover:bg-opacity-90">
                     View All
                 </Link>
-             </div>
+             </div> */}
             </div>
             
           </div>
