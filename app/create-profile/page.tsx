@@ -535,7 +535,7 @@ const Profile = () => {
                             disabled
                             value={'coding'}
                             {...register("student.course")}
-                            className={`relative appearance-none bg-[#E6E6E6] block outline-none w-full bg-transparent rounded-md border 
+                            className={`relative appearance-none bg-stone-200 block outline-none w-full bg-transparent rounded-md border 
                                 border-gray-600 py-4 px-4 shadow-sm ring-1 ring-inset ring-gray-300 text-gray-700 
                                 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6 ${
                               errors.student?.course

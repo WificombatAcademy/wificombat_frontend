@@ -34,6 +34,7 @@ export const PricingPlan = ({ pricingPage }: Props) => {
         <div className="w-[93%] md:w-[90%] lg:w-[88%] mx-auto mt-9 md:mt-16 lg:mt-20 grid grid-cols-1 md:grid-cols-3 gap-5">
           {pricingPlans.map((plans) => (
             <PricingCard
+              defaultStyle
               key={plans.id}
               price={plans.pricing}
               billing={plans.billing}

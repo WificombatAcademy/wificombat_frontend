@@ -9,7 +9,11 @@ export const Onboarding = () => {
             title="Take Our Assessment: Discover Your Path to Success"
             desc="Ready to unlock your potential? Take our assessment today and 
             uncover the perfect career pathway tailored just for you. Start your 
-            journey towards a brighter future!"/>
+            journey towards a brighter future!"
+            image="/coder.png"
+            imageWidth={267}
+            imageHeight={474}
+            />
 
             <OnboardingCard 
             buttonText="Learn More" 
@@ -27,7 +31,11 @@ export const Onboarding = () => {
             listdesc={[
                 "Empower students with sustainable learning solutions using solar-powered tablets in K-12 education.",
                 "Revolutionize classrooms with eco-friendly technology that enhances engagement and learning outcomes.",
-                "Join us in embracing innovation while preserving our planet's resources.",]}/>
+                "Join us in embracing innovation while preserving our planet's resources.",]}
+            image="/tablet.png"
+            imageWidth={374}
+            imageHeight={297}
+            />
         </div>
     )
 }

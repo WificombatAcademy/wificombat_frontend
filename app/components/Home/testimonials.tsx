@@ -89,7 +89,7 @@ export const Testimonials = () => {
                                 key={index}
                                 className={`relative max-[350px]:w-[55px] max-[350px]:h-[55px] w-[60px] h-[60px] 
                                     md:w-[100px] md:h-[100px] lg:w-[120px] lg:h-[120px] rounded-full 
-                                    ${index === activeSlide ? "border-angular-gradient": ""}`}
+                                    ${index === activeSlide ? "border-4 border-purple-500": ""}`}
                                 >
                                  <div className="image-container w-full h-full">
                                     <Image
