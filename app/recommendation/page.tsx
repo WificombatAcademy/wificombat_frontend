@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { StartCodingToday } from "../components/CodingPathwayComps/today-comp";
+import { TodayComp } from "../components/CodingPathwayComps/today-comp";
 import Footer from "../components/general/Footer";
 import GeneralNavbar from "../components/general/GeneralNavbar";
 import Link from "next/link";
@@ -151,7 +151,10 @@ export default function Page() {
         {/* ALTERNATIVE PATHS */}
       </div>
 
-      <StartCodingToday />
+      <TodayComp 
+      desc="Lorem ipsum dolor sit amet consectetur. Senectus in consequat egestas faucibus morbi pulvinar nec ac. Morbi phasellus sed augue neque ac nibh varius vitae sagittis."
+      header="Start Coding Today!"
+      linkto="/students/pricing-plan"/>
       <Footer />
     </div>
   );
