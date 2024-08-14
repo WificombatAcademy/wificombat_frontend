@@ -1,14 +1,15 @@
 import HeadingDesign from "../general/HeaderDesign"
 
-const outcomes = [
-    {title: "lorem ipsum dolor", desc: "Lorem ipsum dolor sit amet consectetur. Sed non tristique mi vulp"},
-    {title: "lorem ipsum dolor", desc: "Lorem ipsum dolor sit amet consectetur. Sed non tristique mi vulp"},
-    {title: "lorem ipsum dolor", desc: "Lorem ipsum dolor sit amet consectetur. Sed non tristique mi vulp"},
-    {title: "lorem ipsum dolor", desc: "Lorem ipsum dolor sit amet consectetur. Sed non tristique mi vulp"},
-]
+type Props = {
+    outcomes: outcome[];
+}   
 
+type outcome = {
+    title: string,
+    desc: string,
+}
 
-export const Outcomes = () => {
+export const Outcomes = ({outcomes} : Props) => {
     return (
         <section>
             <HeadingDesign heading="learning outcomes" />
