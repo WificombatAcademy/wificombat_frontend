@@ -1,14 +1,14 @@
 import HeadingDesign from "../../general/HeaderDesign"
 
 const outcomes = [
-    {title: "lorem ipsum dolor", desc: "Lorem ipsum dolor sit amet consectetur. Sed non tristique mi vulp"},
-    {title: "lorem ipsum dolor", desc: "Lorem ipsum dolor sit amet consectetur. Sed non tristique mi vulp"},
-    {title: "lorem ipsum dolor", desc: "Lorem ipsum dolor sit amet consectetur. Sed non tristique mi vulp"},
-    {title: "lorem ipsum dolor", desc: "Lorem ipsum dolor sit amet consectetur. Sed non tristique mi vulp"},
-    {title: "lorem ipsum dolor", desc: "Lorem ipsum dolor sit amet consectetur. Sed non tristique mi vulp"},
-    {title: "lorem ipsum dolor", desc: "Lorem ipsum dolor sit amet consectetur. Sed non tristique mi vulp"},
-    {title: "lorem ipsum dolor", desc: "Lorem ipsum dolor sit amet consectetur. Sed non tristique mi vulp"},
-    {title: "lorem ipsum dolor", desc: "Lorem ipsum dolor sit amet consectetur. Sed non tristique mi vulp"},
+    {title: "Proficiency in Programming Languages", desc: "Develop strong coding skills in at least one major programming language."},
+    {title: "Game Development Skills", desc: "Understand game design principles and gain experience with game engines like Unity or Unreal Engine."},
+    {title: "Multimedia Design Expertise", desc: "Master multimedia tools such as Adobe Creative Suite to create and edit digital content."},
+    {title: "AI Application and Ethics", desc: "Apply AI techniques to real-world problems and understand the ethical implications of AI."},
+    {title: "IoT Systems Knowledge", desc: "Design and program IoT devices, focusing on hardware interfacing and data analysis."},
+    {title: "Robotics Programming and Integration", desc: "Learn to program robots and integrate sensors for autonomous systems."},
+    {title: "Project-Based Learning", desc: "Apply interdisciplinary knowledge to complete real-world tech projects."},
+    {title: "Critical Thinking and Innovation", desc: "Develop critical thinking skills to solve complex problems across various tech domains."},
 ]
 
 export const LearningOutcomes = () => {

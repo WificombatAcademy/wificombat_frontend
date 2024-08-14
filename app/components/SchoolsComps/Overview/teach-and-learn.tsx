@@ -59,16 +59,16 @@ export const TeachAndLearnWithWifi = () => {
                 <div className="grid grid-cols-1 gap-5">
                     <h4 className="font-semibold mb-2 text-black-500 text-2xl md:text-3xl">Lorem ipsum dolor sit am. </h4>
                     {courseslist.map((list, index) => (
-                      <div key={index} className="flex gap-2">
-                        <Image
+                      <ul key={index} className="flex gap-2 list-disc">
+                        {/* <Image
                           width={24}
                           height={24}
                           src={`/star-1.svg`}
                           alt="star"
                           className="object-contain aspect-auto"
-                        />
-                        <p className="md:w-[80%] text-black-500 md:text-lg">{list}</p>
-                      </div>
+                        /> */}
+                        <li className="md:w-[80%] text-black-500 md:text-lg ml-4">{list}</li>
+                      </ul>
                     ))}
                   </div>
             </div>
