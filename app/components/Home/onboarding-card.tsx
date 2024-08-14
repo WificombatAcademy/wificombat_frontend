@@ -27,11 +27,11 @@ export const OnboardingCard = ({buttonText, checkmark, dontCenter, title, desc,l
                 </> :
                 <>
                     {listdesc && 
-                    <ul className={`pt-4 text-black-700 space-y-[2px] ${checkmark ? "pt-7" : "list-disc"}`}>
+                    <ul className={`pt-4 text-black-700 space-y-[2px] ${checkmark ? "pt-7 space-y-2" : "list-disc"}`}>
                         {listdesc.map((item, index) => (
-                            <div key={index} className={`${checkmark && "flex items-center gap-1"}`}>
+                            <div key={index} className={`${checkmark && "flex items-center gap-1 py-2"}`}>
                                  {checkmark && <FaCircleCheck size={25} className="text-yellow-500"/>}
-                                <li key={index} className={`ml-4 ${ checkmark && "font-medium mb-2"}`}>{item}</li>
+                                <li key={index} className={`ml-4 ${ checkmark && "font-medium"}`}>{item}</li>
                             </div>
                         ))}
                     </ul>}
