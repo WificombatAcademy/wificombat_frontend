@@ -29,7 +29,7 @@ export const CurriculumCard = ({bgColor, borderColor, title, star}: Props) => {
 
                 <ul className="mt-5 space-y-3">
                     {listItems.map((item, index) => (
-                        <div key={index} className="flex items-center gap-2">
+                        <div key={index} className="flex items-center justify-center gap-2 mx-auto">
                             <Image src={star} 
                             width={24} 
                             height={24} 

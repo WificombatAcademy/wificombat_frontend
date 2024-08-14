@@ -10,7 +10,7 @@ export default function Page() {
     <div className="mx-auto relative container w-full max-w-[2000px]">
       <GeneralNavbar />
       <StudentsHero 
-      headerOne="Explore Our Tech Career Pathways Curriculum."
+      headerOne="Explore Our Tech Career Pathway Curriculum."
       headerTwo="Discover a curriculum designed to guide K-12 students through essential tech skills. 
       From coding to AI and robotics, we provide the tools and resources to prepare them for exciting tech careers."/>
       <CareerPathwayCurriculum />

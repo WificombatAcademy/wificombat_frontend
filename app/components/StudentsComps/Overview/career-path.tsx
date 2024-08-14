@@ -22,7 +22,7 @@ export const IntroducingCareerPath = () => {
           <CurriculumCard
             borderColor="border-blue-500"
             bgColor="bg-blue-50"
-            title="Intermediate"
+            title="Intermediary"
             star="/star-2.svg"
           />
           <CurriculumCard

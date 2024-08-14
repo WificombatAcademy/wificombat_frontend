@@ -38,7 +38,7 @@ export const PricingCard = ({billing, defaultStyle, price, color, linkTo, boxSha
             {/* ABOSLUTE BLUR */}
             <div className="absolute flex items-center justify-end inset-0">
 
-            <div className="absolute right-[4rem] lg:right-[5rem] top-3">
+            {/* <div className="absolute right-[4rem] lg:right-[5rem] top-3">
                 <svg 
                 className="max-md:w-5"
                 width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -52,7 +52,7 @@ export const PricingCard = ({billing, defaultStyle, price, color, linkTo, boxSha
                 width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M14 1.44077L17.3123 10.3922L17.3921 10.6079L17.6078 10.6877L26.5592 14L17.6078 17.3123L17.3921 17.3921L17.3123 17.6078L14 26.5592L10.6877 17.6078L10.6079 17.3921L10.3922 17.3123L1.44077 14L10.3922 10.6877L10.6079 10.6079L10.6877 10.3922L14 1.44077Z" fill="white" stroke="#BC00DD"/>
                 </svg>
-            </div>
+            </div> */}
 
                 {/* <div className="w-[60%] h-full grid grid-cols-3">
                     <div className={`w-[90%] ml-auto h-[25%] rounded-b-[40px] ${color} 

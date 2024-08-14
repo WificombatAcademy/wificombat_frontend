@@ -30,7 +30,10 @@ const config: Config = {
         'yellow-500': '#FFB700',
         'yellow-600': '#CC9200',
         'primary-gray': '#D9D9D9',
-      }
+      },
+    screens:{
+      md:'912px'
+    }
     },
   },
   plugins: [],

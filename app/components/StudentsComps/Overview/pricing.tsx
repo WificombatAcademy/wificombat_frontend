@@ -1,3 +1,4 @@
+import { Breadcrumbs } from "@/app/utils/breadcrumb";
 import HeadingDesign from "../../general/HeaderDesign";
 import { PricingCard } from "./pricing-card";
 
@@ -17,14 +18,19 @@ export const PricingPlan = ({ pricingPage }: Props) => {
       {pricingPage ? <></> : <HeadingDesign heading="pricing plan" />}
 
       <div
-        className={`w-full ${
+        className={`w-full relative border-4${
           !pricingPage && "mt-9 "
         } py-10 md:py-14 lg:py-20`}
       >
         {pricingPage && (
+          <>
+            <div className="md:w-[80%] mx-auto mb-9 xl:mb-16 text-black-500 relative">
+            <Breadcrumbs homeLabel="Home" lightMode/>
+            </div>
           <h2 className="mt-8 lg:mt-10 mb-6 text-center md:text-3xl text-2xl lg:text-5xl uppercase font-semibold md:font-medium">
             PRICING PLAN
           </h2>
+          </>
         )}
         <p className="md:w-[80%] lg:w-[50%] mx-auto mt-7 md:text-xl text-center font-semibold">
           Lorem ipsum dolor sit amet consectetur. Facilisis arcu adipiscing mi

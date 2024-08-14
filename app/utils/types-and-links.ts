@@ -71,7 +71,7 @@ export const schoolLinks = [
     'Advanced',
   ]
 
-    export type CurriculumLevel = "Beginner" | "Intermediate" | "Advanced";
+  export type CurriculumLevel = "Beginner" | "Intermediate" | "Advanced";
 
   export type Course = {
     module: string;
@@ -272,3 +272,13 @@ export const schoolLinks = [
       },
     },
   ];
+
+
+
+  ////////////////////////////////////////////////////////////////////////////////////// 
+
+  export type  BreadcrumbsProps = {
+    homeLabel: string;
+    homeIcon?: string;
+    lightMode?: boolean;
+}

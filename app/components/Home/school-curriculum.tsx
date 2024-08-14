@@ -35,7 +35,7 @@ export const SchoolCurriculum = ({dontShowOnboarding}: Props) => {
           <CurriculumCard
             borderColor="border-black-500"
             bgColor="bg-black-50"
-            title="Senior High School"
+            title="Senior Secondary School"
             star="/star-3.svg"
           />
         </div>

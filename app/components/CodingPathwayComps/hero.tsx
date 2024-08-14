@@ -1,4 +1,5 @@
 import { merriweather } from "@/app/fonts"
+import { Breadcrumbs } from "@/app/utils/breadcrumb";
 import Image from "next/image"
 import Link from "next/link"
 
@@ -16,11 +17,12 @@ export const PathwayHero = ({bgColor, image, desc, header, buttonWhite}: Props) 
         id="home"
         className="text-white">
             <div className={`relative isolate overflow-hidden pb-[7rem] md:py-[7rem] lg:py-[10rem] ${bgColor}`}>
-                <div className="relative max-md:mt-[4rem] w-[93%] md:w-[80%] lg:w-[85%] mx-auto h-[16rem] xl:h-[20rem] 2xl:h-[24rem] flex flex-col md:flex-row md:items-center gap-10">
-                    <div className="w-full md:basis-[50%]">
+                <div className="relative max-md:mt-[4rem] w-[93%] md:w-[80%] lg:w-[85%] mx-auto max-lg:h-full h-[16rem] xl:h-[20rem] 2xl:h-[24rem] flex flex-col md:flex-row md:items-center gap-10">
+                    <div className="w-full md:basis-[50%] relative">
+                        <Breadcrumbs homeLabel="Home" />
                         <h1 className={`${merriweather.className} 
                             text-3xl md:text-4xl lg:text-5xl 2xl:text-6xl 
-                            max-md:leading-[45px] lg:leading-[67.2px] 2xl:leading-[78px] font-bold`}>
+                            max-md:leading-[45px] lg:leading-[67.2px] 2xl:leading-[78px] font-bold max-lg:mt-5`}>
                             {header}
                         </h1>
 
