@@ -35,6 +35,7 @@ export const Onboarding = () => {
             image="/tablet.png"
             imageWidth={374}
             imageHeight={297}
+            dontCenter
             />
         </div>
     )

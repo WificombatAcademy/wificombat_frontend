@@ -13,9 +13,10 @@ type Props = {
     image?: string;
     imageWidth?: number;
     imageHeight?: number;
+    dontCenter?: boolean;
 }
 
-export const OnboardingCard = ({buttonText, checkmark, title, desc,listdesc, reverse, linkTo, image, imageHeight, imageWidth}: Props) => {
+export const OnboardingCard = ({buttonText, checkmark, dontCenter, title, desc,listdesc, reverse, linkTo, image, imageHeight, imageWidth}: Props) => {
     return (
         <div className={`w-full flex flex-col ${reverse? "md:flex-row-reverse" : "md:flex-row"} md:items-center md:justify-between gap-16`}>
             <div className="w-full md:basis-[50%]">
@@ -26,7 +27,7 @@ export const OnboardingCard = ({buttonText, checkmark, title, desc,listdesc, rev
                 </> :
                 <>
                     {listdesc && 
-                    <ul className={`pt-4 text-black-700 space-y-4 ${checkmark ? "pt-7" : "list-disc"}`}>
+                    <ul className={`pt-4 text-black-700 space-y-[2px] ${checkmark ? "pt-7" : "list-disc"}`}>
                         {listdesc.map((item, index) => (
                             <div key={index} className={`${checkmark && "flex items-center gap-1"}`}>
                                  {checkmark && <FaCircleCheck size={25} className="text-yellow-500"/>}
@@ -48,15 +49,15 @@ export const OnboardingCard = ({buttonText, checkmark, title, desc,listdesc, rev
             </div>
 
             <div className={`w-full md:basis-[50%] ${!reverse && "flex items-center justify-center"}`}>
-                <div className="w-[300px] h-[300px] md:w-[400px] md:h-[400px] bg-blue-500 flex items-center justify-center
-                 rounded-full max-md:mx-auto">
+                <div className={`w-[300px] h-[300px] md:w-[400px] md:h-[400px] bg-blue-500 flex items-center justify-center
+                 rounded-full max-md:mx-auto`}>
                     {image &&
                     <Image
                     src={image} 
                     alt="onboarding"
                     width={imageWidth}
                     height={imageHeight}
-                    className="object-contain flex-shrink-0"
+                    className={`object-contain flex-shrink-0  ${dontCenter && "relative left-[-2rem]"}`}
                     />}
                 </div>
             </div>
