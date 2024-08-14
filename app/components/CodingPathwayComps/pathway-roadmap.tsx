@@ -1,9 +1,13 @@
 import HeadingDesign from "../general/HeaderDesign"
 
-export const CodingPathwayRoadmap = () => {
+type Props = {
+    title: string;
+}
+
+export const PathwayRoadmap = ({title}: Props) => {
     return (
         <section>
-            <HeadingDesign heading="coding pathway roadmap" />
+            <HeadingDesign heading={`${title} pathway roadmap`} />
 
             <div className="h-[754px]"></div>
         </section>

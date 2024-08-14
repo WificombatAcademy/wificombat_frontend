@@ -5,9 +5,12 @@ import Link from "next/link"
 type Props = {
     bgColor: string;
     image?: string;
+    header: string;
+    desc: string;
+    buttonWhite?:boolean;
 }
 
-export const PathwayHero = ({bgColor, image}: Props) => {
+export const PathwayHero = ({bgColor, image, desc, header, buttonWhite}: Props) => {
     return (
         <section 
         id="home"
@@ -18,19 +21,22 @@ export const PathwayHero = ({bgColor, image}: Props) => {
                         <h1 className={`${merriweather.className} 
                             text-3xl md:text-4xl lg:text-5xl 2xl:text-6xl 
                             max-md:leading-[45px] lg:leading-[67.2px] 2xl:leading-[78px] font-bold`}>
-                            Discover Your Coding Career Pathway
+                            {header}
                         </h1>
 
                         <p className="mt-5 font-semibold text-lg md:text-xl lg:w-[85%]">
-                        Turn your passion for technology into a thriving career in software engineering or DevOps. 
-                        Begin your path with us 
+                        {desc} 
                         </p>
                         
                         <div className="mt-10 lg:mt-16"> 
                             <>
                             <Link 
                             href={`/registration`}
-                            className="px-16 py-5 font-medium text-white shadow-sm bg-black-500 rounded-lg transition duration-300 hover:bg-opacity-90">
+                            className={`${buttonWhite ? "bg-white text-black-500" :
+                                "bg-[#131314] text-white focus-visible:outline-black"} rounded-lg px-16 py-5 font-medium  shadow-sm 
+                               hover:bg-opacity-80 focus-visible:outline focus-visible:outline-2 
+                               focus-visible:outline-offset-2 `}
+                            >
                                 Register
                             </Link>
                             </>

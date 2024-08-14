@@ -23,6 +23,18 @@ export const schoolLinks = [
     "/assets/pathway/gaming-pathway-3.png",
   ] 
 
+  export const multimediaPathwayImages = [
+    "/assets/pathway/multimedia-pathway-1.png",
+    "/assets/pathway/multimedia-pathway-2.png",
+    "/assets/pathway/multimedia-pathway-3.png",
+  ] 
+  
+  export const roboticsPathwayImages = [
+    "/assets/pathway/robotics-pathway-1.png",
+    "/assets/pathway/robotics-pathway-2.png",
+    "/assets/pathway/robotics-pathway-3.png",
+  ] 
+
   export const codingOutcomes = [
     {title: "Problem-Solving Skills", desc: "Algorithmic Thinking: Students will develop the ability to break down problems into smaller, manageable parts and design algorithms to solve them."},
     {title: "Coding Proficiency", desc: "Language Skills: Students will gain proficiency in at least one programming language (e.g., Python, JavaScript, Scratch) and be able to write, debug, and optimize code."},
@@ -35,6 +47,13 @@ export const schoolLinks = [
     {title:"Programming for Games", desc:"Game Logic: Students will develop coding skills specific to game development, such as implementing game physics, AI behavior, and user interactions."},
     {title:"Creative Problem Solving", desc:"Design Challenges: Students will enhance their ability to solve design challenges by creating balanced game mechanics, engaging user experiences, and overcoming technical obstacles."},
     {title:"3D Modeling and Animation", desc:"Visual Design: Students will learn the basics of creating 3D models, textures, and animations, and how to integrate these elements into their games."},
+  ]
+
+  export const outcomes = [
+    {title:"Ac cum facilisi", desc:"Pharetra in pellentesque fringilla viverra laoreet consequat tincidunt. Viverra auctor sed ornare ullamcorper in est magna interdum vitae. Egestas elementum est at neque eget et."},
+    {title:"Iaculis sollicitudin eget", desc:"Hac lacus sed egestas commodo nisl bibendum. Pellentesque in fermentum et scelerisque nunc. Ullamcorper tellus arcu sem amet massa pellentesque scelerisque."},
+    {title:"Purus molestie quam", desc:"Quisque vestibulum diam tempus scelerisque consequat. Suscipit mauris sit nisi dapibus diam tellus vel mi. Fringilla bibendum pellentesque eu nisl."},
+    {title:"Arcu duis platea", desc:"Varius commodo lobortis sit morbi sollicitudin porttitor leo proin sed. Proin pretium accumsan eget arcu leo nisi. Etiam quis neque purus nunc massa."},
   ]
 
   export const pathway = [

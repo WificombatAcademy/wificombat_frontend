@@ -1,7 +1,7 @@
 import { PathwayHero } from "../components/CodingPathwayComps/hero";
-import { CodingOnboarding } from "../components/CodingPathwayComps/onboarding";
+import { CodingOnboarding } from "../components/OnboardingComps/coding-onboarding";
 import { Outcomes } from "../components/CodingPathwayComps/outcomes";
-import { CodingPathwayRoadmap } from "../components/CodingPathwayComps/pathway-roadmap";
+import { PathwayRoadmap } from "../components/CodingPathwayComps/pathway-roadmap";
 import { TodayComp } from "../components/CodingPathwayComps/today-comp";
 import { WhyCodingPathway } from "../components/CodingPathwayComps/why-coding";
 import Footer from "../components/general/Footer";
@@ -12,7 +12,10 @@ export default function Page() {
   return (
     <div className="mx-auto relative container w-full max-w-[2000px]">
       <GeneralNavbar />
-      <PathwayHero image="/hero-1.png" bgColor="bg-blue-500" />
+      <PathwayHero image="/hero-1.png" bgColor="bg-blue-500"
+      header="Discover Your Coding Career Pathway"
+      desc="Turn your passion for technology into a thriving career in software engineering or DevOps. 
+      Begin your path with us" />
       <WhyCodingPathway
         images={codingPathwayImages}
         headerOne="Why Coding Pathway?"
@@ -24,14 +27,15 @@ export default function Page() {
       Lacus ante lorem vulputate sollicitudin nunc viverra tortor. Quis gravida quam erat amet amet velit. Velit 
       tortor vivamus aliquam at imperdiet commodo."
       />
-      <CodingPathwayRoadmap />
+      <PathwayRoadmap title="Coding"/>
       <Outcomes outcomes={codingOutcomes} />
       <CodingOnboarding />
-      <TodayComp 
-      header="Start Coding Today"
-      desc="Lorem ipsum dolor sit amet consectetur. Senectus in 
+      <TodayComp
+        header="Start Coding Today"
+        desc="Lorem ipsum dolor sit amet consectetur. Senectus in 
            consequat egestas faucibus morbi pulvinar nec ac. Morbi phasellus sed augue neque ac nibh varius vitae sagittis."
-      linkto="/schools/pricing-plan"/>
+        linkto="/schools/pricing-plan"
+      />
       <Footer />
     </div>
   );
