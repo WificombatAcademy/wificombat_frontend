@@ -31,21 +31,7 @@ const Page = () => {
 
           <main className="pb-10">
             <div className="space-y-10">
-              <div className="flex max-lg:flex-col-reverse max-lg:gap-6">
-                <div className="w-full h-screen lg:w-[40%] xl:w-[35%] px-4 sm:px-6 lg:px-8 space-y-5 overflow-y-auto">
-                  {/* module */}
-                  module
-                  {/* module */}
-                </div>
-                
-
-                <div className="w-full h-screen lg:w-[60%] xl:w-[65%] bg-[#F9F9FF] px-4 pb-16 sm:px-6 lg:px-8 space-y-4">
-                  {/* content */}
-                   content
-                  {/* content */}
-                </div>
-
-              </div>
+                Report card
             </div>
           </main>
         </div>

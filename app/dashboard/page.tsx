@@ -26,7 +26,7 @@ const Dashboard = () => {
       <div className={`${raleway.className} relative`}>
         {/* header/ MAIN SECTION Start */}
         <div className={`${toggleSidebar ? "lg:pl-36" : "lg:pl-64"}
-        transition-all duration-700 ease-in-out`}>
+        transition-all duration-500 ease-in-out`}>
 
           <DashboardHeader setSidebarOpen={setSidebarOpen} />
           

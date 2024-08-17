@@ -45,35 +45,36 @@ export const navigation = [
   },
   {
     name: "Leaderboard",
-    href: "/leaderboard",
+    href: "/dashboard/leaderboard",
     icon: HiOutlineTrophy,
     current: false,
     comingSoon: false,
   },
   {
     name: "My Profile",
-    href: "/profile",
+    href: "/dashboard/profile",
     icon: MdOutlineAccountCircle,
     current: false,
     comingSoon: false,
   },
   {
     name: "Portfolio",
-    href: "/portfolio",
+    href: "/dashboard/portfolio",
     icon: TbFileCertificate,
     current: false,
     comingSoon: false,
   },
-  {
-    name: "Mentorship",
-    href: "/",
-    icon: MdGroups,
-    current: false,
-    comingSoon: false,
-  },
+  // {
+  //   name: "Mentorship",
+  //   href: "/",
+  //   icon: MdGroups,
+  //   current: false,
+  //   comingSoon: false,
+  // },
 ];
 
 const DesktopSidebar = () => {
+  const router = useRouter();
   const pathname = normalizePath(usePathname()); 
   const {toggleSidebar, setToggleSidebar} = useMain();
   const [activeLink, setActiveLink] = useState<string | undefined>();
@@ -119,6 +120,12 @@ const DesktopSidebar = () => {
   const handleExpand = (name: string) => {
     setExpanded(expanded === name ? undefined : name);
   };
+
+  // const handleNavigation = (item: string) => {
+  //   if (item !== "") {
+  //     window.location.href = item;
+  //   }
+  // }
 
   const isCareerPathActive = pathname.startsWith("/dashboard/career-path");
 
@@ -166,9 +173,10 @@ const DesktopSidebar = () => {
                 {navigation.map((item) => (
                   <li key={item.name} className="">
 
-                  <Link href={item.href} 
+                  <Link href={item.href}
                     onClick={() => {
-                      if (item.subNav) handleExpand(item.name);
+                      // handleNavigation(item.href);
+                      if (item.subNav) handleExpand(item.name)
                     }}
                     className={classNames(
                       item.comingSoon
@@ -178,7 +186,7 @@ const DesktopSidebar = () => {
                         ? `text-[#F2F2F3]`
                         : `text-gray-400 hover:text-white hover:bg-gray-800`,
                       `group flex items-center gap-x-3 rounded-md p-3 text-lg leading-6 
-                      font-medium transition duration-700 ease-in-out ${
+                      font-medium transition duration-700 ease-in-out cursor-pointer ${
                         toggleSidebar && "w-fit mx-auto"
                       }`
                     )}
@@ -196,7 +204,8 @@ const DesktopSidebar = () => {
 
                     {!toggleSidebar && item.name}
                     {!toggleSidebar && item.comingSoon && (
-                      <span className="basis-[30%] inline-flex items-center text-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
+                      <span className="basis-[30%] inline-flex items-center text-center rounded-md 
+                      bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
                         Coming Soon
                       </span>
                     )}

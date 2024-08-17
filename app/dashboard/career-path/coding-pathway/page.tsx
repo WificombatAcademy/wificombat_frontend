@@ -25,7 +25,7 @@ const Page = () => {
 
         {/* header/ MAIN SECTION Start */}
         <div className={`${toggleSidebar ? "lg:pl-36" : "lg:pl-64"}
-        transition-all duration-700 ease-in-out`}>
+        transition-all duration-500 ease-in-out`}>
          
          <DashboardHeader setSidebarOpen={setSidebarOpen}/>
 
@@ -80,7 +80,7 @@ const Page = () => {
                                 </h6>
 
                                 <div>
-                                    <Link href={``}>
+                                    <Link href={`/dashboard/report-card/course_${ind + 1}`}>
                                         <button 
                                         disabled={!course.reportCard}
                                         className={`disabled:bg-[#B1B1B4] disabled:cursor-not-allowed bg-black-500 text-white 
@@ -101,8 +101,11 @@ const Page = () => {
                                     className="w-[60%] md:w-[50%] lg:w-[25%] flex-shrink-0 mb-5">
                                        <Link href={module.unlocked ?   
                                        `/dashboard/career-path/coding-pathway/fund_${ind+1}/module_${index+1}` : ""}>
-                                            <div className="relative w-full h-[150px] md:h-[190px] lg:h-[215px]">
-                                                    {!module.unlocked && <div className="absolute inset-0 bg-[#B1B1B4]/30 rounded-2xl"></div>}
+                                            <button 
+                                            disabled={!module.unlocked}
+                                            className="relative w-full h-[150px] md:h-[190px] lg:h-[215px] disabled:cursor-not-allowed">
+                                                {!module.unlocked && <div className="absolute inset-0 
+                                                bg-[#B1B1B4]/30 rounded-2xl"></div>}
                                                     <Image 
                                                     src={module.thumbnail}
                                                     alt={module.thumbnail}
@@ -110,7 +113,7 @@ const Page = () => {
                                                     height={215}
                                                     className="w-full h-full object-cover rounded-2xl"
                                                     />
-                                            </div>
+                                            </button>
                                        </Link>
                                         <div className="px-1">
                                             <div className="mt-3 flex items-center justify-between">
