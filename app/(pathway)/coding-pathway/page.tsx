@@ -1,12 +1,12 @@
-import { PathwayHero } from "../components/CodingPathwayComps/hero";
-import { CodingOnboarding } from "../components/OnboardingComps/coding-onboarding";
-import { Outcomes } from "../components/CodingPathwayComps/outcomes";
-import { PathwayRoadmap } from "../components/CodingPathwayComps/pathway-roadmap";
-import { TodayComp } from "../components/CodingPathwayComps/today-comp";
-import { WhyCodingPathway } from "../components/CodingPathwayComps/why-coding";
-import Footer from "../components/general/Footer";
-import GeneralNavbar from "../components/general/GeneralNavbar";
-import { codingOutcomes, codingPathwayImages } from "../utils/types-and-links";
+import { PathwayHero } from "../../components/CodingPathwayComps/hero";
+import { CodingOnboarding } from "../../components/OnboardingComps/coding-onboarding";
+import { Outcomes } from "../../components/CodingPathwayComps/outcomes";
+import { PathwayRoadmap } from "../../components/CodingPathwayComps/pathway-roadmap";
+import { TodayComp } from "../../components/CodingPathwayComps/today-comp";
+import { WhyCodingPathway } from "../../components/CodingPathwayComps/why-coding";
+import Footer from "../../components/general/Footer";
+import GeneralNavbar from "../../components/general/GeneralNavbar";
+import { codingOutcomes, codingPathwayImages } from "../../utils/types-and-links";
 
 export default function Page() {
   return (

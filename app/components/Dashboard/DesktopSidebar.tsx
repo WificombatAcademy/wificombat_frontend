@@ -20,6 +20,7 @@ import Image from "next/image";
 import { TbFileCertificate } from "react-icons/tb";
 import { raleway } from "@/app/fonts";
 import Link from "next/link";
+import { useMain } from "@/app/context/MainContext";
 
 export const navigation = [
   {
@@ -74,7 +75,7 @@ export const navigation = [
 
 const DesktopSidebar = () => {
   const pathname = normalizePath(usePathname()); 
-  const [showIconsOnly, setShowIconsOnly] = useState(false);
+  const {toggleSidebar, setToggleSidebar} = useMain();
   const [activeLink, setActiveLink] = useState<string | undefined>();
   const [toggleButtonVisible, setToggleButtonVisible] = useState(true);
   const [expanded, setExpanded] = useState<string | undefined>();
@@ -103,15 +104,15 @@ const DesktopSidebar = () => {
   }, [pathname]);
 
   const handleToggle = () => {
-    if (showIconsOnly) {
+    if (toggleSidebar) {
       setToggleButtonVisible(false); 
       setTimeout(() => {
-        setShowIconsOnly(!showIconsOnly);
+        setToggleSidebar(!toggleSidebar);
         setTimeout(() =>setToggleButtonVisible(true), 300); // Show the button after the sidebar transition
       }, 100)
     } 
     else {
-      setShowIconsOnly(!showIconsOnly);
+      setToggleSidebar(!toggleSidebar);
     }
   };
 
@@ -123,11 +124,11 @@ const DesktopSidebar = () => {
 
   return (
     <div className={`hidden lg:fixed lg:inset-y-0 z-50 lg:flex lg:flex-col 
-    transition duration-700 ease-in-out ${showIconsOnly ? "w-fit" : "lg:w-64"}`}>
+    transition duration-700 ease-in-out ${toggleSidebar ? "w-fit" : "lg:w-64"}`}>
 
       <motion.div 
       initial="full"
-      animate={showIconsOnly ? "iconsOnly" : "full"}
+      animate={toggleSidebar ? "iconsOnly" : "full"}
       variants={sidebarVariants}
       className={` ${raleway.className} flex grow flex-col gap-y-16 overflow-y-auto bg-[#0C0C0D] px-6 pb-4`}>
 
@@ -140,7 +141,7 @@ const DesktopSidebar = () => {
           justify-center rounded-full border border-blue-500 shadow-xl top-8 right-[-1rem] transition 
           duration-300 cursor-pointer"
         >
-          {showIconsOnly ? (
+          {toggleSidebar ? (
             <MdOutlineKeyboardDoubleArrowRight size={14} className="" />
           ) : (
             <MdOutlineKeyboardDoubleArrowLeft size={14}className="" />
@@ -178,7 +179,7 @@ const DesktopSidebar = () => {
                         : `text-gray-400 hover:text-white hover:bg-gray-800`,
                       `group flex items-center gap-x-3 rounded-md p-3 text-lg leading-6 
                       font-medium transition duration-700 ease-in-out ${
-                        showIconsOnly && "w-fit mx-auto"
+                        toggleSidebar && "w-fit mx-auto"
                       }`
                     )}
                     style={
@@ -189,18 +190,18 @@ const DesktopSidebar = () => {
                     }
                   >
                     <item.icon
-                      className={`h-6 w-6 shrink-0 ${showIconsOnly && "mx-auto"}`}
+                      className={`h-6 w-6 shrink-0 ${toggleSidebar && "mx-auto"}`}
                       aria-hidden="true"
                     />
 
-                    {!showIconsOnly && item.name}
-                    {!showIconsOnly && item.comingSoon && (
+                    {!toggleSidebar && item.name}
+                    {!toggleSidebar && item.comingSoon && (
                       <span className="basis-[30%] inline-flex items-center text-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
                         Coming Soon
                       </span>
                     )}
 
-                    {(item.subNav && !showIconsOnly) && (
+                    {(item.subNav && !toggleSidebar) && (
                     <div className={`ml-1`}>
                       {expanded === item.name ? (
                         <IoMdArrowDropdown size={25} />
@@ -212,7 +213,7 @@ const DesktopSidebar = () => {
 
                   </Link>
 
-                  {item.subNav && expanded === item.name && !showIconsOnly && (
+                  {item.subNav && expanded === item.name && !toggleSidebar && (
                     <ul className="pl-8 space-y-2 mt-2">
                       {item.subNav.map((subItem) => (
                         <li key={subItem.name}>

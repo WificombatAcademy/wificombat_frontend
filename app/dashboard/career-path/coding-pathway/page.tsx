@@ -1,7 +1,9 @@
 "use client";
 
+import DashboardHeader from "@/app/components/Dashboard/DashboardHeader";
 import Header from "@/app/components/Dashboard/Header";
 import SideBar from "@/app/components/Dashboard/SideBar";
+import { useMain } from "@/app/context/MainContext";
 import { raleway } from "@/app/fonts";
 import { Courses, stage } from "@/app/utils/types-and-links";
 import Image from "next/image";
@@ -13,33 +15,19 @@ import { SlLock } from "react-icons/sl";
 
 const Page = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const {toggleSidebar} = useMain();
 
   return (
     <>
       <SideBar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-      <div>
+      <div className={`${raleway.className} relative`}>
         {/* Static sidebar for desktop */}
 
         {/* header/ MAIN SECTION Start */}
-        <div className={`lg:pl-64 ${raleway.className}`}>
-          <div className="sticky top-0 z-40 flex shrink-0 items-center gap-x-4 bg-white sm:gap-x-6">
-          <button
-              type="button"
-              className="p-2.5 text-gray-700 lg:hidden"
-              onClick={() => setSidebarOpen(true)}
-            >
-              <span className="sr-only">Open sidebar</span>
-              <HiBars3 size={30} className="h-8 w-8" aria-hidden="true" />
-            </button>
-
-            {/* Separator */}
-            <div
-              className="h-6 w-px bg-gray-900/10 lg:hidden"
-              aria-hidden="true"
-            />
-
-            <Header />
-          </div>
+        <div className={`${toggleSidebar ? "lg:pl-36" : "lg:pl-64"}
+        transition-all duration-700 ease-in-out`}>
+         
+         <DashboardHeader setSidebarOpen={setSidebarOpen}/>
 
           <main className="pb-10 mt-2">
             <div className="px-4 sm:px-6 lg:px-8 space-y-10">
@@ -78,13 +66,12 @@ const Page = () => {
                             <option>Level 1</option>
                           </select>
                     </div>
-                </div>
-                
+                </div>              
 
                 <div className="flex flex-col gap-9">
-                    {Courses.map((course, index) => (
+                    {Courses.map((course, ind) => (
                         <div 
-                        key={index}
+                        key={ind}
                         className="flex flex-col gap-8">
                             {/* TITLE */}
                             <div className="flex items-center justify-between gap-6">
@@ -113,7 +100,7 @@ const Page = () => {
                                     key={index}
                                     className="w-[60%] md:w-[50%] lg:w-[25%] flex-shrink-0 mb-5">
                                        <Link href={module.unlocked ?   
-                                       `/dashboard/career-path/coding-pathway/${index+1}` : ""}>
+                                       `/dashboard/career-path/coding-pathway/fund_${ind+1}/module_${index+1}` : ""}>
                                             <div className="relative w-full h-[150px] md:h-[190px] lg:h-[215px]">
                                                     {!module.unlocked && <div className="absolute inset-0 bg-[#B1B1B4]/30 rounded-2xl"></div>}
                                                     <Image 
@@ -140,7 +127,7 @@ const Page = () => {
                                                     {module.desc}
                                                 </h3>
                                             </div>
-                                            <div className="mt-2 flex flex-wrap gap-5 text-black-600">
+                                            <div className="mt-2 flex flex-wrap gap-3 md:gap-5 text-black-600">
                                                 <div>
                                                     {module.lessons} {""} 
                                                     {module.lessons > 1 ? "lessons" : "lesson"}
@@ -175,22 +162,3 @@ const Page = () => {
 };
 
 export default Page;
-
-const coursesApi = [
-  {
-    id: 1,
-    title: "UI/UX course",
-    thumbnail: "https://source.unsplash.com/random/400x300",
-    completedPercentage: 80,
-    lessonCompleted: 20,
-    lessonRemaining: 14,
-  },
-  {
-    id: 2,
-    title: "Gaming",
-    thumbnail: "https://source.unsplash.com/random/400x300",
-    completedPercentage: 67,
-    lessonCompleted: 20,
-    lessonRemaining: 14,
-  },
-];

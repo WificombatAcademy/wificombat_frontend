@@ -12,11 +12,13 @@ type Props = {
     linkTo?: string;
     image?: string;
     imageWidth?: number;
+    widthStyle?:string;
     imageHeight?: number;
     dontCenter?: boolean;
 }
 
-export const OnboardingCard = ({buttonText, checkmark, dontCenter, title, desc,listdesc, reverse, linkTo, image, imageHeight, imageWidth}: Props) => {
+export const OnboardingCard = ({buttonText, checkmark, dontCenter, title, desc,listdesc, 
+    reverse, linkTo, image, imageHeight, imageWidth, widthStyle}: Props) => {
     return (
         <div className={`w-full flex flex-col ${reverse? "md:flex-row-reverse" : "md:flex-row"} md:items-center md:justify-between gap-16`}>
             <div className="w-full md:basis-[50%]">
@@ -57,7 +59,8 @@ export const OnboardingCard = ({buttonText, checkmark, dontCenter, title, desc,l
                     alt="onboarding"
                     width={imageWidth}
                     height={imageHeight}
-                    className={`object-contain flex-shrink-0  ${dontCenter && "relative left-[-2rem]"}`}
+                    className={`${widthStyle} object-contain flex-shrink-0  
+                    ${dontCenter && "relative left-[-1rem] md:left-[-2rem]"}`}
                     />}
                 </div>
             </div>

@@ -7,7 +7,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { IoChevronBackOutline } from "react-icons/io5";
 import { z } from "zod";
-import OtpModal from "../utils/otp-modal";
+import OtpModal from "../../utils/otp-modal";
 
 const schema = z.object({
   email: z.string().email("Invalid email address")

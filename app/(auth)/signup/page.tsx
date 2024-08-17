@@ -8,7 +8,7 @@ import Image from "next/image";
 import { IoChevronBackOutline } from "react-icons/io5";
 import Link from "next/link";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
-import OtpModal from "../utils/otp-modal";
+import OtpModal from "../../utils/otp-modal";
 
 const schema = z.object({
     email: z.string().email("Invalid email address"),

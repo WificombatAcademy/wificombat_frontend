@@ -345,7 +345,7 @@ export const schoolLinks = [
           lessons: 3,
           quiz: 3,
           assignment: 1,
-          unlocked: true
+          unlocked: false
         },
         
         {
@@ -381,7 +381,7 @@ export const schoolLinks = [
           lessons: 3,
           quiz: 3,
           assignment: 1,
-          unlocked: true
+          unlocked: false
         },
         
         {

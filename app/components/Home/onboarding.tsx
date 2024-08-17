@@ -13,6 +13,7 @@ export const Onboarding = () => {
             image="/coder.png"
             imageWidth={267}
             imageHeight={474}
+            widthStyle="max-md:w-[60%]"
             />
 
             <OnboardingCard 
@@ -35,6 +36,7 @@ export const Onboarding = () => {
             image="/tablet.png"
             imageWidth={374}
             imageHeight={297}
+            widthStyle="max-md:w-[93%]"
             dontCenter
             />
         </div>

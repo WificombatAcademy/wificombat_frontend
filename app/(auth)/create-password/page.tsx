@@ -7,7 +7,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { IoChevronBackOutline } from "react-icons/io5";
 import { z } from "zod";
-import SuccessModal from "../utils/success-modal";
+import SuccessModal from "../../utils/success-modal";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 
 type ForgotPasswordValues = {

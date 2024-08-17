@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Providers from "./utils/progress-bar";
 import { raleway } from "./fonts";
+import { MainProvider } from "./context/MainContext";
 
 export const metadata: Metadata = {
   title: "Wificombat-Elearning",
@@ -16,7 +17,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Providers>
-        <body className={raleway.className}>{children}</body>
+        <MainProvider>
+          <body className={raleway.className}>
+            {children}
+          </body>
+        </MainProvider>
       </Providers>
     </html>
   );

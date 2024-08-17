@@ -10,10 +10,13 @@ import SimpleLineChart from "../components/Dashboard/Graph";
 import Piechart from "../components/Dashboard/Piechart";
 import Image from "next/image";
 import { raleway } from "../fonts";
+import DashboardHeader from "../components/Dashboard/DashboardHeader";
+import { useMain } from "../context/MainContext";
 
 
 const Dashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const {toggleSidebar} = useMain();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -22,25 +25,11 @@ const Dashboard = () => {
      <SideBar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       <div className={`${raleway.className} relative`}>
         {/* header/ MAIN SECTION Start */}
-        <div className="lg:pl-64">
-          <div className="sticky top-0 z-40 flex shrink-0 items-center gap-x-4 bg-white sm:gap-x-6">
-            <button
-              type="button"
-              className="p-2.5 text-gray-700 lg:hidden"
-              onClick={() => setSidebarOpen(true)}
-            >
-              <span className="sr-only">Open sidebar</span>
-              <HiBars3 size={30} className="h-8 w-8" aria-hidden="true" />
-            </button>
+        <div className={`${toggleSidebar ? "lg:pl-36" : "lg:pl-64"}
+        transition-all duration-700 ease-in-out`}>
 
-            {/* Separator */}
-            <div
-              className="h-6 w-px bg-gray-900/10 lg:hidden"
-              aria-hidden="true"
-            />
-
-            <Header />
-          </div>
+          <DashboardHeader setSidebarOpen={setSidebarOpen} />
+          
           <main className="pb-10 lg:pb-10">
             <div className="px-4 sm:px-6 lg:px-8 lg:py-6 space-y-10">
               <Main  numberOfCourses={9} numberOfCoursesInProgress={2}/>

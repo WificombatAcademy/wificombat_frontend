@@ -1,12 +1,12 @@
-import { PathwayHero } from "../components/CodingPathwayComps/hero";
-import { Outcomes } from "../components/CodingPathwayComps/outcomes";
-import { PathwayRoadmap } from "../components/CodingPathwayComps/pathway-roadmap";
-import { TodayComp } from "../components/CodingPathwayComps/today-comp";
-import { WhyCodingPathway } from "../components/CodingPathwayComps/why-coding";
-import Footer from "../components/general/Footer";
-import GeneralNavbar from "../components/general/GeneralNavbar";
-import { gamingOutcomes, gamingPathwayImages } from "../utils/types-and-links";
-import { GamingOnboarding } from "../components/OnboardingComps/gaming-onboarding";
+import { PathwayHero } from "../../components/CodingPathwayComps/hero";
+import { Outcomes } from "../../components/CodingPathwayComps/outcomes";
+import { PathwayRoadmap } from "../../components/CodingPathwayComps/pathway-roadmap";
+import { TodayComp } from "../../components/CodingPathwayComps/today-comp";
+import { WhyCodingPathway } from "../../components/CodingPathwayComps/why-coding";
+import Footer from "../../components/general/Footer";
+import GeneralNavbar from "../../components/general/GeneralNavbar";
+import { gamingOutcomes, gamingPathwayImages } from "../../utils/types-and-links";
+import { GamingOnboarding } from "../../components/OnboardingComps/gaming-onboarding";
 
 export default function Page() {
   return (
