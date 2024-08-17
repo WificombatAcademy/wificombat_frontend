@@ -41,8 +41,8 @@ const Dashboard = () => {
 
             <Header />
           </div>
-          <main className="py-10">
-            <div className="px-4 sm:px-6 lg:px-8 py-12 space-y-10">
+          <main className="pb-10 lg:py-10">
+            <div className="px-4 sm:px-6 lg:px-8 lg:py-12 space-y-10">
               <Main  numberOfCourses={9} numberOfCoursesInProgress={2}/>
 
               <div className="flex w-full gap-6 min-h-[390px] max-lg:flex-col">
@@ -73,7 +73,7 @@ const Dashboard = () => {
                     </div>
                   </div>
                   <hr className="mt-4" />
-                  <div className="flex items-center flex-col h-full gap-8 mt-8">
+                  <div className="flex items-center flex-col h-full gap-8 mt-8 mb-8">
                     <Piechart />
 
                     <div className="flex gap-2 self-start ml-5">
