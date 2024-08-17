@@ -107,7 +107,9 @@ const Page = () => {
                             {/* MODULES */}
                             <div className="flex items-center gap-5 overflow-x-scroll">
                                 {course.Modules.map((module, index) => (
-                                    <div className="w-[60%] md:w-[50%] lg:w-[25%] flex-shrink-0 mb-5">
+                                    <div 
+                                    key={index}
+                                      className="w-[60%] md:w-[50%] lg:w-[25%] flex-shrink-0 mb-5">
                                         <div className="relative w-full h-[150px] md:h-[190px] lg:h-[215px]">
                                             {!module.unlocked && <div className="absolute inset-0 bg-[#B1B1B4]/30 rounded-2xl"></div>}
                                             <Image 
