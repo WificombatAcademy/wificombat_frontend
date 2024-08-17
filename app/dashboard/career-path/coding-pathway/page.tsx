@@ -56,7 +56,9 @@ const Page = () => {
                                 outline-none sm:text-sm sm:leading-6 py-3 px-5 font-medium
                            `}
                           >{stage.map((stage, index) => (
-                            <option>{stage}</option>
+                            <option
+                            key={index}
+                            >{stage}</option>
                             ))}
                           </select>
                     </div>
@@ -107,17 +109,22 @@ const Page = () => {
                             {/* MODULES */}
                             <div className="flex items-center gap-5 overflow-x-scroll">
                                 {course.Modules.map((module, index) => (
-                                    <div className="w-[60%] md:w-[50%] lg:w-[25%] flex-shrink-0 mb-5">
-                                        <div className="relative w-full h-[150px] md:h-[190px] lg:h-[215px]">
-                                            {!module.unlocked && <div className="absolute inset-0 bg-[#B1B1B4]/30 rounded-2xl"></div>}
-                                            <Image 
-                                            src={module.thumbnail}
-                                            alt={module.thumbnail}
-                                            width={282}
-                                            height={215}
-                                            className="w-full h-full object-cover rounded-2xl"
-                                            />
-                                        </div>
+                                    <div 
+                                    key={index}
+                                    className="w-[60%] md:w-[50%] lg:w-[25%] flex-shrink-0 mb-5">
+                                       <Link href={module.unlocked ?   
+                                       `/dashboard/career-path/coding-pathway/${index+1}` : ""}>
+                                            <div className="relative w-full h-[150px] md:h-[190px] lg:h-[215px]">
+                                                    {!module.unlocked && <div className="absolute inset-0 bg-[#B1B1B4]/30 rounded-2xl"></div>}
+                                                    <Image 
+                                                    src={module.thumbnail}
+                                                    alt={module.thumbnail}
+                                                    width={282}
+                                                    height={215}
+                                                    className="w-full h-full object-cover rounded-2xl"
+                                                    />
+                                            </div>
+                                       </Link>
                                         <div className="px-1">
                                             <div className="mt-3 flex items-center justify-between">
                                                 <h3 className="font-semibold text-lg">
