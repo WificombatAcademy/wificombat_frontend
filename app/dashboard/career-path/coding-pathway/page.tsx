@@ -9,6 +9,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { HiBars3 } from "react-icons/hi2";
 import { IoMdArrowDropdown } from "react-icons/io";
+import { SlLock } from "react-icons/sl";
 
 const Page = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -108,7 +109,7 @@ const Page = () => {
                                 {course.Modules.map((module, index) => (
                                     <div className="w-[60%] md:w-[50%] lg:w-[25%] flex-shrink-0 mb-5">
                                         <div className="relative w-full h-[150px] md:h-[190px] lg:h-[215px]">
-                                            {!module.unlocked && <div className="absolute inset-0 bg-[#b1b1b4]/30 rounded-2xl"></div>}
+                                            {!module.unlocked && <div className="absolute inset-0 bg-[#B1B1B4]/30 rounded-2xl"></div>}
                                             <Image 
                                             src={module.thumbnail}
                                             alt={module.thumbnail}
@@ -116,6 +117,40 @@ const Page = () => {
                                             height={215}
                                             className="w-full h-full object-cover rounded-2xl"
                                             />
+                                        </div>
+                                        <div className="px-1">
+                                            <div className="mt-3 flex items-center justify-between">
+                                                <h3 className="font-semibold text-lg">
+                                                    {module.title}
+                                                </h3>
+
+                                                {!module.unlocked &&
+                                                <SlLock size={20} className="text-black-700"/>
+                                                }
+                                            </div>
+                                            <div className="mt-2 font-medium">
+                                                <h3 className="">
+                                                    {module.desc}
+                                                </h3>
+                                            </div>
+                                            <div className="mt-2 flex flex-wrap gap-5 text-black-600">
+                                                <div>
+                                                    {module.lessons} {""} 
+                                                    {module.lessons > 1 ? "lessons" : "lesson"}
+                                                </div>
+
+                                                <div>
+                                                    {module.quiz} {""}
+                                                    Quiz
+                                                    
+                                                </div>
+
+                                                <div>
+                                                    {module.assignment} {""}
+                                                    {module.assignment > 1 ? "Assignments" : "Assignment"}
+                                                    
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 ))}
