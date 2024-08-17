@@ -3,13 +3,10 @@
 import Header from "@/app/components/Dashboard/Header";
 import SideBar from "@/app/components/Dashboard/SideBar";
 import { raleway } from "@/app/fonts";
-import Image from "next/image";
-import Link from "next/link";
-import { title } from "process";
 import { useState } from "react";
 import { HiBars3 } from "react-icons/hi2";
 
-const Courses = () => {
+const Page = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
@@ -50,7 +47,7 @@ const Courses = () => {
   );
 };
 
-export default Courses;
+export default Page;
 
 const coursesApi = [
   {

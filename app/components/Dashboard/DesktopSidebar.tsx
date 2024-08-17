@@ -172,9 +172,8 @@ const DesktopSidebar = () => {
                     className={classNames(
                       item.comingSoon
                         ? `text-gray-400 pointer-events-none cursor-not-allowed`
-                        : item.subNav
-                        ? `text-[#F2F2F3] hover:bg-gray-800 cursor-pointer`
-                        : normalizePath(pathname) === normalizePath(item.href)
+                        : normalizePath(pathname) === normalizePath(item.href) ||
+                        (isCareerPathActive && item.name === "Career Path")
                         ? `text-[#F2F2F3]`
                         : `text-gray-400 hover:text-white hover:bg-gray-800`,
                       `group flex items-center gap-x-3 rounded-md p-3 text-lg leading-6 
