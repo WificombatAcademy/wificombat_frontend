@@ -85,7 +85,7 @@ const Page = () => {
                         className="flex flex-col gap-8">
                             {/* TITLE */}
                             <div className="flex items-center justify-between gap-6">
-                                <h6 className="text-[#131314] text-[28px] font-bold">
+                                <h6 className="text-[#131314] text-xl md:text-[28px] font-bold">
                                     {course.title}
                                 </h6>
 
@@ -106,8 +106,9 @@ const Page = () => {
                             {/* MODULES */}
                             <div className="flex items-center gap-5 overflow-x-scroll">
                                 {course.Modules.map((module, index) => (
-                                    <div className="w-[48%] md:w-[38%] lg:w-[25%] flex-shrink-0">
-                                        <div className="w-full h-[215px]">
+                                    <div className="w-[60%] md:w-[50%] lg:w-[25%] flex-shrink-0 mb-5">
+                                        <div className="relative w-full h-[150px] md:h-[190px] lg:h-[215px]">
+                                            {!module.unlocked && <div className="absolute inset-0 bg-[#b1b1b4]/30 rounded-2xl"></div>}
                                             <Image 
                                             src={module.thumbnail}
                                             alt={module.thumbnail}
