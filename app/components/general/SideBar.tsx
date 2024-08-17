@@ -45,7 +45,7 @@ const Popup = ({ links, onClose }:PopupProps) => (
   </div>
 );
 
-const SideBar = ({ sidebarOpen, setSidebarOpen }: Props) => {
+const MobileSideBar = ({ sidebarOpen, setSidebarOpen }: Props) => {
   const pathname = usePathname();
   const [schoolsPopupVisible, setSchoolsPopupVisible] = useState(false);
   const [studentsPopupVisible, setStudentsPopupVisible] = useState(false);
@@ -168,4 +168,4 @@ const SideBar = ({ sidebarOpen, setSidebarOpen }: Props) => {
   );
 };
 
-export default SideBar;
+export default MobileSideBar;

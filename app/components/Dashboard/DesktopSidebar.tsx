@@ -19,6 +19,7 @@ import { normalizePath } from "@/app/utils/paths";
 import Image from "next/image";
 import { TbFileCertificate } from "react-icons/tb";
 import { raleway } from "@/app/fonts";
+import Link from "next/link";
 
 export const navigation = [
   {
@@ -30,14 +31,14 @@ export const navigation = [
   },
   {
     name: "Career Path",
-    href: "#",
+    href: "",
     icon: IoBookOutline,
     current: false,
     comingSoon: false,
     subNav: [
       {
         name: "Coding Pathway",
-        href: "/dashboard/coding-pathway",
+        href: "/dashboard/career-path/coding-pathway",
       },
     ],
   },
@@ -118,6 +119,8 @@ const DesktopSidebar = () => {
     setExpanded(expanded === name ? undefined : name);
   };
 
+  const isCareerPathActive = pathname.startsWith("/dashboard/career-path");
+
   return (
     <div className={`hidden lg:fixed lg:inset-y-0 z-50 lg:flex lg:flex-col 
     transition duration-700 ease-in-out ${showIconsOnly ? "w-fit" : "lg:w-64"}`}>
@@ -128,22 +131,22 @@ const DesktopSidebar = () => {
       variants={sidebarVariants}
       className={` ${raleway.className} flex grow flex-col gap-y-16 overflow-y-auto bg-[#0C0C0D] px-6 pb-4`}>
 
-        {toggleButtonVisible && ( // Conditionally render the toggle button
-          <motion.div
-          whileHover={{scale:1.1 }}
-            whileTap={{scale:0.9 }}
-            transition={{duration:1 }}
-            onClick={handleToggle}className="toggle-button hidden z-[53] small-view-arrow-bg absolute h-8 w-8 bg-white lg:flex items-center 
-            justify-center rounded-full border border-blue-500 shadow-xl top-8 right-[-1rem] transition 
-            duration-300 cursor-pointer"
-          >
-            {showIconsOnly ? (
-              <MdOutlineKeyboardDoubleArrowRight size={14} className="" />
-            ) : (
-              <MdOutlineKeyboardDoubleArrowLeft size={14}className="" />
-            )}
-          </motion.div>
-        )}
+      {toggleButtonVisible && ( 
+        <motion.div
+        whileHover={{scale:1.1 }}
+          whileTap={{scale:0.9 }}
+          transition={{duration:1 }}
+          onClick={handleToggle}className="toggle-button hidden z-[53] small-view-arrow-bg absolute h-8 w-8 bg-white lg:flex items-center 
+          justify-center rounded-full border border-blue-500 shadow-xl top-8 right-[-1rem] transition 
+          duration-300 cursor-pointer"
+        >
+          {showIconsOnly ? (
+            <MdOutlineKeyboardDoubleArrowRight size={14} className="" />
+          ) : (
+            <MdOutlineKeyboardDoubleArrowLeft size={14}className="" />
+          )}
+        </motion.div>
+      )}
 
         <div className="flex h-16 shrink-0 items-center">
          <Image
@@ -162,7 +165,7 @@ const DesktopSidebar = () => {
                 {navigation.map((item) => (
                   <li key={item.name} className="">
 
-                  <div
+                  <Link href={item.href} 
                     onClick={() => {
                       if (item.subNav) handleExpand(item.name);
                     }}
@@ -170,7 +173,7 @@ const DesktopSidebar = () => {
                       item.comingSoon
                         ? `text-gray-400 pointer-events-none cursor-not-allowed`
                         : item.subNav
-                        ? `text-gray-400 hover:text-white hover:bg-gray-800 cursor-pointer`
+                        ? `text-[#F2F2F3] hover:bg-gray-800 cursor-pointer`
                         : normalizePath(pathname) === normalizePath(item.href)
                         ? `text-[#F2F2F3]`
                         : `text-gray-400 hover:text-white hover:bg-gray-800`,
@@ -180,7 +183,8 @@ const DesktopSidebar = () => {
                       }`
                     )}
                     style={
-                      normalizePath(pathname) === normalizePath(item.href)
+                      normalizePath(pathname) === normalizePath(item.href) ||
+                       (isCareerPathActive && item.name === "Career Path")
                         ? { background: "#0784C3" }
                         : {}
                     }
@@ -197,7 +201,7 @@ const DesktopSidebar = () => {
                       </span>
                     )}
 
-                    {item.subNav && (
+                    {(item.subNav && !showIconsOnly) && (
                     <div className={`ml-1`}>
                       {expanded === item.name ? (
                         <IoMdArrowDropdown size={25} />
@@ -206,7 +210,8 @@ const DesktopSidebar = () => {
                       )}
                     </div>
                     )}
-                  </div>
+
+                  </Link>
 
                   {item.subNav && expanded === item.name && !showIconsOnly && (
                     <ul className="pl-8 space-y-2 mt-2">
@@ -218,7 +223,7 @@ const DesktopSidebar = () => {
                               normalizePath(pathname) === normalizePath(subItem.href)
                                 ? `text-[#F2F2F3]`
                                 : `text-gray-400 hover:text-blue-500`,
-                              `group flex gap-x-3 rounded-md p-2 text-base leading-5 font-medium 
+                              `group flex gap-x-3 rounded-md p-2 text-base text-center leading-5 font-medium 
                               transition duration-300 ease-in-out`
                             )}
                             style={

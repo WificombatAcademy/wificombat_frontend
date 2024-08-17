@@ -35,6 +35,8 @@ const SideBar = ({ sidebarOpen, setSidebarOpen }: Props) => {
     setExpanded(expanded === name ? undefined : name);
   };
 
+  const isCareerPathActive = pathname.startsWith("/dashboard/career-path");
+
   return (
     <Transition.Root show={sidebarOpen} as={Fragment}>
       <Dialog
@@ -106,18 +108,21 @@ const SideBar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                       <ul role="list" className="-mx-2 space-y-1">
                         {navigation.map((item) => (
                           <li key={item.name}>
-                            <div
+                            <Link
+                            href={item.href} 
                               onClick={() => {
                                 if (item.subNav) handleExpand(item.name);
                               }}
                               className={classNames(
-                                pathname === item.href
+                                pathname === item.href ||
+                                (isCareerPathActive && item.name === "Career Path")
                                   ? "text-[#F2F2F3]"
                                   : "text-gray-400 hover:text-white hover:bg-gray-800",
                                 "group flex gap-x-3 items-center rounded-md p-3 text-lg leading-6 font-semibold cursor-pointer"
                               )}
                               style={
-                                pathname === item.href
+                                pathname === item.href ||
+                                (isCareerPathActive && item.name === "Career Path")
                                   ? {
                                       background:
                                         "#0784C3",
@@ -143,7 +148,7 @@ const SideBar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                                   )}
                                 </div>
                               )}
-                            </div>
+                            </Link>
                             {item.subNav &&
                             item.subNav.length > 0 && expanded === item.name && (
                               <ul className="pl-8 space-y-2 mt-2">
@@ -159,7 +164,7 @@ const SideBar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                                       )}
                                       style={
                                         pathname === subItem.href
-                                          ? { background: "#0784C3" }
+                                          ? { color: "#0784C3" }
                                           : {}
                                       }
                                     >

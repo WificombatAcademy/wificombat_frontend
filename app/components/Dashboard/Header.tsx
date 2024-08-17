@@ -26,7 +26,7 @@ const userNavigation = [
 const Header = () => {
 
   return (
-    <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6 items-center py-7 lg:px-10 max-lg:pr-2.5">
+    <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6 items-center py-7 lg:px-10 max-lg:pr-2.5 border-b border-black-50">
       <div className="text-lg lg:items-center font-semibold leading-6 text-gray-900 hidden lg:flex">
         <Boy />
         <div>

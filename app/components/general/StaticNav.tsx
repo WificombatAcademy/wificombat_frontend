@@ -8,10 +8,10 @@ import {
 import { RiMenu2Line } from "react-icons/ri";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import SideBar from "./SideBar";
 import { usePathname } from "next/navigation";
 import Popup from "./Popup";
 import { schoolLinks, studentLinks } from "@/app/utils/types-and-links";
+import MobileSideBar from "./SideBar";
 
 type Props = {};
 
@@ -29,7 +29,7 @@ const StaticNav = (props: Props) => {
       ${removeNavbar ? "hidden" : "relative"}
       `}
     >
-      <SideBar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+      <MobileSideBar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       <ul className="mx-auto flex max-w-6xl items-center justify-between lg:justify-center gap-4 max-lg:pr-4">
         <Link
           href="/features"

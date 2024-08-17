@@ -41,8 +41,8 @@ const Dashboard = () => {
 
             <Header />
           </div>
-          <main className="pb-10 lg:py-10">
-            <div className="px-4 sm:px-6 lg:px-8 lg:py-12 space-y-10">
+          <main className="pb-10 lg:pb-10">
+            <div className="px-4 sm:px-6 lg:px-8 lg:py-6 space-y-10">
               <Main  numberOfCourses={9} numberOfCoursesInProgress={2}/>
 
               <div className="flex w-full gap-6 min-h-[390px] max-lg:flex-col">
@@ -65,12 +65,12 @@ const Dashboard = () => {
                     <h6 className="font-bold text-xl">
                     Career Pathway Progress
                     </h6>
-                    <div className="flex items-center mt-2 text-[#4F4F4F]">
+                    {/* <div className="flex items-center mt-2 text-[#4F4F4F]">
                       <p className="text-sm">This Week</p>
                       <span>
                         <GoChevronDown />
                       </span>
-                    </div>
+                    </div> */}
                   </div>
                   <hr className="mt-4" />
                   <div className="flex items-center flex-col h-full gap-8 mt-8 mb-8">
