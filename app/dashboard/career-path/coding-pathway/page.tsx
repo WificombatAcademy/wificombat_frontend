@@ -56,7 +56,7 @@ const Page = () => {
                                 outline-none sm:text-sm sm:leading-6 py-3 px-5 font-medium
                            `}
                           >{stage.map((stage, index) => (
-                            <option>{stage}</option>
+                            <option key ={index}>{stage}</option>
                             ))}
                           </select>
                     </div>
