@@ -1,5 +1,6 @@
 "use client";
 
+import { raleway } from "@/app/fonts";
 import { Dialog, Transition } from "@headlessui/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,12 +9,14 @@ import { Fragment, useState } from "react";
 import { FaXmark } from "react-icons/fa6";
 import { HiOutlineTrophy } from "react-icons/hi2";
 import { IoBookOutline } from "react-icons/io5";
+import { IoMdArrowDropup, IoMdArrowDropdown } from "react-icons/io"
 import {
   MdGroups,
   MdOutlineAccountCircle,
   MdOutlineDashboard,
   MdOutlineLogout,
 } from "react-icons/md";
+import { navigation } from "./DesktopSidebar";
 
 type Props = {
   sidebarOpen: boolean;
@@ -24,21 +27,14 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-const navigation = [
-  { name: "Dashboard", href: "/dashboard#", icon: MdOutlineDashboard, current: true },
-  { name: "My Courses", href: "/dashboard/courses", icon: IoBookOutline, current: false },
-  { name: "Mentorship", href: "/dashboard#", icon: MdGroups, current: false },
-  { name: "Leaderboard", href: "/dashboard#", icon: HiOutlineTrophy, current: false },
-  {
-    name: "My Profile",
-    href: "/dashboard#",
-    icon: MdOutlineAccountCircle,
-    current: false,
-  },
-];
-
 const SideBar = ({ sidebarOpen, setSidebarOpen }: Props) => {
   const pathname = usePathname();
+  const [expanded, setExpanded] = useState<string | undefined>();
+
+  const handleExpand = (name: string) => {
+    setExpanded(expanded === name ? undefined : name);
+  };
+
   return (
     <Transition.Root show={sidebarOpen} as={Fragment}>
       <Dialog
@@ -93,13 +89,14 @@ const SideBar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                 </div>
               </Transition.Child>
               {/* Sidebar component, swap this element with another sidebar if you like */}
-              <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-[#0C0C0D] px-6 pb-4 ring-1 ring-white/10">
+              <div className={`${raleway.className} 
+              flex grow flex-col gap-y-5 overflow-y-auto bg-[#0C0C0D] px-6 pb-4 ring-1 ring-white/10`}>
                 <div className="flex h-16 shrink-0 items-center">
                 <Image
                   src={`/assets/auth/logo.svg`}
                   alt={`logo`}
-                  width={15}
-                  height={15}
+                  width={60}
+                  height={60}
                   className="object-contain text-neutral-400"
                 />
                 </div>
@@ -109,19 +106,21 @@ const SideBar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                       <ul role="list" className="-mx-2 space-y-1">
                         {navigation.map((item) => (
                           <li key={item.name}>
-                            <Link
-                              href={`${item.href}`}
+                            <div
+                              onClick={() => {
+                                if (item.subNav) handleExpand(item.name);
+                              }}
                               className={classNames(
                                 pathname === item.href
                                   ? "text-[#F2F2F3]"
                                   : "text-gray-400 hover:text-white hover:bg-gray-800",
-                                "group flex gap-x-3 rounded-md p-3 text-lg leading-6 font-semibold"
+                                "group flex gap-x-3 items-center rounded-md p-3 text-lg leading-6 font-semibold cursor-pointer"
                               )}
                               style={
                                 pathname === item.href
                                   ? {
                                       background:
-                                        "conic-gradient(from 173.86deg at 50% 50%, #FFB600 -13.12deg, #BC00DD 120deg, #0784C3 181.87deg, #FFB600 346.88deg, #BC00DD 480deg)",
+                                        "#0784C3",
                                     }
                                   : {}
                               }
@@ -131,7 +130,45 @@ const SideBar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                                 aria-hidden="true"
                               />
                               {item.name}
-                            </Link>
+
+                              {item.subNav && 
+                              item.subNav.length > 0 && (
+                                <div
+                                  className={`ml-auto ${expanded === item.name ? "rotate-180" : ""}`}
+                                >
+                                  {expanded === item.name ? (
+                                     <IoMdArrowDropdown size={25} />
+                                    ) : (
+                                      <IoMdArrowDropup size={25} />
+                                  )}
+                                </div>
+                              )}
+                            </div>
+                            {item.subNav &&
+                            item.subNav.length > 0 && expanded === item.name && (
+                              <ul className="pl-8 space-y-2 mt-2">
+                                {item.subNav.map((subItem) => (
+                                  <li key={subItem.name}>
+                                    <Link
+                                      href={subItem.href}
+                                      className={classNames(
+                                        pathname === subItem.href
+                                          ? "text-[#F2F2F3]"
+                                          : "text-gray-400 hover:text-white hover:bg-gray-800",
+                                        "group flex gap-x-3 rounded-md p-2 text-base leading-5 font-medium"
+                                      )}
+                                      style={
+                                        pathname === subItem.href
+                                          ? { background: "#0784C3" }
+                                          : {}
+                                      }
+                                    >
+                                      {subItem.name}
+                                    </Link>
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
                           </li>
                         ))}
                       </ul>

@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export const schoolLinks = [
     { href: "/schools/overview", label: "Overview" },
     { href: "/schools/curriculum", label: "School Curriculum" },
@@ -281,4 +283,4 @@ export const schoolLinks = [
     homeLabel: string;
     homeIcon?: string;
     lightMode?: boolean;
-}
+  }

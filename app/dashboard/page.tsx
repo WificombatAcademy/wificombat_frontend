@@ -9,6 +9,7 @@ import { GoChevronDown } from "react-icons/go";
 import SimpleLineChart from "../components/Dashboard/Graph";
 import Piechart from "../components/Dashboard/Piechart";
 import Image from "next/image";
+import { raleway } from "../fonts";
 
 
 const Dashboard = () => {
@@ -19,7 +20,7 @@ const Dashboard = () => {
   return (
     <>
      <SideBar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-      <div>
+      <div className={`${raleway.className} relative`}>
         {/* header/ MAIN SECTION Start */}
         <div className="lg:pl-64">
           <div className="sticky top-0 z-40 flex shrink-0 items-center gap-x-4 bg-white sm:gap-x-6">
@@ -47,7 +48,7 @@ const Dashboard = () => {
               <div className="flex w-full gap-6 min-h-[390px] max-lg:flex-col">
                 <div className="w-full lg:basis-[60%] shadow-md overflow-x-scroll">
                   <div className="w-full flex-1 py-4 px-5">
-                    <h6 className="font-bold text-xl">Courses Overview</h6>
+                    <h6 className="font-bold text-xl">Career Pathway Streak</h6>
                     <div className="flex items-center mt-2 text-[#4F4F4F]">
                       <p className="text-sm">This Week</p>
                       <span>
@@ -62,7 +63,7 @@ const Dashboard = () => {
                 <div className="w-full lg:basis-[40%] shadow-md">
                   <div className="w-full flex-1 py-4 px-5">
                     <h6 className="font-bold text-xl">
-                      Completed vs Uncompleted Task
+                    Career Pathway Progress
                     </h6>
                     <div className="flex items-center mt-2 text-[#4F4F4F]">
                       <p className="text-sm">This Week</p>
@@ -81,7 +82,7 @@ const Dashboard = () => {
                         <h6>Completed</h6>
                       </div>
                       <div className="text-[#131314] text-xs flex items-center gap-[7px]">
-                        <div className="w-[10px] h-[10px] rounded-full bg-[#FFB700]"></div>
+                        <div className="w-[10px] h-[10px] rounded-full bg-[#E5E5E6]"></div>
                         <h6>Uncompleted</h6>
                       </div>
                     </div>
@@ -91,7 +92,7 @@ const Dashboard = () => {
 
               {/* Courses section */}
               <div className="space-y-6">
-                <h6 className="text-[#131314] font-bold text-2xl">Courses</h6>
+                <h6 className="text-[#131314] font-bold text-2xl">Continue Learning</h6>
                 <div className="flex flex-col gap-6">
                   {courseData.map((course) => (
                     <div key={course.id} className="flex gap-7">
@@ -121,10 +122,14 @@ const Dashboard = () => {
                           </p>
                         </div>
                         <div className="text-[#636369] text-sm space-x-4">
-                        <span>{course.lessonCompleted} Completed</span>
                           <span>
-                            {course.lessonRemaining} Remaining
+                            Module {course.module}
                           </span>
+
+                          <span>
+                             Lesson {course.lesson}
+                          </span>
+
                         </div>
                         <div className="h-2 bg-[#D9D9D9] rounded w-full">
                           <div
@@ -155,7 +160,7 @@ const courseData = [
       title: "Coding Fundamental 1",
       thumbnail: "/assets/dashboard/course.png",
       completedPercentage: 67,
-      lessonCompleted: 20,
-      lessonRemaining: 14,
+      module: 20,
+      lesson: 14,
     },
 ];

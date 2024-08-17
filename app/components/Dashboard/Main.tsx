@@ -1,5 +1,7 @@
+import { FaRegFolderOpen } from "react-icons/fa";
 import { HiOutlineTrophy } from "react-icons/hi2";
 import { IoBookOutline } from "react-icons/io5";
+import { TbCertificate } from "react-icons/tb";
 
 type Props = {
   numberOfCourses: number;
@@ -8,7 +10,7 @@ type Props = {
 
 const cardData = [
   {
-    title: "My Courses",
+    title: "Courses completed",
     icon: IoBookOutline,
     stats: "0",
     iconColor: "text-[#0784C3]",
@@ -16,8 +18,8 @@ const cardData = [
     cardBg: "bg-[#E6F6FE]",
   },
   {
-    title: "Courses In Progress",
-    icon: IoBookOutline,
+    title: "Completed Project",
+    icon: FaRegFolderOpen,
     stats: "0",
     iconColor: "text-[#BC00DD]",
     iconBg: "bg-[#F7CCFF]",
@@ -33,11 +35,11 @@ const cardData = [
   },
   {
     title: "Certificates",
-    icon: HiOutlineTrophy,
+    icon: TbCertificate,
     stats: "0",
-    iconColor: "text-[#19B600]",
-    iconBg: "bg-[#BBFD9C]",
-    cardBg: "bg-[#E6FFDA]",
+    iconColor: "text-black-500",
+    iconBg: "bg-black-100",
+    cardBg: "bg-black-50",
   },
 ];
 

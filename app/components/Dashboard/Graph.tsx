@@ -10,13 +10,13 @@ import {
 } from "recharts";
 
 const data = [
-  { name: "Monday", Gaming: 18, "UI/UX Design": 98 , TeenTech: 0},
-  { name: "Tuesday", Gaming: 80, "UI/UX Design": 80 , TeenTech: 0 },
-  { name: "Wednesday", Gaming: 10, "UI/UX Design": 62 , TeenTech: 0 },
-  { name: "Thursday", Gaming: 23, "UI/UX Design": 58 , TeenTech: 0 },
-  { name: "Friday", Gaming: 42, "UI/UX Design": 61 , TeenTech: 0 },
-  { name: "Saturday", Gaming: 42, "UI/UX Design": 60 , TeenTech: 0 },
-  { name: "Sunday", Gaming: 21, "UI/UX Design": 40 , TeenTech: 0 },
+  { name: "Monday", Gaming: 18, "UI/UX Design": 98 , Pathway: 0},
+  { name: "Tuesday", Gaming: 80, "UI/UX Design": 80 , Pathway: 0 },
+  { name: "Wednesday", Gaming: 10, "UI/UX Design": 62 , Pathway: 0 },
+  { name: "Thursday", Gaming: 23, "UI/UX Design": 58 , Pathway: 0 },
+  { name: "Friday", Gaming: 42, "UI/UX Design": 61 , Pathway: 0 },
+  { name: "Saturday", Gaming: 42, "UI/UX Design": 60 , Pathway: 0 },
+  { name: "Sunday", Gaming: 21, "UI/UX Design": 40 , Pathway: 0 },
 ];
 
 function SimpleLineChart() {
@@ -38,8 +38,8 @@ function SimpleLineChart() {
       
       <Line
         type="monotone"
-        dataKey="TeenTech"
-        stroke="#FFB700"
+        dataKey="Pathway"
+        stroke="#0784C3"
         activeDot={{ r: 8 }}
       />
       {/* <Line type="monotone" dataKey="Gaming" stroke="#BC00DD" /> */}

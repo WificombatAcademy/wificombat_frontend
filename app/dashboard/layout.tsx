@@ -10,7 +10,7 @@ export default function DashboardLayout({
     <html lang="en">
       <Providers>
         <DesktopSidebar />
-        <body className="">{children}</body>
+        <body className="relative">{children}</body>
       </Providers>
     </html>
   );

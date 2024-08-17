@@ -78,7 +78,7 @@ const Header = () => {
                 border: "1px solid",
                 padding: "1px",
                 background:
-                  "conic-gradient(from 173.86deg at 50% 50%, #FFB600 -13.12deg, #BC00DD 120deg, #0784C3 181.87deg, #FFB600 346.88deg, #BC00DD 480deg)",
+                  "#0784C3",
                 borderRadius: "50%",
                 display: "inline-block",
               }}

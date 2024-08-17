@@ -3,7 +3,7 @@ import { PieChart } from "react-minimal-pie-chart";
 
 const Piechart = () => {
   const [reveal, setReveal] = useState(0);
-  const [uncompletedValue, setUncompletedValue] = useState(0);
+  const [uncompletedValue, setUncompletedValue] = useState(90);
   const [completedValue, setCompletedValue] = useState(0);
 
   useEffect(() => {
@@ -32,19 +32,19 @@ const Piechart = () => {
         center={[50, 50]}
         data={[
           {
-            color: uncompletedValue === 0 ? "#E5E5E6" : "#FFB700",
+            color: uncompletedValue === 0 ? "#F2F4F7" : "#F2F4F7",
             title: "Uncompleted",
-            value: 10,
+            value: uncompletedValue,
           },
           {
-            color: completedValue === 0 ? "#F2F2F3" : "#0784C3",
+            color: completedValue === 0 ?   "#F2F4F7" : "#0784C3",
             title: "Completed",
-            value: 15,
+            value: completedValue,
           },
         ]}
         labelPosition={50}
         lengthAngle={360}
-        lineWidth={50}
+        lineWidth={28}
         paddingAngle={0}
         radius={50}
         startAngle={0}
@@ -61,7 +61,7 @@ const Piechart = () => {
           fontWeight: "bold",
         }}
       >
-        0
+      {completedValue}%
       </div>
     </div>
   );
