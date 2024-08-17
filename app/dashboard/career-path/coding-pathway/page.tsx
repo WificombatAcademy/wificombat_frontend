@@ -3,8 +3,12 @@
 import Header from "@/app/components/Dashboard/Header";
 import SideBar from "@/app/components/Dashboard/SideBar";
 import { raleway } from "@/app/fonts";
+import { Courses, stage } from "@/app/utils/types-and-links";
+import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import { HiBars3 } from "react-icons/hi2";
+import { IoMdArrowDropdown } from "react-icons/io";
 
 const Page = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -36,9 +40,89 @@ const Page = () => {
             <Header />
           </div>
 
-          <main className="py-10">
+          <main className="pb-10 mt-2">
             <div className="px-4 sm:px-6 lg:px-8 space-y-10">
-              <h6 className="text-[#131314] text-[28px] font-bold">Courses</h6>
+                <div className="flex items-center gap-3">
+                    <div className="z-10 relative w-fit bg-purple-50 border-purple-100 rounded-md shadow-sm cursor-pointer">
+                           <div className="absolute inset-0 flex items-center justify-end">
+                            <IoMdArrowDropdown 
+                            size={22}
+                            className="text-black-500 relative right-2" />    
+                          </div>
+
+                          <select
+                            className={`relative appearance-none w-full block bg-transparent 
+                                outline-none sm:text-sm sm:leading-6 py-3 px-5 font-medium
+                           `}
+                          >{stage.map((stage, index) => (
+                            <option>{stage}</option>
+                            ))}
+                          </select>
+                    </div>
+
+                    <div className="z-10 relative w-fit bg-blue-50 border-blue-100 rounded-md shadow-sm cursor-pointer">
+                           <div className="absolute inset-0 flex items-center justify-end">
+                            <IoMdArrowDropdown 
+                            size={22}
+                            className="text-black-500 relative right-2" />    
+                          </div>
+
+                          <select
+                            className={`relative appearance-none w-full block bg-transparent 
+                                outline-none sm:text-sm sm:leading-6 py-3 px-5 pr-10 font-medium
+                           `}
+                          >
+                            <option>Level 1</option>
+                          </select>
+                    </div>
+                </div>
+                
+
+                <div className="flex flex-col gap-9">
+                    {Courses.map((course, index) => (
+                        <div 
+                        key={index}
+                        className="flex flex-col gap-8">
+                            {/* TITLE */}
+                            <div className="flex items-center justify-between gap-6">
+                                <h6 className="text-[#131314] text-[28px] font-bold">
+                                    {course.title}
+                                </h6>
+
+                                <div>
+                                    <Link href={``}>
+                                        <button 
+                                        disabled={!course.reportCard}
+                                        className={`disabled:bg-[#B1B1B4] disabled:cursor-not-allowed bg-black-500 text-white 
+                                            py-2 md:py-3 2xl:py-4 px-3 md:px-4 lg:px-6 
+                                            transition duration-300 hover:bg-opacity-90 rounded-lg`}>
+                                            Report Card
+                                        </button>
+                                    </Link>
+                                </div>
+                            </div>
+                            {/* TITLE */}
+                            
+                            {/* MODULES */}
+                            <div className="flex items-center gap-5 overflow-x-scroll">
+                                {course.Modules.map((module, index) => (
+                                    <div className="w-[48%] md:w-[38%] lg:w-[25%] flex-shrink-0">
+                                        <div className="w-full h-[215px]">
+                                            <Image 
+                                            src={module.thumbnail}
+                                            alt={module.thumbnail}
+                                            width={282}
+                                            height={215}
+                                            className="w-full h-full object-cover rounded-2xl"
+                                            />
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                            {/* MODULES */}
+                        </div>
+                    ))}
+                </div>
             </div>
           </main>
         </div>

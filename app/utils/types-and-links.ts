@@ -284,3 +284,135 @@ export const schoolLinks = [
     homeIcon?: string;
     lightMode?: boolean;
   }
+
+
+  //////////////////////////////////////////////////////////////////////////////////////  CODING PATHWAY
+  export const Courses = [
+    {
+      reportCard: true,
+      title: 'Coding Fundamental 1 (Lightbot and MBlock)',
+      Modules: [
+        {
+          thumbnail: "/assets/dashboard/course.png",
+          title: "Module 1",
+          desc:"Introduction to algorithm and LightBot",
+          lessons: 3,
+          quiz: 3,
+          assignment: 1,
+          unlocked: true
+        },
+        
+        {
+          thumbnail: "/assets/dashboard/course.png",
+          title: "Module 2",
+          desc:"Introduction to algorithm and LightBot",
+          lessons: 3,
+          quiz: 3,
+          assignment: 1,
+          unlocked: false
+        },
+
+        {
+          thumbnail: "/assets/dashboard/course.png",
+          title: "Module 3",
+          desc:"Introduction to algorithm and LightBot",
+          lessons: 3,
+          quiz: 3,
+          assignment: 1,
+          unlocked: false
+        },
+
+        {
+          thumbnail: "/assets/dashboard/course.png",
+          title: "Module 4",
+          desc:"Introduction to algorithm and LightBot",
+          lessons: 3,
+          quiz: 3,
+          assignment: 1,
+          unlocked: false
+        },
+      ]
+    }, 
+
+    {
+      reportCard: false,
+      title: 'Coding Fundamental 2 (Lightbot and MBlock)',
+      Modules: [
+        {
+          thumbnail: "/assets/dashboard/course.png",
+          title: "Module 1",
+          desc:"Introduction to algorithm and LightBot",
+          lessons: 3,
+          quiz: 3,
+          assignment: 1,
+          unlocked: true
+        },
+        
+        {
+          thumbnail: "/assets/dashboard/course.png",
+          title: "Module 2",
+          desc:"Introduction to algorithm and LightBot",
+          lessons: 3,
+          quiz: 3,
+          assignment: 1,
+          unlocked: false
+        },
+
+        {
+          thumbnail: "/assets/dashboard/course.png",
+          title: "Module 3",
+          desc:"Introduction to algorithm and LightBot",
+          lessons: 3,
+          quiz: 3,
+          assignment: 1,
+          unlocked: false
+        },
+      ]
+    }, 
+
+    {
+      reportCard: false,
+      title: 'Coding Fundamental 3 (Lightbot and MBlock)',
+      Modules: [
+        {
+          thumbnail: "/assets/dashboard/course.png",
+          title: "Module 1",
+          desc:"Introduction to algorithm and LightBot",
+          lessons: 3,
+          quiz: 3,
+          assignment: 1,
+          unlocked: true
+        },
+        
+        {
+          thumbnail: "/assets/dashboard/course.png",
+          title: "Module 2",
+          desc:"Introduction to algorithm and LightBot",
+          lessons: 3,
+          quiz: 3,
+          assignment: 1,
+          unlocked: false
+        },
+
+        {
+          thumbnail: "/assets/dashboard/course.png",
+          title: "Module 3",
+          desc:"Introduction to algorithm and LightBot",
+          lessons: 3,
+          quiz: 3,
+          assignment: 1,
+          unlocked: false
+        },
+
+        {
+          thumbnail: "/assets/dashboard/course.png",
+          title: "Module 4",
+          desc:"Introduction to algorithm and LightBot",
+          lessons: 3,
+          quiz: 3,
+          assignment: 1,
+          unlocked: false
+        },
+      ]
+    }
+  ]
