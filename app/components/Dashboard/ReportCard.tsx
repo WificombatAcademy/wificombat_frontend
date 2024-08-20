@@ -6,7 +6,7 @@ import {
     ComposedChart, Line, XAxis, YAxis, Tooltip, Legend, CartesianGrid, ResponsiveContainer, Bar
   } from 'recharts';
   
-type HeaderProps = {
+export type HeaderProps = {
     children: ReactNode;
 }
 

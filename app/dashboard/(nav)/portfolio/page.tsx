@@ -2,6 +2,7 @@
 
 import DashboardHeader from "@/app/components/Dashboard/DashboardHeader";
 import Header from "@/app/components/Dashboard/Header";
+import { PortfolioCard } from "@/app/components/Dashboard/PortfolioCard";
 import SideBar from "@/app/components/Dashboard/SideBar";
 import { useMain } from "@/app/context/MainContext";
 import { raleway } from "@/app/fonts";
@@ -31,7 +32,7 @@ const Page = () => {
 
           <main className="pb-10">
             <div className="space-y-10">
-                PORTFOLIO
+                <PortfolioCard />
             </div>
           </main>
         </div>
