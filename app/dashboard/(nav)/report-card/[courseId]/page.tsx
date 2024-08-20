@@ -1,17 +1,11 @@
 "use client";
 
 import DashboardHeader from "@/app/components/Dashboard/DashboardHeader";
-import Header from "@/app/components/Dashboard/Header";
+import { ReportCard } from "@/app/components/Dashboard/ReportCard";
 import SideBar from "@/app/components/Dashboard/SideBar";
 import { useMain } from "@/app/context/MainContext";
 import { raleway } from "@/app/fonts";
-import { Courses, stage } from "@/app/utils/types-and-links";
-import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
-import { HiBars3 } from "react-icons/hi2";
-import { IoMdArrowDropdown } from "react-icons/io";
-import { SlLock } from "react-icons/sl";
 
 const Page = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -29,10 +23,8 @@ const Page = () => {
           
           <DashboardHeader setSidebarOpen={setSidebarOpen}/>
 
-          <main className="pb-10">
-            <div className="space-y-10">
-                Report card
-            </div>
+          <main className="pb-10 bg-[#F9F9FF] h-screen overflow-y-auto">
+            <ReportCard />
           </main>
         </div>
       </div>
