@@ -89,6 +89,8 @@
 .form-box{
   box-shadow: 2px 4px 8px 0px #B1B1B133,
    -2px 0px 4px 0px #B1B1B133;
+   position: relative;
+   z-index: 1;
 }
 
 

@@ -4,39 +4,26 @@ import { motion } from "framer-motion";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { IoChevronBackOutline } from "react-icons/io5"
+import { IoCheckmark, IoChevronBackOutline } from "react-icons/io5"
 import AssessmentDesign from "./assessment-design";
 import { useState } from "react";
 import { FormDataSchema } from "@/app/utils/schema";
 import { merriweather } from "@/app/fonts";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import Link from "next/link";
+import { assessmentAges, assessmentGender, stage } from "@/app/utils/types-and-links";
+import Image from "next/image";
 
 type Inputs = z.infer<typeof FormDataSchema>
-
-const initialActivities = [
-    'Playing games on a tablet or computer',
-    'Drawing pictures or coloring',
-    'Building with blocks or LEGOs',
-    'Solving simple puzzles',
-  ];
 
 const AssessmentForm = () => {
     const router = useRouter();
     const [previousStep, setPreviousStep] = useState(0)
     const [currentStep, setCurrentStep] = useState(0)
-    const delta = currentStep - previousStep
-    const [activities, setActivities] = useState(initialActivities);
+    const [selectedAge, setSelectedAge] = useState<String | null>(null);
 
-    const onDragEnd = (result:any) => {
-      if (!result.destination) return;
-  
-      const reorderedActivities = Array.from(activities);
-      const [removed] = reorderedActivities.splice(result.source.index, 1);
-      reorderedActivities.splice(result.destination.index, 0, removed);
-  
-      setActivities(reorderedActivities);
-    };
+    const handleSelectAge = (age:string) => {
+        setSelectedAge(age);
+      };
 
     const {
         register,
@@ -114,14 +101,15 @@ const AssessmentForm = () => {
     }
 
     return (
-        <section className="relative w-full h-screen bg-white flex lg:items-center justify-center overflow-y-scroll">
+        <section className="relative w-full h-screen bg-white flex justify-center overflow-y-auto">
             <AssessmentDesign />
-            <div className="w-[90%] md:w-[85%] mx-auto">
-               <div className="">                 
+            <div className="z-[5] w-[90%] md:w-[85%] mx-auto ">
+               <div className="relative">                 
                     <IoChevronBackOutline
                         size={24}
                         onClick={() => router.back()}
-                        className="absolute left-3 lg:left-[5rem] top-3 lg:top-8 max-lg:mb-3 border border-[#5F5F5F1A] p-5 w-14 h-14 cursor-pointer font-bold rounded-lg shadow-lg"
+                        className="z-50 absolute left-3 lg:left-[5rem] top-3 lg:top-8 max-lg:mb-3 border border-[#5F5F5F1A] 
+                        p-5 w-14 h-14 cursor-pointer font-bold rounded-lg shadow-lg"
                     />
                </div>
 
@@ -131,8 +119,8 @@ const AssessmentForm = () => {
                 className="z-20 relative text-black-500">
 
                     {currentStep === 0 && (
-                        <div className="form-box max-md:mt-32 md:w-[70%] lg:w-[50%] mx-auto 
-                        py-10 px-5 md:px-8 rounded-3xl">
+                        <div className="form-box max-md:mt-32 md:mt-48 md:w-[70%] lg:w-[50%] mx-auto 
+                        py-10 px-5 md:px-8 rounded-3xl overflow-y-auto">
                             <h1 className={`${merriweather.className} font-bold text-lg md:text-2xl text-center`}>
                                 Part 1: Introductory Questions
                             </h1>
@@ -157,8 +145,8 @@ const AssessmentForm = () => {
                     )}
 
                     {currentStep === 1 && (
-                        <div className="form-box max-md:mt-32 md:w-[70%] lg:w-[50%] mx-auto 
-                        py-10 px-5 md:px-8 rounded-3xl">
+                        <div className="z-[5] relative form-box max-md:mt-32 md:mt-6 md:w-[70%] lg:w-[50%] mx-auto 
+                        py-10 px-5 md:px-8 rounded-3xl overflow-y-auto">
                             <h1 className={`${merriweather.className} font-bold text-lg md:text-2xl text-center`}>
                                 Part 1: Introductory Questions
                             </h1>
@@ -168,25 +156,40 @@ const AssessmentForm = () => {
                                 What is your age?
                             </div>
 
-                            <div className="mt-5 w-full p-3 rounded-lg
-                            space-y-4">
-                                {FormDataSchema.shape.age._def.values.map((age,index) => (
-                                   <div 
-                                       key={index}
-                                       className="w-full py-4 px-5 bg-blue-50 rounded-lg">
-                                        <input
+                            <div className="mt-5 w-full py-3 rounded-lg grid grid-cols-2 gap-4">
+                                {assessmentAges.map((AgeTyge) => (
+                                    <div
+                                    key={AgeTyge.id}
+                                    onClick={() => handleSelectAge(AgeTyge.age)}
+                                    className={`relative w-full text-center rounded-lg cursor-pointer`}
+                                    >
+                                    <input
                                         type="radio"
-                                        value={age}
+                                        value={AgeTyge.age}
+                                        checked={selectedAge === AgeTyge.age}
                                         {...register("age")}
-                                        className="mr-2 border-none border-transparent rounded-full"
-                                        />
-                                        <label className="font-medium">{age}</label>
-                                   </div>
-                                ))}
-                            </div>
+                                        className="hidden" // Hide the radio input
+                                    />
 
-                            <div className="h-4">
-                            {errors.age && <p className="text-red-500 h-fit">{errors.age.message}</p>}
+                                    <div className="w-full h-[200px] md:h-[250px]">
+                                        <Image 
+                                        src={AgeTyge.image}
+                                        alt="Age-Type"
+                                        width={180}
+                                        height={180}
+                                        className="w-full h-full object-cover rounded-xl"
+                                        />
+                                    </div>
+
+                                    <div className="mt-4 font-medium">{AgeTyge.age}</div>
+
+                                    {selectedAge === AgeTyge.age && (
+                                        <div className="absolute top-[-0.3rem] right-0 bg-green-500 text-white rounded-full">
+                                            <IoCheckmark />
+                                        </div>
+                                    )}
+                                    </div>
+                                ))}
                             </div>
 
                             <Navigations />
@@ -194,36 +197,51 @@ const AssessmentForm = () => {
                     )}
 
                     {currentStep === 2 && (
-                        <div className="form-box max-md:mt-32 md:w-[70%] lg:w-[50%] mx-auto 
-                        py-10 px-5 md:px-8 rounded-3xl">
+                        <div className="z-[5] relative form-box max-md:mt-32 md:mt-6 md:w-[70%] lg:w-[50%] mx-auto 
+                        py-10 px-5 md:px-8 rounded-3xl overflow-y-auto">
                             <h1 className={`${merriweather.className} font-bold text-lg md:text-2xl text-center`}>
                                 Part 1: Introductory Questions
                             </h1>
 
-                            <div className="mt-6 w-full bg-blue-500 text-white 
+                            <div className="mt-6 w-full bg-yellow-400 text-white 
                             font-bold text-lg md:text-xl 2xl:text-2xl py-6 px-[10px] text-center rounded-2xl">
                                 What is your gender?
                             </div>
 
-                            <div className="mt-5 w-full p-3 rounded-lg
-                            space-y-4">
-                                {FormDataSchema.shape.gender._def.values.map((gender, index) => (
-                                   <div 
-                                    key={index}
-                                   className="w-full py-4 px-5 bg-blue-50 rounded-lg">
-                                        <input
+                            <div className="mt-5 w-full py-3 rounded-lg grid grid-cols-2 gap-4">
+                                {assessmentGender.map((gender) => (
+                                    <div
+                                    key={gender.id}
+                                    onClick={() => handleSelectAge(gender.sex)}
+                                    className={`relative w-full text-center rounded-lg cursor-pointer`}
+                                    >
+                                    <input
                                         type="radio"
-                                        value={gender}
-                                        {...register("gender")}
-                                        className="mr-2 border-none border-transparent rounded-full"
-                                        />
-                                        <label className="font-medium">{gender}</label>
-                                   </div>
-                                ))}
-                            </div>
+                                        value={gender.sex}
+                                        checked={selectedAge === gender.sex}
+                                        {...register("age")}
+                                        className="hidden" // Hide the radio input
+                                    />
 
-                            <div className="h-4">
-                            {errors.gender && <p className="text-red-500 h-fit">{errors.gender.message}</p>}
+                                    <div className="w-full h-[200px] md:h-[250px]">
+                                        <Image 
+                                        src={gender.image}
+                                        alt="Age-Type"
+                                        width={180}
+                                        height={180}
+                                        className="w-full h-full object-cover rounded-xl"
+                                        />
+                                    </div>
+
+                                    <div className="mt-4 font-medium">{gender.sex}</div>
+
+                                    {selectedAge === gender.sex && (
+                                        <div className="absolute top-[-0.3rem] right-0 bg-green-500 text-white rounded-full">
+                                            <IoCheckmark />
+                                        </div>
+                                    )}
+                                    </div>
+                                ))}
                             </div>
 
                             <Navigations />
@@ -232,7 +250,7 @@ const AssessmentForm = () => {
 
                      {currentStep === 3 && (
                         <div className="form-box max-md:mt-32 md:w-[70%] lg:w-[50%] mx-auto 
-                        py-10 px-5 md:px-8 rounded-3xl">
+                        py-10 px-5 md:px-8 rounded-3xl overflow-y-auto">
                             <h1 className={`${merriweather.className} font-bold text-lg md:text-2xl text-center`}>
                             Part 2: Scenario-Based Questions
                             </h1>
@@ -270,7 +288,7 @@ const AssessmentForm = () => {
 
                     {currentStep === 4 && (
                         <div className="form-box max-md:mt-32 md:w-[70%] lg:w-[50%] mx-auto 
-                        py-10 px-5 md:px-8 rounded-3xl">
+                        py-10 px-5 md:px-8 rounded-3xl overflow-y-auto">
                             <h1 className={`${merriweather.className} font-bold text-lg md:text-2xl text-center`}>
                                 Part 2: Scenario-Based Questions
                             </h1>
@@ -307,7 +325,7 @@ const AssessmentForm = () => {
 
                     {currentStep === 5 && (
                         <div className="form-box max-md:mt-32 md:w-[70%] lg:w-[50%] mx-auto 
-                        py-10 px-5 md:px-8 rounded-3xl">
+                        py-10 px-5 md:px-8 rounded-3xl overflow-y-auto">
                             <h1 className={`${merriweather.className} font-bold text-lg md:text-2xl text-center`}>
                                 Part 2: Scenario-Based Questions
                             </h1>
@@ -344,7 +362,7 @@ const AssessmentForm = () => {
 
                     {currentStep === 6 && (
                         <div className="form-box max-md:mt-32 md:w-[70%] lg:w-[50%] mx-auto 
-                        py-10 px-5 md:px-8 rounded-3xl">
+                        py-10 px-5 md:px-8 rounded-3xl overflow-y-auto">
                             <h1 className={`${merriweather.className} font-bold text-lg md:text-2xl text-center`}>
                                 Part 2: Scenario-Based Questions
                             </h1>
@@ -381,7 +399,7 @@ const AssessmentForm = () => {
 
                     {currentStep === 7 && (
                         <div className="form-box max-md:mt-32 md:w-[70%] lg:w-[50%] mx-auto 
-                        py-10 px-5 md:px-8 rounded-3xl">
+                        py-10 px-5 md:px-8 rounded-3xl overflow-y-auto">
                             <h1 className={`${merriweather.className} font-bold text-lg md:text-2xl text-center`}>
                                 Part 2: Scenario-Based Questions
                             </h1>
@@ -418,7 +436,6 @@ const AssessmentForm = () => {
 
                 </form>
             </div>
-
 
         </section>
     )

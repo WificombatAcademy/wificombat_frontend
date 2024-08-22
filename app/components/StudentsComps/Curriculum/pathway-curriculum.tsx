@@ -1,9 +1,9 @@
 "use client"
-import { useState } from "react";
-import { CurriculumLevel, PathCurriculumType, pathsCurriculum } from "@/app/utils/types-and-links";
+import { useEffect, useState } from "react";
+import { API, CurriculumLevel, PathCurriculumType, pathsCurriculum } from "@/app/utils/types-and-links";
 import HeadingDesign from "../../general/HeaderDesign";
 import CareerCard from "../../Home/career-card";
-import Link from "next/link";
+import axios from "axios";
 
 type CareerPathwayCurriculumProps = {
   schoolCurriculum?: boolean;
@@ -17,6 +17,19 @@ export const CareerPathwayCurriculum = ({schoolCurriculum}: CareerPathwayCurricu
   const headingText = schoolCurriculum ? "school curriculum" : "career pathway curriculum";
 
   const activePath: PathCurriculumType = pathsCurriculum[activePathIndex];
+
+  useEffect(() => { []
+    const fetchPathways = async () => {
+        try {
+        const response = await axios.get(`${API}/career-pathways`);
+        console.log(response.data)
+      }
+      catch (error) {    
+      }
+    } 
+
+    fetchPathways()
+  })
 
   return (
     <section>

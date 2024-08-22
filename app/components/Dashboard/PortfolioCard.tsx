@@ -1,7 +1,16 @@
+"use client"
 import { merriweather } from "@/app/fonts"
 import Image from "next/image"
 import { HeaderProps } from "./ReportCard"
+import { ProgressCircle } from "@/app/utils/progress-bar"
+import { ReactNode } from "react"
+import { HiOutlineUserGroup } from "react-icons/hi2"
 
+type PortfolioCardProps = {
+    title: string;
+    desc: string;
+
+}
 const interests = [
     "Lorem ipsum dolor sit amet consectetur",
     "Lorem ipsum dolor sit amet consectetur",
@@ -18,10 +27,29 @@ const PortoflioHeader = ({ children }: HeaderProps) => {
     )
  }
 
+ const Card = ({ title, desc, }: PortfolioCardProps) => {
+    return (
+        <article className="relative w-full py-8 px-4 md:px-8 flex items-center
+        border border-black-200 rounded-xl">
+            <h3 className="text-lg font-semibold">{title}</h3>
+            <p className="text-sm mt-3">
+                {desc}
+            </p>
+
+            <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2">
+                    <HiOutlineUserGroup />
+                </div>  
+            </div>
+        </article>
+    )
+}
+
 export const PortfolioCard = () => {
+    // const [progress, setProgress] = useState(65);
     return (
         <section>
-            <div className="my-8 md:my-10 w-[95%] md:w-[80%] lg:w-[70%] bg-white text-black-500 mx-auto">
+            <div className="my-8 md:my-10 w-[95%] md:w-[80%] lg:w-[70%] bg-white text-black-500 mx-auto ">
                  {/* HEADER */}
                  <header className="w-full py-3 px-4 md:px-6 lg:px-8 bg-blue-500 text-white flex items-center justify-between">
                     <div className="basis-[30%] lg:basis-[35%]">
@@ -65,16 +93,31 @@ export const PortfolioCard = () => {
                             ))}
                         </ul>
                     </article>
-                </div>
-                {/* STUDENT INFO */}
+                    {/* STUDENT INFO */}
 
-                {/* STUDENT PROGRESS */}
-                <article>
-                    <PortoflioHeader>
-                        Student Progress
-                    </PortoflioHeader>
-                </article>
-                {/* STUDENT PROGRESS */}
+                    {/* STUDENT PROGRESS */}
+                    <article>
+                        <PortoflioHeader>
+                            Student Progress
+                        </PortoflioHeader>
+
+                        <main  className="mt-10 grid grid-cols-2 lg:grid-cols-4">
+                            <ProgressCircle title="Quizzes" value={24} progress={40} size={150} strokeWidth={15} />
+                            <ProgressCircle title="Assignment" value={12} progress={60} size={150} strokeWidth={15} />
+                            <ProgressCircle title="Certificate" value={4} progress={55} size={150} strokeWidth={15} />
+                            <ProgressCircle title="Projects" value={6} progress={40} size={150} strokeWidth={15} />
+                        </main>
+                    </article>
+                    {/* STUDENT PROGRESS */}
+
+                    {/* PROJECTS */}
+                    <article>
+                        <PortoflioHeader>
+                            Projects
+                        </PortoflioHeader>
+                    </article>
+                    {/* PROJECTS */}
+                </div>
             </div>
         </section>
     )

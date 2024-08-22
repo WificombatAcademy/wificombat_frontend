@@ -416,3 +416,47 @@ export const schoolLinks = [
       ]
     }
   ]
+
+
+
+
+
+
+  ///////////////////////////////////////////////////////
+  export const API = process.env.NEXT_PUBLIC_BASE_URL;
+
+
+
+  /////////////////////////////////////////////////////// ASSESSMENT
+
+  export const assessmentAges = [
+    { id: 1,
+      age: "6-8 years old",
+      image: "/student-reg.png"
+    },
+    { id: 2,
+      age: "9-12 years old",
+      image: "/assessment-age-2.png"
+    },
+    { id: 3,
+      age: "13-15 years old",
+      image: "/assessment-age-3.png"
+    },
+    { id: 4,
+      age: "16-18 years old",
+      image: "/assessment-age-4.png"
+    },
+  ]
+
+  export const assessmentGender = [
+    {
+      id: 1,
+      sex: "Female",
+      image: "/student-reg.png"
+    },
+    {
+      id: 2,
+      sex: "Male",
+      image: "/educator-reg.png"
+    }
+  ]
