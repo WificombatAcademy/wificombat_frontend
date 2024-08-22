@@ -28,7 +28,7 @@ const CareerCard = ({ bgColor ,desc, pathway, linkTo, level, subject, textWhite,
                             className="w-full h-full object-cover rounded-tl-2xl rounded-tr-2xl" 
                             />
                         </div>}
-                        <div className="relative z-20">
+                        <div className="relative z-[7]">
                             <h3 className={`${textWhite ? "text-white": ""}  my-3 text-lg md:text-2xl text-black-500 font-semibold`}>
                                 {pathway} Pathway</h3>
                         </div>
