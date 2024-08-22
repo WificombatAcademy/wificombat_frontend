@@ -1,6 +1,6 @@
 "use client"
 import { useEffect, useState } from "react";
-import { API, CurriculumLevel, PathCurriculumType, pathsCurriculum } from "@/app/utils/types-and-links";
+import { API, CurriculumLevel, PathCurriculumType, pathsCurriculum, Pathways } from "@/app/utils/types-and-links";
 import HeadingDesign from "../../general/HeaderDesign";
 import CareerCard from "../../Home/career-card";
 import axios from "axios";
@@ -14,6 +14,7 @@ const levels: CurriculumLevel[] = ["Beginner", "Intermediate", "Advanced"];
 export const CareerPathwayCurriculum = ({schoolCurriculum}: CareerPathwayCurriculumProps) => {
   const [activePathIndex, setActivePathIndex] = useState(0);
   const [selectedLevel, setSelectedLevel] = useState<CurriculumLevel>("Beginner");
+  const [pathways, setPathways] = useState([]);
   const headingText = schoolCurriculum ? "school curriculum" : "career pathway curriculum";
 
   const activePath: PathCurriculumType = pathsCurriculum[activePathIndex];
@@ -22,14 +23,14 @@ export const CareerPathwayCurriculum = ({schoolCurriculum}: CareerPathwayCurricu
     const fetchPathways = async () => {
         try {
         const response = await axios.get(`${API}/career-pathways`);
-        console.log(response.data)
+        setPathways(response.data); 
       }
       catch (error) {    
       }
     } 
 
     fetchPathways()
-  })
+  }, [])
 
   return (
     <section>
@@ -77,14 +78,16 @@ export const CareerPathwayCurriculum = ({schoolCurriculum}: CareerPathwayCurricu
              <div className="w-full lg:basis-[87%]">
              {activePath && (
                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9">
-                  {activePath.curriculum[selectedLevel].map((course, index) => (
+                  {pathways.map((course:Pathways, index) => (
                     <CareerCard
                     linkTo="/coding-pathway"
-                    key={index}
-                    pathway={course.module}
-                    subject={course.subject}
+                    key={course.id}
+                    pathway={course.title}
+                    subject={course.title}
                     level={course.level}
-                    desc="This pathway covers everything from concept art and storytelling to coding and game mechanics."
+                    desc={course.content}
+                    image={`https://wificombatacademy.com/${course.imageurl}`}
+                    textWhite 
                     />
                   ))}
                </div>

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { FaPlus } from "react-icons/fa6";
 
@@ -10,15 +11,24 @@ type Props = {
     bgColor?: string;
     textWhite?: boolean;
     pathways?: string[];
+    image?: string;
 }
 
-const CareerCard = ({ bgColor ,desc, pathway, linkTo, level, subject, textWhite, pathways }: Props) => {
+const CareerCard = ({ bgColor ,desc, pathway, linkTo, level, subject, textWhite, pathways, image }: Props) => {
     return (
         <div className="h-full">
             <Link href={`${linkTo && linkTo}`}>
                 <div className="w-full flex flex-col h-full bg-white pb-3 shadow-lg rounded-2xl cursor-pointer">
-                    <div className={`w-full h-[220px] 2xl:h-[250px] min-[2000px]:h-[300px] ${bgColor ?? "bg-black-200"} px-4 flex items-end rounded-tl-2xl rounded-tr-2xl`}>
-                        <div>
+                    <div className={`relative w-full h-[220px] 2xl:h-[250px] min-[2000px]:h-[300px] 
+                        ${bgColor ?? "bg-black-200"} px-4 flex items-end rounded-tl-2xl rounded-tr-2xl`}>
+                        {image && <div className="absolute inset-0 bg-black rounded-tl-2xl rounded-tr-2xl">
+                            <div className="absolute inset-0 bg-black/30 rounded-tl-2xl rounded-tr-2xl"></div>
+                            <Image src={image} alt="pathway"
+                            width={300} height={300}
+                            className="w-full h-full object-cover rounded-tl-2xl rounded-tr-2xl" 
+                            />
+                        </div>}
+                        <div className="relative z-20">
                             <h3 className={`${textWhite ? "text-white": ""}  my-3 text-lg md:text-2xl text-black-500 font-semibold`}>
                                 {pathway} Pathway</h3>
                         </div>

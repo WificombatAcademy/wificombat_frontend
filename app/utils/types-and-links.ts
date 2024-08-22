@@ -91,6 +91,14 @@ export const schoolLinks = [
     module: string;
     curriculum: Curriculum;
   }
+
+  export type Pathways = {
+    id: string;
+    title: string;
+    content: string;
+    imageurl: string;
+    level: string;
+  }
   
 
   export const pathsCurriculum = [
