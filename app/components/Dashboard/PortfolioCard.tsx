@@ -209,6 +209,20 @@ export const PortfolioCard = () => {
                     {/* SDG AND TECHPRENEURSHIP PROJECTS */}
                 </div>
             </div>
+
+             {/* BUTTON */}
+             <div className="w-full flex items-center justify-center">
+                <Link href={``}>
+                    <button 
+                    
+                    className={`disabled:bg-[#B1B1B4] disabled:cursor-not-allowed bg-black-500 text-white 
+                        py-2 md:py-3 2xl:py-4 px-3 md:px-4 lg:px-6 
+                        transition duration-300 hover:bg-opacity-90 rounded-lg`}>
+                        Download Report
+                    </button>
+                </Link>
+            </div>
+            {/* BUTTON */}
         </section>
     )
 }
