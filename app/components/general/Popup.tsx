@@ -4,7 +4,7 @@ import React from 'react'
 export type PopupProps = {
   links: link[];
   onClose?: () => void;
-  onclick?: () => void;
+  onclick?: (label: string) => void;
   portfolio?: boolean;
 }
 
@@ -23,7 +23,7 @@ const Popup = ({links, portfolio, onclick}: PopupProps) => {
         <li 
         key={index} 
         className={`w-full ${portfolio && "text-center mb-4"}`}
-        onClick={onclick}
+        onClick={() => onclick && onclick(link.label)}
         >
           <Link href={link.href} className="block text-black-500 px-4 py-2 hover:bg-gray-200 whitespace-nowrap">
             {link.label}

@@ -18,6 +18,7 @@ const Page = () => {
   const [selectedSection, setSelectedSection] = useState("Student Portfolio");
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [modalContent, setModalContent] = useState("");
 
   return (
     <>
@@ -60,8 +61,11 @@ const Page = () => {
                       Add
                   </button>
                   {isPopupVisible && 
-                  <Popup 
-                  onclick={() => setOpenModal(true)}
+                  <Popup
+                      onclick={(label) => {
+                        setModalContent(label);
+                        setOpenModal(true);
+                      }}
                   links={addToPortfolioLinks} 
                   portfolio={true} 
                   />}
@@ -90,14 +94,15 @@ const Page = () => {
           />
 
           <h2 className={`${merriweather.className} mt-4 font-bold text-xl md:text-2xl text-center`}>
-            Add Your Project</h2>
+            {`Add Your ${modalContent}`}
+          </h2>
 
-            <div className="mt-4 w-full">
+            <div className="mt-6 w-full">
               <label
                 htmlFor="text"
                 className="block font-medium leading-6"
               >
-                Project Title
+                {modalContent} Title
               </label>
               <div className="mt-2">
                 <input
@@ -142,7 +147,7 @@ const Page = () => {
                   <input
                     id="date"
                     type="date"
-                    placeholder="02/03/24"
+                    // placeholder="02/03/24"
                     className={`block outline-none w-full rounded-md border border-black-300 py-4 px-4 shadow-sm ring-1 ring-inset 
                       ring-gray-300 placeholder:[#656765] focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm 
                       sm:leading-6 select-none`}
