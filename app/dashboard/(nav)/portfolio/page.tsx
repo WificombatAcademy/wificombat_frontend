@@ -1,10 +1,12 @@
 "use client";
+import Certificates from "@/app/components/Dashboard/Certificates";
 import DashboardHeader from "@/app/components/Dashboard/DashboardHeader";
 import { PortfolioCard } from "@/app/components/Dashboard/PortfolioCard";
 import SideBar from "@/app/components/Dashboard/SideBar";
+import Popup from "@/app/components/general/Popup";
 import { useMain } from "@/app/context/MainContext";
 import { raleway } from "@/app/fonts";
-import { sections } from "@/app/utils/types-and-links";
+import { addToPortfolioLinks, sections } from "@/app/utils/types-and-links";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -12,6 +14,7 @@ const Page = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const {toggleSidebar} = useMain();
   const [selectedSection, setSelectedSection] = useState("Student Portfolio");
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
 
   return (
     <>
@@ -41,16 +44,23 @@ const Page = () => {
                 ))}
                 </div>
 
-                <div>
+                <div className="relative"
+                                      onClick={() => setIsPopupVisible(!isPopupVisible)} // Toggle modal on click
+                                      onMouseEnter={() => setIsPopupVisible(true)} // Show modal on hover
+                                      onMouseLeave={() => setIsPopupVisible(false)}
+                >
                   <button 
                   className={`disabled:bg-[#B1B1B4] disabled:cursor-not-allowed bg-black-500 text-white 
                       py-2 md:py-3 2xl:py-4 px-3 md:px-4 lg:px-6 
-                      transition duration-300 hover:bg-opacity-90 rounded-lg`}>
+                      transition duration-300 hover:bg-opacity-90 rounded-lg`}
+                      >
                       Add
                   </button>
+                  {isPopupVisible && <Popup links={addToPortfolioLinks} portfolio={true} />}
                 </div>
               </div>
                 {selectedSection === "Student Portfolio" &&  <PortfolioCard />}
+                {selectedSection === "Certificate" &&  <Certificates />}
             </div>
           </main>
         </div>

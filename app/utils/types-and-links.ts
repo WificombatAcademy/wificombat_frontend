@@ -1,5 +1,3 @@
-import { ReactNode } from "react";
-
 export const schoolLinks = [
     { href: "/schools/overview", label: "Overview" },
     { href: "/schools/curriculum", label: "School Curriculum" },
@@ -479,3 +477,9 @@ export const schoolLinks = [
     "/assets/assessment/thumbs-down.svg",
     "/assets/assessment/thinking-face.svg",
   ]
+
+  export const addToPortfolioLinks = [
+    { href: "", label: "Project" },
+    { href: "", label: "Competition" },
+    { href: "", label: "SDG and Techpreneurship" },
+  ];

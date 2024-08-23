@@ -41,7 +41,7 @@ const Page = () => {
 
                           <select
                             className={`relative appearance-none w-full block bg-transparent 
-                                outline-none sm:text-sm sm:leading-6 py-3 px-5 font-medium
+                                outline-none sm:text-sm sm:leading-6 py-3 px-7 font-medium
                            `}
                           >{stage.map((stage, index) => (
                             <option
