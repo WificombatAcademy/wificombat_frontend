@@ -73,6 +73,11 @@ export const schoolLinks = [
     'Advanced',
   ]
 
+  export const sections = [
+    'Student Portfolio',
+    'Certificate'
+  ]
+
   export type CurriculumLevel = "Beginner" | "Intermediate" | "Advanced";
 
   export type Course = {
