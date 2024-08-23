@@ -3,14 +3,17 @@ import { merriweather } from "@/app/fonts"
 import Image from "next/image"
 import { HeaderProps } from "./ReportCard"
 import { ProgressCircle } from "@/app/utils/progress-bar"
-import { ReactNode } from "react"
 import { HiOutlineUserGroup } from "react-icons/hi2"
+import { LuCalendarDays } from "react-icons/lu";
+import { FaLink } from "react-icons/fa6"
+import Link from "next/link"
 
 type PortfolioCardProps = {
     title: string;
     desc: string;
-
 }
+
+const names = ["Gladys", "Victoria", "Colleen", "Esther", "Angel", "Philip"]
 const interests = [
     "Lorem ipsum dolor sit amet consectetur",
     "Lorem ipsum dolor sit amet consectetur",
@@ -29,17 +32,39 @@ const PortoflioHeader = ({ children }: HeaderProps) => {
 
  const Card = ({ title, desc, }: PortfolioCardProps) => {
     return (
-        <article className="relative w-full py-8 px-4 md:px-8 flex items-center
+        <article className="relative w-full py-8 px-4 md:px-8 flex flex-col
         border border-black-200 rounded-xl">
             <h3 className="text-lg font-semibold">{title}</h3>
             <p className="text-sm mt-3">
                 {desc}
             </p>
 
-            <div className="flex items-center gap-2">
+            <div className="mt-4 text-sm flex flex-wrap items-center gap-2">
                 <div className="flex items-center gap-2">
                     <HiOutlineUserGroup />
+                    <h4>Team Members: {""}</h4>
                 </div>  
+                <div className="flex flex-wrap gap-2 items-center">
+                {names.map((memberName) => (
+                     <h3 key={memberName}>
+                        {memberName}
+                     </h3>
+                    ))}
+                </div>
+            </div>
+
+            <div className="mt-4 text-sm flex flex-wrap items-center gap-2">
+                <div className="flex items-center gap-2">
+                    <LuCalendarDays />
+                    <h4>03/06/2024 {""}</h4>
+                </div> 
+
+                <div className="flex items-center gap-2">
+                    <FaLink />
+                    <Link href={`https://grace.project.64.764.com`} className="text-blue-500">
+                        https://grace.project.64.764.com
+                    </Link>
+                </div> 
             </div>
         </article>
     )
@@ -49,7 +74,7 @@ export const PortfolioCard = () => {
     // const [progress, setProgress] = useState(65);
     return (
         <section>
-            <div className="my-8 md:my-10 w-[95%] md:w-[80%] lg:w-[70%] bg-white text-black-500 mx-auto ">
+            <div className="my-8 md:my-10 w-[95%] bg-white text-black-500 mx-auto ">
                  {/* HEADER */}
                  <header className="w-full py-3 px-4 md:px-6 lg:px-8 bg-blue-500 text-white flex items-center justify-between">
                     <div className="basis-[30%] lg:basis-[35%]">
@@ -115,8 +140,73 @@ export const PortfolioCard = () => {
                         <PortoflioHeader>
                             Projects
                         </PortoflioHeader>
+
+                        <div className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <Card 
+                            desc="Lorem ipsum dolor sit amet consectetur. Eu ultrices volutpat est eu commodo. 
+                            Placerat mi id maecenas convallis vulputate est quis. Tincidunt iaculis est massa 
+                            non dapibus neque faucibus neque. Enim viverra leo suscipit suspendisse."
+                            title="Financial Mobile App"
+                            />
+
+                            <Card 
+                            desc="Lorem ipsum dolor sit amet consectetur. Eu ultrices volutpat est eu commodo. 
+                            Placerat mi id maecenas convallis vulputate est quis. Tincidunt iaculis est massa 
+                            non dapibus neque faucibus neque. Enim viverra leo suscipit suspendisse."
+                            title="Financial Mobile App"
+                            />
+                        </div>
                     </article>
                     {/* PROJECTS */}
+                    
+
+                    {/* COMPETITIONS */}
+                    <article>
+                        <PortoflioHeader>
+                            Competitions
+                        </PortoflioHeader>
+
+                        <div className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <Card 
+                            desc="Lorem ipsum dolor sit amet consectetur. Eu ultrices volutpat est eu commodo. 
+                            Placerat mi id maecenas convallis vulputate est quis. Tincidunt iaculis est massa 
+                            non dapibus neque faucibus neque. Enim viverra leo suscipit suspendisse."
+                            title="CONRAD Competition"
+                            />
+
+                            <Card 
+                            desc="Lorem ipsum dolor sit amet consectetur. Eu ultrices volutpat est eu commodo. 
+                            Placerat mi id maecenas convallis vulputate est quis. Tincidunt iaculis est massa 
+                            non dapibus neque faucibus neque. Enim viverra leo suscipit suspendisse."
+                            title="MTN Competition"
+                            />
+                        </div>
+                    </article>
+                    {/* COMPETITIONS */}
+
+                    {/* SDG AND TECHPRENEURSHIP PROJECTS */}
+                    <article>
+                        <PortoflioHeader>
+                            SDG and Techpreneurship Projects
+                        </PortoflioHeader>
+
+                        <div className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-6">
+                           <Card 
+                            desc="Lorem ipsum dolor sit amet consectetur. Eu ultrices volutpat est eu commodo. 
+                            Placerat mi id maecenas convallis vulputate est quis. Tincidunt iaculis est massa 
+                            non dapibus neque faucibus neque. Enim viverra leo suscipit suspendisse."
+                            title="CONRAD Competition"
+                            />
+
+                            <Card 
+                            desc="Lorem ipsum dolor sit amet consectetur. Eu ultrices volutpat est eu commodo. 
+                            Placerat mi id maecenas convallis vulputate est quis. Tincidunt iaculis est massa 
+                            non dapibus neque faucibus neque. Enim viverra leo suscipit suspendisse."
+                            title="MTN Competition"
+                            />
+                        </div>
+                    </article>
+                    {/* SDG AND TECHPRENEURSHIP PROJECTS */}
                 </div>
             </div>
         </section>
