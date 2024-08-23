@@ -22,7 +22,7 @@ export const CareerPathwayCurriculum = ({schoolCurriculum}: CareerPathwayCurricu
   useEffect(() => { []
     const fetchPathways = async () => {
         try {
-        const response = await axios.get(`${API}/career-pathways`);
+        const response = await axios.get(`${API}/pathways/`);
         setPathways(response.data); 
       }
       catch (error) {    
@@ -53,7 +53,8 @@ export const CareerPathwayCurriculum = ({schoolCurriculum}: CareerPathwayCurricu
           </div>
 
           <div className="mt-10 md:mt-16 flex flex-col lg:flex-row gap-16 items-center lg:items-start justify-between">
-            <div 
+            <div
+             
             className="w-full lg:basis-[13%] py-3 px-2 md:px-3 flex flex-wrap lg:flex-col items-center max-sm:justify-between rounded shadow-xl max-lg:px-4 border">
                 {pathsCurriculum.map((curriculum,index) => (
                   <div
@@ -79,16 +80,16 @@ export const CareerPathwayCurriculum = ({schoolCurriculum}: CareerPathwayCurricu
              <div className="w-full lg:basis-[87%]">
              {activePath && (
                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9">
-                  {pathways.map((course:Pathways, index) => (
+                  {activePath.curriculum[selectedLevel].map((course, index) => (
                     <CareerCard
                     linkTo="/coding-pathway"
-                    key={course.id}
-                    pathway={course.title}
-                    subject={course.title}
+                    key={index}
+                    pathway={course.module}
+                    subject={course.subject}
                     level={course.level}
-                    desc={course.content}
-                    image={`https://wificombatacademy.com/${course.imageurl}`}
-                    textWhite 
+                    desc={`Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, voluptatibus rem. Corporis necessitatibus nostrum adipisci illo`}
+                    // image={`https://wificombatacademy.com/${course.imageurl}`}
+                    // textWhite 
                     />
                   ))}
                </div>

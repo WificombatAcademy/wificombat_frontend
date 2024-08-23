@@ -119,7 +119,9 @@ const Login = () => {
                         placeholder="grace@gmail.com"
                         disabled={isLoading}
                         {...register("email", { required: true })}
-                        className={`block outline-none w-full rounded-md border border-gray-600 py-4 px-4 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-700 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6 ${
+                        className={`block outline-none w-full rounded-md border border-gray-600 py-4 px-4 shadow-sm ring-1 
+                          ring-inset ring-gray-300 placeholder:text-gray-700 focus:ring-2 focus:ring-inset 
+                          focus:ring-purple-600 sm:text-sm sm:leading-6 ${
                           errors.email
                             ? "border-[#F00101]"
                             : "border-neutral-300"
@@ -158,7 +160,9 @@ const Login = () => {
                         placeholder="********"
                         disabled={isLoading}
                         {...register("password", { required: true })}
-                        className={`block outline-none w-full rounded-md border border-gray-600 py-4 px-4 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-700 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6 ${
+                        className={`block outline-none w-full rounded-md border border-gray-600 py-4 px-4 shadow-sm ring-1 
+                          ring-inset ring-gray-300 placeholder:text-gray-700 focus:ring-2 focus:ring-inset 
+                          focus:ring-purple-600 sm:text-sm sm:leading-6 ${
                           errors.password
                             ? "border-[#F00101]"
                             : "border-neutral-300"
@@ -190,7 +194,9 @@ const Login = () => {
                       type="submit"
                       onClick={handleSubmit(onSubmit)}
                       disabled={isLoading || !isValid}
-                      className="flex w-full justify-center rounded-md disabled:bg-[#B1B1B4] active:bg-[#131314] bg-[#131314] p-4 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-purple-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600"
+                      className="flex w-full justify-center rounded-md disabled:bg-[#B1B1B4] active:bg-[#131314] bg-[#131314] 
+                      p-4 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-purple-500 focus-visible:outline 
+                      focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600"
                     >
                       {isLoading ? "Please wait..." : "Login"}
                     </button>

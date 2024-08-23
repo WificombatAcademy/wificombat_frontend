@@ -15,7 +15,9 @@ export type link = {
 
 const Popup = ({links, portfolio, onclick}: PopupProps) => {
   return (
-    <div className={`z-[10] absolute top-full ${portfolio && "right-0 shadow-xl"} bg-white flex shadow-md py-4 rounded max-lg:hidden`}>
+    <div className={`z-[10] absolute top-full bg-white flex shadow-md py-4 rounded
+      ${portfolio ? "right-0 shadow-xl" : "max-lg:hidden"} 
+    `}>
     <ul>
       {links.map((link, index) => (
         <li 

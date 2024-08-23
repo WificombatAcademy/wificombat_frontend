@@ -31,9 +31,14 @@ const config: Config = {
         'yellow-600': '#CC9200',
         'primary-gray': '#D9D9D9',
       },
-    screens:{
-      md:'912px'
-    }
+
+      screens:{
+        md:'912px'
+      },
+      
+      userSelect: {
+        'none': 'none',
+      }
     },
   },
   plugins: [],

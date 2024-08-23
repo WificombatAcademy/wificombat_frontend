@@ -7,8 +7,9 @@ import { act, useEffect, useState } from "react";
 import { FormDataSchema } from "@/app/utils/schema";
 import { merriweather } from "@/app/fonts";
 import Link from "next/link";
-import { assessmentAges, assessmentGender, assessmentImages, stage } from "@/app/utils/types-and-links";
+import { API, assessmentAges, assessmentGender, assessmentImages, stage } from "@/app/utils/types-and-links";
 import Image from "next/image";
+import axios from "axios";
 
 type Inputs = z.infer<typeof FormDataSchema>
 
@@ -85,25 +86,25 @@ const AssessmentForm = () => {
     }
     // END NAVIGATIONS
 
-    // useEffect(() => { []
-    //     const fetchAssessments = async () => {
-    //         try {
-    //         const response = await axios.get(`https://wificombatacademy.com/api/v2/assessment`, {
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //                 withCredentials: true,
-    //             }
-    //         });
-    //         setAssessments(response.data); 
-    //       }
-    //       catch (error) {    
-    //       }
-    //     } 
+    useEffect(() => { []
+        const fetchAssessments = async () => {
+            try {
+            const response = await axios.get(`${API}/assessment`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    withCredentials: true,
+                }
+            });
+            setAssessments(response.data); 
+          }
+          catch (error) {    
+          }
+        } 
     
-    //     fetchAssessments()
-    //   }, [])
+        fetchAssessments()
+      }, [])
 
-    // console.log('A:', assessments)
+    console.log('A:', assessments)
 
     return (
         <section className="relative w-full h-screen bg-white pb-20 flex justify-center overflow-y-auto">
