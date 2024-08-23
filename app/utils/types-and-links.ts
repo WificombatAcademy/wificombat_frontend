@@ -468,3 +468,9 @@ export const schoolLinks = [
       image: "/educator-reg.png"
     }
   ]
+
+  export const assessmentImages = [
+    "/assets/assessment/thumbs-up.svg",
+    "/assets/assessment/thumbs-down.svg",
+    "/assets/assessment/thinking-face.svg",
+  ]

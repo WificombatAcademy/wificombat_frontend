@@ -31,6 +31,7 @@ export const CareerPathwayCurriculum = ({schoolCurriculum}: CareerPathwayCurricu
 
     fetchPathways()
   }, [])
+  
 
   return (
     <section>

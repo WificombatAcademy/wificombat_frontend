@@ -1,16 +1,13 @@
 "use client"
 import { z } from "zod";
-import { motion } from "framer-motion";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { IoCheckmark, IoChevronBackOutline } from "react-icons/io5"
 import AssessmentDesign from "./assessment-design";
-import { useState } from "react";
+import { act, useEffect, useState } from "react";
 import { FormDataSchema } from "@/app/utils/schema";
 import { merriweather } from "@/app/fonts";
 import Link from "next/link";
-import { assessmentAges, assessmentGender, stage } from "@/app/utils/types-and-links";
+import { assessmentAges, assessmentGender, assessmentImages, stage } from "@/app/utils/types-and-links";
 import Image from "next/image";
 
 type Inputs = z.infer<typeof FormDataSchema>
@@ -20,27 +17,14 @@ const AssessmentForm = () => {
     const [previousStep, setPreviousStep] = useState(0)
     const [currentStep, setCurrentStep] = useState(0)
     const [selectedAge, setSelectedAge] = useState<String | null>(null);
+    const [assessments, setAssessments] = useState([]);
 
     const handleSelectAge = (age:string) => {
         setSelectedAge(age);
       };
 
-    const {
-        register,
-        handleSubmit,
-        watch,
-        reset,
-        trigger,
-        formState: { errors }
-      } = useForm<Inputs>({
-        resolver: zodResolver(FormDataSchema)
-      })
-    
-      const processForm: SubmitHandler<Inputs> = data => {
-        console.log(data)
-        reset()
-      }
 
+    //   NAVIGATIONS
     const Navigations = () => {
         const prev = () => {
             if(currentStep !== 0) {
@@ -99,9 +83,30 @@ const AssessmentForm = () => {
             </div>
         )
     }
+    // END NAVIGATIONS
+
+    // useEffect(() => { []
+    //     const fetchAssessments = async () => {
+    //         try {
+    //         const response = await axios.get(`https://wificombatacademy.com/api/v2/assessment`, {
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //                 withCredentials: true,
+    //             }
+    //         });
+    //         setAssessments(response.data); 
+    //       }
+    //       catch (error) {    
+    //       }
+    //     } 
+    
+    //     fetchAssessments()
+    //   }, [])
+
+    // console.log('A:', assessments)
 
     return (
-        <section className="relative w-full h-screen bg-white flex justify-center overflow-y-auto">
+        <section className="relative w-full h-screen bg-white pb-20 flex justify-center overflow-y-auto">
             <AssessmentDesign />
             <div className="z-[5] w-[90%] md:w-[85%] mx-auto ">
                <div className="relative">                 
@@ -115,7 +120,6 @@ const AssessmentForm = () => {
 
 
                 <form 
-                onSubmit={handleSubmit(processForm)}
                 className="z-20 relative text-black-500">
 
                     {currentStep === 0 && (
@@ -131,14 +135,10 @@ const AssessmentForm = () => {
                                 <input 
                                 type="text"
                                 placeholder="Enter your name"
-                                {...register("name")}
                                 className="outline-none w-full p-3 border border-black-300 rounded-lg placeholder:text-[#656765]"
                                 />
                             </div>
 
-                            <div className="h-4">
-                             {errors.name && <p className="text-red-500 h-fit">{errors.name.message}</p>}
-                            </div>
 
                             <Navigations />
                         </div>
@@ -167,7 +167,6 @@ const AssessmentForm = () => {
                                         type="radio"
                                         value={AgeTyge.age}
                                         checked={selectedAge === AgeTyge.age}
-                                        {...register("age")}
                                         className="hidden" // Hide the radio input
                                     />
 
@@ -219,7 +218,6 @@ const AssessmentForm = () => {
                                         type="radio"
                                         value={gender.sex}
                                         checked={selectedAge === gender.sex}
-                                        {...register("age")}
                                         className="hidden" // Hide the radio input
                                     />
 
@@ -249,7 +247,7 @@ const AssessmentForm = () => {
                     )}
 
                      {currentStep === 3 && (
-                        <div className="form-box max-md:mt-32 md:w-[70%] lg:w-[50%] mx-auto 
+                        <div className="form-box max-md:mt-32 md:mt-12 lg:mt-14 md:w-[70%] lg:w-[50%] mx-auto 
                         py-10 px-5 md:px-8 rounded-3xl overflow-y-auto">
                             <h1 className={`${merriweather.className} font-bold text-lg md:text-2xl text-center`}>
                             Part 2: Scenario-Based Questions
@@ -263,23 +261,27 @@ const AssessmentForm = () => {
                            
                             <div className="mt-5 w-full p-3 rounded-lg space-y-4">
                                 {FormDataSchema.shape.activities._def.values.map((activities, index) => (
-                                   <div 
+                                    <div 
                                     key={index}
-                                   className="flex items-center gap-4"
-                                   >
-                                        <div className="py-4 px-6 bg-blue-50 text-blue-500 text-lg font-bold rounded-lg">
-                                            {index + 1}
+                                   className="w-full py-4 px-5 bg-blue-50 flex items-center gap-2 rounded-lg">
+                                        <input
+                                        type="radio"
+                                        name="activities" 
+                                        value={activities}
+                                        className="mr-2 accent-blue-500 border-none border-transparent rounded-full"
+                                        />
+                                        <div className="font-medium flex items-center gap-1">
+                                            <Image 
+                                            src={assessmentImages[index]} 
+                                            alt={"activity"} 
+                                            width={32}
+                                            height={32}
+                                            className="object-contain" 
+                                        />
+                                        {activities}
                                         </div>
-
-                                        <label 
-                                        className="w-full py-4 px-5 bg-blue-50 rounded-lg font-medium"
-                                        >{activities}</label>
                                    </div>
                                 ))}
-                            </div>
-
-                            <div className="h-4">
-                            {errors.activities && <p className="text-red-500 h-fit">{errors.activities.message}</p>}
                             </div>
 
                             <Navigations />
@@ -287,36 +289,41 @@ const AssessmentForm = () => {
                     )}
 
                     {currentStep === 4 && (
-                        <div className="form-box max-md:mt-32 md:w-[70%] lg:w-[50%] mx-auto 
+                        <div className="form-box max-md:mt-32 md:mt-12 lg:mt-14 md:w-[70%] lg:w-[50%] mx-auto 
                         py-10 px-5 md:px-8 rounded-3xl overflow-y-auto">
                             <h1 className={`${merriweather.className} font-bold text-lg md:text-2xl text-center`}>
-                                Part 2: Scenario-Based Questions
+                            Part 2: Scenario-Based Questions
                             </h1>
 
-                            <div className="mt-6 w-full bg-blue-500 text-white 
+                            <div className="mt-6 w-full bg-purple-500 text-white 
                             font-bold text-lg md:text-xl 2xl:text-2xl py-6 px-[10px] text-center rounded-2xl">
-                                What do you like to do when you play games?
+                                Arrange these activities based on your choice
                             </div>
 
-                            <div className="mt-5 w-full p-3 rounded-lg
-                            space-y-4">
-                                {FormDataSchema.shape.gamePreference._def.values.map((gamePreference, index) => (
-                                   <div 
+                           
+                            <div className="mt-5 w-full p-3 rounded-lg space-y-4">
+                                {FormDataSchema.shape.activities._def.values.map((activities, index) => (
+                                    <div 
                                     key={index}
-                                   className="w-full py-4 px-5 bg-blue-50 rounded-lg">
+                                   className="w-full py-4 px-5 bg-purple-50 flex items-center gap-2 rounded-lg">
                                         <input
-                                        type="checkbox"
-                                        value={gamePreference}
-                                        {...register("gamePreference")}
-                                        className="mr-2 border-none border-transparent rounded-full"
+                                        type="radio"
+                                        name="activities" 
+                                        value={activities}
+                                        className="mr-2 accent-blue-500 border-none border-transparent rounded-full"
                                         />
-                                        <label className="font-medium">{gamePreference}</label>
+                                        <div className="font-medium flex items-center gap-1">
+                                            <Image 
+                                            src={assessmentImages[index]} 
+                                            alt={"activity"} 
+                                            width={32}
+                                            height={32}
+                                            className="object-contain" 
+                                        />
+                                        {activities}
+                                        </div>
                                    </div>
                                 ))}
-                            </div>
-
-                            <div className="h-4">
-                            {errors.gamePreference && <p className="text-red-500 h-fit">{errors.gamePreference.message}</p>}
                             </div>
 
                             <Navigations />
@@ -324,36 +331,41 @@ const AssessmentForm = () => {
                     )}
 
                     {currentStep === 5 && (
-                        <div className="form-box max-md:mt-32 md:w-[70%] lg:w-[50%] mx-auto 
+                        <div className="form-box max-md:mt-32 md:mt-12 lg:mt-14 md:w-[70%] lg:w-[50%] mx-auto 
                         py-10 px-5 md:px-8 rounded-3xl overflow-y-auto">
                             <h1 className={`${merriweather.className} font-bold text-lg md:text-2xl text-center`}>
-                                Part 2: Scenario-Based Questions
+                            Part 2: Scenario-Based Questions
                             </h1>
 
-                            <div className="mt-6 w-full bg-blue-500 text-white 
+                            <div className="mt-6 w-full bg-yellow-500 text-white 
                             font-bold text-lg md:text-xl 2xl:text-2xl py-6 px-[10px] text-center rounded-2xl">
-                                If you could make a toy do something, what would you chose?
+                                Arrange these activities based on your choice
                             </div>
 
-                            <div className="mt-5 w-full p-3 rounded-lg
-                            space-y-4">
-                                {FormDataSchema.shape.toyAction._def.values.map((toyAction, index) => (
-                                   <div 
+                           
+                            <div className="mt-5 w-full p-3 rounded-lg space-y-4">
+                                {FormDataSchema.shape.activities._def.values.map((activities, index) => (
+                                    <div 
                                     key={index}
-                                   className="w-full py-4 px-5 bg-blue-50 rounded-lg">
+                                   className="w-full py-4 px-5 bg-yellow-50 flex items-center gap-2 rounded-lg">
                                         <input
-                                        type="checkbox"
-                                        value={toyAction}
-                                        {...register("toyAction")}
-                                        className="mr-2 border-none border-transparent rounded-full"
+                                        type="radio"
+                                        name="activities" 
+                                        value={activities}
+                                        className="mr-2 accent-blue-500 border-none border-transparent rounded-full"
                                         />
-                                        <label className="font-medium">{toyAction}</label>
+                                        <div className="font-medium flex items-center gap-1">
+                                            <Image 
+                                            src={assessmentImages[index]} 
+                                            alt={"activity"} 
+                                            width={32}
+                                            height={32}
+                                            className="object-contain" 
+                                        />
+                                        {activities}
+                                        </div>
                                    </div>
                                 ))}
-                            </div>
-
-                            <div className="h-4">
-                            {errors.toyAction && <p className="text-red-500 h-fit">{errors.toyAction.message}</p>}
                             </div>
 
                             <Navigations />
@@ -361,36 +373,41 @@ const AssessmentForm = () => {
                     )}
 
                     {currentStep === 6 && (
-                        <div className="form-box max-md:mt-32 md:w-[70%] lg:w-[50%] mx-auto 
+                        <div className="form-box max-md:mt-32 md:mt-12 lg:mt-14 md:w-[70%] lg:w-[50%] mx-auto 
                         py-10 px-5 md:px-8 rounded-3xl overflow-y-auto">
                             <h1 className={`${merriweather.className} font-bold text-lg md:text-2xl text-center`}>
-                                Part 2: Scenario-Based Questions
+                            Part 2: Scenario-Based Questions
                             </h1>
 
                             <div className="mt-6 w-full bg-blue-500 text-white 
                             font-bold text-lg md:text-xl 2xl:text-2xl py-6 px-[10px] text-center rounded-2xl">
-                                What do you like to do when you draw or colour?
+                                Arrange these activities based on your choice
                             </div>
 
-                            <div className="mt-5 w-full p-3 rounded-lg
-                            space-y-4">
-                                {FormDataSchema.shape.drawingPreference._def.values.map((drawingPreference, index) => (
-                                   <div 
+                           
+                            <div className="mt-5 w-full p-3 rounded-lg space-y-4">
+                                {FormDataSchema.shape.activities._def.values.map((activities, index) => (
+                                    <div 
                                     key={index}
-                                   className="w-full py-4 px-5 bg-blue-50 rounded-lg">
+                                   className="w-full py-4 px-5 bg-blue-50 flex items-center gap-2 rounded-lg">
                                         <input
-                                        type="checkbox"
-                                        value={drawingPreference}
-                                        {...register("drawingPreference")}
-                                        className="mr-2 border-none border-transparent rounded-full"
+                                        type="radio"
+                                        name="activities" 
+                                        value={activities}
+                                        className="mr-2 accent-blue-500 border-none border-transparent rounded-full"
                                         />
-                                        <label className="font-medium">{drawingPreference}</label>
+                                        <div className="font-medium flex items-center gap-1">
+                                            <Image 
+                                            src={assessmentImages[index]} 
+                                            alt={"activity"} 
+                                            width={32}
+                                            height={32}
+                                            className="object-contain" 
+                                        />
+                                        {activities}
+                                        </div>
                                    </div>
                                 ))}
-                            </div>
-
-                            <div className="h-4">
-                            {errors.drawingPreference && <p className="text-red-500 h-fit">{errors.drawingPreference.message}</p>}
                             </div>
 
                             <Navigations />
@@ -398,36 +415,41 @@ const AssessmentForm = () => {
                     )}
 
                     {currentStep === 7 && (
-                        <div className="form-box max-md:mt-32 md:w-[70%] lg:w-[50%] mx-auto 
+                        <div className="form-box max-md:mt-32 md:mt-12 lg:mt-14 md:w-[70%] lg:w-[50%] mx-auto 
                         py-10 px-5 md:px-8 rounded-3xl overflow-y-auto">
                             <h1 className={`${merriweather.className} font-bold text-lg md:text-2xl text-center`}>
-                                Part 2: Scenario-Based Questions
+                            Part 2: Scenario-Based Questions
                             </h1>
 
-                            <div className="mt-6 w-full bg-blue-500 text-white 
+                            <div className="mt-6 w-full bg-purple-800 text-white 
                             font-bold text-lg md:text-xl 2xl:text-2xl py-6 px-[10px] text-center rounded-2xl">
-                                What would you like a robot to do for you?
+                                Arrange these activities based on your choice
                             </div>
 
-                            <div className="mt-5 w-full p-3 rounded-lg
-                            space-y-4">
-                                {FormDataSchema.shape.robotTask._def.values.map((robotTask, index) => (
-                                   <div 
+                           
+                            <div className="mt-5 w-full p-3 rounded-lg space-y-4">
+                                {FormDataSchema.shape.activities._def.values.map((activities, index) => (
+                                    <div 
                                     key={index}
-                                   className="w-full py-4 px-5 bg-blue-50 rounded-lg">
+                                   className="w-full py-4 px-5 bg-purple-200 flex items-center gap-2 rounded-lg">
                                         <input
-                                        type="checkbox"
-                                        value={robotTask}
-                                        {...register("robotTask")}
-                                        className="mr-2 border-none border-transparent rounded-full"
+                                        type="radio"
+                                        name="activities" 
+                                        value={activities}
+                                        className="mr-2 accent-blue-500 border-none border-transparent rounded-full"
                                         />
-                                        <label className="font-medium">{robotTask}</label>
+                                        <div className="font-medium flex items-center gap-1">
+                                            <Image 
+                                            src={assessmentImages[index]} 
+                                            alt={"activity"} 
+                                            width={32}
+                                            height={32}
+                                            className="object-contain" 
+                                        />
+                                        {activities}
+                                        </div>
                                    </div>
                                 ))}
-                            </div>
-
-                            <div className="h-4">
-                            {errors.robotTask && <p className="text-red-500 h-fit">{errors.robotTask.message}</p>}
                             </div>
 
                             <Navigations />

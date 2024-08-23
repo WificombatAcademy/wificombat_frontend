@@ -17,10 +17,10 @@ export const FormDataSchema = z.object({
 
   activities:
     z.enum([
-        'Playing games on a tablet or computer', 
-        'Drawing pictures or coloring', 
-        'Building with blocks or LEGOs', 
-        'Solving simple puzzles']),
+      'Yes', 
+      'No', 
+      'Maybe',
+    ]),
 
   gamePreference: z.enum([
     'Run and Jump', 
