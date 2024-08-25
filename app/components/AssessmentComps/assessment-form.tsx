@@ -89,12 +89,7 @@ const AssessmentForm = () => {
     useEffect(() => { []
         const fetchAssessments = async () => {
             try {
-            const response = await axios.get(`${API}/assessment`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    withCredentials: true,
-                }
-            });
+            const response = await axios.get(`${API}/assessment/`);
             setAssessments(response.data); 
           }
           catch (error) {    
