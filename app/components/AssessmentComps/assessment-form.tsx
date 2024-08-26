@@ -13,12 +13,24 @@ import axios from "axios";
 
 type Inputs = z.infer<typeof FormDataSchema>
 
+type Option = {
+    [key: string]: number;
+  };
+  
+
+type Assessment = {
+    id: number;
+    question: string;
+    category: string;
+    options: Option;
+}
+
 const AssessmentForm = () => {
     const router = useRouter();
     const [previousStep, setPreviousStep] = useState(0)
     const [currentStep, setCurrentStep] = useState(0)
     const [selectedAge, setSelectedAge] = useState<String | null>(null);
-    const [assessments, setAssessments] = useState([]);
+    const [assessments, setAssessments] = useState<Assessment[]>([]);
 
     const handleSelectAge = (age:string) => {
         setSelectedAge(age);
@@ -99,7 +111,18 @@ const AssessmentForm = () => {
         fetchAssessments()
       }, [])
 
-    console.log('A:', assessments)
+    const getAnswerText = (answer: number): string => {
+        switch (answer) {
+          case 1:
+            return 'Yes';
+          case 0:
+            return 'No';
+          case 0.5:
+            return 'Maybe';
+          default:
+            return '';
+        }
+      };
 
     return (
         <section className="relative w-full h-screen bg-white pb-20 flex justify-center overflow-y-auto">
@@ -251,19 +274,19 @@ const AssessmentForm = () => {
 
                             <div className="mt-6 w-full bg-blue-500 text-white 
                             font-bold text-lg md:text-xl 2xl:text-2xl py-6 px-[10px] text-center rounded-2xl">
-                                Arrange these activities based on your choice
+                                {assessments[0].question}
                             </div>
 
                            
                             <div className="mt-5 w-full p-3 rounded-lg space-y-4">
-                                {FormDataSchema.shape.activities._def.values.map((activities, index) => (
+                                {Object.keys(assessments[0]?.options || {}).map((optionKey, index) => (
                                     <div 
-                                    key={index}
-                                   className="w-full py-4 px-5 bg-blue-50 flex items-center gap-2 rounded-lg">
+                                    key={optionKey}
+                                    className="w-full py-4 px-5 bg-blue-50 flex items-center gap-2 rounded-lg">
                                         <input
                                         type="radio"
-                                        name="activities" 
-                                        value={activities}
+                                        name={`activities`} 
+                                        value={optionKey}
                                         className="mr-2 accent-blue-500 border-none border-transparent rounded-full"
                                         />
                                         <div className="font-medium flex items-center gap-1">
@@ -274,7 +297,7 @@ const AssessmentForm = () => {
                                             height={32}
                                             className="object-contain" 
                                         />
-                                        {activities}
+                                        {getAnswerText(assessments[0]?.options[optionKey])}
                                         </div>
                                    </div>
                                 ))}
@@ -293,19 +316,20 @@ const AssessmentForm = () => {
 
                             <div className="mt-6 w-full bg-purple-500 text-white 
                             font-bold text-lg md:text-xl 2xl:text-2xl py-6 px-[10px] text-center rounded-2xl">
-                                Arrange these activities based on your choice
+                                {assessments[1].question}
                             </div>
 
                            
-                            <div className="mt-5 w-full p-3 rounded-lg space-y-4">
-                                {FormDataSchema.shape.activities._def.values.map((activities, index) => (
+                            <div className="mt-5 w-full p-3 rounded-lg space-y-4">                                
+                                {Object.keys(assessments[1]?.options || {}).map((optionKey, index) => (
+
                                     <div 
                                     key={index}
                                    className="w-full py-4 px-5 bg-purple-50 flex items-center gap-2 rounded-lg">
                                         <input
                                         type="radio"
                                         name="activities" 
-                                        value={activities}
+                                        value={optionKey}
                                         className="mr-2 accent-blue-500 border-none border-transparent rounded-full"
                                         />
                                         <div className="font-medium flex items-center gap-1">
@@ -316,7 +340,7 @@ const AssessmentForm = () => {
                                             height={32}
                                             className="object-contain" 
                                         />
-                                        {activities}
+                                        {getAnswerText(assessments[1]?.options[optionKey])}
                                         </div>
                                    </div>
                                 ))}
@@ -335,19 +359,19 @@ const AssessmentForm = () => {
 
                             <div className="mt-6 w-full bg-yellow-500 text-white 
                             font-bold text-lg md:text-xl 2xl:text-2xl py-6 px-[10px] text-center rounded-2xl">
-                                Arrange these activities based on your choice
+                                {assessments[2].question}
                             </div>
 
                            
                             <div className="mt-5 w-full p-3 rounded-lg space-y-4">
-                                {FormDataSchema.shape.activities._def.values.map((activities, index) => (
+                                {Object.keys(assessments[2]?.options || {}).map((optionKey, index) => (
                                     <div 
                                     key={index}
                                    className="w-full py-4 px-5 bg-yellow-50 flex items-center gap-2 rounded-lg">
                                         <input
                                         type="radio"
                                         name="activities" 
-                                        value={activities}
+                                        value={optionKey}
                                         className="mr-2 accent-blue-500 border-none border-transparent rounded-full"
                                         />
                                         <div className="font-medium flex items-center gap-1">
@@ -358,7 +382,8 @@ const AssessmentForm = () => {
                                             height={32}
                                             className="object-contain" 
                                         />
-                                        {activities}
+                                         {getAnswerText(assessments[2]?.options[optionKey])}
+
                                         </div>
                                    </div>
                                 ))}
@@ -377,19 +402,19 @@ const AssessmentForm = () => {
 
                             <div className="mt-6 w-full bg-blue-500 text-white 
                             font-bold text-lg md:text-xl 2xl:text-2xl py-6 px-[10px] text-center rounded-2xl">
-                                Arrange these activities based on your choice
+                                {assessments[3].question}
                             </div>
 
                            
                             <div className="mt-5 w-full p-3 rounded-lg space-y-4">
-                                {FormDataSchema.shape.activities._def.values.map((activities, index) => (
+                                {Object.keys(assessments[3]?.options || {}).map((optionKey, index) => (
                                     <div 
                                     key={index}
                                    className="w-full py-4 px-5 bg-blue-50 flex items-center gap-2 rounded-lg">
                                         <input
                                         type="radio"
                                         name="activities" 
-                                        value={activities}
+                                        value={optionKey}
                                         className="mr-2 accent-blue-500 border-none border-transparent rounded-full"
                                         />
                                         <div className="font-medium flex items-center gap-1">
@@ -400,7 +425,7 @@ const AssessmentForm = () => {
                                             height={32}
                                             className="object-contain" 
                                         />
-                                        {activities}
+                                         {getAnswerText(assessments[3]?.options[optionKey])}
                                         </div>
                                    </div>
                                 ))}
@@ -419,19 +444,20 @@ const AssessmentForm = () => {
 
                             <div className="mt-6 w-full bg-purple-800 text-white 
                             font-bold text-lg md:text-xl 2xl:text-2xl py-6 px-[10px] text-center rounded-2xl">
-                                Arrange these activities based on your choice
+                                {assessments[4].question}
                             </div>
 
                            
                             <div className="mt-5 w-full p-3 rounded-lg space-y-4">
-                                {FormDataSchema.shape.activities._def.values.map((activities, index) => (
+
+                                {Object.keys(assessments[4]?.options || {}).map((optionKey, index) => (
                                     <div 
                                     key={index}
                                    className="w-full py-4 px-5 bg-purple-200 flex items-center gap-2 rounded-lg">
                                         <input
                                         type="radio"
                                         name="activities" 
-                                        value={activities}
+                                        value={optionKey}
                                         className="mr-2 accent-blue-500 border-none border-transparent rounded-full"
                                         />
                                         <div className="font-medium flex items-center gap-1">
@@ -442,7 +468,7 @@ const AssessmentForm = () => {
                                             height={32}
                                             className="object-contain" 
                                         />
-                                        {activities}
+                                         {getAnswerText(assessments[4]?.options[optionKey])}
                                         </div>
                                    </div>
                                 ))}
