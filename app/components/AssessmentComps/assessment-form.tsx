@@ -46,14 +46,14 @@ const AssessmentForm = () => {
         }
 
         const next = () => {
-            if(currentStep !== 8) {
+            if(currentStep !== 10) {
                 setCurrentStep(currentStep + 1)
             }
         }
         return (
             <div>
                 {
-                currentStep === 7 ? 
+                currentStep === 10 ? 
                 <>
                     <div className="mt-16 flex items-center justify-center">
                         <div>
@@ -80,11 +80,11 @@ const AssessmentForm = () => {
                         </button>  
 
                         <div>
-                            {currentStep + 1} of 8
+                            {currentStep + 1} of 11
                         </div>
 
                         <button
-                        disabled={currentStep >= 7}
+                        disabled={currentStep >= 10}
                         onClick={next}
                         className="py-2 px-4 border border-[#D0D5DD] shadow-md rounded-lg
                         disabled:text-gray-400 disabled:cursor-not-allowed">
@@ -469,6 +469,135 @@ const AssessmentForm = () => {
                                             className="object-contain" 
                                         />
                                          {getAnswerText(assessments[4]?.options[optionKey])}
+                                        </div>
+                                   </div>
+                                ))}
+                            </div>
+
+                            <Navigations />
+                        </div>
+                    )}
+
+                    {currentStep === 8 && (
+                        <div className="form-box max-md:mt-32 md:mt-12 lg:mt-14 md:w-[70%] lg:w-[50%] mx-auto 
+                        py-10 px-5 md:px-8 rounded-3xl overflow-y-auto">
+                            <h1 className={`${merriweather.className} font-bold text-lg md:text-2xl text-center`}>
+                            Part 2: Scenario-Based Questions
+                            </h1>
+
+                            <div className="mt-6 w-full bg-blue-500 text-white 
+                            font-bold text-lg md:text-xl 2xl:text-2xl py-6 px-[10px] text-center rounded-2xl">
+                                {assessments[5].question}
+                            </div>
+
+                           
+                            <div className="mt-5 w-full p-3 rounded-lg space-y-4">
+
+                                {Object.keys(assessments[5]?.options || {}).map((optionKey, index) => (
+                                    <div 
+                                    key={index}
+                                   className="w-full py-4 px-5 bg-blue-50 flex items-center gap-2 rounded-lg">
+                                        <input
+                                        type="radio"
+                                        name="activities" 
+                                        value={optionKey}
+                                        className="mr-2 accent-blue-500 border-none border-transparent rounded-full"
+                                        />
+                                        <div className="font-medium flex items-center gap-1">
+                                            <Image 
+                                            src={assessmentImages[index]} 
+                                            alt={"activity"} 
+                                            width={32}
+                                            height={32}
+                                            className="object-contain" 
+                                        />
+                                         {getAnswerText(assessments[5]?.options[optionKey])}
+                                        </div>
+                                   </div>
+                                ))}
+                            </div>
+
+                            <Navigations />
+                        </div>
+                    )}
+
+                    {currentStep === 9 && (
+                        <div className="form-box max-md:mt-32 md:mt-12 lg:mt-14 md:w-[70%] lg:w-[50%] mx-auto 
+                        py-10 px-5 md:px-8 rounded-3xl overflow-y-auto">
+                            <h1 className={`${merriweather.className} font-bold text-lg md:text-2xl text-center`}>
+                            Part 2: Scenario-Based Questions
+                            </h1>
+
+                            <div className="mt-6 w-full bg-yellow-500 text-white 
+                            font-bold text-lg md:text-xl 2xl:text-2xl py-6 px-[10px] text-center rounded-2xl">
+                                {assessments[6].question}
+                            </div>
+
+                           
+                            <div className="mt-5 w-full p-3 rounded-lg space-y-4">
+
+                                {Object.keys(assessments[6]?.options || {}).map((optionKey, index) => (
+                                    <div 
+                                    key={index}
+                                   className="w-full py-4 px-5 bg-yellow-50 flex items-center gap-2 rounded-lg">
+                                        <input
+                                        type="radio"
+                                        name="activities" 
+                                        value={optionKey}
+                                        className="mr-2 accent-blue-500 border-none border-transparent rounded-full"
+                                        />
+                                        <div className="font-medium flex items-center gap-1">
+                                            <Image 
+                                            src={assessmentImages[index]} 
+                                            alt={"activity"} 
+                                            width={32}
+                                            height={32}
+                                            className="object-contain" 
+                                        />
+                                         {getAnswerText(assessments[6]?.options[optionKey])}
+                                        </div>
+                                   </div>
+                                ))}
+                            </div>
+
+                            <Navigations />
+                        </div>
+                    )}
+
+                    {currentStep === 10 && (
+                        <div className="form-box max-md:mt-32 md:mt-12 lg:mt-14 md:w-[70%] lg:w-[50%] mx-auto 
+                        py-10 px-5 md:px-8 rounded-3xl overflow-y-auto">
+                            <h1 className={`${merriweather.className} font-bold text-lg md:text-2xl text-center`}>
+                            Part 2: Scenario-Based Questions
+                            </h1>
+
+                            <div className="mt-6 w-full bg-purple-500 text-white 
+                            font-bold text-lg md:text-xl 2xl:text-2xl py-6 px-[10px] text-center rounded-2xl">
+                                {assessments[7].question}
+                            </div>
+
+                           
+                            <div className="mt-5 w-full p-3 rounded-lg space-y-4">
+
+                                {Object.keys(assessments[7]?.options || {}).map((optionKey, index) => (
+                                    <div 
+                                    key={index}
+                                   className="w-full py-4 px-5 bg-purple-50 flex items-center gap-2 rounded-lg">
+                                        <input
+                                        type="radio"
+                                        name="activities" 
+                                        value={optionKey}
+                                        className="mr-2 accent-blue-500 border-none border-transparent rounded-full"
+                                        />
+                                        <div className="font-medium flex items-center gap-1">
+                                            <Image 
+                                            src={assessmentImages[index]} 
+                                            alt={"activity"} 
+                                            width={32}
+                                            height={32}
+                                            className="object-contain" 
+                                        />
+                                         {getAnswerText(assessments[7]?.options[optionKey])}
                                         </div>
                                    </div>
                                 ))}
