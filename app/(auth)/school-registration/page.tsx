@@ -1,20 +1,21 @@
 "use client"
 import Image from "next/image"
 import Link from "next/link"
+import RegisterDesign from "@/app/components/RegistrationComps/RegisterDesign";
 import { useRouter } from "next/navigation";
-import { IoChevronBackOutline } from "react-icons/io5"
-import RegisterDesign from "./RegisterDesign";
+import { IoChevronBackOutline } from "react-icons/io5";
 
 const images = [
-    {image:"/student-reg.png", hoverColor: "hover:shadow-green-600", role:"Student", link: "/signup"},
-    // {image:"/parent-reg.png", hoverColor: "hover:shadow-purple-300", role:"Parent"},
-    {image: "/school-reg.png", hoverColor: "hover:shadow-blue-500", role: "School", link: "/school-registration"}
+    {image:"/student-reg.png", hoverColor: "hover:shadow-green-600", role:"Student"},
+    {image: "/teacher-reg.png", hoverColor: "hover:shadow-red-500", role: "Teacher"},
+    {image: "/admin-reg.png", hoverColor: "hover:shadow-green-500", role: "Administrator",}
 ]
 
-const RegisterDetails = () => {
+export default function Page () {
     const router = useRouter();
     return (
-        <section className="relative w-full h-screen bg-white flex items-center justify-center overflow-y-visible">
+        <div className="mx-auto relative container w-full max-w-[2000px]">
+             <section className="relative w-full h-screen bg-white flex items-center justify-center overflow-y-visible">
             <RegisterDesign />
             
             <div className="w-[90%] md:w-[85%] mx-auto">
@@ -22,10 +23,10 @@ const RegisterDetails = () => {
                     <IoChevronBackOutline
                         size={24}
                         onClick={() => router.back()}
-                        className="absolute left-3 lg:left-[-2rem] top-3 lg:top-[-0.5rem] max-lg:mb-3 border border-[#5F5F5F1A] p-5 w-14 h-14 cursor-pointer font-bold rounded-lg shadow-lg"
+                        className="md:absolute left-3 lg:left-[-2rem] top-3 lg:top-[-0.5rem] max-lg:mb-3 border border-[#5F5F5F1A] p-5 w-14 h-14 cursor-pointer font-bold rounded-lg shadow-lg"
                     />
                     <h1 className="relative w-[90%] mx-auto font-semibold text-2xl md:text-3xl lg:text-4xl text-center">
-                        Choose an account type you want to register with
+                        Create Account as a/an
                     </h1>
                </div>
             
@@ -36,7 +37,7 @@ const RegisterDetails = () => {
                          <div 
                          key={index}
                          className="w-[40%] lg:w-[33%]">
-                        <Link href={image.link}>
+                        <Link href={`/school-create-account`}>
                             <Image
                             width={250}
                             height={250}
@@ -56,9 +57,7 @@ const RegisterDetails = () => {
                     Already have an account? <Link href={`/login`} className="text-blue-500">Login</Link>
                 </div>
             </div>
-        </section>
+            </section>
+        </div>
     )
 }
-
-
-export default RegisterDetails
