@@ -443,19 +443,23 @@ export const schoolLinks = [
   export const assessmentAges = [
     { id: 1,
       age: "6-8 years old",
-      image: "/student-reg.png"
+      maleImage: "/assessment-age-5.png",
+      femaleImage: "/student-reg.png",
     },
     { id: 2,
       age: "9-12 years old",
-      image: "/assessment-age-2.png"
+      maleImage: "/educator-reg.png",
+      femaleImage: "/assessment-age-2.png",
     },
     { id: 3,
       age: "13-15 years old",
-      image: "/assessment-age-3.png"
+      maleImage: "/assessment-age-6.png",
+      femaleImage: "/assessment-age-3.png",
     },
     { id: 4,
       age: "16-18 years old",
-      image: "/assessment-age-4.png"
+      maleImage: "/assessment-age-7.png",
+      femaleImage: "/assessment-age-4.png",
     },
   ]
 

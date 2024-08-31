@@ -25,17 +25,43 @@ type Assessment = {
     options: Option;
 }
 
+type Response = {
+    question_id: number;
+    question: string;
+    answer: string;
+};
+
 const AssessmentForm = () => {
     const router = useRouter();
-    const [previousStep, setPreviousStep] = useState(0)
     const [currentStep, setCurrentStep] = useState(0)
     const [selectedAge, setSelectedAge] = useState<String | null>(null);
+    const [selectedGender, setSelectedGender] = useState<String | null>(null);
+    const handleSelectAge = (age: string) => setSelectedAge(age);
+    const handleSelectGender = (gender: string) => setSelectedGender(gender);
     const [assessments, setAssessments] = useState<Assessment[]>([]);
+    const [responses, setResponses] = useState<Response[]>([]);
 
-    const handleSelectAge = (age:string) => {
-        setSelectedAge(age);
-      };
+    const updateResponse = (questionId: number, questionText: string, answer: string) => {
+        setResponses(prev => {
+            const existingResponseIndex = prev.findIndex(r => r.question_id === questionId);
+            if (existingResponseIndex > -1) {
+                const updatedResponses = [...prev];
+                updatedResponses[existingResponseIndex] = { question_id: questionId, question: questionText, answer };
+                return updatedResponses;
+            } else {
+                return [...prev, { question_id: questionId, question: questionText, answer }];
+            }
+        });
+    };
 
+    const submitResponses = async () => {
+        try {
+            const response = await axios.post(`${API}/assessment/ai/`, { responses, age:selectedAge });
+            console.log('Career Pathway Recommendation:', response.data);
+        } catch (error) {
+            console.error('Error submitting responses:', error);
+        }
+    };
 
     //   NAVIGATIONS
     const Navigations = () => {
@@ -57,14 +83,15 @@ const AssessmentForm = () => {
                 <>
                     <div className="mt-16 flex items-center justify-center">
                         <div>
-                            <Link
-                                href={"/recommendation"}
+                            <div
+                                onClick={submitResponses}
                                 className={`bg-[#131314] xl:text-lg text-white focus-visible:outline-black 
                                     rounded-lg px-16 py-5 font-medium  shadow-sm hover:bg-opacity-80 
-                                    focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 `}
+                                    focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                    disabled:bg-gray-400 disabled:cursor-not-allowed  `}
                             >
                                 Submit
-                            </Link>
+                            </div>
                         </div>
                     </div>
                 </> : 
@@ -97,6 +124,7 @@ const AssessmentForm = () => {
         )
     }
     // END NAVIGATIONS
+    
 
     useEffect(() => { []
         const fetchAssessments = async () => {
@@ -152,6 +180,7 @@ const AssessmentForm = () => {
                                 <label className="font-medium">Name</label>
 
                                 <input 
+                                required
                                 type="text"
                                 placeholder="Enter your name"
                                 className="outline-none w-full p-3 border border-black-300 rounded-lg placeholder:text-[#656765]"
@@ -164,57 +193,6 @@ const AssessmentForm = () => {
                     )}
 
                     {currentStep === 1 && (
-                        <div className="z-[5] relative form-box max-md:mt-32 md:mt-6 md:w-[70%] lg:w-[50%] mx-auto 
-                        py-10 px-5 md:px-8 rounded-3xl overflow-y-auto">
-                            <h1 className={`${merriweather.className} font-bold text-lg md:text-2xl text-center`}>
-                                Part 1: Introductory Questions
-                            </h1>
-
-                            <div className="mt-6 w-full bg-blue-500 text-white 
-                            font-bold text-lg md:text-xl 2xl:text-2xl py-6 px-[10px] text-center rounded-2xl">
-                                What is your age?
-                            </div>
-
-                            <div className="mt-5 w-full py-3 rounded-lg grid grid-cols-2 gap-4">
-                                {assessmentAges.map((AgeTyge) => (
-                                    <div
-                                    key={AgeTyge.id}
-                                    onClick={() => handleSelectAge(AgeTyge.age)}
-                                    className={`relative w-full text-center rounded-lg cursor-pointer`}
-                                    >
-                                    <input
-                                        type="radio"
-                                        value={AgeTyge.age}
-                                        checked={selectedAge === AgeTyge.age}
-                                        className="hidden" // Hide the radio input
-                                    />
-
-                                    <div className="w-full h-[200px] md:h-[250px]">
-                                        <Image 
-                                        src={AgeTyge.image}
-                                        alt="Age-Type"
-                                        width={180}
-                                        height={180}
-                                        className="w-full h-full object-cover rounded-xl"
-                                        />
-                                    </div>
-
-                                    <div className="mt-4 font-medium">{AgeTyge.age}</div>
-
-                                    {selectedAge === AgeTyge.age && (
-                                        <div className="absolute top-[-0.3rem] right-0 bg-green-500 text-white rounded-full">
-                                            <IoCheckmark />
-                                        </div>
-                                    )}
-                                    </div>
-                                ))}
-                            </div>
-
-                            <Navigations />
-                        </div>
-                    )}
-
-                    {currentStep === 2 && (
                         <div className="z-[5] relative form-box max-md:mt-32 md:mt-12 xl:mt-16 md:w-[70%] lg:w-[50%] mx-auto 
                         py-10 px-5 md:px-8 rounded-3xl overflow-y-auto">
                             <h1 className={`${merriweather.className} font-bold text-lg md:text-2xl text-center`}>
@@ -230,17 +208,18 @@ const AssessmentForm = () => {
                                 {assessmentGender.map((gender) => (
                                     <div
                                     key={gender.id}
-                                    onClick={() => handleSelectAge(gender.sex)}
+                                    onClick={() => handleSelectGender(gender.sex)}
                                     className={`relative w-full text-center rounded-lg cursor-pointer`}
                                     >
                                     <input
+                                        required
                                         type="radio"
                                         value={gender.sex}
-                                        checked={selectedAge === gender.sex}
+                                        checked={selectedGender === gender.sex}
                                         className="hidden" // Hide the radio input
                                     />
 
-                                    <div className="w-full h-[200px] md:h-[250px]">
+                                    <div className="w-full h-[150px] md:h-[250px]">
                                         <Image 
                                         src={gender.image}
                                         alt="Age-Type"
@@ -252,7 +231,59 @@ const AssessmentForm = () => {
 
                                     <div className="mt-4 font-medium">{gender.sex}</div>
 
-                                    {selectedAge === gender.sex && (
+                                    {selectedGender === gender.sex && (
+                                        <div className="absolute top-[-0.3rem] right-0 bg-green-500 text-white rounded-full">
+                                            <IoCheckmark />
+                                        </div>
+                                    )}
+                                    </div>
+                                ))}
+                            </div>
+
+                            <Navigations />
+                        </div>
+                    )}
+
+                    {currentStep === 2 && (
+                        <div className="z-[5] relative form-box max-md:mt-32 md:mt-6 md:w-[70%] lg:w-[50%] mx-auto 
+                        py-10 px-5 md:px-8 rounded-3xl overflow-y-auto">
+                            <h1 className={`${merriweather.className} font-bold text-lg md:text-2xl text-center`}>
+                                Part 1: Introductory Questions
+                            </h1>
+
+                            <div className="mt-6 w-full bg-blue-500 text-white 
+                            font-bold text-lg md:text-xl 2xl:text-2xl py-6 px-[10px] text-center rounded-2xl">
+                                What is your age?
+                            </div>
+
+                            <div className="mt-5 w-full py-3 rounded-lg grid grid-cols-2 gap-4">
+                                {assessmentAges.map((AgeType) => (
+                                    <div
+                                    key={AgeType.id}
+                                    onClick={() => handleSelectAge(AgeType.age)}
+                                    className={`relative w-full text-center rounded-lg cursor-pointer`}
+                                    >
+                                    <input
+                                        required
+                                        type="radio"
+                                        value={AgeType.age}
+                                        checked={selectedAge === AgeType.age}
+                                        className="hidden" // Hide the radio input
+                                    />
+
+                                    <div className="w-full h-[150px] md:h-[250px]">
+                                        <Image 
+                                        src={selectedGender === "Male" ? AgeType.maleImage : AgeType.femaleImage}
+                                        alt="Age-Type"
+                                        width={180}
+                                        height={180}
+                                        className="w-full h-full object-cover rounded-xl"
+                                        />
+                                    </div>
+
+                                    <div className="mt-4 font-medium">{AgeType.age}</div>
+
+                                    {selectedAge === AgeType.age && (
                                         <div className="absolute top-[-0.3rem] right-0 bg-green-500 text-white rounded-full">
                                             <IoCheckmark />
                                         </div>
@@ -284,9 +315,11 @@ const AssessmentForm = () => {
                                     key={optionKey}
                                     className="w-full py-4 px-5 bg-blue-50 flex items-center gap-2 rounded-lg">
                                         <input
+                                        required
                                         type="radio"
                                         name={`activities`} 
                                         value={optionKey}
+                                        onChange={() => updateResponse(0, assessments[0].question, optionKey)}
                                         className="mr-2 accent-blue-500 border-none border-transparent rounded-full"
                                         />
                                         <div className="font-medium flex items-center gap-1">
@@ -327,9 +360,11 @@ const AssessmentForm = () => {
                                     key={index}
                                    className="w-full py-4 px-5 bg-purple-50 flex items-center gap-2 rounded-lg">
                                         <input
+                                        required
                                         type="radio"
-                                        name="activities" 
+                                        name={`activities`}
                                         value={optionKey}
+                                        onChange={() => updateResponse(1, assessments[1].question, optionKey)}
                                         className="mr-2 accent-blue-500 border-none border-transparent rounded-full"
                                         />
                                         <div className="font-medium flex items-center gap-1">
@@ -369,9 +404,11 @@ const AssessmentForm = () => {
                                     key={index}
                                    className="w-full py-4 px-5 bg-yellow-50 flex items-center gap-2 rounded-lg">
                                         <input
+                                        required
                                         type="radio"
-                                        name="activities" 
+                                        name={`activities`}
                                         value={optionKey}
+                                        onChange={() => updateResponse(2, assessments[2].question, optionKey)}
                                         className="mr-2 accent-blue-500 border-none border-transparent rounded-full"
                                         />
                                         <div className="font-medium flex items-center gap-1">
@@ -412,9 +449,11 @@ const AssessmentForm = () => {
                                     key={index}
                                    className="w-full py-4 px-5 bg-blue-50 flex items-center gap-2 rounded-lg">
                                         <input
+                                        required
                                         type="radio"
-                                        name="activities" 
+                                        name={`activities`}
                                         value={optionKey}
+                                        onChange={() => updateResponse(3, assessments[3].question, optionKey)}
                                         className="mr-2 accent-blue-500 border-none border-transparent rounded-full"
                                         />
                                         <div className="font-medium flex items-center gap-1">
@@ -455,9 +494,11 @@ const AssessmentForm = () => {
                                     key={index}
                                    className="w-full py-4 px-5 bg-purple-200 flex items-center gap-2 rounded-lg">
                                         <input
+                                        required
                                         type="radio"
-                                        name="activities" 
+                                        name={`activities`}
                                         value={optionKey}
+                                        onChange={() => updateResponse(4, assessments[4].question, optionKey)}
                                         className="mr-2 accent-blue-500 border-none border-transparent rounded-full"
                                         />
                                         <div className="font-medium flex items-center gap-1">
@@ -498,9 +539,11 @@ const AssessmentForm = () => {
                                     key={index}
                                    className="w-full py-4 px-5 bg-blue-50 flex items-center gap-2 rounded-lg">
                                         <input
+                                        required
                                         type="radio"
-                                        name="activities" 
+                                        name={`activities`}
                                         value={optionKey}
+                                        onChange={() => updateResponse(5, assessments[5].question, optionKey)}
                                         className="mr-2 accent-blue-500 border-none border-transparent rounded-full"
                                         />
                                         <div className="font-medium flex items-center gap-1">
@@ -541,9 +584,11 @@ const AssessmentForm = () => {
                                     key={index}
                                    className="w-full py-4 px-5 bg-yellow-50 flex items-center gap-2 rounded-lg">
                                         <input
+                                        required
                                         type="radio"
-                                        name="activities" 
+                                        name={`activities`}
                                         value={optionKey}
+                                        onChange={() => updateResponse(6, assessments[6].question, optionKey)}
                                         className="mr-2 accent-blue-500 border-none border-transparent rounded-full"
                                         />
                                         <div className="font-medium flex items-center gap-1">
@@ -584,9 +629,11 @@ const AssessmentForm = () => {
                                     key={index}
                                    className="w-full py-4 px-5 bg-purple-50 flex items-center gap-2 rounded-lg">
                                         <input
+                                        required
                                         type="radio"
-                                        name="activities" 
+                                        name={`activities`}
                                         value={optionKey}
+                                        onChange={() => updateResponse(7, assessments[7].question, optionKey)}
                                         className="mr-2 accent-blue-500 border-none border-transparent rounded-full"
                                         />
                                         <div className="font-medium flex items-center gap-1">

@@ -12,13 +12,23 @@ const MainContext = createContext<MainContextType | undefined>(undefined);
 
 export const MainProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [toggleSidebar, setToggleSidebar] = useState<boolean>(false);
-  const [selectedRole, setSelectedRole] = useState<string>(() => {
-    return sessionStorage.getItem('selectedRole') || '';
-  });
+  const [selectedRole, setSelectedRole] = useState('');
+
+  useEffect(() => {
+    // Only run this code on the client side
+    if (typeof window !== 'undefined') {
+      const savedRole = sessionStorage.getItem('selectedRole');
+      if (savedRole) {
+        setSelectedRole(savedRole);
+      }
+    }
+  }, []);
 
   useEffect(() => {
     // Save selectedRole to sessionStorage whenever it changes
-    sessionStorage.setItem('selectedRole', selectedRole);
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('selectedRole', selectedRole);
+    }
   }, [selectedRole]);
 
   return (
