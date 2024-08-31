@@ -4,6 +4,7 @@ import Link from "next/link"
 import RegisterDesign from "@/app/components/RegistrationComps/RegisterDesign";
 import { useRouter } from "next/navigation";
 import { IoChevronBackOutline } from "react-icons/io5";
+import { useMain } from "@/app/context/MainContext";
 
 const images = [
     {image:"/student-reg.png", hoverColor: "hover:shadow-green-600", role:"Student"},
@@ -12,7 +13,13 @@ const images = [
 ]
 
 export default function Page () {
+    const {setSelectedRole} = useMain();
     const router = useRouter();
+
+    const handleRoleSelection = (role: string) => {
+        setSelectedRole(role);
+      };
+
     return (
         <div className="mx-auto relative container w-full max-w-[2000px]">
              <section className="relative w-full h-screen bg-white flex items-center justify-center overflow-y-visible">
@@ -36,8 +43,9 @@ export default function Page () {
                        {images.map((image, index) => (
                          <div 
                          key={index}
-                         className="w-[40%] lg:w-[33%]">
-                        <Link href={`/school-create-account`}>
+                         className="w-[40%] lg:w-[33%]"
+                         onClick={() => handleRoleSelection(image.role)}>
+                        <Link href={`/signup`}>
                             <Image
                             width={250}
                             height={250}

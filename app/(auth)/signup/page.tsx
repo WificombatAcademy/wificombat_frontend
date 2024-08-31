@@ -9,29 +9,48 @@ import { IoChevronBackOutline } from "react-icons/io5";
 import Link from "next/link";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import OtpModal from "../../utils/otp-modal";
+import { useMain } from "@/app/context/MainContext";
+import { IoIosArrowDown } from "react-icons/io";
 
-const schema = z.object({
+let selectedRole = null;
+
+const schema = z
+  .object({
     email: z.string().email("Invalid email address"),
-    password: z
-        .string()
-        .min(8, { message: "Password must be at least 8 characters long" }),
-    confirm_password: z.string().min(8, {
-        message: "Confirm password must be at least 8 characters long",
-        }),
-    })
-    .refine((data) => data.password === data.confirm_password, {
-        message: "Passwords do not match",
-        path: ["confirm_password"],
+    password: z.string().min(8, { message: "Password must be at least 8 characters long" }),
+    confirm_password: z
+      .string()
+      .min(8, { message: "Confirm password must be at least 8 characters long" }),
+    schoolName: z.string().optional(),
+  })
+  .refine((data) => data.password === data.confirm_password, {
+    message: "Passwords do not match",
+    path: ["confirm_password"],
+  })
+  .refine((data) => {
+    if (selectedRole === "Administrator") {
+      return data.schoolName && data.schoolName.length > 0;
+    }
+    if (selectedRole === "Student" || selectedRole === "Teacher") {
+      return data.schoolName && data.schoolName !== "";
+    }
+    return true;
+  }, {
+    message: "School name is required",
+    path: ["schoolName"],
   });
+
 
   type SignupValues = {
     email: string;
     password: string;
     confirm_password: string;
+    schoolName?: string;
   };
 
 export default function Page () {
     const router = useRouter();
+    const { selectedRole } = useMain();
     const [isLoading, setIsLoading] = useState(false);
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
@@ -55,12 +74,13 @@ export default function Page () {
           email: "",
           password: "",
           confirm_password: "",
+          schoolName: "",
         },
         resolver: zodResolver(schema),
         mode: "onChange",
       });
     
-    let fieldsToWatch: readonly any[] = ["email", "password", "confirm_password"];
+    let fieldsToWatch: readonly any[] = ["email", "password", "confirm_password", "schoolName"];
 
     const watchedFields = watch(fieldsToWatch);
 
@@ -129,6 +149,61 @@ export default function Page () {
                             onSubmit={handleSubmit(onSubmit)}
                             className="space-y-2">
                                 <>
+                                { (selectedRole !== "") && 
+                                    <div className="relative w-full mt-[4rem]">
+                                        <label 
+                                        htmlFor="schoolName" 
+                                        className="block text-sm mb-2 font-medium leading-6 text-gray-900">
+                                            School Name
+                                        </label>
+
+                                        {selectedRole === "Administrator" ? (
+                                            <input
+                                            type="text"
+                                            id="schoolName"
+                                            placeholder="Enter your school name"
+                                            required
+                                            disabled={isLoading}
+                                            {...register("schoolName", { required: true })}
+                                            className={`block outline-none w-full rounded-md border 
+                                        border-gray-600 py-4 px-4 shadow-sm ring-1 ring-inset ring-gray-300 
+                                        placeholder:text-gray-700 sm:text-sm sm:leading-6 ${
+                                                errors.schoolName ? "border-[#F00101]" : "border-neutral-300"
+                                            } ${errors.schoolName ? "focus:border-red-500" : "focus:border-black"}`}
+                                            />
+                                        ) : (
+                                           <div className="relative">
+                                             <div className="absolute inset-0 flex items-center justify-end">
+                                            <IoIosArrowDown className="text-black-500 relative right-4" />
+                                            </div>
+                                             <select
+                                            id="schoolName"
+                                            disabled={isLoading}
+                                            required
+                                            {...register("schoolName", { required: true })}
+                                            className={`relative appearance-none block outline-none w-full bg-transparent
+                                            rounded-md border border-gray-600 py-4 px-4 shadow-sm ring-1 ring-inset 
+                                            ring-gray-300 text-gray-700 focus:ring-2 focus:ring-inset focus:ring-purple-600 
+                                            sm:text-sm sm:leading-6 ${
+                                                errors.schoolName ? "border-[#F00101]" : "border-neutral-300"
+                                            } ${errors.schoolName ? "focus:border-red-500" : "focus:border-black"}`}
+                                            >
+                                            <option value="">Select your school</option>
+                                            <option value="School 1">School 1</option>
+                                            <option value="School 2">School 2</option>
+                                            <option value="School 3">School 3</option>
+                                            </select>
+                                           </div>
+                                        )}
+                                        <div className="h-4">
+                                            {errors.schoolName && (
+                                            <p className="text-[#F00101] h-fit">{errors.schoolName.message}</p>
+                                            )}
+                                        </div>
+                                    </div>
+                                }
+
+
                                 <div className="w-full">
                                     <label
                                     htmlFor="email"
@@ -147,7 +222,7 @@ export default function Page () {
                                         border-gray-600 py-4 px-4 shadow-sm ring-1 ring-inset ring-gray-300 
                                         placeholder:text-gray-700 sm:text-sm sm:leading-6 ${
                                         errors.email
-                                            ? "border-[#F00101]"
+                                            ? "border border-[#F00101]"
                                             : "border-neutral-300"
                                         } ${
                                         errors.email

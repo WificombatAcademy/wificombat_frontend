@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation";
 import { IoChevronBackOutline } from "react-icons/io5"
 import RegisterDesign from "./RegisterDesign";
+import { useMain } from "@/app/context/MainContext";
 
 const images = [
     {image:"/student-reg.png", hoverColor: "hover:shadow-green-600", role:"Student", link: "/signup"},
@@ -12,7 +13,9 @@ const images = [
 ]
 
 const RegisterDetails = () => {
+    const {setSelectedRole} = useMain();
     const router = useRouter();
+
     return (
         <section className="relative w-full h-screen bg-white flex items-center justify-center overflow-y-visible">
             <RegisterDesign />
@@ -35,7 +38,8 @@ const RegisterDetails = () => {
                        {images.map((image, index) => (
                          <div 
                          key={index}
-                         className="w-[40%] lg:w-[33%]">
+                         className="w-[40%] lg:w-[33%]"
+                         onClick={() => setSelectedRole("")}>
                         <Link href={image.link}>
                             <Image
                             width={250}

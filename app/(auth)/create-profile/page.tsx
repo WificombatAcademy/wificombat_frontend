@@ -381,7 +381,9 @@ const Profile = () => {
                               {...register("student.country", {
                                 required: true,
                               })}
-                              className={`relative appearance-none block outline-none w-full bg-transparent rounded-md border border-gray-600 py-4 px-4 shadow-sm ring-1 ring-inset ring-gray-300 text-gray-700 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6 ${
+                              className={`relative appearance-none block outline-none w-full bg-transparent rounded-md border 
+                                border-gray-600 py-4 px-4 shadow-sm ring-1 ring-inset ring-gray-300 text-gray-700 focus:ring-2 
+                                focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6 ${
                                 errors.student?.country
                                   ? "border-[#F00101]"
                                   : "border-neutral-300"
