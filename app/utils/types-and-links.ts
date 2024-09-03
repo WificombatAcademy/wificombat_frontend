@@ -440,6 +440,19 @@ export const schoolLinks = [
 
   /////////////////////////////////////////////////////// ASSESSMENT
 
+  export const getAnswerText = (answer: number): string => {
+    switch (answer) {
+      case 1:
+        return 'Yes';
+      case 0:
+        return 'No';
+      case 0.5:
+        return 'Maybe';
+      default:
+        return '';
+    }
+  };
+
   export const assessmentAges = [
     { id: 1,
       age: "6-8 years old",

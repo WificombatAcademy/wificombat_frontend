@@ -6,10 +6,10 @@ import AssessmentDesign from "./assessment-design";
 import { act, useEffect, useState } from "react";
 import { FormDataSchema } from "@/app/utils/schema";
 import { merriweather } from "@/app/fonts";
-import Link from "next/link";
-import { API, assessmentAges, assessmentGender, assessmentImages, stage } from "@/app/utils/types-and-links";
+import { API, assessmentAges, assessmentGender, assessmentImages, getAnswerText } from "@/app/utils/types-and-links";
 import Image from "next/image";
 import axios from "axios";
+import Loader from "@/app/utils/loader";
 
 type Inputs = z.infer<typeof FormDataSchema>
 
@@ -33,13 +33,16 @@ type Response = {
 
 const AssessmentForm = () => {
     const router = useRouter();
-    const [currentStep, setCurrentStep] = useState(0)
+    const [loading, setLoading] = useState(true);
+    const [currentStep, setCurrentStep] = useState(0);
+    const [name, setName] = useState("");
     const [selectedAge, setSelectedAge] = useState<String | null>(null);
     const [selectedGender, setSelectedGender] = useState<String | null>(null);
     const handleSelectAge = (age: string) => setSelectedAge(age);
     const handleSelectGender = (gender: string) => setSelectedGender(gender);
     const [assessments, setAssessments] = useState<Assessment[]>([]);
     const [responses, setResponses] = useState<Response[]>([]);
+     const [validationErrors, setValidationErrors] = useState<String []>([]);
 
     const updateResponse = (questionId: number, questionText: string, answer: string) => {
         setResponses(prev => {
@@ -63,19 +66,35 @@ const AssessmentForm = () => {
         }
     };
 
+    const validateCurrentStep = () => {
+        const errors: string[] = [];
+        if (currentStep === 0 && !name) {
+            errors.push("Name is required.");
+        }
+        if (currentStep === 1 && !selectedGender) {
+            errors.push("Gender is required.");
+        }
+        if (currentStep === 2 && !selectedAge) {
+            errors.push("Age is required.");
+        }
+        setValidationErrors(errors);
+        return errors.length === 0;
+    };
+
     //   NAVIGATIONS
     const Navigations = () => {
         const prev = () => {
-            if(currentStep !== 0) {
-                setCurrentStep(currentStep - 1)
+            if (currentStep !== 0) {
+                setCurrentStep(currentStep - 1);
             }
-        }
+        };
 
         const next = () => {
-            if(currentStep !== 10) {
-                setCurrentStep(currentStep + 1)
+            if (validateCurrentStep()) {
+                setCurrentStep(currentStep + 1);
             }
-        }
+        };
+
         return (
             <div>
                 {
@@ -131,6 +150,7 @@ const AssessmentForm = () => {
             try {
             const response = await axios.get(`${API}/assessment/`);
             setAssessments(response.data); 
+            setLoading(false);
           }
           catch (error) {    
           }
@@ -139,18 +159,9 @@ const AssessmentForm = () => {
         fetchAssessments()
       }, [])
 
-    const getAnswerText = (answer: number): string => {
-        switch (answer) {
-          case 1:
-            return 'Yes';
-          case 0:
-            return 'No';
-          case 0.5:
-            return 'Maybe';
-          default:
-            return '';
-        }
-      };
+      if(loading) {
+        return <Loader />
+      }
 
     return (
         <section className="relative w-full h-screen bg-white pb-20 flex justify-center overflow-y-auto">
@@ -168,6 +179,13 @@ const AssessmentForm = () => {
 
                 <form 
                 className="z-20 relative text-black-500">
+                    {validationErrors.length > 0 && (
+                        <div className="text-red-500 mb-4 text-center">
+                            {validationErrors.map((error, index) => (
+                                <p key={index}>{error}</p>
+                            ))}
+                        </div>
+                    )}
 
                     {currentStep === 0 && (
                         <div className="form-box max-md:mt-32 md:mt-48 md:w-[70%] lg:w-[50%] mx-auto 
@@ -182,6 +200,8 @@ const AssessmentForm = () => {
                                 <input 
                                 required
                                 type="text"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
                                 placeholder="Enter your name"
                                 className="outline-none w-full p-3 border border-black-300 rounded-lg placeholder:text-[#656765]"
                                 />
