@@ -10,6 +10,7 @@ import { API, assessmentAges, assessmentGender, assessmentImages, getAnswerText 
 import Image from "next/image";
 import axios from "axios";
 import Loader from "@/app/utils/loader";
+import axiosInstance from "@/app/utils/auth-interceptor";
 
 type Inputs = z.infer<typeof FormDataSchema>
 
@@ -59,7 +60,7 @@ const AssessmentForm = () => {
 
     const submitResponses = async () => {
         try {
-            const response = await axios.post(`${API}/assessment/ai/`, { responses, age:selectedAge });
+            const response = await axiosInstance.post(`${API}/assessment/ai/`, { responses, age:selectedAge });
             console.log('Career Pathway Recommendation:', response.data);
         } catch (error) {
             console.error('Error submitting responses:', error);
@@ -148,7 +149,7 @@ const AssessmentForm = () => {
     useEffect(() => { []
         const fetchAssessments = async () => {
             try {
-            const response = await axios.get(`${API}/assessment/`);
+            const response = await axiosInstance.get(`${API}/assessment/`);
             setAssessments(response.data); 
             setLoading(false);
           }

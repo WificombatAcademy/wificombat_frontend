@@ -3,6 +3,7 @@ import "./globals.css";
 import Providers from "./utils/progress-bar";
 import { raleway } from "./fonts";
 import { MainProvider } from "./context/MainContext";
+import { AuthProvider } from "./context/AuthContext";
 
 export const metadata: Metadata = {
   title: "Wificombat-Elearning",
@@ -17,11 +18,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Providers>
-        <MainProvider>
-          <body className={raleway.className}>
-            {children}
-          </body>
-        </MainProvider>
+        <AuthProvider>
+          <MainProvider>
+            <body className={raleway.className}>
+              {children}
+            </body>
+          </MainProvider>
+        </AuthProvider>
       </Providers>
     </html>
   );

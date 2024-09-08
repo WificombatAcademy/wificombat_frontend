@@ -11,6 +11,10 @@ import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import OtpModal from "../../utils/otp-modal";
 import { useMain } from "@/app/context/MainContext";
 import { IoIosArrowDown } from "react-icons/io";
+import { useAuth } from "@/app/context/AuthContext";
+import { API } from "@/app/utils/types-and-links";
+import toast, { Toaster } from "react-hot-toast";
+import axiosInstance from "@/app/utils/auth-interceptor";
 
 let selectedRole = null;
 
@@ -51,6 +55,7 @@ const schema = z
 export default function Page () {
     const router = useRouter();
     const { selectedRole } = useMain();
+    const {setMail} = useAuth();
     const [isLoading, setIsLoading] = useState(false);
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
@@ -88,21 +93,39 @@ export default function Page () {
     (field) => field !== ""
     );
 
+    const email = watch("email");
+
+    const requestOtp = async () => {
+        setIsLoading(true);
+        try {
+          const response = await axiosInstance.post(`${API}/otp/`, {
+            email,
+            action: 'request',
+          });
+          toast.success('OTP sent:');
+          setModalOpen(true);
+          setIsLoading(false);
+        } catch (error:any) {
+          toast.error('Error sending OTP:', error)
+          setIsLoading(false);
+        }
+      };
+
     const onSubmit: SubmitHandler<SignupValues> = async (data) => {
         setIsLoading(true);
         try {
           console.log("Form data:", data);
           await new Promise((resolve) => setTimeout(resolve, 2000));
-          setModalOpen(true)
+          requestOtp();
+          setMail(email);
         } catch (error) {
           console.error("Signup error:", error);
-        } finally {
-          setIsLoading(false);
-        }
+        } 
       };
 
   return (
         <div className="mx-auto relative container w-full max-w-[2000px]">
+            <Toaster />
             <div className="flex min-h-full w-full h-screen bg-white">
                 <div className="relative hidden w-0 flex-1 lg:max-w-[655px] lg:block rounded-tr-[100px]">
                     <Image
@@ -296,7 +319,7 @@ export default function Page () {
                                     <div className="mt-2 relative">
 
                                     <div
-                                    className="absolute top-[25%] right-2 text-[#656765] cursor-pointer text-foundation-gray-normal"
+                                    className="absolute top-[15%] right-2 text-[#656765] cursor-pointer text-foundation-gray-normal"
                                     onClick={toggleConfirmPasswordVisibility}
                                     >
                                     {confirmPasswordVisible ? <AiOutlineEye size={20}/> : <AiOutlineEyeInvisible size={20}/>}
@@ -320,7 +343,7 @@ export default function Page () {
                                             : "focus:border-black"
                                         }`}
                                     />
-                                        <div className="h-4">
+                                        <div className="h-12 lg:h-8">
                                             {errors.confirm_password && (
                                                 <p className="text-[#F00101] h-fit">
                                                 {errors?.confirm_password?.message}
@@ -330,7 +353,7 @@ export default function Page () {
                                     </div>
                                 </div>
 
-                                <div className="mt-4 mb-10 lg:mb-16 text-sm flex items-start gap-3 font-medium">
+                                <div className="mt-7 mb-10 lg:mb-16 text-sm flex items-start gap-3 font-medium">
                                     <input 
                                     type="checkbox"
                                     required
