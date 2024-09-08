@@ -17,14 +17,13 @@ export type ModalProps = {
 const OtpModal = ({isOpen, onClose}: ModalProps) => {
   const {mail} = useAuth();
   const router = useRouter();
-  const [isModalOpen, setModalOpen] = useState(false);
   const [minutes, setMinutes] = useState(10);
   const [seconds, setSeconds] = useState(0);
   const [otp, setOtp] = useState("");
   const [isVerifyingLoading, setIsVerifyingLoading] = useState(false);
   const [isResendCodeLoading, setIsResendCodeLoading] = useState(false);
   const [successfulSignup, setSuccessfulSignup] = useState(false);
-
+  const [isOtpExpired, setIsOtpExpired] = useState(false);
 
   useEffect(() => {
     const countdown = setInterval(() => {
@@ -34,6 +33,7 @@ const OtpModal = ({isOpen, onClose}: ModalProps) => {
       if (seconds === 0) {
         if (minutes === 0) {
           clearInterval(countdown);
+          setIsOtpExpired(true);
         } else {
           setMinutes(minutes - 1);
           setSeconds(59);
@@ -45,7 +45,7 @@ const OtpModal = ({isOpen, onClose}: ModalProps) => {
 
   const validateOtp = async () => {
     try {
-      setIsResendCodeLoading(true);
+      setIsVerifyingLoading(true);
       const response = await axiosInstance.post(`${API}/otp/`, {
         email: mail,
         action: 'validate',
@@ -64,13 +64,16 @@ const OtpModal = ({isOpen, onClose}: ModalProps) => {
 
   const resendOtp = async () => {
     try {
-      setIsVerifyingLoading(true);
+      setIsResendCodeLoading(true);
       const response = await axiosInstance.post(`${API}/otp/`, {
         email: mail,
         action: 'resend'
       });
       toast.success('OTP resent');
       setIsResendCodeLoading(false);
+      setMinutes(10);
+      setSeconds(0);
+      setIsOtpExpired(false);
     } catch (error) {
       console.error('OTP verification failed:', error);
       setIsResendCodeLoading(false);
@@ -116,11 +119,14 @@ const OtpModal = ({isOpen, onClose}: ModalProps) => {
         {isVerifyingLoading? "Verifying..." : "Verify Account"}
         </button>
 
-        <p 
+        <button 
+        disabled={isOtpExpired}
         onClick={resendOtp}  
-        className="my-4 text-center font-semibold cursor-pointer">
-            {isResendCodeLoading ? "Resending..." : "Resend Code"}
-        </p>
+        className={`my-4 w-full text-center flex items-center justify-center font-semibold cursor-pointer 
+          ${isOtpExpired ? '' : 'text-gray-400'}`}
+        >
+            {isResendCodeLoading ? "Resending..." : isOtpExpired ? "Resend Code" : "Wait for Expiry"}
+        </button>
     </Modal>
   );
 };
