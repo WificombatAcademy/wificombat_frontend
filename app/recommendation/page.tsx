@@ -5,7 +5,7 @@ import GeneralNavbar from "../components/general/GeneralNavbar";
 import Link from "next/link";
 import RecommendationDesign from "../components/AssessmentComps/recommendation-design";
 
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 export default function RecommendationPage() {
     const router = useRouter();
