@@ -21,7 +21,9 @@ interface AuthContextProps {
   saveSignupData: (data: AuthData) => void;
   clearSignupData: () => void;
   mail: string;
+  pass: string;
   setMail: React.Dispatch<React.SetStateAction<string>>;
+  setPass: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
@@ -37,6 +39,7 @@ export const useAuth = () => {
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [signupData, setSignupData] = useState<AuthData | null>(null);
   const [mail, setMail] = useState('');
+  const [pass, setPass] = useState('');
 
   const saveSignupData = (data: AuthData) => {
     setSignupData(data);
@@ -47,7 +50,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   return (
-    <AuthContext.Provider value={{ signupData, saveSignupData, clearSignupData, mail, setMail }}>
+    <AuthContext.Provider value={{ signupData, saveSignupData, clearSignupData, mail, setMail, pass, setPass }}>
       {children}
     </AuthContext.Provider>
   );

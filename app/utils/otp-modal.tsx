@@ -98,7 +98,7 @@ const OtpModal = ({isOpen, onClose}: ModalProps) => {
                 isNumberInput
                 length={6}
                 className="mx-auto my-5/20 appearance-none"
-                inputClassName="w-10 h-10 md:w-12 md:h-12 mx-1 md:mx-4 text-2xl text-center rounded-md border border-gray-400 overflow-y-hidden"
+                inputClassName="w-10 h-10 md:w-12 md:h-12 mx-1 md:mx-2 text-2xl text-center rounded-md border border-gray-400 overflow-y-hidden"
                 onChangeOTP={(newOtp) => setOtp(newOtp)}
             />
 

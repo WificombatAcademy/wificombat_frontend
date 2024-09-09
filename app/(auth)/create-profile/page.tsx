@@ -3,14 +3,19 @@ import ProgressBar from "../../utils/form-progress";
 import { getCountries, getStates } from "@/app/utils/countriesApi";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoChevronBackOutline } from "react-icons/io5";
 import { isValid, z } from "zod";
-import { pathway, stage } from "../../utils/types-and-links";
+import { API, deviceId, pathway, stage } from "../../utils/types-and-links";
 import { pricingPlans } from "../../components/StudentsComps/Overview/pricing";
 import { PricingCard } from "../../components/StudentsComps/Overview/pricing-card";
+import { useAuth } from "@/app/context/AuthContext";
+import toast, { Toaster } from "react-hot-toast";
+import axiosInstance from "@/app/utils/auth-interceptor";
+import { useRouter } from "next/navigation";
+import { RiLoader4Fill } from "react-icons/ri";
 
 enum STEPS {
   STUDENT_INFO = 0,
@@ -80,6 +85,8 @@ const schema = z.object({
 });
 
 const Profile = () => {
+  const router = useRouter();
+  const {mail, pass} = useAuth();
   const [countries, setCountries] = useState([]);
   const [countryStates, setCountryStates] = useState([]);
   const [step, setStep] = useState(STEPS.STUDENT_INFO);
@@ -140,17 +147,55 @@ const Profile = () => {
       (field) => field !== undefined && field !== ""
     );
 
-  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+  // const onSubmit: SubmitHandler<FormValues> = async (data) => {
+  //   setIsLoading(true);
+  //   try {
+  //     console.log("Form data:", data);
+  //     await new Promise((resolve) => setTimeout(resolve, 2000));
+  //   } catch (error) {
+  //     console.error("Signup error:", error);
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
+
+  const submitRegister = async (e: FormEvent) => {
+    e.preventDefault();
     setIsLoading(true);
     try {
-      console.log("Form data:", data);
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-    } catch (error) {
+      const response = await axiosInstance.post(`${API}/authentication/`, {
+        action: "register",
+        mail:"demiladeala@gmail.com",
+        pass:"Demilade@10",
+        name: watch("student.fullname"),
+        account_type: "student",
+        age: watch("student.age"),
+        career_pathway: watch("student.pathway"),
+        country: watch("student.country"),
+        learning_stage: watch("student.stage"),
+        name_in_full: watch("student.fullname"),
+        state: watch("student.state"),
+        dvid: deviceId,
+      },{
+        headers:{
+          "Content-Type": "multipart/form-data",
+        }
+      });
+  
+      // Check if success is false in the response
+      if (response.data.success === false) {
+        toast.error(response.data.message || "Registration failed. Please try again.");
+      } else {
+        toast.success("Registration successful");
+        router.push("/login");
+      }
+    } catch (error: any) {
       console.error("Signup error:", error);
+      toast.error("Signup error. Please try again.");
     } finally {
       setIsLoading(false);
     }
-  };
+  };  
 
   const handleContinue = async () => {
     let fieldsToValidate: FormFields[] = [];
@@ -205,8 +250,11 @@ const Profile = () => {
     setSelectedPlan(billing);
   };
 
+  
+
   return (
     <>
+    <Toaster/>
       <div className="flex w-full min-h-full h-screen flex-1 bg-white">
         <div className="relative hidden w-0 flex-1 lg:max-w-[655px] lg:block rounded-tr-[100px]">
           <Image
@@ -274,9 +322,8 @@ const Profile = () => {
 
             <div className="mt-10">
               <div>
-                <form className="space-y-6">
-                  {step === STEPS.STUDENT_INFO && (
-                    <>
+                <form className="space-y-6 ">
+                  {step === STEPS.STUDENT_INFO && (         <>
                       <div className="w-full">
                         <label
                           htmlFor="student.fullname"
@@ -591,12 +638,20 @@ const Profile = () => {
 
                       <div className="mt-10 lg:mt-14">
                         <button
-                          type="button"
-                          onClick={handleContinue}
+                          type="submit"
+                          onClick={submitRegister}
                           disabled={!isFormFilled}
-                          className="flex w-full justify-center rounded-md disabled:bg-[#B1B1B4] active:bg-[#131314] bg-[#131314] p-4 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-purple-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600"
+                          className="flex w-full items-center justify-center text-center rounded-md disabled:bg-[#B1B1B4] 
+                          active:bg-[#131314] bg-[#131314] p-4 text-sm font-semibold leading-6 
+                          text-white shadow-sm hover:bg-purple-500 focus-visible:outline 
+                          focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600"
                         >
-                          Continue
+                          {isLoading? 
+                          <div className="flex items-center gap-1">
+                            Registering
+                            <RiLoader4Fill size={24} className="animate-spin"/>
+                          </div> : 
+                          "Register"}
                         </button>
                       </div>
                     </>
@@ -761,4 +816,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default Profile

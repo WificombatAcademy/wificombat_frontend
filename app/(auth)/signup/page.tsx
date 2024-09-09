@@ -55,7 +55,7 @@ const schema = z
 export default function Page () {
     const router = useRouter();
     const { selectedRole } = useMain();
-    const {setMail} = useAuth();
+    const {setMail, setPass} = useAuth();
     const [isLoading, setIsLoading] = useState(false);
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
@@ -94,6 +94,7 @@ export default function Page () {
     );
 
     const email = watch("email");
+    const password = watch("password");
 
     const requestOtp = async () => {
         setIsLoading(true);
@@ -116,8 +117,9 @@ export default function Page () {
         try {
           console.log("Form data:", data);
           await new Promise((resolve) => setTimeout(resolve, 2000));
-          requestOtp();
           setMail(email);
+          setPass(password);
+          requestOtp();
         } catch (error) {
           console.error("Signup error:", error);
         } 

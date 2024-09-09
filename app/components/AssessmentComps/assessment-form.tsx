@@ -60,13 +60,16 @@ const AssessmentForm = () => {
     };
 
     const submitResponses = async () => {
-        try {
-            const response = await axiosInstance.post(`${API}/assessment/ai/`, { responses, age:selectedAge });
-            console.log('Career Pathway Recommendation:', response.data);
-        } catch (error) {
-            console.error('Error submitting responses:', error);
+        if (validateCurrentStep()) { // Only proceed if validation is successful
+            try {
+                const response = await axiosInstance.post(`${API}/assessment/ai/`, { responses, age: selectedAge });
+                console.log('Career Pathway Recommendation:', response.data);
+            } catch (error) {
+                console.error('Error submitting responses:', error);
+            }
         }
     };
+    
 
     const validateCurrentStep = () => {
         const errors: string[] = [];
@@ -82,34 +85,17 @@ const AssessmentForm = () => {
             errors.push("Age is required.");
             toast.error("Age is required.");
         }
+        if (currentStep >= 3 && currentStep <= 10) {
+            const questionIndex = currentStep - 3;
+            const answered = responses.some(response => response.question_id === questionIndex);
+            if (!answered) {
+                errors.push(`Please answer the question for step ${currentStep + 1}.`);
+                toast.error(`Please answer the question for step ${currentStep + 1}.`);
+            }
+        }
         setValidationErrors(errors);
         return errors.length === 0;
     };
-
-    const validateAssessments = (): boolean => {
-        // Check if all assessments have been answered
-        for (let i = 0; i < assessments.length; i++) {
-            if (!responses[i]) {
-                return false; // Return false if any assessment is missing
-            }
-        }
-        return true; // Return true if all assessments are answered
-    }
-    
-    const handleNavigation = (direction: 'next' | 'previous') => {
-        if (direction === 'next') {
-            if (validateAssessments()) {
-                // Proceed to the next step
-                setCurrentStep(prevStep => prevStep + 1);
-            } else {
-                // Show an error or prompt user to answer all questions
-                toast.error("Please answer all questions before proceeding.");
-            }
-        } else {
-            // Proceed to the previous step
-            setCurrentStep(prevStep => prevStep - 1);
-        }
-    }
 
     // NAVIGATIONS
     const Navigations = () => {
@@ -370,6 +356,7 @@ const AssessmentForm = () => {
                                         type="radio"
                                         name={`activities`} 
                                         value={optionKey}
+                                        checked={responses.some(response => response.question_id === 0 && response.answer === optionKey)}
                                         onChange={() => updateResponse(0, assessments[0].question, optionKey)}
                                         className="mr-2 accent-blue-500 border-none border-transparent rounded-full"
                                         />
@@ -415,6 +402,7 @@ const AssessmentForm = () => {
                                         type="radio"
                                         name={`activities`}
                                         value={optionKey}
+                                        checked={responses.some(response => response.question_id === 1 && response.answer === optionKey)}
                                         onChange={() => updateResponse(1, assessments[1].question, optionKey)}
                                         className="mr-2 accent-blue-500 border-none border-transparent rounded-full"
                                         />
@@ -459,6 +447,7 @@ const AssessmentForm = () => {
                                         type="radio"
                                         name={`activities`}
                                         value={optionKey}
+                                        checked={responses.some(response => response.question_id === 2 && response.answer === optionKey)}
                                         onChange={() => updateResponse(2, assessments[2].question, optionKey)}
                                         className="mr-2 accent-blue-500 border-none border-transparent rounded-full"
                                         />
@@ -504,6 +493,7 @@ const AssessmentForm = () => {
                                         type="radio"
                                         name={`activities`}
                                         value={optionKey}
+                                        checked={responses.some(response => response.question_id === 3 && response.answer === optionKey)}
                                         onChange={() => updateResponse(3, assessments[3].question, optionKey)}
                                         className="mr-2 accent-blue-500 border-none border-transparent rounded-full"
                                         />
@@ -549,6 +539,7 @@ const AssessmentForm = () => {
                                         type="radio"
                                         name={`activities`}
                                         value={optionKey}
+                                        checked={responses.some(response => response.question_id === 4 && response.answer === optionKey)}
                                         onChange={() => updateResponse(4, assessments[4].question, optionKey)}
                                         className="mr-2 accent-blue-500 border-none border-transparent rounded-full"
                                         />
@@ -594,6 +585,7 @@ const AssessmentForm = () => {
                                         type="radio"
                                         name={`activities`}
                                         value={optionKey}
+                                        checked={responses.some(response => response.question_id === 5 && response.answer === optionKey)}
                                         onChange={() => updateResponse(5, assessments[5].question, optionKey)}
                                         className="mr-2 accent-blue-500 border-none border-transparent rounded-full"
                                         />
@@ -639,6 +631,7 @@ const AssessmentForm = () => {
                                         type="radio"
                                         name={`activities`}
                                         value={optionKey}
+                                        checked={responses.some(response => response.question_id === 6 && response.answer === optionKey)}
                                         onChange={() => updateResponse(6, assessments[6].question, optionKey)}
                                         className="mr-2 accent-blue-500 border-none border-transparent rounded-full"
                                         />
@@ -684,6 +677,7 @@ const AssessmentForm = () => {
                                         type="radio"
                                         name={`activities`}
                                         value={optionKey}
+                                        checked={responses.some(response => response.question_id === 7 && response.answer === optionKey)}
                                         onChange={() => updateResponse(7, assessments[7].question, optionKey)}
                                         className="mr-2 accent-blue-500 border-none border-transparent rounded-full"
                                         />

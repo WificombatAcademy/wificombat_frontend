@@ -437,6 +437,31 @@ export const schoolLinks = [
   export const API = process.env.NEXT_PUBLIC_BASE_URL;
 
 
+  // Utility to generate UUID
+function generateUUID(): string {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    const r = (Math.random() * 16) | 0;
+    const v = c === 'x' ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
+
+// Store device ID in localStorage
+function getDeviceID(): string {
+  let deviceId = localStorage.getItem('device_id');
+  if (!deviceId) {
+    deviceId = generateUUID();
+    localStorage.setItem('device_id', deviceId);
+  }
+  return deviceId;
+}
+
+// Usage
+export const deviceId = getDeviceID();
+console.log('Device ID:', deviceId);
+
+
+
 
   /////////////////////////////////////////////////////// ASSESSMENT
 
