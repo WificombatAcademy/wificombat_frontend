@@ -11,6 +11,7 @@ import Image from "next/image";
 import axios from "axios";
 import Loader from "@/app/utils/loader";
 import axiosInstance from "@/app/utils/auth-interceptor";
+import toast, { Toaster } from "react-hot-toast";
 
 type Inputs = z.infer<typeof FormDataSchema>
 
@@ -71,18 +72,46 @@ const AssessmentForm = () => {
         const errors: string[] = [];
         if (currentStep === 0 && !name) {
             errors.push("Name is required.");
+            toast.error("Name is required!");
         }
         if (currentStep === 1 && !selectedGender) {
             errors.push("Gender is required.");
+            toast.error("Gender is required.");
         }
         if (currentStep === 2 && !selectedAge) {
             errors.push("Age is required.");
+            toast.error("Age is required.");
         }
         setValidationErrors(errors);
         return errors.length === 0;
     };
 
-    //   NAVIGATIONS
+    const validateAssessments = (): boolean => {
+        // Check if all assessments have been answered
+        for (let i = 0; i < assessments.length; i++) {
+            if (!responses[i]) {
+                return false; // Return false if any assessment is missing
+            }
+        }
+        return true; // Return true if all assessments are answered
+    }
+    
+    const handleNavigation = (direction: 'next' | 'previous') => {
+        if (direction === 'next') {
+            if (validateAssessments()) {
+                // Proceed to the next step
+                setCurrentStep(prevStep => prevStep + 1);
+            } else {
+                // Show an error or prompt user to answer all questions
+                toast.error("Please answer all questions before proceeding.");
+            }
+        } else {
+            // Proceed to the previous step
+            setCurrentStep(prevStep => prevStep - 1);
+        }
+    }
+
+    // NAVIGATIONS
     const Navigations = () => {
         const prev = () => {
             if (currentStep !== 0) {
@@ -167,6 +196,7 @@ const AssessmentForm = () => {
     return (
         <section className="relative w-full h-screen bg-white pb-20 flex justify-center overflow-y-auto">
             <AssessmentDesign />
+            <Toaster/>
             <div className="z-[5] w-[90%] md:w-[85%] mx-auto ">
                <div className="relative">                 
                     <IoChevronBackOutline
@@ -182,9 +212,9 @@ const AssessmentForm = () => {
                 className="z-20 relative text-black-500">
                     {validationErrors.length > 0 && (
                         <div className="text-red-500 mb-4 text-center">
-                            {validationErrors.map((error, index) => (
+                            {/* {validationErrors.map((error, index) => (
                                 <p key={index}>{error}</p>
-                            ))}
+                            ))} */}
                         </div>
                     )}
 
@@ -317,7 +347,7 @@ const AssessmentForm = () => {
                         </div>
                     )}
 
-                     {currentStep === 3 && (
+                    {currentStep === 3 && (
                         <div className="form-box max-md:mt-32 md:mt-12 lg:mt-14 md:w-[70%] lg:w-[50%] mx-auto 
                         py-10 px-5 md:px-8 rounded-3xl overflow-y-auto">
                             <h1 className={`${merriweather.className} font-bold text-lg md:text-2xl text-center`}>
