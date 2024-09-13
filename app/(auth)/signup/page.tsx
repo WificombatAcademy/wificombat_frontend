@@ -99,7 +99,7 @@ export default function Page () {
     const requestOtp = async () => {
         setIsLoading(true);
         try {
-          const response = await axiosInstance.post(`${API}/otp/`, {
+           await axiosInstance.post(`${API}/otp/`, {
             email,
             action: 'request',
           });

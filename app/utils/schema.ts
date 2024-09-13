@@ -1,48 +1,48 @@
 import { z } from 'zod';
 
-export const FormDataSchema = z.object({
-  name: z.string().min(1, "Name is required"),
+export const schema = z.object({
+  student: z
+    .object({
+      fullname: z.string().refine(
+        (value) => {
+          const names = value.trim().split(" ");
+          return names.length >= 2;
+        },
+        { message: "Full name must contain at least two names" }
+      ),
+      //email: z.string().email({ message: "Invalid email address" }),
+      age: z.number().min(1, { message: "Age must be at least 8" }),
+      country: z.string().min(1, { message: "Country is required" }),
+      state: z.string().min(1, { message: "State is required" }),
+      pathway: z.string().min(1, { message: "Pathway is required" }),
+      stage: z.string().min(1, { message: "Stage is required" }),
+      course: z.string().min(1, { message: "Course is required" }),
+      password: z
+        .string()
+        .min(8, { message: "Password must be at least 8 characters long" }),
+      confirm_password: z.string().min(8, {
+        message: "Confirm password must be at least 8 characters long",
+      }),
+    })
+    .refine((data) => data.password === data.confirm_password, {
+      message: "Passwords do not match",
+      path: ["confirm_password"],
+    }),
 
-  age: z.enum([
-    '6-8 years old',
-     '9-12 years old',
-     '13-15 years old',
-     '16-18 years old',
-  ]),
+  schoolStudent: z.object({
+    fullname: z.string().refine(
+      (value) => {
+        const names = value.trim().split(" ");
+        return names.length >= 2;
+      },
+      { message: "Full name must contain at least two names" }
+    ),
+    //email: z.string().email({ message: "Invalid email address" }),
+    age: z.number().min(1, { message: "Age must be at least 8" }),
+    class: z.string().min(1, {message: "Class is required"}),
+  }),
 
-  gender: z.enum([
-    'Male', 
-    'Female', 
-    'Prefer not to say']),
-
-  activities:
-    z.enum([
-      'Yes', 
-      'No', 
-      'Maybe',
-    ]),
-
-  gamePreference: z.enum([
-    'Run and Jump', 
-    'Find hidden things', 
-    'Talk to characters', 
-    'Make things happen']),
-
-  toyAction: z.enum([
-    'Make it move',
-     'Make it talk',
-     'Make it change colour',
-     'Make it count']),
-
-  drawingPreference: z.enum([
-    'Make things look pretty',
-     'Tell a story',
-     'Make funny characters',
-     'Create something new']),
-
-  robotTask: z.enum([
-    'Play with you',
-     'Help you with chores',
-     'Talk to you',
-     'Look cool']),
+  payment: z.object({
+    plan: z.string().min(1, { message: "Plan is required" }),
+  }),
 });

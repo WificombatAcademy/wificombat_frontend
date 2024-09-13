@@ -15,7 +15,10 @@ import { useAuth } from "@/app/context/AuthContext";
 import toast, { Toaster } from "react-hot-toast";
 import axiosInstance from "@/app/utils/auth-interceptor";
 import { useRouter } from "next/navigation";
-import { RiLoader4Fill } from "react-icons/ri";
+import StudentInfo from "@/app/components/RegistrationComps/StudentInfo";
+import { schema } from "@/app/utils/schema";
+import { useMain } from "@/app/context/MainContext";
+import SchoolStudentInfo from "@/app/components/RegistrationComps/SchoolStudentInfo";
 
 enum STEPS {
   STUDENT_INFO = 0,
@@ -35,6 +38,11 @@ export type FormValues = {
     password: string;
     confirm_password: string;
   };
+  schoolStudent:{
+    fullname: string;
+    age: number;
+    class:string
+  };
   payment: {
     plan: string;
   };
@@ -48,44 +56,16 @@ type FormFields =
   | "student.state"
   | "student.pathway"
   | "student.stage"
-  | "payment.plan";
+  | "schoolStudent.fullname"
+  | "schoolStudent.age"
+  | "schoolStudent.class"
+  | "payment.plan"
 let fieldsToValidate: FormFields[] = [];
 
-const schema = z.object({
-  student: z
-    .object({
-      fullname: z.string().refine(
-        (value) => {
-          const names = value.trim().split(" ");
-          return names.length >= 2;
-        },
-        { message: "Full name must contain at least two names" }
-      ),
-      //email: z.string().email({ message: "Invalid email address" }),
-      age: z.number().min(1, { message: "Age must be at least 8" }),
-      country: z.string().min(1, { message: "Country is required" }),
-      state: z.string().min(1, { message: "State is required" }),
-      pathway: z.string().min(1, { message: "Pathway is required" }),
-      stage: z.string().min(1, { message: "Stage is required" }),
-      course: z.string().min(1, { message: "Course is required" }),
-      password: z
-        .string()
-        .min(8, { message: "Password must be at least 8 characters long" }),
-      confirm_password: z.string().min(8, {
-        message: "Confirm password must be at least 8 characters long",
-      }),
-    })
-    .refine((data) => data.password === data.confirm_password, {
-      message: "Passwords do not match",
-      path: ["confirm_password"],
-    }),
-  payment: z.object({
-    plan: z.string().min(1, { message: "Plan is required" }),
-  }),
-});
 
 const Profile = () => {
   const router = useRouter();
+  const {selectedRole} = useMain();
   const {mail, pass} = useAuth();
   const [countries, setCountries] = useState([]);
   const [countryStates, setCountryStates] = useState([]);
@@ -114,6 +94,11 @@ const Profile = () => {
         stage: "",
         course: "",
       },
+      schoolStudent: {
+        fullname:"",
+        age:0,
+        class: ""
+      },
       payment: {
         plan: "",
       },
@@ -131,6 +116,9 @@ const Profile = () => {
         "student.state",
         "student.pathway",
         "student.stage",
+        "schoolStudent.fullname",
+        "schoolStudent.age",
+        "schoolStudent.class"
         // "student.course",
       ];
       break;
@@ -165,8 +153,8 @@ const Profile = () => {
     try {
       const response = await axiosInstance.post(`${API}/authentication/`, {
         action: "register",
-        mail:"demiladeala@gmail.com",
-        pass:"Demilade@10",
+        mail,
+        pass,
         name: watch("student.fullname"),
         account_type: "student",
         age: watch("student.age"),
@@ -230,26 +218,47 @@ const Profile = () => {
     setStep((prev) => prev - 1);
   };
 
-  useEffect(() => {
-    getCountries().then((result) => {
-      setCountries(result.data.data);
-    });
-  }, []);
-
-  const selectedCountry = watch("student.country");
-
-  useEffect(() => {
-    if (selectedCountry !== "Select Country") {
-      getStates(selectedCountry).then((result) => {
-        setCountryStates(result.data.data.states);
-      });
-    }
-  }, [selectedCountry]);
 
   const handlePlanSelect = (billing: string) => {
     setSelectedPlan(billing);
   };
 
+  const renderFormFields = () => {
+    switch (selectedRole) {
+      case '' :
+        return (
+          <>
+          <StudentInfo
+            register={register}
+            errors={errors}
+            isLoading={isLoading}
+            submitRegister={submitRegister}
+            isFormFilled={isFormFilled}
+            countries={countries}
+            countryStates={countryStates}
+            pathway={pathway}
+            stage={stage}
+          />
+          </>
+        );
+      case 'Student' :
+        return (
+          <>
+          <SchoolStudentInfo
+            register={register}
+            errors={errors}
+            isLoading={isLoading}
+            submitRegister={submitRegister}
+            isFormFilled={isFormFilled}
+            countries={countries}
+            countryStates={countryStates}
+            pathway={pathway}
+            stage={stage}
+          />
+          </>
+        )
+    }
+  }
   
 
   return (
@@ -274,15 +283,18 @@ const Profile = () => {
             />
           </div>
         </div>
-        <div className="relative max-lg:w-full flex flex-1 flex-col lg:flex-none overflow-y-auto mx-auto lg:min-w-[769px] py-10">
+        <div className={`
+          relative max-lg:w-full flex flex-1 flex-col lg:flex-none overflow-y-auto mx-auto lg:min-w-[769px] border-4 pb-10
+        ${selectedRole!=="" ? "pt-0" : "pt-10"}`}>
           {step === STEPS.STUDENT_INFO ? (
-            <div className="w-14 h-14"></div>
+            <div className="w-14 h-14 border-4"></div>
           ) : (
             <IoChevronBackOutline
               fontSize={10}
               style={{ bottom: "2rem" }}
               onClick={handleBack}
-              className="max-lg:hidden lg:absolute top-12 border border-[#5F5F5F1A] p-5 w-14 h-14 cursor-pointer font-bold rounded-lg shadow-sm"
+              className="max-lg:hidden lg:absolute top-12 border border-[#5F5F5F1A] p-5 w-14 h-14 
+              cursor-pointer font-bold rounded-lg shadow-sm"
             />
           )}
 
@@ -300,14 +312,14 @@ const Profile = () => {
           )}
 
           <div className="w-full px-4 md:px-20">
-            <ProgressBar
+            {/* <ProgressBar
               steps={[
                 { title: "Student Information" },
                 { title: "Payment Plan" },
                 { title: "Payment description" },
               ]}
               currentStep={step}
-            />
+            /> */}
           </div>
           <div className="mx-auto w-full px-4 lg:px-20 max-w-3xl">
             <div>
@@ -323,338 +335,8 @@ const Profile = () => {
             <div className="mt-10">
               <div>
                 <form className="space-y-6 ">
-                  {step === STEPS.STUDENT_INFO && (         <>
-                      <div className="w-full">
-                        <label
-                          htmlFor="student.fullname"
-                          className="block text-sm font-medium leading-6 text-gray-900"
-                        >
-                          Full Name
-                        </label>
-                        <div className="mt-2">
-                          <input
-                            id="student.fullname"
-                            type="text"
-                            placeholder="Grace Adeboye"
-                            disabled={isLoading}
-                            {...register("student.fullname", {
-                              required: true,
-                            })}
-                            className={`block outline-none w-full rounded-md border border-gray-600 py-4 px-4 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-700 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6 ${
-                              errors.student?.fullname
-                                ? "border-[#F00101]"
-                                : "border-neutral-300"
-                            }
-                            ${
-                              errors.student?.fullname
-                                ? "focus:border-red-500"
-                                : "focus:border-black"
-                            }`}
-                          />
-                          {errors.student?.fullname && (
-                            <p className="text-[#F00101]">
-                              {errors.student.fullname.message}
-                            </p>
-                          )}
-                        </div>
-                      </div>
-
-                      <div className="w-full">
-                        <label
-                          htmlFor="student.age"
-                          className="block text-sm font-medium leading-6 text-gray-900"
-                        >
-                          Age
-                        </label>
-                        <div className="mt-2 relative">
-                          <div className="absolute inset-0 flex items-start justify-end">
-                            <IoIosArrowDown className="text-black-500 relative top-5 right-4" />
-                          </div>
-                          <select
-                            id="student.age"
-                            {...register("student.age", {
-                              required: true,
-                              valueAsNumber: true,
-                            })}
-                            className={`relative appearance-none block outline-none w-full bg-transparent rounded-md border border-gray-600 py-4 px-4 shadow-sm ring-1 ring-inset ring-gray-300 text-gray-700 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6 ${
-                              errors.student?.age
-                                ? "border-[#F00101]"
-                                : "border-neutral-300"
-                            }
-                            ${
-                              errors.student?.age
-                                ? "focus:border-red-500"
-                                : "focus:border-black"
-                            }`}
-                          >
-                            <option value="0" disabled>
-                              Select an age
-                            </option>
-                            {Array.from({ length: 11 }, (_, i) => i + 8).map(
-                              (age) => (
-                                <option
-                                  key={age}
-                                  value={age}
-                                  className="text-gray-700"
-                                >
-                                  {age}
-                                </option>
-                              )
-                            )}
-                          </select>
-                          {errors.student?.age && (
-                            <p className="h-[1rem] text-[#F00101]">
-                              {errors.student.age.message}
-                            </p>
-                          )}
-                        </div>
-                      </div>
-
-                      <div className="flex gap-6">
-                        <div className="w-1/2">
-                          <label
-                            htmlFor="student.country"
-                            className="block text-sm font-medium leading-6 text-gray-900"
-                          >
-                            Country
-                          </label>
-                          <div className="mt-2 relative">
-                            <div className="absolute inset-0 flex items-center justify-end">
-                              <IoIosArrowDown className="text-black-500 relative right-4" />
-                            </div>
-                            <select
-                              id="student.country"
-                              disabled={isLoading}
-                              {...register("student.country", {
-                                required: true,
-                              })}
-                              className={`relative appearance-none block outline-none w-full bg-transparent rounded-md border 
-                                border-gray-600 py-4 px-4 shadow-sm ring-1 ring-inset ring-gray-300 text-gray-700 focus:ring-2 
-                                focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6 ${
-                                errors.student?.country
-                                  ? "border-[#F00101]"
-                                  : "border-neutral-300"
-                              }
-                            ${
-                              errors.student?.country
-                                ? "focus:border-red-500"
-                                : "focus:border-black"
-                            }`}
-                            >
-                              <option value="">Select Country</option>
-                              {countries.length > 0 &&
-                                countries.map((country: any) => (
-                                  <option
-                                    key={country.name}
-                                    value={country.name}
-                                  >
-                                    {country.name}
-                                  </option>
-                                ))}
-                            </select>
-                            {errors.student?.country && (
-                              <p className="text-[#F00101]">
-                                {errors.student.country.message}
-                              </p>
-                            )}
-                          </div>
-                        </div>
-
-                        <div className="w-1/2">
-                          <label
-                            htmlFor="student.state"
-                            className="block text-sm font-medium leading-6 text-gray-900"
-                          >
-                            State
-                          </label>
-                          <div className="mt-2 relative">
-                            <div className="absolute inset-0 flex items-center justify-end">
-                              <IoIosArrowDown className="text-black-500 relative right-4" />
-                            </div>
-                            <select
-                              id="student.state"
-                              disabled={isLoading}
-                              {...register("student.state", { required: true })}
-                              className={`relative appearance-none block outline-none w-full bg-transparent rounded-md border border-gray-600 py-4 px-4 shadow-sm ring-1 ring-inset ring-gray-300 text-gray-700 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6 ${
-                                errors.student?.state
-                                  ? "border-[#F00101]"
-                                  : "border-neutral-300"
-                              }
-                            ${
-                              errors.student?.state
-                                ? "focus:border-red-500"
-                                : "focus:border-black"
-                            }`}
-                            >
-                              <option value="" className="text-gray-600">
-                                Select State
-                              </option>
-                              {countryStates.length > 0 &&
-                                countryStates.map((state: any) => (
-                                  <option
-                                    key={state.state_code}
-                                    value={state.name}
-                                  >
-                                    {state.name}
-                                  </option>
-                                ))}
-                            </select>
-                            {errors.student?.state && (
-                              <p className="text-[#F00101]">
-                                {errors.student.state.message}
-                              </p>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="flex gap-6">
-                        <div className="w-1/2">
-                          <label
-                            htmlFor="student.pathway"
-                            className="block text-sm font-medium leading-6 text-gray-900"
-                          >
-                            Career Pathway
-                          </label>
-                          <div className="mt-2 relative">
-                            <div className="absolute inset-0 flex items-center justify-end">
-                              <IoIosArrowDown className="text-black-500 relative right-4" />
-                            </div>
-                            <select
-                              id="student.pathway"
-                              disabled={isLoading}
-                              {...register("student.pathway", {
-                                required: true,
-                              })}
-                              className={`relative appearance-none block outline-none w-full bg-transparent rounded-md border border-gray-600 py-4 px-4 shadow-sm ring-1 ring-inset ring-gray-300 text-gray-700 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6 ${
-                                errors.student?.pathway
-                                  ? "border-[#F00101]"
-                                  : "border-neutral-300"
-                              }
-                            ${
-                              errors.student?.pathway
-                                ? "focus:border-red-500"
-                                : "focus:border-black"
-                            }`}
-                            >
-                              <option value="">Select Pathway</option>
-                              {pathway.map((pathway, index) => (
-                                <option key={index} value={pathway}>
-                                  {pathway}
-                                </option>
-                              ))}
-                            </select>
-                            {errors.student?.pathway && (
-                              <p className="text-[#F00101]">
-                                {errors.student.pathway.message}
-                              </p>
-                            )}
-                          </div>
-                        </div>
-
-                        <div className="w-1/2">
-                          <label
-                            htmlFor="student.state"
-                            className="block text-sm font-medium leading-6 text-gray-900"
-                          >
-                            Stages
-                          </label>
-                          <div className="mt-2 relative">
-                            <div className="absolute inset-0 flex items-center justify-end">
-                              <IoIosArrowDown className="text-black-500 relative right-4" />
-                            </div>
-                            <select
-                              id="student.stage"
-                              disabled={isLoading}
-                              {...register("student.stage", { required: true })}
-                              className={`relative appearance-none block outline-none w-full bg-transparent rounded-md border border-gray-600 py-4 px-4 shadow-sm ring-1 ring-inset ring-gray-300 text-gray-700 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6 ${
-                                errors.student?.stage
-                                  ? "border-[#F00101]"
-                                  : "border-neutral-300"
-                              }
-                            ${
-                              errors.student?.stage
-                                ? "focus:border-red-500"
-                                : "focus:border-black"
-                            }`}
-                            >
-                              <option value="" className="text-gray-600">
-                                Select Stage
-                              </option>
-                              {stage.map((stage, index) => (
-                                <option key={index} value={stage}>
-                                  {stage}
-                                </option>
-                              ))}
-                            </select>
-                            {errors.student?.stage && (
-                              <p className="text-[#F00101]">
-                                {errors.student.stage.message}
-                              </p>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="w-full">
-                        <label
-                          htmlFor="student.course"
-                          className="block text-sm font-medium leading-6 text-gray-900"
-                        >
-                          Course
-                        </label>
-                        <div className="mt-2 relative">
-                          <div className="absolute inset-0 flex items-start justify-end">
-                            <IoIosArrowDown className="text-black-500 relative top-5 right-4" />
-                          </div>
-                          <select
-                            id="student.course"
-                            disabled
-                            value={"coding"}
-                            {...register("student.course")}
-                            className={`relative appearance-none bg-stone-200 block outline-none w-full bg-transparent rounded-md border 
-                                border-gray-600 py-4 px-4 shadow-sm ring-1 ring-inset ring-gray-300 text-gray-700 
-                                focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6 ${
-                                  errors.student?.course
-                                    ? "border-[#F00101]"
-                                    : "border-neutral-300"
-                                }
-                            ${
-                              errors.student?.course
-                                ? "focus:border-red-500"
-                                : "focus:border-black"
-                            }`}
-                          >
-                            <option value="Coding">Nil</option>
-                            {/* <option value="TeenTechpreneurship">TeenTechpreneurship</option> */}
-                          </select>
-                          {errors.student?.course && (
-                            <p className="text-[#F00101]">
-                              {errors.student.course.message}
-                            </p>
-                          )}
-                        </div>
-                      </div>
-
-                      <div className="mt-10 lg:mt-14">
-                        <button
-                          type="submit"
-                          onClick={submitRegister}
-                          disabled={!isFormFilled}
-                          className="flex w-full items-center justify-center text-center rounded-md disabled:bg-[#B1B1B4] 
-                          active:bg-[#131314] bg-[#131314] p-4 text-sm font-semibold leading-6 
-                          text-white shadow-sm hover:bg-purple-500 focus-visible:outline 
-                          focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600"
-                        >
-                          {isLoading? 
-                          <div className="flex items-center gap-1">
-                            Registering
-                            <RiLoader4Fill size={24} className="animate-spin"/>
-                          </div> : 
-                          "Register"}
-                        </button>
-                      </div>
-                    </>
+                  {step === STEPS.STUDENT_INFO && (
+                    renderFormFields()
                   )}
 
                   {step === STEPS.PAYMENT_PLAN && (
