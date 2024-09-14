@@ -4,16 +4,13 @@ import { useRouter } from "next/navigation";
 import { IoCheckmark, IoChevronBackOutline } from "react-icons/io5"
 import AssessmentDesign from "./assessment-design";
 import { act, useEffect, useState } from "react";
-import { FormDataSchema } from "@/app/utils/schema";
-import { merriweather } from "@/app/fonts";
 import { API, assessmentAges, assessmentGender, assessmentImages, getAnswerText } from "@/app/utils/types-and-links";
 import Image from "next/image";
 import axios from "axios";
 import Loader from "@/app/utils/loader";
 import axiosInstance from "@/app/utils/auth-interceptor";
 import toast, { Toaster } from "react-hot-toast";
-
-type Inputs = z.infer<typeof FormDataSchema>
+import { merriweather } from "@/app/fonts";
 
 type Option = {
     [key: string]: number;

@@ -107,6 +107,27 @@ const Profile = () => {
 
   let fieldsToWatch: readonly any[] = [];
 
+  const isFormFilled = (): boolean => {
+    if (selectedRole === "Student") {
+      const schoolStudentValues = getValues("schoolStudent");
+      return !!(
+        schoolStudentValues.fullname.trim() &&
+        schoolStudentValues.age > 0 &&
+        schoolStudentValues.class.trim()
+      );
+    } else {
+      const studentValues = getValues("student");
+      return !!(
+        studentValues.fullname.trim() &&
+        studentValues.age > 0 &&
+        studentValues.country.trim() &&
+        studentValues.state.trim() &&
+        studentValues.pathway.trim() &&
+        studentValues.stage.trim()
+      );
+    }
+  };
+
   switch (step) {
     case STEPS.STUDENT_INFO:
       fieldsToWatch = [
@@ -154,9 +175,9 @@ const Profile = () => {
         action: "register",
         mail:"demiladeala@gmail.com",
         pass:"demi1234",
-        name: watch("schoolStudent.fullname"),
-        age:watch("schoolStudent.age"),
-        class: watch("schoolStudent.class")
+        name: "demilade",
+        age:9,
+        class:"JSS3",
       }
     }
     try {
@@ -211,28 +232,7 @@ const Profile = () => {
     if (isValid) {
       setStep((prev) => prev + 1);
     }
-  };  
-
-  const isFormFilled = (): boolean => {
-    if (selectedRole === "Student") {
-      const schoolStudentValues = getValues("schoolStudent");
-      return !!(
-        schoolStudentValues.fullname.trim() &&
-        schoolStudentValues.age > 0 &&
-        schoolStudentValues.class.trim()
-      );
-    } else {
-      const studentValues = getValues("student");
-      return !!(
-        studentValues.fullname.trim() &&
-        studentValues.age > 0 &&
-        studentValues.country.trim() &&
-        studentValues.state.trim() &&
-        studentValues.pathway.trim() &&
-        studentValues.stage.trim()
-      );
-    }
-  };  
+  };    
 
   const handleBack = () => {
     setStep((prev) => prev - 1);
