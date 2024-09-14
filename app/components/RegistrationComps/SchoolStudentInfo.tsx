@@ -7,11 +7,7 @@ type Props = {
     errors: any;
     isLoading:boolean;
     submitRegister: (e: FormEvent) => Promise<void>;
-    isFormFilled: boolean;
-    countries: Array<{ name: string }>;
-    countryStates: Array<{ name: string; state_code: string }>;
-    pathway: string[];
-    stage: string[];
+    isFormFilled: () => boolean;
 
 }
 
@@ -21,10 +17,6 @@ const SchoolStudentInfo = ({
     isLoading,
     submitRegister,
     isFormFilled,
-    countries,
-    countryStates,
-    pathway,
-    stage
   }: Props) => {
   return (
     <>
@@ -141,7 +133,7 @@ const SchoolStudentInfo = ({
                 />
                 {errors.schoolstudent?.class && (
                 <p className="text-[#F00101]">
-                    {errors.school.class.message}
+                    {errors.schoolstudent.class.message}
                 </p>
                 )}
             </div>
@@ -151,7 +143,7 @@ const SchoolStudentInfo = ({
         <button
             type="submit"
             onClick={submitRegister}
-            disabled={!isFormFilled}
+            disabled={!isFormFilled()}
             className="flex w-full items-center justify-center text-center rounded-md disabled:bg-[#B1B1B4] 
             active:bg-[#131314] bg-[#131314] p-4 text-sm font-semibold leading-6 
             text-white shadow-sm hover:bg-purple-500 focus-visible:outline 

@@ -102,7 +102,7 @@ const Profile = () => {
       payment: {
         plan: "",
       },
-    },
+    }
   });
 
   let fieldsToWatch: readonly any[] = [];
@@ -119,7 +119,6 @@ const Profile = () => {
         "schoolStudent.fullname",
         "schoolStudent.age",
         "schoolStudent.class"
-        // "student.course",
       ];
       break;
     case STEPS.PAYMENT_PLAN:
@@ -129,29 +128,14 @@ const Profile = () => {
       break;
   }
 
-  const isFormFilled =
-    Object.keys(errors).length === 0 &&
-    Object.values(watch(fieldsToWatch)).every(
-      (field) => field !== undefined && field !== ""
-    );
-
-  // const onSubmit: SubmitHandler<FormValues> = async (data) => {
-  //   setIsLoading(true);
-  //   try {
-  //     console.log("Form data:", data);
-  //     await new Promise((resolve) => setTimeout(resolve, 2000));
-  //   } catch (error) {
-  //     console.error("Signup error:", error);
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
 
   const submitRegister = async (e: FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    try {
-      const response = await axiosInstance.post(`${API}/authentication/`, {
+    let payload;
+
+    if (selectedRole==="") {
+      payload = {
         action: "register",
         mail,
         pass,
@@ -164,6 +148,20 @@ const Profile = () => {
         name_in_full: watch("student.fullname"),
         state: watch("student.state"),
         dvid: deviceId,
+      }
+    } else if (selectedRole === "Student") {
+      payload = {
+        action: "register",
+        mail:"demiladeala@gmail.com",
+        pass:"demi1234",
+        name: watch("schoolStudent.fullname"),
+        age:watch("schoolStudent.age"),
+        class: watch("schoolStudent.class")
+      }
+    }
+    try {
+      const response = await axiosInstance.post(`${API}/authentication/`, {
+       payload
       },{
         headers:{
           "Content-Type": "multipart/form-data",
@@ -187,32 +185,54 @@ const Profile = () => {
 
   const handleContinue = async () => {
     let fieldsToValidate: FormFields[] = [];
-
-    switch (step) {
-      case STEPS.STUDENT_INFO:
-        fieldsToValidate = [
-          "student.fullname",
-          //   "student.course",
-          "student.age",
-          "student.state",
-          "student.country",
-          "student.pathway",
-          "student.stage",
-        ];
-        break;
-      case STEPS.PAYMENT_PLAN:
-        fieldsToValidate = ["payment.plan"];
-        break;
-      default:
-        break;
+  
+    if (selectedRole === 'Student') {
+      fieldsToValidate = [
+        "schoolStudent.fullname",
+        "schoolStudent.age",
+        "schoolStudent.class",
+      ];
+    } else {
+      fieldsToValidate = [
+        "student.fullname",
+        "student.age",
+        "student.country",
+        "student.state",
+        "student.pathway",
+        "student.stage",
+      ];
     }
-
+  
+    if (step === STEPS.PAYMENT_PLAN) {
+      fieldsToValidate.push("payment.plan");
+    }
+  
     const isValid = await trigger(fieldsToValidate);
-
     if (isValid) {
       setStep((prev) => prev + 1);
     }
-  };
+  };  
+
+  const isFormFilled = (): boolean => {
+    if (selectedRole === "Student") {
+      const schoolStudentValues = getValues("schoolStudent");
+      return !!(
+        schoolStudentValues.fullname.trim() &&
+        schoolStudentValues.age > 0 &&
+        schoolStudentValues.class.trim()
+      );
+    } else {
+      const studentValues = getValues("student");
+      return !!(
+        studentValues.fullname.trim() &&
+        studentValues.age > 0 &&
+        studentValues.country.trim() &&
+        studentValues.state.trim() &&
+        studentValues.pathway.trim() &&
+        studentValues.stage.trim()
+      );
+    }
+  };  
 
   const handleBack = () => {
     setStep((prev) => prev - 1);
@@ -233,7 +253,7 @@ const Profile = () => {
             errors={errors}
             isLoading={isLoading}
             submitRegister={submitRegister}
-            isFormFilled={isFormFilled}
+            isFormFilled={isFormFilled()}
             countries={countries}
             countryStates={countryStates}
             pathway={pathway}
@@ -250,10 +270,6 @@ const Profile = () => {
             isLoading={isLoading}
             submitRegister={submitRegister}
             isFormFilled={isFormFilled}
-            countries={countries}
-            countryStates={countryStates}
-            pathway={pathway}
-            stage={stage}
           />
           </>
         )
@@ -283,11 +299,13 @@ const Profile = () => {
             />
           </div>
         </div>
+
+        
         <div className={`
-          relative max-lg:w-full flex flex-1 flex-col lg:flex-none overflow-y-auto mx-auto lg:min-w-[769px] border-4 pb-10
+          relative max-lg:w-full flex flex-1  flex-col lg:flex-none overflow-y-auto mx-auto lg:min-w-[769px]
         ${selectedRole!=="" ? "pt-0" : "pt-10"}`}>
           {step === STEPS.STUDENT_INFO ? (
-            <div className="w-14 h-14 border-4"></div>
+            <div className="w-14 h-14"></div>
           ) : (
             <IoChevronBackOutline
               fontSize={10}
@@ -323,7 +341,8 @@ const Profile = () => {
           </div>
           <div className="mx-auto w-full px-4 lg:px-20 max-w-3xl">
             <div>
-              <h2 className="mt-8 text-2xl font-bold leading-9 tracking-tight text-gray-900">
+              <h2 className={`text-2xl font-bold leading-9 tracking-tight text-gray-900
+                ${selectedRole!=="" ? "" : "mt-8"}`}>
                 {step === STEPS.STUDENT_INFO
                   ? "Student Profile"
                   : step === STEPS.PAYMENT_PLAN
@@ -369,7 +388,6 @@ const Profile = () => {
                           <button
                             type="button"
                             onClick={handleContinue}
-                            disabled={!isFormFilled}
                             className="flex w-full justify-center rounded-md disabled:bg-[#B1B1B4] active:bg-[#131314] bg-[#131314] p-4 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-purple-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600"
                           >
                             Continue

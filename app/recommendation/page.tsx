@@ -1,10 +1,10 @@
+"use client"
 import Image from "next/image";
 import { TodayComp } from "../components/CodingPathwayComps/today-comp";
 import Footer from "../components/general/Footer";
 import GeneralNavbar from "../components/general/GeneralNavbar";
 import Link from "next/link";
 import RecommendationDesign from "../components/AssessmentComps/recommendation-design";
-
 import { useRouter } from 'next/navigation';
 
 export default function RecommendationPage() {
