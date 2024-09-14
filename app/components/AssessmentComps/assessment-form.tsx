@@ -1,16 +1,15 @@
 "use client"
-import { z } from "zod";
 import { useRouter } from "next/navigation";
 import { IoCheckmark, IoChevronBackOutline } from "react-icons/io5"
 import AssessmentDesign from "./assessment-design";
-import { act, useEffect, useState } from "react";
+import {useEffect, useState } from "react";
 import { API, assessmentAges, assessmentGender, assessmentImages, getAnswerText } from "@/app/utils/types-and-links";
 import Image from "next/image";
-import axios from "axios";
 import Loader from "@/app/utils/loader";
 import axiosInstance from "@/app/utils/auth-interceptor";
 import toast, { Toaster } from "react-hot-toast";
 import { merriweather } from "@/app/fonts";
+import { RiLoader4Fill } from "react-icons/ri";
 
 type Option = {
     [key: string]: number;
@@ -32,7 +31,9 @@ type Response = {
 
 const AssessmentForm = () => {
     const router = useRouter();
+    const [recommendation, setRecommendation] = useState<any>(null);
     const [loading, setLoading] = useState(true);
+    const [submitting, setSubmitting] = useState(false);
     const [currentStep, setCurrentStep] = useState(0);
     const [name, setName] = useState("");
     const [selectedAge, setSelectedAge] = useState<String | null>(null);
@@ -59,10 +60,20 @@ const AssessmentForm = () => {
     const submitResponses = async () => {
         if (validateCurrentStep()) { // Only proceed if validation is successful
             try {
+            setSubmitting(true);
                 const response = await axiosInstance.post(`${API}/assessment/ai/`, { responses, age: selectedAge });
+                setRecommendation(response.data);
+                const queryParams = new URLSearchParams({
+                    data: JSON.stringify(response.data),
+                }).toString();
+    
+                // Navigate to the recommendation page with query parameters
+                router.push(`/recommendation?${queryParams}`);
+                setSubmitting(false);       
                 console.log('Career Pathway Recommendation:', response.data);
-            } catch (error) {
-                console.error('Error submitting responses:', error);
+            } catch (error:any) {
+                toast.error('Error submitting responses:', error);
+                setSubmitting(false);
             }
         }
     };
@@ -118,11 +129,16 @@ const AssessmentForm = () => {
                             <div
                                 onClick={submitResponses}
                                 className={`bg-[#131314] xl:text-lg text-white focus-visible:outline-black 
-                                    rounded-lg px-16 py-5 font-medium  shadow-sm hover:bg-opacity-80 
-                                    focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                                    disabled:bg-gray-400 disabled:cursor-not-allowed  `}
+                                    rounded-lg px-16 py-5 font-medium flex items-center justify-center text-center 
+                                    shadow-sm hover:bg-opacity-80 focus-visible:outline focus-visible:outline-2 
+                                    focus-visible:outline-offset-2disabled:bg-gray-400 disabled:cursor-not-allowed `}
                             >
-                                Submit
+                                {submitting ? 
+                                <div className="flex items-center gap-1">
+                                Submitting
+                                <RiLoader4Fill className="animate-spin"/>
+                                </div> : 
+                                "Submit"}
                             </div>
                         </div>
                     </div>

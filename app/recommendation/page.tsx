@@ -6,17 +6,24 @@ import GeneralNavbar from "../components/general/GeneralNavbar";
 import Link from "next/link";
 import RecommendationDesign from "../components/AssessmentComps/recommendation-design";
 import { useRouter } from 'next/navigation';
+import { useEffect, useState } from "react";
 
 export default function RecommendationPage() {
     const router = useRouter();
-    const { pathway, level, reason, alternative_pathways } = router.query;
+    const [recommendation, setRecommendation] = useState<any>(null);
 
-    // Default values in case data is missing
-    const pathwayTitle = pathway || "Coding career pathway";
-    const pathwayLevel = level || "Beginner";
-    const pathwayReason = reason || "No reason provided.";
-    const altPaths = alternative_pathways || [];
+    useEffect(() => {
+        const { search } = window.location;
+        const queryParams = new URLSearchParams(search);
+        const data = queryParams.get('data');
+        if (data) {
+            setRecommendation(JSON.parse(data));
+        }
+    }, []);
 
+    console.log(recommendation)
+
+   if(recommendation) {
     return (
         <div className="mx-auto relative container w-full max-w-[2000px]">
             {/* Navbar and Footer */}
@@ -27,9 +34,7 @@ export default function RecommendationPage() {
 
                 <div className="relative z-[5] w-[90%] md:w-[70%] lg:w-[65%] mx-auto">
                     <h1 className="pt-14 md:pt-20 lg:pt-28 text-center font-semibold text-xl md:text-2xl lg:text-3xl">
-                        Hi Jimmy, your assessment indicates a strong aptitude for logical
-                        thinking and problem-solving, which are essential for a successful
-                        coding career.
+                    {recommendation.best_pathway.reason}
                     </h1>
                 </div>
                 {/* SUMMARY */}
@@ -49,7 +54,7 @@ export default function RecommendationPage() {
 
                         <div className="w-full md:basis-[50%]">
                             <h2 className="text-blue-500 font-semibold text-xl md:text-2xl lg:text-4xl">
-                                {pathwayTitle} - {pathwayLevel}
+                            {recommendation.best_pathway.pathway}
                             </h2>
 
                             <p className="mt-4 text-lg md:text-xl">
@@ -68,7 +73,7 @@ export default function RecommendationPage() {
                                             rounded-lg px-16 py-5 font-medium  shadow-sm hover:bg-opacity-80 
                                             focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 `}
                                 >
-                                    Learn More
+                                    Register here
                                 </Link>
                             </div>
                         </div>
@@ -88,7 +93,31 @@ export default function RecommendationPage() {
                                 Pathway Highlights
                             </h3>
                             <p className="mt-4 text-lg md:text-xl">
-                                {pathwayReason}
+                                {recommendation.best_pathway.reason}
+                            </p>
+                        </div>
+
+                        <div>
+                            <h3 className="font-semibold text-xl md:text-2xl lg:text-3xl">
+                                Skill Alignment
+                            </h3>
+                            <p className="mt-4 text-lg md:text-xl">
+                            </p>
+                        </div>
+
+                        <div>
+                            <h3 className="font-semibold text-xl md:text-2xl lg:text-3xl">
+                                Career Outlook
+                            </h3>
+                            <p className="mt-4 text-lg md:text-xl">
+                            </p>
+                        </div>
+
+                        <div>
+                            <h3 className="font-semibold text-xl md:text-2xl lg:text-3xl">
+                                Next Step
+                            </h3>
+                            <p className="mt-4 text-lg md:text-xl">
                             </p>
                         </div>
                         {/* Additional sections can be added here */}
@@ -108,14 +137,14 @@ export default function RecommendationPage() {
                     </p>
 
                     <div className="mt-10 flex flex-wrap items-center gap-5">
-                        {altPaths && altPaths.map((path:any, index:number) => (
+                        {/* {altPaths && altPaths.map((path:any, index:number) => (
                             <div
                                 key={index}
                                 className="font-semibold px-4 py-[10px] border border-black-500 max-md:text-sm rounded-lg cursor-pointer"
                             >
                                 {path} Pathway
                             </div>
-                        ))}
+                        ))} */}
                     </div>
                 </div>
                 {/* ALTERNATIVE PATHS */}
@@ -123,10 +152,11 @@ export default function RecommendationPage() {
 
             <TodayComp 
                 desc="Lorem ipsum dolor sit amet consectetur. Senectus in consequat egestas faucibus morbi pulvinar nec ac. Morbi phasellus sed augue neque ac nibh varius vitae sagittis."
-                header="Start Coding Today!"
+                header="Start Pathway Today!"
                 linkto="/students/pricing-plan"
             />
             <Footer />
         </div>
     );
-}
+    }
+   }

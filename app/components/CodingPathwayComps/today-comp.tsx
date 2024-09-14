@@ -12,7 +12,7 @@ export const TodayComp = ({ desc, header, linkto}: Props) => {
         <h3 className="w-[90%] mx-auto text-center text-2xl md:text-4xl font-semibold">
             {header}
         </h3>
-       <p className="mt-9 md:w-[80%] lg:w-[65%] xl:w-[60%] mx-auto text-center md:text-xl"> 
+       <p className="mt-4 lg:mt-9 w-[95%] md:w-[80%] lg:w-[65%] xl:w-[60%] mx-auto text-center md:text-xl"> 
         {desc}
        </p>
 
