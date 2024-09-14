@@ -446,19 +446,19 @@ function generateUUID(): string {
   });
 }
 
-// Store device ID in localStorage
-function getDeviceID(): string {
-  let deviceId = localStorage.getItem('device_id');
-  if (!deviceId) {
-    deviceId = generateUUID();
-    localStorage.setItem('device_id', deviceId);
-  }
-  return deviceId;
-}
+// // Store device ID in localStorage
+// function getDeviceID(): string {
+//   let deviceId = localStorage.getItem('device_id');
+//   if (!deviceId) {
+//     deviceId = generateUUID();
+//     localStorage.setItem('device_id', deviceId);
+//   }
+//   return deviceId;
+// }
 
-// Usage
-export const deviceId = getDeviceID();
-console.log('Device ID:', deviceId);
+// // Usage
+// export const deviceId = getDeviceID();
+// console.log('Device ID:', deviceId);
 
 
 

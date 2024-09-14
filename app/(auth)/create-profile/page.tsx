@@ -8,7 +8,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoChevronBackOutline } from "react-icons/io5";
 import { isValid, z } from "zod";
-import { API, deviceId, pathway, stage } from "../../utils/types-and-links";
+import { API, pathway, stage } from "../../utils/types-and-links";
 import { pricingPlans } from "../../components/StudentsComps/Overview/pricing";
 import { PricingCard } from "../../components/StudentsComps/Overview/pricing-card";
 import { useAuth } from "@/app/context/AuthContext";
@@ -168,7 +168,6 @@ const Profile = () => {
         learning_stage: watch("student.stage"),
         name_in_full: watch("student.fullname"),
         state: watch("student.state"),
-        dvid: deviceId,
       }
     } else if (selectedRole === "Student") {
       payload = {
