@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Modal from './modal';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useMain } from '../context/MainContext';
 
 export type ModalProps = {
     isOpen: boolean;
@@ -10,12 +11,11 @@ export type ModalProps = {
 }
 
 const SuccessModal = ({isOpen, onClose}: ModalProps) => {
-  const [isModalOpen, setModalOpen] = useState(false);
-
+  const {successfulSignup} = useMain();
   if (!isOpen) return null;
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} removeCancelIcon={true}>
+    <Modal isOpen={successfulSignup} onClose={onClose} removeCancelIcon={true}>
 
         <Image 
         src={`/assets/auth/success.svg`}

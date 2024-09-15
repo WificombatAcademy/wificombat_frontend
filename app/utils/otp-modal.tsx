@@ -3,11 +3,12 @@ import { useEffect, useState } from 'react';
 import Modal from './modal';
 import OTPInput from './otpInput';
 import { useAuth } from '../context/AuthContext';
-import axios from 'axios';
 import { API } from './types-and-links';
 import toast, { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import axiosInstance from './auth-interceptor';
+import SuccessModal from './success-modal';
+import { useMain } from '../context/MainContext';
 
 export type ModalProps = {
     isOpen: boolean;
@@ -22,7 +23,7 @@ const OtpModal = ({isOpen, onClose}: ModalProps) => {
   const [otp, setOtp] = useState("");
   const [isVerifyingLoading, setIsVerifyingLoading] = useState(false);
   const [isResendCodeLoading, setIsResendCodeLoading] = useState(false);
-  const [successfulSignup, setSuccessfulSignup] = useState(false);
+  const {setSuccessfulSignup} = useMain();
   const [isOtpExpired, setIsOtpExpired] = useState(false);
 
   useEffect(() => {
@@ -43,6 +44,20 @@ const OtpModal = ({isOpen, onClose}: ModalProps) => {
     return () => clearInterval(countdown);
   }, [minutes, seconds]);
 
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.key === "Enter" && otp !== "" && !isVerifyingLoading && !isResendCodeLoading) {
+        validateOtp();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyPress);
+    return () => {
+      window.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [otp, isVerifyingLoading, isResendCodeLoading]);
+
+
   const validateOtp = async () => {
     try {
       setIsVerifyingLoading(true);
@@ -54,8 +69,7 @@ const OtpModal = ({isOpen, onClose}: ModalProps) => {
       console.log('OTP verified:');
       setIsVerifyingLoading(false);
       setSuccessfulSignup(true);
-      onClose(); // Close the modal after successful verification
-      router.push("/create-profile");
+      onClose();
     } catch (error) {
       toast.error('Error sending OTP');
       setIsVerifyingLoading(false);
@@ -83,6 +97,7 @@ const OtpModal = ({isOpen, onClose}: ModalProps) => {
   if (!isOpen) return null;
 
   return (
+    <>
     <Modal isOpen={isOpen} onClose={onClose}>
       <Toaster />
         <div className="text-xl font-semibold text-center">
@@ -127,7 +142,9 @@ const OtpModal = ({isOpen, onClose}: ModalProps) => {
         >
             {isResendCodeLoading ? "Resending..." : isOtpExpired ? "Resend Code" : "Wait for Expiry"}
         </button>
+        
     </Modal>
+    </>
   );
 };
 

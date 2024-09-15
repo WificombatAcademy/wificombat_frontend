@@ -3,7 +3,9 @@ import React, { createContext, useContext, useState, ReactNode, useEffect } from
 
 interface MainContextType {
   toggleSidebar: boolean;
+  successfulSignup: boolean;
   selectedRole: string;
+  setSuccessfulSignup: React.Dispatch<React.SetStateAction<boolean>>;
   setToggleSidebar: React.Dispatch<React.SetStateAction<boolean>>;
   setSelectedRole: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -12,6 +14,7 @@ const MainContext = createContext<MainContextType | undefined>(undefined);
 
 export const MainProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [toggleSidebar, setToggleSidebar] = useState<boolean>(false);
+  const [successfulSignup, setSuccessfulSignup] = useState(false);
   const [selectedRole, setSelectedRole] = useState('');
 
   useEffect(() => {
@@ -32,7 +35,13 @@ export const MainProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   }, [selectedRole]);
 
   return (
-    <MainContext.Provider value={{ toggleSidebar, setToggleSidebar, selectedRole, setSelectedRole }}>
+    <MainContext.Provider value={{ 
+      toggleSidebar, 
+      setToggleSidebar, 
+      selectedRole, 
+      setSelectedRole,
+      successfulSignup, 
+      setSuccessfulSignup }}>
       {children}
     </MainContext.Provider>
   );

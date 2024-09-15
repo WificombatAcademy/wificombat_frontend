@@ -456,8 +456,9 @@ const Profile = () => {
 
         
         <div className={`
-          relative max-lg:w-full flex flex-1  flex-col lg:flex-none overflow-y-auto mx-auto lg:min-w-[769px]
-        ${selectedRole!=="" ? "pt-0" : "pt-10"}`}>
+          relative max-lg:w-full flex flex-1 flex-col pb-10 lg:flex-none overflow-y-auto mx-auto lg:min-w-[769px]
+        ${selectedRole!=="" ? "pt-0" : "pt-10"}
+        ${selectedRole==="Student" ? "-mt-16" : ""}`}>
           {step === STEPS.STUDENT_INFO ? (
             <div className="w-14 h-14"></div>
           ) : (

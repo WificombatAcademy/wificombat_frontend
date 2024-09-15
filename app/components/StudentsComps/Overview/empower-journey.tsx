@@ -43,7 +43,7 @@ export const EmpowerLearningJourney = () => {
         </div>
       </div>
 
-      <div className="h-[900px]"></div>
+      {/* <div className="h-[900px]"></div> */}
     </section>
   );
 };
