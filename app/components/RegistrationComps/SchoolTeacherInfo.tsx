@@ -12,7 +12,7 @@ type Props = {
     isFormFilled: boolean;
 }
 
-const SchoolStudentInfo = ({
+const SchoolTeacherInfo = ({
     register,
     errors,
     isLoading,
@@ -23,85 +23,34 @@ const SchoolStudentInfo = ({
     <>
         <div className="w-full">
         <label
-            htmlFor="schoolStudent.fullname"
+            htmlFor="schoolTeacher.fullname"
             className="block text-sm font-medium leading-6 text-gray-900"
         >
             Full Name
         </label>
         <div className="mt-2">
             <input
-            id="schoolStudent.fullname"
+            id="schoolTeacher.fullname"
             type="text"
             placeholder="Grace Adeboye"
             disabled={isLoading}
-            {...register("schoolStudent.fullname", {
+            {...register("schoolTeacher.fullname", {
                 required: true,
             })}
             className={`block outline-none w-full rounded-md border border-gray-600 py-4 px-4 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-700 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6 ${
-                errors.schoolStudent?.fullname
+                errors.schoolTeacher?.fullname
                 ? "border-[#F00101]"
                 : "border-neutral-300"
             }
             ${
-                errors.schoolStudent?.fullname
+                errors.schoolTeacher?.fullname
                 ? "focus:border-red-500"
                 : "focus:border-black"
             }`}
             />
-            {errors.schoolStudent?.fullname && (
+            {errors.schoolTeacher?.fullname && (
             <p className="text-[#F00101]">
-                {errors.schoolStudent.fullname.message}
-            </p>
-            )}
-        </div>
-        </div>
-
-        <div className="w-full">
-        <label
-            htmlFor="schoolStudent.age"
-            className="block text-sm font-medium leading-6 text-gray-900"
-        >
-            Age
-        </label>
-        <div className="mt-2 relative">
-            <div className="absolute inset-0 flex items-start justify-end">
-            <IoIosArrowDown className="text-black-500 relative top-5 right-4" />
-            </div>
-            <select
-            id="schoolStudent.age"
-            {...register("schoolStudent.age", {
-                required: true,
-                valueAsNumber: true,
-            })}
-            className={`relative appearance-none block outline-none w-full bg-transparent rounded-md border border-gray-600 py-4 px-4 shadow-sm ring-1 ring-inset ring-gray-300 text-gray-700 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6 ${
-                errors.schoolStudent?.age
-                ? "border-[#F00101]"
-                : "border-neutral-300"
-            }
-            ${
-                errors.schoolStudent?.age
-                ? "focus:border-red-500"
-                : "focus:border-black"
-            }`}
-            >
-            <option value="0" disabled>
-                Select an age
-            </option>
-            {Array.from({ length: 11 }, (_, i) => i + 8).map(
-                (age) => (
-                <option
-                    key={age}
-                    value={age}
-                    className="text-gray-700"
-                >
-                    {age}
-                </option>
-                )
-            )}
-            </select>
-            {errors.schoolStudent?.age && (
-            <p className="h-[1rem] text-[#F00101]">
-                {errors.schoolStudent.age.message}
+                {errors.schoolTeacher.fullname.message}
             </p>
             )}
         </div>
@@ -109,25 +58,25 @@ const SchoolStudentInfo = ({
 
         <div>
             <label
-                htmlFor="schoolStudent.class"
+                htmlFor="schoolTeacher.class"
                 className="block text-sm font-medium leading-6 text-gray-900"
             >
-                Class
+                Class You Teach
             </label>
             <div className="mt-2 relative">
                 <div className="absolute inset-0 flex items-start justify-end">
                 <IoIosArrowDown className="text-black-500 relative top-5 right-4" />    
                 </div>
                 <select
-                id="schoolStudent.class"
+                id="schoolTeacher.class"
                 disabled={isLoading}
-                {...register("schoolStudent.class", { required: true })}
+                {...register("schoolTeacher.class", { required: true })}
                 className={`relative appearance-none block outline-none w-full bg-transparent rounded-md border border-gray-600 py-4 px-4 shadow-sm ring-1 ring-inset ring-gray-300 text-gray-700 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6 ${
-                    errors.schoolStudent?.class
+                    errors.schoolTeacher?.class
                     ? "border-[#F00101]"
                     : "border-neutral-300"
                 }
-                ${errors.schoolStudent?.class ? "focus:border-red-500" : "focus:border-black"}`}
+                ${errors.schoolTeacher?.class ? "focus:border-red-500" : "focus:border-black"}`}
                 >
                 <option value="" className="text-gray-600">Select Class</option>
                 <option value="JSS1" className="text-gray-600">JSS 1 / Grade 7 / Year 7</option>
@@ -137,9 +86,42 @@ const SchoolStudentInfo = ({
                 <option value="SSS2" className="text-gray-600">SSS 2 / Grade 11 / Year 11</option>
                 <option value="SS33" className="text-gray-600">SS3 3 / Grade 12 / Year 12</option>
                 </select>
-                {errors.schoolStudent?.class && (
+                {errors.schoolTeacher?.class && (
                 <p className="text-[#F00101]">
-                    {errors.schoolStudent.class.message}
+                    {errors.schoolTeacher.class.message}
+                </p>
+                )}
+            </div>
+        </div>
+
+        <div>
+            <label
+                htmlFor="schoolTeacher.students"
+                className="block text-sm font-medium leading-6 text-gray-900"
+            >
+                Number of Student
+            </label>
+            <div className="mt-2">
+                <input
+                id="schoolTeacher.students"
+                type="number"
+                placeholder="50"
+                disabled={isLoading}
+                {...register("schoolTeacher.students", { required: true })}
+                className={`block outline-none w-full rounded-md border border-gray-600 py-4 px-4 shadow-sm ring-1 
+                    ring-inset ring-gray-300 placeholder:text-gray-700 focus:ring-2 focus:ring-inset 
+                    focus:ring-purple-600 sm:text-sm sm:leading-6 ${
+                    errors.schoolTeacher?.students
+                    ? "border-[#F00101]"
+                    : "border-neutral-300"
+                }
+            ${
+                errors.schoolTeacher?.students ? "focus:border-red-500" : "focus:border-black"
+            }`}
+                />
+                {errors.schoolTeacher?.students && (
+                <p className="text-[#F00101]">
+                    {errors.schoolTeacher.students.message}
                 </p>
                 )}
             </div>
@@ -167,4 +149,4 @@ const SchoolStudentInfo = ({
   )
 }
 
-export default SchoolStudentInfo
+export default SchoolTeacherInfo

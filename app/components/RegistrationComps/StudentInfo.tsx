@@ -344,7 +344,7 @@ const StudentInfo = ({
         <button
             type="submit"
             onClick={submitRegister}
-            disabled={!isFormFilled}
+            // disabled={!isFormFilled}
             className="flex w-full items-center justify-center text-center rounded-md disabled:bg-[#B1B1B4] 
             active:bg-[#131314] bg-[#131314] p-4 text-sm font-semibold leading-6 
             text-white shadow-sm hover:bg-purple-500 focus-visible:outline 

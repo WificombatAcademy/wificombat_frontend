@@ -1,13 +1,10 @@
 "use client";
-import ProgressBar from "../../utils/form-progress";
 import { getCountries, getStates } from "@/app/utils/countriesApi";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import { FormEvent, useEffect, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { IoIosArrowDown } from "react-icons/io";
+import { useForm } from "react-hook-form";
 import { IoChevronBackOutline } from "react-icons/io5";
-import { isValid, z } from "zod";
 import { API, pathway, stage } from "../../utils/types-and-links";
 import { pricingPlans } from "../../components/StudentsComps/Overview/pricing";
 import { PricingCard } from "../../components/StudentsComps/Overview/pricing-card";
@@ -19,6 +16,8 @@ import StudentInfo from "@/app/components/RegistrationComps/StudentInfo";
 import { schema } from "@/app/utils/schema";
 import { useMain } from "@/app/context/MainContext";
 import SchoolStudentInfo from "@/app/components/RegistrationComps/SchoolStudentInfo";
+import SchoolTeacherInfo from "@/app/components/RegistrationComps/SchoolTeacherInfo";
+import StudentAdministratorInfo from "@/app/components/RegistrationComps/SchoolAdministratorInfo";
 
 enum STEPS {
   STUDENT_INFO = 0,
@@ -41,8 +40,21 @@ export type FormValues = {
   schoolStudent:{
     fullname: string;
     age: number;
-    class:string
+    class:string;
   };
+  schoolTeacher:{
+    fullname: string;
+    class: string;
+    students:number;
+  };
+  schoolAdministrator:{
+    pathway: string;
+    class:string;
+    students:number;
+    teachers:number;
+    country: string;
+    state: string;
+  }
   payment: {
     plan: string;
   };
@@ -59,6 +71,15 @@ type FormFields =
   | "schoolStudent.fullname"
   | "schoolStudent.age"
   | "schoolStudent.class"
+  | "schoolTeacher.fullname"
+  | "schoolTeacher.class"
+  | "schoolTeacher.students"
+  | "schoolAdministrator.pathway"
+  | "schoolAdministrator.class"
+  | "schoolAdministrator.students"
+  | "schoolAdministrator.teachers"
+  | "schoolAdministrator.country"
+  | "schoolAdministrator.state"
   | "payment.plan"
 let fieldsToValidate: FormFields[] = [];
 
@@ -99,6 +120,19 @@ const Profile = () => {
         age:0,
         class: ""
       },
+      schoolTeacher: {
+        fullname:"",
+        class:"",
+        students: 0,
+      },
+      schoolAdministrator:{
+        pathway: "",
+        class: "",
+        students: 0,
+        teachers: 0,
+        country: "",
+        state: "",
+      },
       payment: {
         plan: "",
       },
@@ -108,25 +142,47 @@ const Profile = () => {
   let fieldsToWatch: readonly any[] = [];
 
   const isFormFilled = (): boolean => {
-    if (selectedRole === "Student") {
-      const schoolStudentValues = getValues("schoolStudent");
-      return !!(
-        schoolStudentValues.fullname.trim() &&
-        schoolStudentValues.age > 0 &&
-        schoolStudentValues.class.trim()
-      );
-    } else {
-      const studentValues = getValues("student");
-      return !!(
-        studentValues.fullname.trim() &&
-        studentValues.age > 0 &&
-        studentValues.country.trim() &&
-        studentValues.state.trim() &&
-        studentValues.pathway.trim() &&
-        studentValues.stage.trim()
-      );
+    switch (selectedRole) {
+      case "":
+        const studentValues = getValues("student");
+        return !!(
+          studentValues.fullname.trim() &&
+          studentValues.age > 0 &&
+          studentValues.country.trim() &&
+          studentValues.state.trim() &&
+          studentValues.pathway.trim() &&
+          studentValues.stage.trim()
+        );
+      case "Student":
+        const schoolStudentValues = getValues("schoolStudent");
+        return !!(
+          schoolStudentValues.fullname.trim() &&
+          schoolStudentValues.age > 0 &&
+          schoolStudentValues.class.trim()
+        );
+      case "Teacher":
+        const teacherValues = getValues("schoolTeacher");
+        return !!(
+          teacherValues.fullname.trim() &&
+          teacherValues.class.trim() &&
+          teacherValues.students > 0
+        );
+      case "Administrator":
+        const administratorValues = getValues("schoolAdministrator");
+        return !!(
+          administratorValues.country.trim() &&
+          administratorValues.state.trim() &&
+          administratorValues.pathway.trim() &&
+          administratorValues.students > 0 &&
+          administratorValues.teachers > 0 &&
+          administratorValues.class.trim() 
+        );
+      default:
+        return false;
     }
   };
+  
+  
 
   switch (step) {
     case STEPS.STUDENT_INFO:
@@ -139,7 +195,17 @@ const Profile = () => {
         "student.stage",
         "schoolStudent.fullname",
         "schoolStudent.age",
-        "schoolStudent.class"
+        "schoolStudent.class",
+        "schoolTeacher.fullname",
+        "schoolTeacher.students",
+        "schoolTeacher.class",
+        "schoolAdministrator.pathway",
+        "schoolAdministrator.class",
+        "schoolAdministrator.students",
+        "schoolAdministrator.teachers",
+        "schoolAdministrator.country",
+        "schoolAdministrator.state"
+
       ];
       break;
     case STEPS.PAYMENT_PLAN:
@@ -149,13 +215,32 @@ const Profile = () => {
       break;
   }
 
+  useEffect(() => {
+    getCountries().then(result => {
+      setCountries(result.data.data);
+    })
+  }, [])
+
+  const selectedStudentCountry = watch('student.country');
+  const selectedAdminCountry = watch('schoolAdministrator.country');
+
+  const selectedCountry = selectedRole === 'Administrator' ? selectedAdminCountry : selectedStudentCountry;
+
+  useEffect(() => {
+    if(selectedCountry !== "Select Country") {
+      getStates(selectedCountry).then(result => {
+        setCountryStates(result.data.data.states)
+      })
+    }
+  }, [selectedStudentCountry, selectedAdminCountry, selectedRole])
+
 
   const submitRegister = async (e: FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     let payload;
 
-    if (selectedRole==="") {
+    if (selectedRole === "") {
       payload = {
         action: "register",
         mail,
@@ -172,17 +257,41 @@ const Profile = () => {
     } else if (selectedRole === "Student") {
       payload = {
         action: "register",
-        mail:"demiladeala@gmail.com",
-        pass:"demi1234",
-        name: "demilade",
-        age:9,
-        class:"JSS3",
+        mail,
+        pass,
+        name: watch("schoolStudent.fullname"),
+        account_type: "school",
+        age:watch("schoolStudent.age"),
+        class:watch("schoolStudent.class"),
       }
     }
+    else if (selectedRole === "Teacher") {
+      payload = {
+        action: "register",
+        mail,
+        pass,
+        name: watch("schoolTeacher.fullname"),
+        account_type: "school",
+        students:watch("schoolTeacher.students"),
+        class:watch("schoolTeacher.class"),
+      }    
+    }
+    else if (selectedRole === "Administrator") {
+      payload = {
+        action: "register",
+        mail,
+        pass,
+        pathway: watch("schoolAdministrator.pathway"),
+        account_type: "school",
+        students:watch("schoolAdministrator.students"),
+        teachers:watch("schoolAdministrator.teachers"),
+        class:watch("schoolAdministrator.class"),
+        country:watch("schoolAdministrator.country"),
+        state:watch("schoolAdministrator.state")
+      }    
+    }
     try {
-      const response = await axiosInstance.post(`${API}/authentication/`, {
-       payload
-      },{
+      const response = await axiosInstance.post(`${API}/authentication/`,payload,{
         headers:{
           "Content-Type": "multipart/form-data",
         }
@@ -212,7 +321,25 @@ const Profile = () => {
         "schoolStudent.age",
         "schoolStudent.class",
       ];
-    } else {
+    } 
+     if (selectedRole === 'Teacher') {
+      fieldsToValidate = [
+        "schoolTeacher.fullname",
+        "schoolTeacher.students",
+        "schoolTeacher.class",
+      ];
+    }
+    if (selectedRole === 'Administrator') {
+      fieldsToValidate = [
+       "schoolAdministrator.country",
+       "schoolAdministrator.class",
+       "schoolAdministrator.pathway",
+       "schoolAdministrator.state",
+       "schoolAdministrator.students",
+       "schoolAdministrator.teachers",
+      ];
+    }
+    else {
       fieldsToValidate = [
         "student.fullname",
         "student.age",
@@ -228,9 +355,9 @@ const Profile = () => {
     }
   
     const isValid = await trigger(fieldsToValidate);
-    if (isValid) {
-      setStep((prev) => prev + 1);
-    }
+  if (isValid && isFormFilled()) {
+    setStep((prev) => prev + 1);
+  }
   };    
 
   const handleBack = () => {
@@ -268,7 +395,35 @@ const Profile = () => {
             errors={errors}
             isLoading={isLoading}
             submitRegister={submitRegister}
-            isFormFilled={isFormFilled}
+            isFormFilled={isFormFilled()}
+          />
+          </>
+        )
+      case 'Teacher' :
+        return (
+          <>
+          <SchoolTeacherInfo
+            register={register}
+            errors={errors}
+            isLoading={isLoading}
+            submitRegister={submitRegister}
+            isFormFilled={isFormFilled()}
+          />
+          </>
+        )
+      case 'Administrator' :
+        return (
+          <>
+           <StudentAdministratorInfo
+            register={register}
+            errors={errors}
+            isLoading={isLoading}
+            submitRegister={submitRegister}
+            isFormFilled={isFormFilled()}
+            countries={countries}
+            countryStates={countryStates}
+            pathway={pathway}
+            stage={stage}
           />
           </>
         )
@@ -328,7 +483,7 @@ const Profile = () => {
             </div>
           )}
 
-          <div className="w-full px-4 md:px-20">
+          {/* <div className="w-full px-4 md:px-20">
             {/* <ProgressBar
               steps={[
                 { title: "Student Information" },
@@ -336,14 +491,20 @@ const Profile = () => {
                 { title: "Payment description" },
               ]}
               currentStep={step}
-            /> */}
-          </div>
+            /> 
+          </div> */}
           <div className="mx-auto w-full px-4 lg:px-20 max-w-3xl">
             <div>
               <h2 className={`text-2xl font-bold leading-9 tracking-tight text-gray-900
-                ${selectedRole!=="" ? "" : "mt-8"}`}>
+                ${selectedRole!=="" ? "max-lg:mt-8" : "mt-8"}`}>
                 {step === STEPS.STUDENT_INFO
-                  ? "Student Profile"
+                  ? selectedRole === "Student"
+                  ? "Create Student Profile"
+                  : selectedRole === "Teacher"
+                  ? "Create Teacher Profile"
+                  : selectedRole === "Administrator"
+                  ? "Create Profile"
+                  : "Student Profile"
                   : step === STEPS.PAYMENT_PLAN
                   ? "Choose a plan"
                   : "Payment Description"}
