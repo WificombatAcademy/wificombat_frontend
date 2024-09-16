@@ -5,20 +5,20 @@ type Props = {
     bgColor: string;
     title: string;
     star: string;
+    list: string[];
 }
 
 const listItems = [
-    "Lorem ipsum dolor sit amet c1",
-    "Lorem ipsum dolor sit amet c2",
-    "Lorem ipsum dolor sit amet c3",
-    "Lorem ipsum dolor sit amet c4",
-    "Lorem ipsum dolor sit amet c5",
-    "Lorem ipsum dolor sit amet c6",
-    "Lorem ipsum dolor sit amet c7",
-    "Lorem ipsum dolor sit amet c8"
+    "Introduction to algorithm and LightBot",
+    "Getting Started with programming on Pictoblox",
+    "Introduction to MBlock",
+    "Basic Programming Concepts",
+    "Getting Started with Bitsbox",
+    "Multimedia and Animations",
+    "Events in JavaScript",
 ];
 
-export const CurriculumCard = ({bgColor, borderColor, title, star}: Props) => {
+export const CurriculumCard = ({bgColor, borderColor, title, star, list}: Props) => {
     return (
         <div className={`w-full py-6 px-4 rounded-3xl border-t-4 ${borderColor} ${bgColor}`}>
             <div className="w-full flex items-center justify-center">
@@ -28,8 +28,8 @@ export const CurriculumCard = ({bgColor, borderColor, title, star}: Props) => {
                 <h3 className="w-full mt-4 text-center font-semibold text-2xl">{title}</h3>
 
                 <ul className="mt-5 space-y-3">
-                    {listItems.map((item, index) => (
-                        <div key={index} className="flex items-center justify-center gap-2 mx-auto">
+                    {list.map((item, index) => (
+                        <div key={index} className="flex items-start justify-start gap-2 mx-auto">
                             <Image src={star} 
                             width={24} 
                             height={24} 

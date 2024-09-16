@@ -45,7 +45,7 @@ const testimonialData = [
 export const Testimonials = () => {
   const [activeSlide, setActiveSlide] = useState(0);
   return (
-    <div className="w-full py-7 md:py-10 bg-black-500">
+    <div className="w-full py-7 md:py-10 lg:pb-40 bg-black-500">
         <div
             className="w-[93%] md:w-[88%] mx-auto mt-3 flex max-[330px]:flex-col 
             flex-row items-center justify-center gap-2 md:gap-4">
@@ -57,10 +57,12 @@ export const Testimonials = () => {
         </div>
 
         <div className="mt-14 w-[93%] md:w-[90%] lg:w-[88%] mx-auto">
-            <div className="md:w-[75%] mx-auto text-center text-white border">
+            <div className="mx-auto text-center text-white">
                 <Swiper
                 autoplay={{delay: 10000}}
                 modules={[ Autoplay ]}
+                spaceBetween={20}
+                centeredSlides
                 onActiveIndexChange={
                     (swiper) => setActiveSlide(swiper.realIndex)
                 }>
@@ -68,21 +70,55 @@ export const Testimonials = () => {
                         <SwiperSlide 
                         key={index}
                         className={``}>
-                            <div className="flex flex-col md:flex-row gap-4 md:gap-2">
-                                <FaQuoteLeft size={40} className="flex-shrink-0 max-md:mx-auto" />
-                                <p className="font-medium md:text-xl">
-                                {testimonial.testimonial}{" "}
-                                </p>
-                            </div>
+                           <div className="bg-white text-black-500 rounded-xl py-3 px-4">
+                                <div className="flex items-center gap-4">
+                                    <div
+                                    key={index}
+                                    className={`relative max-[350px]:w-[55px] max-[350px]:h-[55px] w-[60px] h-[60px] 
+                                        md:w-[80px] md:h-[80px] lg:w-[90px] lg:h-[90px] rounded-full border-4
+                                        ${index === activeSlide ? "border-4 border-purple-500": ""}`}
+                                    >
+                                        <div className="image-container w-full h-full">
+                                            <Image
+                                            width={320}
+                                            height={480}
+                                            src={testimonial.image}
+                                            alt={`testimonial ${index + 1}`}
+                                            className="object-cover w-full h-full rounded-full"
+                                            />
+                                        </div>
+                                    </div>
 
-                            <h2 className="mt-6 md:mt-8 text-2xl md:text-3xl font-semibold">
-                                {testimonial.name}
-                            </h2>
-                            <h4 className="mt-5 text-lg md:text-xl">{testimonial.role}</h4>
+                                   <div>
+                                        <h2 className="mt-6 md:mt-8 text-2xl md:text-3xl font-semibold">
+                                        {testimonial.name}
+                                        </h2>
+                                        <h4 className="mt-5 text-lg md:text-xl">{testimonial.role}</h4>
+                                   </div>
+                                </div>
+
+                                <div className="mt-4 flex flex-col md:flex-row gap-4 md:gap-2">
+                                    <FaQuoteLeft size={40} className="flex-shrink-0 max-md:mx-auto" />
+                                    <p className="font-medium md:text-">
+                                    {testimonial.testimonial}{" "}
+                                    </p>
+                                </div>
+                           </div>
                         </SwiperSlide>
                     ))}
-                    
-                    <div className="mt-14 mb-40 flex items-center justify-center">
+                
+                </Swiper>
+
+            </div>
+        </div>
+
+    </div>
+  );
+};
+
+
+
+{/* <div className="mt-14 mb-40 flex items-center justify-center">
                         <div className="flex items-center gap-2 md:gap-6">
                             {testimonialData.map((testImage, index) => (
                             <div
@@ -103,12 +139,4 @@ export const Testimonials = () => {
                                 </div>
                             ))}
                         </div>
-                    </div>
-                </Swiper>
-
-            </div>
-        </div>
-
-    </div>
-  );
-};
+                    </div> */}

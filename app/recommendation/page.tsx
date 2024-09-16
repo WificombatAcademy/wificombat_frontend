@@ -7,10 +7,12 @@ import Link from "next/link";
 import RecommendationDesign from "../components/AssessmentComps/recommendation-design";
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from "react";
+import { useMain } from "../context/MainContext";
 
 export default function RecommendationPage() {
     const router = useRouter();
     const [recommendation, setRecommendation] = useState<any>(null);
+    const {name} = useMain();
 
     useEffect(() => {
         const { search } = window.location;
@@ -33,7 +35,10 @@ export default function RecommendationPage() {
                 <RecommendationDesign />
 
                 <div className="relative z-[5] w-[90%] md:w-[70%] lg:w-[65%] mx-auto">
-                    <h1 className="pt-14 md:pt-20 lg:pt-28 text-center font-semibold text-xl md:text-2xl lg:text-3xl">
+                    <h1 className="pt-14 md:pt-20 lg:pt-28 text-2xl lg:text-4xl font-bold text-center">
+                        {name}'s Assessment
+                    </h1>
+                    <h1 className="mt-4 text-center text-xl md:text-2xl lg:text-3xl">
                     {recommendation.best_pathway.reason}
                     </h1>
                 </div>
@@ -102,6 +107,7 @@ export default function RecommendationPage() {
                                 Skill Alignment
                             </h3>
                             <p className="mt-4 text-lg md:text-xl">
+                            Coming Soon!
                             </p>
                         </div>
 
@@ -110,6 +116,7 @@ export default function RecommendationPage() {
                                 Career Outlook
                             </h3>
                             <p className="mt-4 text-lg md:text-xl">
+                            Coming Soon!
                             </p>
                         </div>
 
@@ -118,6 +125,7 @@ export default function RecommendationPage() {
                                 Next Step
                             </h3>
                             <p className="mt-4 text-lg md:text-xl">
+                            Coming Soon!
                             </p>
                         </div>
                         {/* Additional sections can be added here */}

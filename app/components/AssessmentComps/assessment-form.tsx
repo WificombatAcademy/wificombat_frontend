@@ -10,6 +10,7 @@ import axiosInstance from "@/app/utils/auth-interceptor";
 import toast, { Toaster } from "react-hot-toast";
 import { merriweather } from "@/app/fonts";
 import { RiLoader4Fill } from "react-icons/ri";
+import { useMain } from "@/app/context/MainContext";
 
 type Option = {
     [key: string]: number;
@@ -31,6 +32,7 @@ type Response = {
 
 const AssessmentForm = () => {
     const router = useRouter();
+    const {setUsername} = useMain();
     const [recommendation, setRecommendation] = useState<any>(null);
     const [loading, setLoading] = useState(true);
     const [submitting, setSubmitting] = useState(false);
@@ -62,6 +64,7 @@ const AssessmentForm = () => {
             try {
             setSubmitting(true);
                 const response = await axiosInstance.post(`${API}/assessment/ai/`, { responses, age: selectedAge });
+                setUsername(name);
                 setRecommendation(response.data);
                 const queryParams = new URLSearchParams({
                     data: JSON.stringify(response.data),

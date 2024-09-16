@@ -6,12 +6,14 @@ interface MainContextType {
   successfulSignup: boolean;
   successfulReg: boolean;
   selectedRole: string;
+  name:string;
   paymentOption: string;
   setSuccessfulSignup: React.Dispatch<React.SetStateAction<boolean>>;
   setSuccessfulReg: React.Dispatch<React.SetStateAction<boolean>>;
   setToggleSidebar: React.Dispatch<React.SetStateAction<boolean>>;
   setSelectedRole: React.Dispatch<React.SetStateAction<string>>;
   setPaymentOption: React.Dispatch<React.SetStateAction<string>>;
+  setUsername: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const MainContext = createContext<MainContextType | undefined>(undefined);
@@ -22,6 +24,7 @@ export const MainProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [successfulReg, setSuccessfulReg] = useState(false);
   const [selectedRole, setSelectedRole] = useState('');
   const [paymentOption, setPaymentOption] = useState('');
+  const [name, setUsername] = useState('');
 
   useEffect(() => {
     // Only run this code on the client side
@@ -52,6 +55,8 @@ export const MainProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       successfulReg,
       paymentOption,
       setPaymentOption,
+      name,
+      setUsername
        }}>
       {children}
     </MainContext.Provider>
