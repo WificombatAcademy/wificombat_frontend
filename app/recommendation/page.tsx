@@ -36,7 +36,7 @@ export default function RecommendationPage() {
 
                 <div className="relative z-[5] w-[90%] md:w-[70%] lg:w-[65%] mx-auto">
                     <h1 className="pt-14 md:pt-20 lg:pt-28 text-2xl lg:text-4xl font-bold text-center">
-                        {name}'s Assessment
+                        {name}&apos;s Assessment
                     </h1>
                     <h1 className="mt-4 text-center text-xl md:text-2xl lg:text-3xl">
                     {recommendation.best_pathway.reason}
