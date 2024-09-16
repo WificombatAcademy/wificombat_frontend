@@ -20,19 +20,19 @@ const slides = [
 
     {heading1: "Explore the Multimedia Pathway", 
     heading2: `Your Journey in Multimedia Starts Here! Join our program to become a skilled Animator, Illustrator, and 2D & 3D Designer. Shape your creative future with us.`,
-    bgColor: "bg-purple-500", buttonBlack: true, img:"" },
+    bgColor: "bg-purple-500", buttonBlack: true, img:"/hero-3.png" },
 
     {heading1: "Navigate the AI Career Pathway", 
     heading2: `Dive into the exciting world of artificial intelligence. Gain expertise, innovate, and lead the way in AI technology with our specialized career pathway.`,
-    bgColor: "bg-black-500", buttonBlack: false, img: "" },
+    bgColor: "bg-black-500", buttonBlack: false, img: "/hero-4.png" },
 
     {heading1: "Dive into the Robotics and IoT Career Pathway", 
     heading2: `Step into the world of Robotics and IoT with our exclusive career pathway program. Design and implement groundbreaking technologies`,
-    bgColor: "bg-blue-500", buttonBlack: true, img:"" },
+    bgColor: "bg-blue-500", buttonBlack: true, img:"/hero-5.png" },
 
     {heading1: "Navigate the  Techprenuership Career Pathway", 
      heading2: `Lorem ipsum dolor sit amet consectetur. Nunc et aenean imperdiet dignissim suspendisse in. Pretium ante adipiscing sed amet eget sed in. Parturient t`,
-    bgColor: "bg-yellow-500", buttonBlack: true, img:"" },
+    bgColor: "bg-yellow-500", buttonBlack: true, img:"/hero-6.png" },
 ]
 
 export const Hero = () => {
@@ -87,7 +87,7 @@ export const Hero = () => {
                                     alt={slide.img ?? ""}
                                     width={500}
                                     height={500}
-                                    className="w-full h-full object-cover border-none"
+                                    className="w-full h-[570px] object-contain border-none"
                                     />}
                                 </div>
 

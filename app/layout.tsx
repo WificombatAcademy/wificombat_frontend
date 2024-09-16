@@ -4,6 +4,8 @@ import Providers from "./utils/progress-bar";
 import { raleway } from "./fonts";
 import { MainProvider } from "./context/MainContext";
 import { AuthProvider } from "./context/AuthContext";
+import SuccessModal from "./utils/success-modal";
+import RegModal from "./utils/reg-modal";
 
 export const metadata: Metadata = {
   title: "Wificombat-Elearning",
@@ -22,6 +24,8 @@ export default function RootLayout({
           <MainProvider>
             <body className={raleway.className}>
               {children}
+              <SuccessModal />
+              <RegModal />
             </body>
           </MainProvider>
         </AuthProvider>

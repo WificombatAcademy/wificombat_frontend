@@ -6,7 +6,7 @@ type Props = {
     register:any;
     errors: any;
     isLoading:boolean;
-    submitRegister: (e: FormEvent) => Promise<void>;
+    submitRegister: (e: FormEvent, paymentOption: string) => Promise<void>; 
     isFormFilled: boolean;
     countries: Array<{ name: string }>;
     countryStates: Array<{ name: string; state_code: string }>;
@@ -273,11 +273,28 @@ const StudentAdministratorInfo = ({
         </div>
         </div>
 
-        <div className="mt-10 lg:mt-14">
+        <div className="mt-10 lg:mt-14 flex items-center justify-between gap-8">
         <button
             type="submit"
-            onClick={submitRegister}
-            // disabled={!isFormFilled}
+            onClick={(e) => submitRegister(e, 'payLater')}
+            disabled={!isFormFilled}
+            className="flex w-full items-center justify-center text-center rounded-md disabled:border-[#B1B1B4]
+            disabled:bg-[#fff] text-[#131314] border border-[#131314] p-4 text-sm font-semibold leading-6 
+            shadow-sm hover:bg-purple-50 focus-visible:outline disabled:text-[#B1B1B4]
+            focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600"
+        >
+            {isLoading? 
+            <div className="flex items-center gap-1">
+            Registering
+            <RiLoader4Fill size={24} className="animate-spin"/>
+            </div> : 
+            "Pay Later"}
+        </button>
+
+        <button
+            type="submit"
+            onClick={(e) => submitRegister(e, 'payNow')}
+            disabled={!isFormFilled}
             className="flex w-full items-center justify-center text-center rounded-md disabled:bg-[#B1B1B4] 
             active:bg-[#131314] bg-[#131314] p-4 text-sm font-semibold leading-6 
             text-white shadow-sm hover:bg-purple-500 focus-visible:outline 

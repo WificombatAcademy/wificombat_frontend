@@ -86,7 +86,7 @@ let fieldsToValidate: FormFields[] = [];
 
 const Profile = () => {
   const router = useRouter();
-  const {selectedRole} = useMain();
+  const {selectedRole, setSuccessfulReg, setPaymentOption} = useMain();
   const {mail, pass} = useAuth();
   const [countries, setCountries] = useState([]);
   const [countryStates, setCountryStates] = useState([]);
@@ -146,7 +146,7 @@ const Profile = () => {
       case "":
         const studentValues = getValues("student");
         return !!(
-          studentValues.fullname.trim() &&
+          studentValues.fullname.trim().split(" ").length >= 2 &&
           studentValues.age > 0 &&
           studentValues.country.trim() &&
           studentValues.state.trim() &&
@@ -156,14 +156,14 @@ const Profile = () => {
       case "Student":
         const schoolStudentValues = getValues("schoolStudent");
         return !!(
-          schoolStudentValues.fullname.trim() &&
+          schoolStudentValues.fullname.trim().split(" ").length >= 2 &&
           schoolStudentValues.age > 0 &&
           schoolStudentValues.class.trim()
         );
       case "Teacher":
         const teacherValues = getValues("schoolTeacher");
         return !!(
-          teacherValues.fullname.trim() &&
+          teacherValues.fullname.trim().split(" ").length >= 2 &&
           teacherValues.class.trim() &&
           teacherValues.students > 0
         );
@@ -182,6 +182,17 @@ const Profile = () => {
     }
   };
   
+  const watchFields = watch(["student.fullname", "student.age", "student.country", "student.state", "student.pathway", "student.stage"]);
+
+  const isStudentFormFilled = !!(
+    watchFields[0].trim().split(" ").length >= 2 && // Fullname validation
+    watchFields[1] > 0 && // Age validation
+    watchFields[2].trim() && // Country validation
+    watchFields[3].trim() && // State validation
+    watchFields[4].trim() && // Pathway validation
+    watchFields[5].trim()   // Stage validation
+  );
+
   
 
   switch (step) {
@@ -235,7 +246,7 @@ const Profile = () => {
   }, [selectedStudentCountry, selectedAdminCountry, selectedRole])
 
 
-  const submitRegister = async (e: FormEvent) => {
+  const submitRegister = async (e: FormEvent, paymentOption:string) => {
     e.preventDefault();
     setIsLoading(true);
     let payload;
@@ -301,8 +312,14 @@ const Profile = () => {
       if (response.data.success === false) {
         toast.error(response.data.message || "Registration failed. Please try again.");
       } else {
+        if (paymentOption === 'payLater') {
+          setPaymentOption("payLater");
+          setSuccessfulReg(true);
+        } else if (paymentOption === 'payNow') {
+          setPaymentOption("payNow");
+          setSuccessfulReg(true);
+        }
         toast.success("Registration successful");
-        router.push("/login");
       }
     } catch (error: any) {
       console.error("Signup error:", error);
@@ -355,9 +372,12 @@ const Profile = () => {
     }
   
     const isValid = await trigger(fieldsToValidate);
-  if (isValid && isFormFilled()) {
-    setStep((prev) => prev + 1);
-  }
+    if (isValid && isFormFilled()) {
+      setStep((prev) => prev + 1);
+    }
+
+    console.log('Validation result:', await trigger(fieldsToValidate));
+    console.log('Current form values:', getValues());
   };    
 
   const handleBack = () => {
@@ -379,7 +399,7 @@ const Profile = () => {
             errors={errors}
             isLoading={isLoading}
             submitRegister={submitRegister}
-            isFormFilled={isFormFilled()}
+            isFormFilled={isStudentFormFilled}
             countries={countries}
             countryStates={countryStates}
             pathway={pathway}
@@ -429,6 +449,7 @@ const Profile = () => {
         )
     }
   }
+
   
 
   return (

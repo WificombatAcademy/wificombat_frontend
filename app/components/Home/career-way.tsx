@@ -1,9 +1,10 @@
+import Image from "next/image";
 import HeadingDesign from "../general/HeaderDesign";
 
 export const CareerPathway = () => {
   return (
     <section className="relative">
-      <HeadingDesign heading="Career Pathways" />
+      <HeadingDesign heading="About Career Pathways" />
 
       <div className="mt-12 md:mt-16 lg:mt-20 xl:mt-[5.5rem] mb-20 w-[93%] md:w-[90] lg:w-[88%] mx-auto">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-10 lg:gap-16">
@@ -28,7 +29,16 @@ export const CareerPathway = () => {
           </div>
 
           <div className="w-full md:basis-[50%]">
-            <div className="w-full h-[350px] 2xl:h-[350px] min-[2000px]:h-[380px] bg-primary-gray rounded-2xl"></div>
+            <div className="w-full h-[350px] 2xl:h-[350px] min-[2000px]:h-[380px]
+             bg-primary-gray rounded-2xl">
+                <Image
+                  src={`/pathway.png`}
+                  alt="pathway-image"
+                  width={514}
+                  height={348}
+                  className="w-full h-full object-cover rounded-2xl"
+                />
+            </div>
           </div>
         </div>
       </div>

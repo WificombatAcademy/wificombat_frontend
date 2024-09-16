@@ -16,7 +16,7 @@ const coursesData = [
     id: 1,
     level: "Beginner",
     duration: "4 weeks",
-    title: "Artificial Intelligence: The Basics of Artificial Intelligence",
+    title: "Coding fundamental 1 (Lightbot and Mblock)",
     link: "/registration",
   },
 
@@ -24,7 +24,7 @@ const coursesData = [
     id: 2,
     level: "Beginner",
     duration: "4 weeks",
-    title: "Artificial Intelligence: The Basics of Artificial Intelligence",
+    title: "Coding fundamental 2 (Lightbot and Mblock)",
     link: "/registration",
   },
 
@@ -32,7 +32,7 @@ const coursesData = [
     id: 3,
     level: "Beginner",
     duration: "4 weeks",
-    title: "Artificial Intelligence: The Basics of Artificial Intelligence",
+    title: "",
     link: "/registration",
   },
 
@@ -40,7 +40,7 @@ const coursesData = [
     id: 4,
     level: "Beginner",
     duration: "4 weeks",
-    title: "Artificial Intelligence: The Basics of Artificial Intelligence",
+    title: "Coding fundamental 3 (Lightbot and Mblock)",
     link: "/registration",
   },
 
@@ -48,10 +48,11 @@ const coursesData = [
     id: 5,
     level: "Beginner",
     duration: "4 weeks",
-    title: "Artificial Intelligence: The Basics of Artificial Intelligence",
+    title: "",
     link: "/registration",
   },
 ];
+
 
 export const HomeCourses = () => {
   const [activeSlide, setActiveSlide] = useState(0);
@@ -111,7 +112,7 @@ export const HomeCourses = () => {
                 <div className="flex-shrink-0 absolute w-full h-[550px] md:h-[500px] lg:h-[550px] bottom-0 bg-purple-500 left-5 rounded-2xl max-lg:hidden"></div>
               </div>
               <div className="z-[2] relative h-[550px] md:h-[500px] lg:h-[550px] bg-white p-6 text-2xl shadow-lg rounded-2xl">
-                <div className="w-full h-[240px] bg-black-300 rounded-2xl border border-purple-500"></div>
+                <div className="w-full h-[240px] bg-blue-500 rounded-2xl border border-purple-500"></div>
 
                 <div className="mt-4 w-full flex items-center justify-between">
                   <div className="flex items-center gap-2 text-black-600">

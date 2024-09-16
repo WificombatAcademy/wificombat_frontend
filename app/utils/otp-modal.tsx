@@ -7,7 +7,6 @@ import { API } from './types-and-links';
 import toast, { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import axiosInstance from './auth-interceptor';
-import SuccessModal from './success-modal';
 import { useMain } from '../context/MainContext';
 
 export type ModalProps = {

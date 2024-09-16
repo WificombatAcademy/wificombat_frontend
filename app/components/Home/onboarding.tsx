@@ -24,7 +24,12 @@ export const Onboarding = () => {
                 "Learn how to create compelling business plans, deliver persuasive pitches, and understand financial basics. ",
                 "Master the art of networking and building investor relationships to gain confidence from potential backers. ",
                 "Turn your innovative ideas into a successful, well-funded tech venture and start shaping your future today."]}
-            reverse={true}/>
+            reverse={true}
+            image="/hero-6.png"
+            imageWidth={567}
+            imageHeight={491}
+            widthStyle="w-full h-full relative lg:left-[3.4rem]"
+            />
 
             <OnboardingCard 
             buttonText="Learn More" 
