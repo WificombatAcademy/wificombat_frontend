@@ -253,8 +253,6 @@ const Page = () => {
 
                         {isSuccessModalOpen && (
                         <SuccessModal 
-                        isOpen={isSuccessModalOpen}
-                        onClose={() => setIsSuccessModalOpen(false)}
                         />
                     )}
                     </div>

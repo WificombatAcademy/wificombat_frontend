@@ -6,6 +6,7 @@ import { FaQuoteLeft } from "react-icons/fa";
 import "swiper/css";
 import "swiper/css/autoplay";
 import { useState } from "react";
+import { merriweather } from "@/app/fonts";
 
 const testimonialData = [
 
@@ -48,16 +49,15 @@ export const Testimonials = () => {
         <div
             className="w-[93%] md:w-[88%] mx-auto mt-3 flex max-[330px]:flex-col 
             flex-row items-center justify-center gap-2 md:gap-4">
-            <div className="bg-white py-4 px-5 font-semibold text-lg md:text-2xl rounded-3xl">
-            TESTIMONIALS
-            </div>
-            <div className="text-white font-semibold text-lg md:text-2xl">
-            FROM OUR USERS
+            {/* <div className="bg-white py-4 px-5 font-semibold text-lg md:text-2xl rounded-3xl">
+            </div> */}
+            <div className={`${merriweather.className} text-white font-semibold text-lg md:text-2xl`}>
+            TESTIMONIALS FROM OUR USERS
             </div>
         </div>
 
         <div className="mt-14 w-[93%] md:w-[90%] lg:w-[88%] mx-auto">
-            <div className="md:w-[75%] mx-auto text-center text-white">
+            <div className="md:w-[75%] mx-auto text-center text-white border">
                 <Swiper
                 autoplay={{delay: 10000}}
                 modules={[ Autoplay ]}
