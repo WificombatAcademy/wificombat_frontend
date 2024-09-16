@@ -54,11 +54,11 @@ export const SchoolCurriculum = ({dontShowOnboarding}: Props) => {
             star="/star-3.svg"
             list={["Web Development basics",
               "Building Web Pages",
-              "Introduction to MBlock",
-              "Basic Programming Concepts",
-              "Getting Started with Bitsbox",
-              "Multimedia and Animations",
-              "Events in JavaScript",]}
+              "Introduction to Styling",
+              "Introduction to SASS",
+              "Introduction to JavaScript Basics",
+              "Introduction to Bootstrap",
+              "Version Control (Git & Github)",]}
           />
         </div>
 

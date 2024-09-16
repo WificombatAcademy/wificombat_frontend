@@ -62,7 +62,7 @@ export const Testimonials = () => {
                 autoplay={{delay: 10000}}
                 modules={[ Autoplay ]}
                 spaceBetween={20}
-                centeredSlides
+                slidesPerView={3}
                 onActiveIndexChange={
                     (swiper) => setActiveSlide(swiper.realIndex)
                 }>
