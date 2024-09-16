@@ -18,18 +18,21 @@ export const IntroducingCareerPath = () => {
             bgColor="bg-purple-50"
             title="Beginner (Level 1)"
             star="/star-1.svg"
+            list={[""]}
           />
           <CurriculumCard
             borderColor="border-blue-500"
             bgColor="bg-blue-50"
             title="Intermediary"
             star="/star-2.svg"
+            list={[""]}
           />
           <CurriculumCard
             borderColor="border-black-500"
             bgColor="bg-black-50"
             title="Advanced"
             star="/star-3.svg"
+            list={[""]}
           />
         </div>
       </div>
