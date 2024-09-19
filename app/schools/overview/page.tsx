@@ -14,7 +14,6 @@ export default function Page() {
       <GeneralNavbar />
       <StudentsHero 
       headerOne="Lorem ipsum dolor sit amet consectetur."
-      headerThree="Lorem ipsum dolor sit amet consectetur."
       headerTwo="Lorem ipsum dolor sit amet consectetur. A integer viverra libero sit. Adipiscing vel 
       at non platea posuere massa porttitor. Viverra purus luctus posuere massa neque laoreet sed viverra."
       text="student-overview.png"

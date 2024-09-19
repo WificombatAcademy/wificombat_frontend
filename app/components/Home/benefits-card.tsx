@@ -22,7 +22,7 @@ export const BenefitCard = ({col, desc, borderColor, bgColor, title, noCircle, i
                         alt={image}
                         width={32}
                         height={32}
-                        className=" object-cover"
+                        className="w-7 object-contain"
                     />}
                     </div>
                 }
