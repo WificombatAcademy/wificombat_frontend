@@ -9,7 +9,7 @@ type CareerPathwayCurriculumProps = {
   schoolCurriculum?: boolean;
 };
 
-const levels: CurriculumLevel[] = ["Beginner", "Intermediate", "Advanced"];
+// const levels: CurriculumLevel[] = ["Beginner", "Intermediate", "Advanced"];
 
 export const CareerPathwayCurriculum = ({schoolCurriculum}: CareerPathwayCurriculumProps) => {
   const [activePathIndex, setActivePathIndex] = useState(0);
@@ -29,8 +29,14 @@ export const CareerPathwayCurriculum = ({schoolCurriculum}: CareerPathwayCurricu
       }
     } 
 
-    fetchPathways();
+    fetchPathways()
   }, [])
+
+  const levelNames = schoolCurriculum
+  ? { Beginner: "Elementary", Intermediate: "Junior High School", Advanced: "Senior High School" }
+  : { Beginner: "Beginner", Intermediate: "Intermediate", Advanced: "Advanced" };
+
+  const levels: CurriculumLevel[] = ["Beginner", "Intermediate", "Advanced"];
   
 
   return (
@@ -47,7 +53,7 @@ export const CareerPathwayCurriculum = ({schoolCurriculum}: CareerPathwayCurricu
                   className={`cursor-pointer ${selectedLevel === level ? "text-purple-500 border-b-4 border-purple-500" : ""}`}
                   onClick={() => setSelectedLevel(level)}
                 >
-                  {level}
+                 {levelNames[level]}
                 </h2>
               ))}
           </div>

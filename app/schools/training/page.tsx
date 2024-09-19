@@ -10,7 +10,7 @@ export default function Page() {
     <div className="mx-auto relative container w-full max-w-[2000px]">
       <GeneralNavbar />
       <StudentsHero 
-      text=""
+      text="school-training.png"
       headerOne="Lorem ipsum dolor sit amet consectetur."
       headerTwo="Lorem ipsum dolor sit amet consectetur. A integer viverra libero sit. Adipiscing vel 
       at non platea posuere massa porttitor. Viverra purus luctus posuere massa neque laoreet sed viverra."
