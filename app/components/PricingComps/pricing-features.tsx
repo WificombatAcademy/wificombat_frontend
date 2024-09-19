@@ -21,45 +21,51 @@ export const PricingFeatures = () => {
                 <table className="min-w-full">
                     <thead>
                     <tr>
-                        <th className="text-lg lg:text-2xl lg:px-4 py-2 pb-10 text-left">Features</th>
-                        <th className="text-lg lg:text-2xl lg:px-4 py-2 pb-10 text-left">Monthly</th>
-                        <th className="text-lg lg:text-2xl lg:px-4 py-2 pb-10 text-left">Quarterly</th>
-                        <th className="text-lg lg:text-2xl lg:px-4 py-2 pb-10 text-left">Yearly</th>
+                        <th className="pr-4 lg:text-2xl lg:px-4 py-2 pb-10 text-left">Features</th>
+                        <th className="px-4 lg:text-2xl lg:px-4 py-2 pb-10 text-center">Monthly</th>
+                        <th className="px-4 lg:text-2xl lg:px-4 py-2 pb-10 text-center">Quarterly</th>
+                        <th className="px-4 lg:text-2xl lg:px-4 py-2 pb-10 text-center">Yearly</th>
                     </tr>
                     </thead>
                     <tbody>
                     {data.map((row) => (
                         <tr key={row.id} className="mt-9">
-                        <td className="p-4">{row.feature}</td>
+                        <td className="py-4">{row.feature}</td>
                         <td className="p-4 text-center">
                             {row.monthly != "" && 
+                            <div className="w-full flex items-center justify-center">
                             <Image 
-                            alt="checkmark"
-                            src={row.monthly}
-                            width={24}
-                            height={24}
-                            className="object-contain"
-                            />}
+                           alt="checkmark"
+                           src={row.monthly}
+                           width={24}
+                           height={24}
+                           className="object-contain"
+                           />
+                           </div>}
                         </td>
                         <td className="p-4 text-center">
                             {row.quarterly != "" && 
-                            <Image 
+                           <div className="w-full flex items-center justify-center">
+                             <Image 
                             alt="checkmark"
                             src={row.quarterly}
                             width={24}
                             height={24}
                             className="object-contain"
-                            />}
+                            />
+                            </div>}
                         </td>
                         <td className="p-4 text-center">
                            {row.yearly != "" &&
-                            <Image 
+                             <div className="w-full flex items-center justify-center">
+                             <Image 
                             alt="checkmark"
                             src={row.yearly}
                             width={24}
                             height={24}
                             className="object-contain"
-                            />}
+                            />
+                            </div>}
                         </td>
                         </tr>
                     ))}

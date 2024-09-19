@@ -28,7 +28,7 @@ export const BenefitCard = ({col, desc, borderColor, bgColor, title, noCircle, i
                 }
 
                 <div className={``}>
-                <h3 className="text-lg md:text-2xl text-black-500 font-semibold">{title}</h3>
+                <h3 className="text-lg md:text-[22px] text-black-500 font-semibold">{title}</h3>
                 <p className="pt-4 text-black-700">{desc}</p>
                 </div>
             </div>

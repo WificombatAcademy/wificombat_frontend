@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css";
 import "swiper/css/navigation";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
+import Image from "next/image";
 
 const certificates = [
     "Game Design",
@@ -67,7 +68,14 @@ export const CurriculumCertification = () => {
                         key={index}
                         >
                             <div className="flex flex-col items-center gap-3">
-                                <div className="w-full h-[230px] bg-primary-gray rounded-2xl"></div>
+                                {/* <div className="w-full h-[230px] bg-primary-gray rounded-2xl"></div> */}
+                                <Image 
+                                src={`/certificate.png`}
+                                alt="certification"
+                                width={350}
+                                height={247}
+                                className={`w-full h-[230px] rounded-2xl`}
+                                />
                                 <p className="text-black-500 font-semibold text-2xl md:text-3xl">{certificate}</p>
                             </div>
                         </SwiperSlide>
