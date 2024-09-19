@@ -33,7 +33,7 @@ const StepItem = ({ number, title, description, image, courseslist, isLast }:
                     </div>
                 )}
                 <div className="relative w-[4rem] h-[5rem] md:w-[6rem] md:h-[7rem] ">
-                    <div className="polygon w-full h-full flex items-center justify-center bg-purple-50 border ">
+                    <div className="roadmap-polygon w-full h-full flex items-center justify-center bg-purple-50 border ">
                         <div className="text-2xl font-bold">{number}</div>
                     </div>
                 </div>
@@ -57,10 +57,11 @@ const StepItem = ({ number, title, description, image, courseslist, isLast }:
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.5 }}
                     >
-                        <div className="w-full flex flex-row items-center gap-7">
+                        <div className="w-full flex flex-col md:flex-row items-center gap-7">
                             <div className="w-full md:basis-[60%]">
-                                <h4 className="mt-8 md:mt-12 mb-2 font-semibold text-black-500 text-lg md:text-xl">Courses they will learn</h4>
-                                <div className="grid grid-cols-2 gap-5">
+                                <h4 className="mt-8 md:mt-12 mb-2 font-semibold text-black-500 text-lg md:text-xl">
+                                    Courses they will learn</h4>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                                     {courseslist.map((list, index) => (
                                         <ul key={index} className="flex gap-2 list-disc">
                                             <li className="md:w-[80%] text-black-500 md:text-lg ml-4">{list}</li>

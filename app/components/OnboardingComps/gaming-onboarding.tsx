@@ -8,21 +8,30 @@ export const GamingOnboarding = () => {
                 checkmark
                 title={"\"Let's Create Something Awesome!\""}
                 listdesc={[
-                    "Gravida ultrices integer massa eget ut ipsum n.",
-                    "Viverra et dui quis interdum eu pulvinar viverra.",
-                    "Phasellus eget leo vitae egestas tincidunt vi.",
-                    "Lectus mauris enim praesent scelerisque ultr.",]}
+                    "Interactive gaming exercises and tutorials",
+                    "Gamified learning experiences",
+                    "Project-based learning with real-world applications",
+                    "Creative challenges with gaming elements",]}
                 reverse={true}
+                image="/assets/pathway/gaming-laptop.png"
+                imageHeight={400}
+                imageWidth={450}
+                widthStyle="max-md:w-[250px] object-contain"
                 />
 
                 <OnboardingCard 
                 checkmark
                 title="Gaming Tools & Resources"
+                subdesc="Gaming tools and resources that is used for the gaming pathway"
                 listdesc={[
-                    "Gravida ultrices integer massa eget ut ipsum n.",
-                    "Viverra et dui quis interdum eu pulvinar viverra.",
-                    "Phasellus eget leo vitae egestas tincidunt vi.",
-                    "Lectus mauris enim praesent scelerisque ultr.",]}
+                    "Roblox",
+                    "Gdevelop",
+                    "Manu Game",
+                    "Unity Engine",]}
+                    image="/assets/pathway/gaming-tools.png"
+                    imageHeight={220}
+                    imageWidth={310}
+                    widthStyle="max-md:w-[200px] object-contain"
                 />
             </div>
         </section>

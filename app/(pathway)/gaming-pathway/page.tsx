@@ -5,7 +5,7 @@ import { TodayComp } from "../../components/CodingPathwayComps/today-comp";
 import { WhyCodingPathway } from "../../components/CodingPathwayComps/why-coding";
 import Footer from "../../components/general/Footer";
 import GeneralNavbar from "../../components/general/GeneralNavbar";
-import { gamingOutcomes, gamingPathwayImages } from "../../utils/types-and-links";
+import { codingSteps, gamingOutcomes, gamingPathwayImages } from "../../utils/types-and-links";
 import { GamingOnboarding } from "../../components/OnboardingComps/gaming-onboarding";
 
 export default function Page() {
@@ -16,17 +16,18 @@ export default function Page() {
       header="Shape Your Gaming Career Pathway"
       desc="Ready to turn your passion for gaming into a career? Dive into the world of game development and start your game career pathway"/>
       <WhyCodingPathway
-        images={gamingPathwayImages}
+        // images={gamingPathwayImages}
+        pathwayImage="/assets/pathway/gaming-pathway-3.png"
         headerOne="Why Gaming Pathway?"
-        pOne="Duis vitae placerat leo tincidunt pellentesque dui ultricies turpis phasellus. 
-        Ullamcorper mollis sit amet sit lorem nam imperdiet in. Orci pharetra integer egestas non pharetra quis. 
-        Mauris tortor suspendisse pellentesque elementum amet non mus ipsum egestas. Enim sodales nibh quam sed 
-        non odio sollicitudin viverra."
-        pTwo="Vestibulum morbi turpis facilisi fringilla pretium venenatis purus cursus sit. Et amet nibh eget elit. 
-      Lacus ante lorem vulputate sollicitudin nunc viverra tortor. Quis gravida quam erat amet amet velit. Velit 
-      tortor vivamus aliquam at imperdiet commodo."
+        pOne="The Gaming Pathway on our WiFiCombat eLearn platform introduces students to the exciting 
+        world of game design and development. Through a combination of creativity, storytelling, and 
+        technical skills, students learn how to design, build, and test their own games. "
+        pTwo="This pathway not only teaches coding and programming but also fosters critical thinking,
+         collaboration, and problem-solving skills. With gaming becoming a key industry in tech, the 
+         Gaming Pathway equips learners with the knowledge and tools they need to explore careers in 
+         game development, interactive media, and beyond, while turning their passion for gaming into real-world expertise."
       />
-      <PathwayRoadmap title="Gaming"/>
+      <PathwayRoadmap title="Gaming" steps={codingSteps}/>
       <Outcomes outcomes={gamingOutcomes} />
       <GamingOnboarding />
       <TodayComp 

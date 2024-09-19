@@ -43,10 +43,10 @@ export const schoolLinks = [
   ]
 
   export const gamingOutcomes = [
-    {title:"Game Design Principles", desc:"Core Concepts: Students will grasp fundamental game design principles, including storytelling, character development, gameplay mechanics, and level design.", bgImage:""},
-    {title:"Programming for Games", desc:"Game Logic: Students will develop coding skills specific to game development, such as implementing game physics, AI behavior, and user interactions.", bgImage:""},
-    {title:"Creative Problem Solving", desc:"Design Challenges: Students will enhance their ability to solve design challenges by creating balanced game mechanics, engaging user experiences, and overcoming technical obstacles.", bgImage:""},
-    {title:"3D Modeling and Animation", desc:"Visual Design: Students will learn the basics of creating 3D models, textures, and animations, and how to integrate these elements into their games.", bgImage:""},
+    {title:"Game Design Principles", desc:"Core Concepts: Students will grasp fundamental game design principles, including storytelling, character development, gameplay mechanics, and level design.", bgImage:"/assets/pathway/gaming-outcome-1.png"},
+    {title:"Programming for Games", desc:"Game Logic: Students will develop coding skills specific to game development, such as implementing game physics, AI behavior, and user interactions.", bgImage:"/assets/pathway/gaming-outcome-2.png"},
+    {title:"Creative Problem Solving", desc:"Design Challenges: Students will enhance their ability to solve design challenges by creating balanced game mechanics, engaging user experiences, and overcoming technical obstacles.", bgImage:"/assets/pathway/gaming-outcome-3.png"},
+    {title:"3D Modeling and Animation", desc:"Visual Design: Students will learn the basics of creating 3D models, textures, and animations, and how to integrate these elements into their games.", bgImage:"/assets/pathway/gaming-outcome-4.png"},
   ]
 
   export const outcomes = [

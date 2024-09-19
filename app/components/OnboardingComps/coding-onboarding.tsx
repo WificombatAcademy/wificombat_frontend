@@ -22,6 +22,7 @@ export const CodingOnboarding = () => {
                 <OnboardingCard 
                 checkmark
                 title="Coding Tools & Resources"
+                subdesc="Coding tools and resources that is used for the coding pathway"
                 listdesc={[
                     "Mblock",
                     "Pictoblox",

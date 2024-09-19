@@ -15,10 +15,11 @@ type Props = {
     widthStyle?:string;
     imageHeight?: number;
     dontCenter?: boolean;
+    subdesc?: string;
     pinkBg?: boolean;
 }
 
-export const OnboardingCard = ({buttonText, checkmark, dontCenter, title, desc,listdesc, 
+export const OnboardingCard = ({buttonText, checkmark, dontCenter, title, desc, subdesc,listdesc, 
     reverse, linkTo, image, imageHeight, imageWidth, widthStyle, pinkBg}: Props) => {
     return (
         <div className={`w-full flex flex-col ${reverse? "md:flex-row-reverse" : "md:flex-row"} md:items-center md:justify-between gap-16`}>
@@ -30,6 +31,8 @@ export const OnboardingCard = ({buttonText, checkmark, dontCenter, title, desc,l
                 </> :
                 <>
                     {listdesc && 
+                    <>
+                    {subdesc && <p className="pt-4 text-black-600 font-semibold md:text-xl">{subdesc}</p>}
                     <ul className={`pt-4 text-black-600 font-semibold md:text-xl space-y-[2px] 
                     ${checkmark ? "pt-7 space-y-2" : "list-disc"}`}>
                         {listdesc.map((item, index) => (
@@ -38,7 +41,8 @@ export const OnboardingCard = ({buttonText, checkmark, dontCenter, title, desc,l
                                 <li key={index} className={`ml-4 ${ checkmark && "font-medium"}`}>{item}</li>
                             </div>
                         ))}
-                    </ul>}
+                    </ul>
+                    </>}
                 </>}
 
               {buttonText &&  
