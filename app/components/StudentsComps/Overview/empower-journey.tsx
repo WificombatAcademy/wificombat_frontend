@@ -14,6 +14,7 @@ export const EmpowerLearningJourney = () => {
             desc="Apply knowledge from various disciplines to complete real-world projects."
             title="Project-Based Learning"
             col={true}
+            image="/empower-journey-1.png"
           />
 
           <BenefitCard
@@ -22,6 +23,7 @@ export const EmpowerLearningJourney = () => {
             desc="Enhance critical thinking and innovation skills by solving complex problems across different technological domains."
             title="Critical Thinking"
             col={true}
+            image="/empower-journey-2.png"
           />
 
           <BenefitCard
@@ -30,6 +32,7 @@ export const EmpowerLearningJourney = () => {
           desc="Develop the ability to present technical ideas clearly and effectively, both in writing and orally."
           title="Communication skills"
           col={true}
+          image="/empower-journey-3.png"
           />
 
           <BenefitCard
@@ -38,7 +41,7 @@ export const EmpowerLearningJourney = () => {
             desc="Prepare for careers in technology through internships, industry certifications, and portfolio development."
             title="Career Readiness"
             col={true}
-            image="/skill-4.png"
+            image="/empower-journey-4.png"
           />
         </div>
       </div>

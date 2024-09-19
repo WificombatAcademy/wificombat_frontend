@@ -29,7 +29,7 @@ export const CareerPathwayCurriculum = ({schoolCurriculum}: CareerPathwayCurricu
       }
     } 
 
-    fetchPathways()
+    fetchPathways();
   }, [])
   
 

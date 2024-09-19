@@ -15,21 +15,23 @@ type Props = {
     widthStyle?:string;
     imageHeight?: number;
     dontCenter?: boolean;
+    pinkBg?: boolean;
 }
 
 export const OnboardingCard = ({buttonText, checkmark, dontCenter, title, desc,listdesc, 
-    reverse, linkTo, image, imageHeight, imageWidth, widthStyle}: Props) => {
+    reverse, linkTo, image, imageHeight, imageWidth, widthStyle, pinkBg}: Props) => {
     return (
         <div className={`w-full flex flex-col ${reverse? "md:flex-row-reverse" : "md:flex-row"} md:items-center md:justify-between gap-16`}>
             <div className="w-full md:basis-[50%]">
                 <h3 className="text-2xl lg:text-3xl text-black-500 font-semibold">{title}</h3>
                 {desc ? 
                 <>
-                    <p className="pt-4 text-black-700 md:text-xl">{desc}</p>
+                    <p className="pt-4 text-black-600 font-semibold md:text-xl">{desc}</p>
                 </> :
                 <>
                     {listdesc && 
-                    <ul className={`pt-4 text-black-700 space-y-[2px] ${checkmark ? "pt-7 space-y-2" : "list-disc"}`}>
+                    <ul className={`pt-4 text-black-600 font-semibold md:text-xl space-y-[2px] 
+                    ${checkmark ? "pt-7 space-y-2" : "list-disc"}`}>
                         {listdesc.map((item, index) => (
                             <div key={index} className={`${checkmark && "flex items-center gap-1 py-2"}`}>
                                  {checkmark && <FaCircleCheck size={25} className="text-yellow-500"/>}
@@ -51,7 +53,8 @@ export const OnboardingCard = ({buttonText, checkmark, dontCenter, title, desc,l
             </div>
 
             <div className={`w-full md:basis-[50%] ${!reverse && "flex items-center justify-center"}`}>
-                <div className={`w-[300px] h-[300px] md:w-[400px] md:h-[400px] bg-blue-500 flex items-center justify-center
+                <div className={`w-[300px] h-[300px] md:w-[400px] md:h-[400px] flex items-center justify-center
+                 ${pinkBg ? "bg-purple-50" : "bg-blue-500"} 
                  rounded-full max-md:mx-auto`}>
                     {image &&
                     <Image

@@ -14,6 +14,7 @@ export default function Page() {
        headerOne="Lorem ipsum dolor sit amet consectetur."
        headerTwo="Lorem ipsum dolor sit amet consectetur. A integer viverra libero sit. Adipiscing vel 
        at non platea posuere massa porttitor. Viverra purus luctus posuere massa neque laoreet sed viverra."
+      text="student-curriculum.png"
       bgColor={true}/>
       <CareerPathwayCurriculum schoolCurriculum/>
       <LearningOutcomes/>

@@ -1,15 +1,18 @@
 import { merriweather } from "@/app/fonts";
 import { Breadcrumbs } from "@/app/utils/breadcrumb";
+import Image from "next/image";
 import Link from "next/link"
 
 type Props = {
     bgColor ?: boolean;
     headerOne: string;
     headerTwo: string;
+    text: string;
     whiteButton?: boolean;
 }
 
-export const StudentsHero = ({bgColor, headerOne, headerTwo, whiteButton}: Props) => {
+export const StudentsHero = ({bgColor, headerOne, headerTwo, text}: Props) => {
+    console.log("IMAGE READ:", text, headerOne)
     return (
         <section 
         id="home"
@@ -39,6 +42,16 @@ export const StudentsHero = ({bgColor, headerOne, headerTwo, whiteButton}: Props
                             </Link>
                             </>
                         </div>
+                    </div>
+
+                    <div className="w-full md:basis-[50%] max-md:hidden">
+                    {text!= undefined && <Image 
+                    src={`/${text}`}
+                    alt={text}
+                    width={500}
+                    height={500}
+                    className="w-full h-[570px] object-contain"
+                    />}
                     </div>
                 </div>
             </div>

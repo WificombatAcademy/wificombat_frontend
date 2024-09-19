@@ -13,6 +13,7 @@ export default function Page() {
     <div className="mx-auto relative container w-full max-w-[2000px]">
       <GeneralNavbar />
       <StudentsHero 
+      text="student-overview.png"
       headerOne="Empower K-12 Students with a Tech Pathway."
       headerTwo="Join a global network of schools offering top-notch education in coding, multimedia design, AI, 
       gaming, robotics, and IoT. Our platform provides the curriculum, tools, and guidance to help students 

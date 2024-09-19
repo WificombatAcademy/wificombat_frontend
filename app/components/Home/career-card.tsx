@@ -20,7 +20,7 @@ const CareerCard = ({ bgColor ,desc, pathway, linkTo, level, subject, textWhite,
             <Link href={`${linkTo && linkTo}`}>
                 <div className="w-full flex flex-col h-full bg-white pb-3 shadow-lg rounded-2xl cursor-pointer">
                     <div className={`relative w-full h-[220px] 2xl:h-[250px] min-[2000px]:h-[300px] 
-                        ${bgColor ?? "bg-black-200"} px-4 flex items-end rounded-tl-2xl rounded-tr-2xl`}>
+                        ${bgColor ?? "bg-blue-500"} px-4 flex items-end rounded-tl-2xl rounded-tr-2xl`}>
                         {image && <div className="absolute inset-0 bg-black rounded-tl-2xl rounded-tr-2xl">
                             <div className="absolute inset-0 bg-black/30 rounded-tl-2xl rounded-tr-2xl"></div>
                             <Image src={image} alt="pathway"

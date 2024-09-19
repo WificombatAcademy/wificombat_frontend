@@ -2,7 +2,7 @@
 import Image from 'next/image'
 
 type Props = {
-    heading:string;
+    heading: string;
 }
 
 const HeadingDesign = ({ heading }: Props) => {
@@ -40,7 +40,8 @@ const HeadingDesign = ({ heading }: Props) => {
                 />
                 </svg>
 
-                <h2 className="w-[90%] mx-auto mt-2 text-center md:text-3xl text-2xl lg:text-5xl uppercase font-semibold md:font-medium">
+                <h2 className="w-[90%] mx-auto mt-2 text-center md:text-3xl text-2xl 
+                lg:text-5xl uppercase font-semibold md:font-medium block whitespace-pre-line">
                     {heading}
                 </h2>
             </div>

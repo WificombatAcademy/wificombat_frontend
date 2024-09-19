@@ -48,7 +48,7 @@ const coursesData = [
     id: 5,
     level: "Beginner",
     duration: "4 weeks",
-    title: "",
+    title: "Pictoblox",
     link: "/registration",
   },
 ];
