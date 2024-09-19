@@ -56,6 +56,23 @@ export const schoolLinks = [
     {title:"Arcu duis platea", desc:"Varius commodo lobortis sit morbi sollicitudin porttitor leo proin sed. Proin pretium accumsan eget arcu leo nisi. Etiam quis neque purus nunc massa."},
   ]
 
+
+export const codingCourseslist = [
+  "Lorem ipsum dolor sit ame",
+  "Lorem ipsum dolor sit ame",
+  "Lorem ipsum dolor sit ame",
+  "Lorem ipsum dolor sit ame",
+  "Lorem ipsum dolor sit ame",
+  "Lorem ipsum dolor sit ame",
+];
+
+export const codingSteps = [
+  { stepNumber: 1, title: "Key Stage 1", description: "Primary 1-3", courseslist: codingCourseslist , image:"/coder.png"},
+  { stepNumber: 2, title: "Key Stage 2", description: "Primary 4-6", courseslist: codingCourseslist , image:"/coder.png"},
+  { stepNumber: 3, title: "Key Stage 3", description: "Junior High School", courseslist: codingCourseslist , image:"/coder.png"},
+  { stepNumber: 4, title: "Key Stage 4", description: "Senior High School", courseslist: codingCourseslist , image:"/coder.png"},
+];
+
   export const pathway = [
     'Coding',
     'Gaming',

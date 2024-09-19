@@ -6,7 +6,7 @@ import { TodayComp } from "../../components/CodingPathwayComps/today-comp";
 import { WhyCodingPathway } from "../../components/CodingPathwayComps/why-coding";
 import Footer from "../../components/general/Footer";
 import GeneralNavbar from "../../components/general/GeneralNavbar";
-import { codingOutcomes, codingPathwayImages } from "../../utils/types-and-links";
+import { codingOutcomes, codingSteps } from "../../utils/types-and-links";
 
 export default function Page() {
   return (
@@ -29,7 +29,7 @@ export default function Page() {
         in technology. Our goal is to nurture creativity and critical thinking, empowering students to become the next 
         generation of tech innovators."
       />
-      <PathwayRoadmap title="Coding"/>
+      <PathwayRoadmap title="Coding" steps={codingSteps}/>
       <Outcomes outcomes={codingOutcomes} />
       <CodingOnboarding />
       <TodayComp

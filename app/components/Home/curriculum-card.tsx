@@ -20,10 +20,10 @@ const listItems = [
 
 export const CurriculumCard = ({bgColor, borderColor, title, star, list}: Props) => {
     return (
-        <div className={`w-full py-6 px-4 rounded-3xl border-t-4 ${borderColor} ${bgColor}`}>
-            <div className="w-full flex items-center justify-center">
+        <div className={`w-full py-12 px-4 rounded-3xl border-t-4 ${borderColor} ${bgColor}`}>
+            {/* <div className="w-full flex items-center justify-center">
                 <div className="w-24 h-24 bg-primary-gray rounded-full"></div>
-            </div>
+            </div> */}
 
                 <h3 className="w-full mt-4 text-center font-semibold text-2xl">{title}</h3>
 

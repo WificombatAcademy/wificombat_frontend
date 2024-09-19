@@ -70,7 +70,7 @@ export const TeachAndLearnWithWifi = () => {
                         <li className="md:w-[80%] text-black-500 md:text-lg ml-4">{list}</li>
                       </ul>
                     ))}
-                  </div>
+                </div>
             </div>
         </section>
     )

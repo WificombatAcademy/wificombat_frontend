@@ -61,7 +61,8 @@ export const CareerPathwayCurriculum = ({schoolCurriculum}: CareerPathwayCurricu
           <div className="mt-10 md:mt-16 flex flex-col lg:flex-row gap-16 items-center lg:items-start justify-between">
             <div
              
-            className="w-full lg:basis-[13%] py-3 px-2 md:px-3 flex flex-wrap lg:flex-col items-center max-sm:justify-between rounded shadow-xl max-lg:px-4 border">
+            className="w-full lg:basis-[13%] py-3 px-2 md:px-3 flex flex-wrap 
+            lg:flex-col items-center max-sm:justify-between rounded shadow-xl max-lg:px-4 border">
                 {pathsCurriculum.map((curriculum,index) => (
                   <div
                   key={index}
