@@ -73,6 +73,34 @@ export const codingSteps = [
   { stepNumber: 4, title: "Key Stage 4", description: "Senior High School", courseslist: codingCourseslist , image:"/coder.png"},
 ];
 
+export const multimediaSteps = [
+  { stepNumber: 1, title: "Key Stage 1", description: "Primary 1-3", courseslist: codingCourseslist , image:"/photographer.png"},
+  { stepNumber: 2, title: "Key Stage 2", description: "Primary 4-6", courseslist: codingCourseslist , image:"/photographer.png"},
+  { stepNumber: 3, title: "Key Stage 3", description: "Junior High School", courseslist: codingCourseslist , image:"/photographer.png"},
+  { stepNumber: 4, title: "Key Stage 4", description: "Senior High School", courseslist: codingCourseslist , image:"/photographer.png"},
+];
+
+export const iotSteps = [
+  { stepNumber: 1, title: "Key Stage 1", description: "Primary 1-3", courseslist: codingCourseslist , image:"/hero-5.png"},
+  { stepNumber: 2, title: "Key Stage 2", description: "Primary 4-6", courseslist: codingCourseslist , image:"/hero-5.png"},
+  { stepNumber: 3, title: "Key Stage 3", description: "Junior High School", courseslist: codingCourseslist , image:"/hero-5.png"},
+  { stepNumber: 4, title: "Key Stage 4", description: "Senior High School", courseslist: codingCourseslist , image:"/hero-5.png"},
+];
+
+export const aiSteps = [
+  { stepNumber: 1, title: "Key Stage 1", description: "Primary 1-3", courseslist: codingCourseslist , image:"/ml-coder.png"},
+  { stepNumber: 2, title: "Key Stage 2", description: "Primary 4-6", courseslist: codingCourseslist , image:"/ml-coder.png"},
+  { stepNumber: 3, title: "Key Stage 3", description: "Junior High School", courseslist: codingCourseslist , image:"/ml-coder.png"},
+  { stepNumber: 4, title: "Key Stage 4", description: "Senior High School", courseslist: codingCourseslist , image:"/ml-coder.png"},
+];
+
+export const techpreneurshipSteps = [
+  { stepNumber: 1, title: "Key Stage 1", description: "Primary 1-3", courseslist: codingCourseslist , image:"/teen-girl.png"},
+  { stepNumber: 2, title: "Key Stage 2", description: "Primary 4-6", courseslist: codingCourseslist , image:"/teen-girl.png"},
+  { stepNumber: 3, title: "Key Stage 3", description: "Junior High School", courseslist: codingCourseslist , image:"/teen-girl.png"},
+  { stepNumber: 4, title: "Key Stage 4", description: "Senior High School", courseslist: codingCourseslist , image:"/teen-girl.png"},
+];
+
   export const pathway = [
     'Coding',
     'Gaming',

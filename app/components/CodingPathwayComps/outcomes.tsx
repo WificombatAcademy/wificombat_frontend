@@ -8,7 +8,7 @@ type Props = {
 type outcome = {
     title: string,
     desc: string,
-    bgImage: string,
+    bgImage?: string,
 }
 
 export const Outcomes = ({outcomes} : Props) => {

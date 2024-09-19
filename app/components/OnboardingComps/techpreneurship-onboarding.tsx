@@ -8,21 +8,30 @@ export const TechprenuershipOnboarding = () => {
                 checkmark
                 title={"\"Let's Learn Something Awesome!\""}
                 listdesc={[
-                    "Gravida ultrices integer massa eget ut ipsum n.",
-                    "Viverra et dui quis interdum eu pulvinar viverra.",
-                    "Phasellus eget leo vitae egestas tincidunt vi.",
-                    "Lectus mauris enim praesent scelerisque ultr.",]}
+                    "Interactive Techprenuership exercises and tutorials",
+                    "Gamified learning experiences",
+                    "Project-based learning with real-world applications",
+                    "Creative challenges with different elements.",]}
                 reverse={true}
+                image="/teen-girl.png"
+                imageHeight={400}
+                imageWidth={450}
+                widthStyle="max-md:w-[250px] object-contain"
                 />
 
                 <OnboardingCard 
+                subdesc="Techprenuership tools and resources that is used for the techprenuership pathway"
                 checkmark
                 title="Techprenuership Tools & Resources"
                 listdesc={[
-                    "Gravida ultrices integer massa eget ut ipsum n.",
-                    "Viverra et dui quis interdum eu pulvinar viverra.",
-                    "Phasellus eget leo vitae egestas tincidunt vi.",
-                    "Lectus mauris enim praesent scelerisque ultr.",]}
+                    "Business & Market Research",
+                    "Product Development & Technology",
+                    "Pitch Deck Design",
+                    "Teams",]}
+                    image="/assets/pathway/techpreneurship-tools.png"
+                    imageHeight={220}
+                    imageWidth={310}
+                    widthStyle="max-md:w-[200px] object-contain"
                 />
             </div>
         </section>

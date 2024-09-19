@@ -9,9 +9,10 @@ type Props = {
     header: string;
     desc: string;
     buttonWhite?:boolean;
+    widthStyle?: string;
 }
 
-export const PathwayHero = ({bgColor, image, desc, header, buttonWhite}: Props) => {
+export const PathwayHero = ({bgColor, image, desc, header, buttonWhite, widthStyle}: Props) => {
     return (
         <section 
         id="home"
@@ -52,7 +53,7 @@ export const PathwayHero = ({bgColor, image, desc, header, buttonWhite}: Props) 
                         alt={image ?? ""}
                         width={500}
                         height={500}
-                        className="w-full h-full object-cover border-none"
+                        className={`w-full h-full object-cover ${widthStyle} border-none`}
                         />}
                     </div>
                 </div>

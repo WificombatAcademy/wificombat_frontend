@@ -8,21 +8,30 @@ export const RoboticsOnboarding = () => {
                 checkmark
                 title={"\"Let's Build Something Awesome!\""}
                 listdesc={[
-                    "Gravida ultrices integer massa eget ut ipsum n.",
-                    "Viverra et dui quis interdum eu pulvinar viverra.",
-                    "Phasellus eget leo vitae egestas tincidunt vi.",
-                    "Lectus mauris enim praesent scelerisque ultr.",]}
+                   "Interactive robotics and IOT exercises and tutorials",
+                   "Gamified learning experiences",
+                    "Project-based learning with real-world applications",
+                    "Creative challenges with robotics and IOT elements",]}
                 reverse={true}
+                image="/hero-5.png"
+                imageHeight={400}
+                imageWidth={450}
+                widthStyle="max-md:w-[250px] object-contain"
                 />
 
                 <OnboardingCard 
+                subdesc="Robotics and IOT tools and resources that is used for the robotics and IOT pathway"
                 checkmark
                 title="Robotics Tools & Resources"
                 listdesc={[
-                    "Gravida ultrices integer massa eget ut ipsum n.",
-                    "Viverra et dui quis interdum eu pulvinar viverra.",
-                    "Phasellus eget leo vitae egestas tincidunt vi.",
-                    "Lectus mauris enim praesent scelerisque ultr.",]}
+                    "Sensors",
+                    "Arduino",
+                    "Raspberry Pi",
+                    "Tinkercard circuits",]}
+                    image="/assets/pathway/iot-tools.png"
+                    imageHeight={220}
+                    imageWidth={310}
+                    widthStyle="max-md:w-[200px] object-contain"
                 />
             </div>
         </section>

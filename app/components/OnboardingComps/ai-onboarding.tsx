@@ -8,21 +8,29 @@ export const AIOnboarding = () => {
                 checkmark
                 title={"\"Let's Build Something Awesome!\""}
                 listdesc={[
-                    "Gravida ultrices integer massa eget ut ipsum n.",
-                    "Viverra et dui quis interdum eu pulvinar viverra.",
-                    "Phasellus eget leo vitae egestas tincidunt vi.",
-                    "Lectus mauris enim praesent scelerisque ultr.",]}
+                    "Interactive AI exercises and tutorials",
+                    "Gamified learning experiences",
+                    "Project-based learning with real-world applications",
+                    "Creative challenges with AI elements",]}
                 reverse={true}
+                image="/ml-coder.png"
+                imageHeight={400}
+                imageWidth={450}
+                widthStyle="max-md:w-[250px] object-contain"
                 />
 
                 <OnboardingCard 
+                subdesc="Artificial Intelligence tools and resources that is used for the artificial intelligence pathway"
                 checkmark
                 title="Artifical Intelligence Tools & Resources"
                 listdesc={[
-                    "Gravida ultrices integer massa eget ut ipsum n.",
-                    "Viverra et dui quis interdum eu pulvinar viverra.",
-                    "Phasellus eget leo vitae egestas tincidunt vi.",
-                    "Lectus mauris enim praesent scelerisque ultr.",]}
+                    "AI Pictoblock",
+                    "Python",
+                    "Machine Language",]}
+                    image="/assets/pathway/ai-tools.png"
+                    imageHeight={220}
+                    imageWidth={310}
+                    widthStyle="max-md:w-[200px] object-contain"
                 />
             </div>
         </section>

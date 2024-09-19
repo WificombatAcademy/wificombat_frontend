@@ -5,7 +5,7 @@ import { TodayComp } from "../../components/CodingPathwayComps/today-comp";
 import { WhyCodingPathway } from "../../components/CodingPathwayComps/why-coding";
 import Footer from "../../components/general/Footer";
 import GeneralNavbar from "../../components/general/GeneralNavbar";
-import { outcomes } from "../../utils/types-and-links";
+import { outcomes, techpreneurshipSteps } from "../../utils/types-and-links";
 import { TechprenuershipOnboarding } from "../../components/OnboardingComps/techpreneurship-onboarding";
 
 export default function Page() {
@@ -18,17 +18,21 @@ export default function Page() {
        bgColor="bg-yellow-500" 
        />
       <WhyCodingPathway
-      images={["", "", ""]}
+      // images={["", "", ""]}
+      pathwayImage="/techpreneurship-pathway.png"
         headerOne="Why Techprenuership Pathway?"
-        pOne="Duis vitae placerat leo tincidunt pellentesque dui ultricies turpis phasellus. 
-        Ullamcorper mollis sit amet sit lorem nam imperdiet in. Orci pharetra integer egestas non pharetra quis. 
-        Mauris tortor suspendisse pellentesque elementum amet non mus ipsum egestas. Enim sodales nibh quam sed 
-        non odio sollicitudin viverra."
-        pTwo="Vestibulum morbi turpis facilisi fringilla pretium venenatis purus cursus sit. Et amet nibh eget elit. 
-      Lacus ante lorem vulputate sollicitudin nunc viverra tortor. Quis gravida quam erat amet amet velit. Velit 
-      tortor vivamus aliquam at imperdiet commodo."
+        pOne="The Techpreneurship Pathway on our WiFiCombat eLearn platform equips students 
+        with the skills and mindset needed to become innovators and entrepreneurs in the 
+        tech industry. Through this pathway, students learn how to identify market opportunities, 
+        develop tech-based solutions, and build sustainable business models. "
+        
+        pTwo="They also gain practical knowledge in areas such as product development, 
+        digital marketing, and startup management. By combining technology with entrepreneurship, 
+        this pathway empowers students to not only create new tech products but also to understand 
+        the business strategies behind successful ventures. It fosters creativity, leadership, and 
+        resilience, preparing students to launch their own tech startups and shape the future of innovation "
       />
-      <PathwayRoadmap title="Techprenuership"/>
+      <PathwayRoadmap title="Techprenuership" steps={techpreneurshipSteps}/>
       <Outcomes outcomes={outcomes} />
       <TechprenuershipOnboarding />
       <TodayComp 

@@ -8,21 +8,30 @@ export const MultimediaOnboarding = () => {
                 checkmark
                 title={"\"Let's Design Something Awesome!\""}
                 listdesc={[
-                    "Gravida ultrices integer massa eget ut ipsum n.",
-                    "Viverra et dui quis interdum eu pulvinar viverra.",
-                    "Phasellus eget leo vitae egestas tincidunt vi.",
-                    "Lectus mauris enim praesent scelerisque ultr.",]}
+                    "Interactive multimedia exercises and tutorials",
+                    "Gamified learning experiences",
+                    "Project-based learning with real-world applications",
+                    "Creative challenges with multimedia elements",]}
                 reverse={true}
+                image="/photographer.png"
+                imageHeight={400}
+                imageWidth={450}
+                widthStyle="max-md:w-[250px] object-contain"
                 />
 
                 <OnboardingCard 
+                subdesc="Multimedia design tools and resources that is used for the multimedia design pathway"
                 checkmark
                 title="Multimedia Tools & Resources"
                 listdesc={[
-                    "Gravida ultrices integer massa eget ut ipsum n.",
-                    "Viverra et dui quis interdum eu pulvinar viverra.",
-                    "Phasellus eget leo vitae egestas tincidunt vi.",
-                    "Lectus mauris enim praesent scelerisque ultr.",]}
+                    "Blender",
+                    "Photoshop",
+                    "Adobe Premier",
+                    "Wix",]}
+                    image="/assets/pathway/multimedia-tools.png"
+                    imageHeight={220}
+                    imageWidth={310}
+                    widthStyle="max-md:w-[200px] object-contain"
                 />
             </div>
         </section>
