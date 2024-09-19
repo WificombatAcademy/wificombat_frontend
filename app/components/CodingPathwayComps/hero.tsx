@@ -53,7 +53,7 @@ export const PathwayHero = ({bgColor, image, desc, header, buttonWhite, widthSty
                         alt={image ?? ""}
                         width={500}
                         height={500}
-                        className={`w-full h-full object-cover ${widthStyle} border-none`}
+                        className={`object-cover ${widthStyle ?? "w-full h-full"} border-none`}
                         />}
                     </div>
                 </div>

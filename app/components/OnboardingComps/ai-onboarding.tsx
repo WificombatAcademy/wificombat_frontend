@@ -15,7 +15,7 @@ export const AIOnboarding = () => {
                 reverse={true}
                 image="/ml-coder.png"
                 imageHeight={400}
-                imageWidth={450}
+                imageWidth={350}
                 widthStyle="max-md:w-[250px] object-contain"
                 />
 

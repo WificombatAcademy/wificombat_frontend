@@ -30,8 +30,8 @@ export const RoboticsOnboarding = () => {
                     "Tinkercard circuits",]}
                     image="/assets/pathway/iot-tools.png"
                     imageHeight={220}
-                    imageWidth={310}
-                    widthStyle="max-md:w-[200px] object-contain"
+                    imageWidth={380}
+                    widthStyle="relative max-md:w-[320px] lg:right-[5%] object-contain"
                 />
             </div>
         </section>

@@ -15,8 +15,8 @@ export const MultimediaOnboarding = () => {
                 reverse={true}
                 image="/photographer.png"
                 imageHeight={400}
-                imageWidth={450}
-                widthStyle="max-md:w-[250px] object-contain"
+                imageWidth={300}
+                widthStyle="max-md:w-[200px] object-contain"
                 />
 
                 <OnboardingCard 

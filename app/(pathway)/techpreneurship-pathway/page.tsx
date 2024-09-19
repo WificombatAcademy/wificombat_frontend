@@ -13,19 +13,21 @@ export default function Page() {
     <div className="mx-auto relative container w-full max-w-[2000px]">
       <GeneralNavbar />
       <PathwayHero
+      image="/hero-6.png"
+      widthStyle="w-full object-contain"
       desc="Lorem ipsum dolor sit amet consectetur. Nunc et aenean imperdiet dignissim suspendisse in. Pretium ante adipiscing sed amet eget sed in. Parturient"
       header="Navigate the Techprenuership Career Pathway"
        bgColor="bg-yellow-500" 
        />
       <WhyCodingPathway
       // images={["", "", ""]}
-      pathwayImage="/techpreneurship-pathway.png"
+      pathwayImage="/assets/pathway/tech-pathway.png"
         headerOne="Why Techprenuership Pathway?"
         pOne="The Techpreneurship Pathway on our WiFiCombat eLearn platform equips students 
         with the skills and mindset needed to become innovators and entrepreneurs in the 
         tech industry. Through this pathway, students learn how to identify market opportunities, 
         develop tech-based solutions, and build sustainable business models. "
-        
+
         pTwo="They also gain practical knowledge in areas such as product development, 
         digital marketing, and startup management. By combining technology with entrepreneurship, 
         this pathway empowers students to not only create new tech products but also to understand 

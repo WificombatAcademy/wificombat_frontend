@@ -15,8 +15,8 @@ export const TechprenuershipOnboarding = () => {
                 reverse={true}
                 image="/teen-girl.png"
                 imageHeight={400}
-                imageWidth={450}
-                widthStyle="max-md:w-[250px] object-contain"
+                imageWidth={200}
+                widthStyle="max-md:w-[150px] object-contain"
                 />
 
                 <OnboardingCard 

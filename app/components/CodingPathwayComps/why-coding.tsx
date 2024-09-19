@@ -12,12 +12,12 @@ type Props = {
 export const WhyCodingPathway = ({images, pathwayImage, headerOne, pOne, pTwo}:Props) => {
     return (
         <section>
-            <div className="mt-12 w-[93%] md:w-[90%] lg:w-[88%] mx-auto flex flex-col 
+            <div className="mt-12 md:mt-16 w-[93%] md:w-[90%] lg:w-[88%] mx-auto flex flex-col 
             md:flex-row md:items-center gap-9 md:gap-12 lg:gap-16 mb-16">
                <div className="w-full md:basis-[50%]">
-                    <h3 className="md:mt-16 font-semibold text-2xl md:text-3xl lg:text-4xl">{headerOne}</h3>
-                    <p className="mt-8 text-black-700">{pOne}</p>
-                    <p className="mt-8 text-black-700">{pTwo}</p>
+                    <h3 className="font-semibold text-2xl md:text-3xl lg:text-4xl">{headerOne}</h3>
+                    <p className="mt-8 text-lg text-black-700">{pOne}</p>
+                    <p className="mt-8 text-lg text-black-700">{pTwo}</p>
                </div>
 
 
