@@ -146,7 +146,7 @@ const SchoolStudentInfo = ({
         </div>
 
         <div className="mt-10 lg:mt-14 flex items-center justify-between gap-8">
-        <button
+        {/* <button
             type="submit"
             onClick={(e) => submitRegister(e, 'payLater')}
             disabled={!isFormFilled}
@@ -160,8 +160,8 @@ const SchoolStudentInfo = ({
             Registering
             <RiLoader4Fill size={24} className="animate-spin"/>
             </div> : 
-            "Pay Later"}
-        </button>
+            "Register"}
+        </button> */}
 
         <button
             type="submit"
@@ -172,7 +172,12 @@ const SchoolStudentInfo = ({
             text-white shadow-sm hover:bg-purple-500 focus-visible:outline 
             focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600"
         >
-           Pay Now
+            {isLoading? 
+            <div className="flex items-center gap-1">
+            Registering
+            <RiLoader4Fill size={24} className="animate-spin"/>
+            </div> : 
+            "Register"}
         </button>
         </div>
     </>

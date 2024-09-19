@@ -183,6 +183,8 @@ const Profile = () => {
   };
   
   const watchFields = watch(["student.fullname", "student.age", "student.country", "student.state", "student.pathway", "student.stage"]);
+  const watchSchoolFields = watch(["schoolStudent.fullname", "schoolStudent.age", "schoolStudent.class"]);
+  
 
   const isStudentFormFilled = !!(
     watchFields[0].trim().split(" ").length >= 2 && // Fullname validation
@@ -192,6 +194,12 @@ const Profile = () => {
     watchFields[4].trim() && // Pathway validation
     watchFields[5].trim()   // Stage validation
   );
+
+    const isSchoolStudentFormFilled = !!(
+      watchSchoolFields[0].trim().split(" ").length >= 2 && // Fullname validation
+      watchSchoolFields[1] > 0 && // Age validation
+      watchSchoolFields[2].trim() // class validation
+    );
 
   
 
@@ -415,7 +423,7 @@ const Profile = () => {
             errors={errors}
             isLoading={isLoading}
             submitRegister={submitRegister}
-            isFormFilled={isFormFilled()}
+            isFormFilled={isSchoolStudentFormFilled}
           />
           </>
         )
