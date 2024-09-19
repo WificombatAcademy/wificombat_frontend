@@ -17,15 +17,17 @@ export default function Page() {
       desc="Turn your passion for technology into a thriving career in software engineering or DevOps. 
       Begin your path with us" />
       <WhyCodingPathway
-        images={codingPathwayImages}
+        // images={codingPathwayImages}
+        pathwayImage="/assets/pathway/coding-pathway-2.png"
         headerOne="Why Coding Pathway?"
-        pOne="Duis vitae placerat leo tincidunt pellentesque dui ultricies turpis phasellus. 
-        Ullamcorper mollis sit amet sit lorem nam imperdiet in. Orci pharetra integer egestas non pharetra quis. 
-        Mauris tortor suspendisse pellentesque elementum amet non mus ipsum egestas. Enim sodales nibh quam sed 
-        non odio sollicitudin viverra."
-        pTwo="Vestibulum morbi turpis facilisi fringilla pretium venenatis purus cursus sit. Et amet nibh eget elit. 
-      Lacus ante lorem vulputate sollicitudin nunc viverra tortor. Quis gravida quam erat amet amet velit. Velit 
-      tortor vivamus aliquam at imperdiet commodo."
+        pOne="The Coding Pathway on our WiFiCombat eLearn platform is designed to equip students with essential coding skills
+         that are crucial for success in the digital age. Through interactive lessons, hands-on projects, and personalized 
+         guidance, students can explore the world of programming, develop problem-solving abilities, and create innovative 
+         solutions."
+        pTwo="Whether they are interested in web development, app creation, or gaming, the Coding Pathway opens up endless 
+        opportunities for young learners to discover their passion, build technical expertise, and prepare for future careers 
+        in technology. Our goal is to nurture creativity and critical thinking, empowering students to become the next 
+        generation of tech innovators."
       />
       <PathwayRoadmap title="Coding"/>
       <Outcomes outcomes={codingOutcomes} />

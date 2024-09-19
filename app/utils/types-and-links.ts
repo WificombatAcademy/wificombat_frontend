@@ -36,17 +36,17 @@ export const schoolLinks = [
   ] 
 
   export const codingOutcomes = [
-    {title: "Problem-Solving Skills", desc: "Algorithmic Thinking: Students will develop the ability to break down problems into smaller, manageable parts and design algorithms to solve them."},
-    {title: "Coding Proficiency", desc: "Language Skills: Students will gain proficiency in at least one programming language (e.g., Python, JavaScript, Scratch) and be able to write, debug, and optimize code."},
-    {title: "Project Development", desc: "Application Building: Students will apply coding skills to create simple applications, games, or interactive projects, demonstrating their ability to use programming in practical scenarios."},
-    {title: "Computational Thinking", desc: "Logical Reasoning: Students will enhance their logical reasoning and critical thinking skills by tackling programming challenges and designing efficient solutions."},
+    {title: "Problem-Solving Skills", desc: "Algorithmic Thinking: Students will develop the ability to break down problems into smaller, manageable parts and design algorithms to solve them.", bgImage:"/assets/pathway/coding-outcome-1.png"},
+    {title: "Coding Proficiency", desc: "Language Skills: Students will gain proficiency in at least one programming language (e.g., Python, JavaScript, Scratch) and be able to write, debug, and optimize code.", bgImage:"/assets/pathway/coding-outcome-2.png"},
+    {title: "Project Development", desc: "Application Building: Students will apply coding skills to create simple applications, games, or interactive projects, demonstrating their ability to use programming in practical scenarios.", bgImage:"/skill-1.png"},
+    {title: "Computational Thinking", desc: "Logical Reasoning: Students will enhance their logical reasoning and critical thinking skills by tackling programming challenges and designing efficient solutions.", bgImage:"/outcome-8.png"},
   ]
 
   export const gamingOutcomes = [
-    {title:"Game Design Principles", desc:"Core Concepts: Students will grasp fundamental game design principles, including storytelling, character development, gameplay mechanics, and level design."},
-    {title:"Programming for Games", desc:"Game Logic: Students will develop coding skills specific to game development, such as implementing game physics, AI behavior, and user interactions."},
-    {title:"Creative Problem Solving", desc:"Design Challenges: Students will enhance their ability to solve design challenges by creating balanced game mechanics, engaging user experiences, and overcoming technical obstacles."},
-    {title:"3D Modeling and Animation", desc:"Visual Design: Students will learn the basics of creating 3D models, textures, and animations, and how to integrate these elements into their games."},
+    {title:"Game Design Principles", desc:"Core Concepts: Students will grasp fundamental game design principles, including storytelling, character development, gameplay mechanics, and level design.", bgImage:""},
+    {title:"Programming for Games", desc:"Game Logic: Students will develop coding skills specific to game development, such as implementing game physics, AI behavior, and user interactions.", bgImage:""},
+    {title:"Creative Problem Solving", desc:"Design Challenges: Students will enhance their ability to solve design challenges by creating balanced game mechanics, engaging user experiences, and overcoming technical obstacles.", bgImage:""},
+    {title:"3D Modeling and Animation", desc:"Visual Design: Students will learn the basics of creating 3D models, textures, and animations, and how to integrate these elements into their games.", bgImage:""},
   ]
 
   export const outcomes = [

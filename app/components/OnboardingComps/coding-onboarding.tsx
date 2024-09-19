@@ -13,16 +13,24 @@ export const CodingOnboarding = () => {
                     "Project-based learning with real-world applications",
                     "Creative challenges with coding elements"]}
                 reverse={true}
+                image="/assets/pathway/something-awesome.png"
+                imageHeight={400}
+                imageWidth={250}
+                widthStyle="max-md:w-[200px] object-contain"
                 />
 
                 <OnboardingCard 
                 checkmark
                 title="Coding Tools & Resources"
                 listdesc={[
-                    "Gravida ultrices integer massa eget ut ipsum n.",
-                    "Viverra et dui quis interdum eu pulvinar viverra.",
-                    "Phasellus eget leo vitae egestas tincidunt vi.",
-                    "Lectus mauris enim praesent scelerisque ultr.",]}
+                    "Mblock",
+                    "Pictoblox",
+                    "App Inventor",
+                    "Bitsbox",]}
+                    image="/assets/pathway/coding-tools.png"
+                    imageHeight={220}
+                    imageWidth={310}
+                    widthStyle="max-md:w-[200px] object-contain"
                 />
             </div>
         </section>

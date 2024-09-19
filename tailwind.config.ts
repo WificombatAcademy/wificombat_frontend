@@ -13,6 +13,7 @@ const config: Config = {
       },
       colors: {
         'black-50': '#F2F2F3',
+        'black-100': '#E5E5E6',
         'black-200': '#CBCBCD',
         'black-300': '#B1B1B4',
         'black-400': '#96969C',

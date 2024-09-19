@@ -32,7 +32,7 @@ const coursesData = [
     id: 3,
     level: "Beginner",
     duration: "4 weeks",
-    title: "",
+    title: "Coding fundamental 3 (Lightbot and Mblock)",
     link: "/registration",
   },
 
@@ -40,7 +40,7 @@ const coursesData = [
     id: 4,
     level: "Beginner",
     duration: "4 weeks",
-    title: "Coding fundamental 3 (Lightbot and Mblock)",
+    title: "Pictoblox",
     link: "/registration",
   },
 
@@ -48,7 +48,7 @@ const coursesData = [
     id: 5,
     level: "Beginner",
     duration: "4 weeks",
-    title: "Pictoblox",
+    title: "Bitsbox 1",
     link: "/registration",
   },
 ];
