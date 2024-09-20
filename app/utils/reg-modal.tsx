@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useMain } from '../context/MainContext';
 
 const RegModal = () => {
-  const { successfulReg, setSuccessfulReg, paymentOption } = useMain();
+  const { successfulReg, setSuccessfulReg } = useMain();
 
   if (!successfulReg) return null;
 
@@ -28,22 +28,20 @@ const RegModal = () => {
               />
 
               <div className="mt-6 text-xl font-semibold text-center">
-                {paymentOption === 'payLater' ? 'Registration Successful' : 'Payment Coming Soon'}
+                 Registration Successful
               </div>
 
               <p className="text-lg font-medium my-4 text-center">
-                {paymentOption === 'payLater'
-                  ? 'Your account has been created successfully.'
-                  : 'You will be able to complete the payment soon.'}
+                Your account has been created successfully
               </p>
 
-              <Link href={paymentOption === 'payLater' ? `/home` : `#`} onClick={handleModalClose}>
+              <Link href={`/login`} onClick={handleModalClose}>
                 <button
                   className="mt-10 flex w-full justify-center rounded-md disabled:bg-[#B1B1B4] active:bg-[#131314] bg-[#131314] 
                   p-4 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-purple-500 focus-visible:outline 
                   focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600"
                 >
-                  {paymentOption === 'payLater' ? 'Go to Home' : 'Okay'}
+                  Proceed to Login
                 </button>
               </Link>
             </div>

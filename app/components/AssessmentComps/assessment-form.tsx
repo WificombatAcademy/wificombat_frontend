@@ -211,7 +211,7 @@ const AssessmentForm = () => {
 
 
                 <form 
-                className="z-20 relative text-black-500">
+                className="z-20 relative text-black-500 pb-12">
                     {validationErrors.length > 0 && (
                         <div className="text-red-500 mb-4 text-center">
                             {/* {validationErrors.map((error, index) => (

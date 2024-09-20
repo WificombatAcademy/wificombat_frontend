@@ -14,13 +14,13 @@ const RecommendationDesign = () => {
             </svg>
         </div>
 
-        <div className="absolute top-[14rem] lg:top-[16rem] right-7 md:right-10 xl:right-[5rem]">
+        <div className="absolute top-[14rem] lg:top-[16rem] right-0 md:right-10 xl:right-[5rem]">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 0L15.2411 8.75891L24 12L15.2411 15.2411L12 24L8.75891 15.2411L0 12L8.75891 8.75891L12 0Z" fill="#CC9200"/>
             </svg>
         </div>
 
-        <div className="absolute top-[14rem] lg:top-[16rem] left-10 md:left-28 lg:left-32 rotate-[-30deg]">
+        <div className="absolute top-[14rem] lg:top-[16rem] left-0 md:left-28 lg:left-32 rotate-[-30deg]">
             <svg width="22" height="18" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M11 0L21.3923 18H0.607696L11 0Z" fill="#131314"/>
             </svg>

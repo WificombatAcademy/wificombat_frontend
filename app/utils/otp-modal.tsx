@@ -22,7 +22,7 @@ const OtpModal = ({isOpen, onClose}: ModalProps) => {
   const [otp, setOtp] = useState("");
   const [isVerifyingLoading, setIsVerifyingLoading] = useState(false);
   const [isResendCodeLoading, setIsResendCodeLoading] = useState(false);
-  const {setSuccessfulSignup} = useMain();
+  const {setSuccessfulSignup, isFromForgotPassword} = useMain();
   const [isOtpExpired, setIsOtpExpired] = useState(false);
 
   useEffect(() => {
@@ -66,9 +66,17 @@ const OtpModal = ({isOpen, onClose}: ModalProps) => {
         otp
       });
       console.log('OTP verified:');
-      setIsVerifyingLoading(false);
-      setSuccessfulSignup(true);
-      onClose();
+      if(isFromForgotPassword){
+        toast.success('OTP verified');
+        router.push("/create-password")
+        onClose();
+      }
+      else {
+        setIsVerifyingLoading(false);
+        toast.success('OTP verified');
+        setSuccessfulSignup(true);
+        onClose();
+      }
     } catch (error) {
       toast.error('Error sending OTP');
       setIsVerifyingLoading(false);

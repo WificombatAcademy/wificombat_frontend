@@ -1,15 +1,16 @@
 "use client";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useContext, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-// import { toast } from "react-hot-toast";
+import { FormEvent, useState } from "react";
+import { useForm } from "react-hook-form";
 import { IoChevronBackOutline } from "react-icons/io5";
 import { z } from "zod";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
+import axiosInstance from "@/app/utils/auth-interceptor";
+import { API } from "@/app/utils/types-and-links";
+import toast, { Toaster } from "react-hot-toast";
 
 const schema = z.object({
   email: z.string().email("Invalid email address"),
@@ -51,21 +52,40 @@ const Login = () => {
     (field) => field !== ""
   );
 
-  const onSubmit: SubmitHandler<LoginValues> = async (data) => {
+  const login = async () => {
+    // e.preventDefault();
     setIsLoading(true);
+    const payload = {
+      action: "login",
+      mail: watch("email"),
+      pass: watch("password"),
+    }
     try {
-      console.log("Form data:", data);
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      router.push('/dashboard')
-    } catch (error) {
-      console.error("Signup error:", error);
+      const response = await axiosInstance.post(`${API}/authentication/`,payload,{
+        headers:{
+          "Content-Type": "multipart/form-data",
+        },
+        withCredentials: true,
+      });
+  
+      // Check if success is false in the response
+      if (response.data.success === false) {
+        toast.error(response.data.message || "Login failed. Please try again.");
+      } else {
+        toast.success("Login successful");
+        router.push("/dashboard");
+      }
+    } catch (error: any) {
+      console.error("Login error:", error);
+      toast.error("Login error. Please try again.");
     } finally {
       setIsLoading(false);
     }
-  };
+  };  
 
   return (
     <div className="flex min-h-full w-full h-screen bg-white">
+      <Toaster />
       <div className="relative hidden w-0 flex-1 lg:max-w-[655px] lg:block rounded-tr-[100px]">
 
         <Image
@@ -103,7 +123,7 @@ const Login = () => {
         <div className="mx-auto w-full">
           <div className="mt-16">
             <div>
-              <form className="space-y-6">
+              <form className="space-y-6" onSubmit={handleSubmit(login)}>
                 <>
                   <div className="w-full">
                     <label
@@ -192,7 +212,6 @@ const Login = () => {
                   <div className="mt-14">
                     <button
                       type="submit"
-                      onClick={handleSubmit(onSubmit)}
                       disabled={isLoading || !isValid}
                       className="flex w-full justify-center rounded-md disabled:bg-[#B1B1B4] active:bg-[#131314] bg-[#131314] 
                       p-4 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-purple-500 focus-visible:outline 

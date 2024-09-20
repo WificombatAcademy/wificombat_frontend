@@ -278,6 +278,7 @@ const Profile = () => {
         action: "register",
         mail,
         pass,
+        name_in_full: watch("schoolStudent.fullname"),
         name: watch("schoolStudent.fullname"),
         account_type: "school",
         age:watch("schoolStudent.age"),
@@ -473,6 +474,7 @@ const Profile = () => {
           />
 
           <div className="absolute inset-0 bg-[#26002C80] opacity-90 rounded-tr-[100px]">
+            <a href="/">
             <Image
               className="absolute top-10 left-10"
               src="/assets/auth/logo.svg"
@@ -480,6 +482,7 @@ const Profile = () => {
               height={54}
               alt=""
             />
+            </a>
           </div>
         </div>
 

@@ -12,7 +12,7 @@ import { useMain } from "../context/MainContext";
 export default function RecommendationPage() {
     const router = useRouter();
     const [recommendation, setRecommendation] = useState<any>(null);
-    const {name} = useMain();
+    const { name } = useMain();
 
     useEffect(() => {
         const { search } = window.location;
@@ -23,9 +23,29 @@ export default function RecommendationPage() {
         }
     }, []);
 
-    console.log(recommendation)
+    console.log(recommendation);
 
-   if(recommendation) {
+    if (!recommendation || !recommendation.best_pathway) {
+        return (
+            <div className="container w-full h-screen flex items-center justify-center mx-auto text-center ">
+               <div className="w-[97%] mx-auto lg:-mt-20">
+                <Image
+                src={`/oops.png`}
+                alt="oops"
+                width={608}
+                height={456}
+                className="w-[450px] mx-auto object-contain"
+                />
+                    <h1 className="text-2xl font-bold">No Recommendation Available</h1>
+                    <p className="mt-4 text-lg">It seems like we couldn't retrieve your career pathway recommendation.</p>
+                    <Link href="/assessment" className="mt-6 inline-block bg-black-500 text-white px-6 py-3 rounded-lg">
+                        Try Again
+                    </Link>
+               </div>
+            </div>
+        );
+    }
+
     return (
         <div className="mx-auto relative container w-full max-w-[2000px]">
             {/* Navbar and Footer */}
@@ -38,8 +58,8 @@ export default function RecommendationPage() {
                     <h1 className="pt-14 md:pt-20 lg:pt-28 text-2xl lg:text-4xl font-bold text-center">
                         {name}&apos;s Assessment
                     </h1>
-                    <h1 className="mt-4 text-center text-xl md:text-2xl lg:text-3xl">
-                    {recommendation.best_pathway.reason}
+                    <h1 className="relative z-[412] mt-4 text-center text-xl md:text-2xl lg:text-3xl">
+                        {recommendation.best_pathway.reason || "No reason provided"}
                     </h1>
                 </div>
                 {/* SUMMARY */}
@@ -49,7 +69,7 @@ export default function RecommendationPage() {
                     <div className="w-[93%] md:w-[90%] mx-auto flex flex-col md:flex-row md:items-center gap-10 md:gap-14 lg:gap-20 text-black-500">
                         <div className="w-full md:basis-[50%]">
                             <Image
-                                src={"/hero-1.png"}
+                                src={recommendation.best_pathway.image}
                                 alt={"pathway"}
                                 width={500}
                                 height={500}
@@ -59,13 +79,14 @@ export default function RecommendationPage() {
 
                         <div className="w-full md:basis-[50%]">
                             <h2 className="text-blue-500 font-semibold text-xl md:text-2xl lg:text-4xl">
-                            {recommendation.best_pathway.pathway}
+                                {recommendation.best_pathway.pathway || "No pathway provided"}
                             </h2>
 
-                            <p className="mt-4 text-lg md:text-xl">
-                                Master programming languages, build web and mobile applications,
-                                and become a proficient software developer.
-                            </p>
+                            <div
+                                className="mt-4 text-lg md:text-xl"
+                                dangerouslySetInnerHTML={{ __html: recommendation.best_pathway.description }}
+                            />
+
 
                             <p className="mt-4 text-lg md:text-xl text-black-700 font-semibold">
                                 Key Skills: Python, JavaScript, HTML, CSS, Databases
@@ -74,9 +95,7 @@ export default function RecommendationPage() {
                             <div className="mt-8 lg:mt-12">
                                 <Link
                                     href="/registration"
-                                    className={`bg-[#131314] text-white focus-visible:outline-black
-                                            rounded-lg px-16 py-5 font-medium  shadow-sm hover:bg-opacity-80 
-                                            focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 `}
+                                    className={`bg-[#131314] text-white focus-visible:outline-black rounded-lg px-16 py-5 font-medium shadow-sm hover:bg-opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 `}
                                 >
                                     Register here
                                 </Link>
@@ -98,7 +117,7 @@ export default function RecommendationPage() {
                                 Pathway Highlights
                             </h3>
                             <p className="mt-4 text-lg md:text-xl">
-                                {recommendation.best_pathway.reason}
+                                {recommendation.best_pathway.reason || "No reason provided"}
                             </p>
                         </div>
 
@@ -107,7 +126,7 @@ export default function RecommendationPage() {
                                 Skill Alignment
                             </h3>
                             <p className="mt-4 text-lg md:text-xl">
-                            Coming Soon!
+                                Coming Soon!
                             </p>
                         </div>
 
@@ -116,7 +135,7 @@ export default function RecommendationPage() {
                                 Career Outlook
                             </h3>
                             <p className="mt-4 text-lg md:text-xl">
-                            Coming Soon!
+                                Coming Soon!
                             </p>
                         </div>
 
@@ -125,10 +144,9 @@ export default function RecommendationPage() {
                                 Next Step
                             </h3>
                             <p className="mt-4 text-lg md:text-xl">
-                            Coming Soon!
+                                Coming Soon!
                             </p>
                         </div>
-                        {/* Additional sections can be added here */}
                     </div>
                 </div>
                 {/* REASONS */}
@@ -140,19 +158,11 @@ export default function RecommendationPage() {
                     </h3>
 
                     <p className="mt-4 text-lg md:text-xl">
-                        If you’re also interested in game development or AI, you might
-                        consider exploring those pathways as well.
+                        If you’re also interested in game development or AI, you might consider exploring those pathways as well.
                     </p>
 
                     <div className="mt-10 flex flex-wrap items-center gap-5">
-                        {/* {altPaths && altPaths.map((path:any, index:number) => (
-                            <div
-                                key={index}
-                                className="font-semibold px-4 py-[10px] border border-black-500 max-md:text-sm rounded-lg cursor-pointer"
-                            >
-                                {path} Pathway
-                            </div>
-                        ))} */}
+                        {/* Alternative pathways can be added here */}
                     </div>
                 </div>
                 {/* ALTERNATIVE PATHS */}
@@ -166,5 +176,4 @@ export default function RecommendationPage() {
             <Footer />
         </div>
     );
-    }
-   }
+}

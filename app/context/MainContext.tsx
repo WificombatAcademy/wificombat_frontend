@@ -5,10 +5,12 @@ interface MainContextType {
   toggleSidebar: boolean;
   successfulSignup: boolean;
   successfulReg: boolean;
+  isFromForgotPassword: boolean;
   selectedRole: string;
   name:string;
   paymentOption: string;
   setSuccessfulSignup: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsFromForgotPassword: React.Dispatch<React.SetStateAction<boolean>>;
   setSuccessfulReg: React.Dispatch<React.SetStateAction<boolean>>;
   setToggleSidebar: React.Dispatch<React.SetStateAction<boolean>>;
   setSelectedRole: React.Dispatch<React.SetStateAction<string>>;
@@ -22,6 +24,7 @@ export const MainProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [toggleSidebar, setToggleSidebar] = useState<boolean>(false);
   const [successfulSignup, setSuccessfulSignup] = useState(false);
   const [successfulReg, setSuccessfulReg] = useState(false);
+  const [isFromForgotPassword, setIsFromForgotPassword] = useState(false);
   const [selectedRole, setSelectedRole] = useState('');
   const [paymentOption, setPaymentOption] = useState('');
   const [name, setUsername] = useState('');
@@ -51,6 +54,8 @@ export const MainProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       setSelectedRole,
       successfulSignup, 
       setSuccessfulSignup,
+      isFromForgotPassword, 
+      setIsFromForgotPassword, 
       setSuccessfulReg,
       successfulReg,
       paymentOption,

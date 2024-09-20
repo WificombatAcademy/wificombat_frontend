@@ -4,10 +4,13 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import {  useContext, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { toast } from "react-hot-toast";
+import { toast, Toaster } from "react-hot-toast";
 import { IoChevronBackOutline } from "react-icons/io5";
 import { z } from "zod";
 import OtpModal from "../../utils/otp-modal";
+import { API } from "@/app/utils/types-and-links";
+import axiosInstance from "@/app/utils/auth-interceptor";
+import { useMain } from "@/app/context/MainContext";
 
 const schema = z.object({
   email: z.string().email("Invalid email address")
@@ -19,12 +22,14 @@ type ForgotPasswordValues = {
 
 const Page = () => {
     const router = useRouter();
+    const {setIsFromForgotPassword} = useMain();
     const [isLoading, setIsLoading] = useState(false);
     const [isOTPModalOpen, setOTPModalOpen] = useState(false);
   
     const {
       register,
       handleSubmit,
+      watch,
       formState: { errors, isValid },
     } = useForm<ForgotPasswordValues>({
       defaultValues: {
@@ -34,47 +39,40 @@ const Page = () => {
     });
   
   
-    const onSubmit: SubmitHandler<ForgotPasswordValues> = async (data) => {
+    const reset = async () => {
+      // e.preventDefault();
       setIsLoading(true);
+      const payload = {
+        action: "reset",
+        mail: watch("email"),
+      }
       try {
-        const response: Response = await fetch(
-          "https://teentech-be.onrender.com/api/v1/students/forgot-password",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                email: data.email,
-            }),
+        const response = await axiosInstance.post(`${API}/authentication/`,payload,{
+          headers:{
+            "Content-Type": "multipart/form-data",
           }
-        );
-  
-        const responseData = await response.json();
-        const { success, message, data: loginData } = responseData;
-        console.log(responseData, "responseData");
-  
-        if (!response.ok || !success) {
-          throw new Error(message);
-        }
-        if (success) {
-          // handleEmailValue(data.email);
+        });
+    
+        // Check if success is false in the response
+        if (response.data.success === false) {
+          toast.error(response.data.message || "Resend OTP failed. Please try again.");
+        } else {
+          setIsFromForgotPassword(true);
           setOTPModalOpen(true);
           toast.success("Password reset OTP sent successfully");
         }
-  
-        return responseData;
       } catch (error: any) {
-        console.error(error);
-        toast.error(error.message);
-        throw error;
+        console.error("Resend OTP error:", error);
+        toast.error("Resend OTP error. Please try again.");
       } finally {
         setIsLoading(false);
       }
-    };
+    };  
+  
 
   return (
     <div className='w-full h-screen bg-white flex'>
+      <Toaster/>
         <div className="relative hidden w-0 flex-1 lg:max-w-[655px] lg:block rounded-tr-[100px]">
             <Image
             fill
@@ -111,7 +109,7 @@ const Page = () => {
             <div className="mx-auto w-full">
                 <div className="mt-16">
                     <div>
-                        <form className="">
+                        <form className=""onSubmit={handleSubmit(reset)}>
                             <>
                             <h4 className='w-[85%] font-semibold mb-4 text-2xl text-[#131314]'>
                                 Please enter your email address to reset your password
@@ -151,7 +149,6 @@ const Page = () => {
                             <div className="mt-14">
                                 <button
                                 type="submit"
-                                onClick={handleSubmit(onSubmit)}
                                 disabled={!isValid || isLoading}
                                 className="flex w-full justify-center rounded-md disabled:bg-[#B1B1B4] active:bg-[#131314] bg-[#131314] p-4 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-purple-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600"
                                 >

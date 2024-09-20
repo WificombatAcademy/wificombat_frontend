@@ -3,13 +3,15 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useMain } from '../context/MainContext';
 
+
+
 // export type ModalProps = {
 //     isOpen: boolean;
 //     onClose: () => void;
 // }
 
 const SuccessModal = () => {
-  const {successfulSignup, setSuccessfulSignup} = useMain();
+  const {successfulSignup, setSuccessfulSignup, } = useMain();
   if (!successfulSignup) return null;
 
   return (
@@ -33,7 +35,7 @@ const SuccessModal = () => {
           Verification Successful
           </div>
           <p className="text-lg font-medium my-4 text-center">
-          Your account has been created successfully
+          Your email has been verified successfully
           </p>
 
 

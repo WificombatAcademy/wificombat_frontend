@@ -15,6 +15,11 @@ const nextConfig = {
             protocol: "https",
             hostname: "www.google.com",
           },
+          {
+            protocol: "https",
+            hostname: "api",  // Assuming 'api' is the correct hostname
+            pathname: "/v1/sites/default/files/styles/medium/public/**",
+          },
         ],
       },
 };
