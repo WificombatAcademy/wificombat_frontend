@@ -37,7 +37,7 @@ export default function RecommendationPage() {
                 className="w-[450px] mx-auto object-contain"
                 />
                     <h1 className="text-2xl font-bold">No Recommendation Available</h1>
-                    <p className="mt-4 text-lg">It seems like we couldn't retrieve your career pathway recommendation.</p>
+                    <p className="mt-4 text-lg">It seems like we couldn&apos;t retrieve your career pathway recommendation.</p>
                     <Link href="/assessment" className="mt-6 inline-block bg-black-500 text-white px-6 py-3 rounded-lg">
                         Try Again
                     </Link>
