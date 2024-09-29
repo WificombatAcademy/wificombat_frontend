@@ -1,7 +1,7 @@
 "use client";
 
 import { getCookie } from "cookies-next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SideBar from "../components/Dashboard/SideBar";
 import Main from "../components/Dashboard/Main";
 import { GoChevronDown } from "react-icons/go";
@@ -11,6 +11,10 @@ import Image from "next/image";
 import { raleway } from "../fonts";
 import DashboardHeader from "../components/Dashboard/DashboardHeader";
 import { useMain } from "../context/MainContext";
+import Loader from "../utils/loader";
+import toast, { Toaster } from "react-hot-toast";
+import axiosInstance from "../utils/auth-interceptor";
+import { API_VERSION_ONE } from "../utils/types-and-links";
 
 
 const Dashboard = () => {
@@ -22,13 +26,53 @@ const Dashboard = () => {
 
   const userId = getCookie("user_id");
 
-  
+  useEffect(() => {
+    const fetchDashboardData = async () => {
+      try {
+        const response = await axiosInstance.get(`${API_VERSION_ONE}/dashboard/${userId}`, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        });
+
+        // Check if the response contains the dashboard data
+        if (response.status === 200) {
+          setDashboardData(response.data);
+        } else {
+          toast.error("Failed to fetch dashboard data.");
+        }
+      } catch (error: any) {
+        console.error("Error fetching dashboard data:", error);
+        setError("Failed to load dashboard data.");
+        toast.error("Error fetching dashboard data. Please try again.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (userId) {
+      fetchDashboardData();
+    } else {
+      setError("User not found.");
+      setLoading(false);
+    }
+  }, [userId]);
+
+  if (loading) {
+    return <Loader noDesign/>;
+  }
+
+  if (error) {
+    return <Loader noDesign isError/>
+  }
 
   // console.log(userId);
   // console.log(sessionId);
 
   return (
     <>
+      <Toaster/>
      <SideBar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       <div className={`${raleway.className} relative`}>
         {/* header/ MAIN SECTION Start */}
