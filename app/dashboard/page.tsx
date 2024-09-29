@@ -1,9 +1,8 @@
 "use client";
 
+import { getCookie } from "cookies-next";
 import { useState } from "react";
 import SideBar from "../components/Dashboard/SideBar";
-import { HiBars3 } from "react-icons/hi2";
-import Header from "../components/Dashboard/Header";
 import Main from "../components/Dashboard/Main";
 import { GoChevronDown } from "react-icons/go";
 import SimpleLineChart from "../components/Dashboard/Graph";
@@ -17,8 +16,16 @@ import { useMain } from "../context/MainContext";
 const Dashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const {toggleSidebar} = useMain();
-  const [error, setError] = useState(null);
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
+  const [dashboardData, setDashboardData] = useState(null);
+
+  const userId = getCookie("user_id");
+
+  
+
+  // console.log(userId);
+  // console.log(sessionId);
 
   return (
     <>

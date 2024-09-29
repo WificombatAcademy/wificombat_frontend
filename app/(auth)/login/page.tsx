@@ -11,6 +11,7 @@ import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import axiosInstance from "@/app/utils/auth-interceptor";
 import { API } from "@/app/utils/types-and-links";
 import toast, { Toaster } from "react-hot-toast";
+import { setCookie } from "cookies-next";
 
 const schema = z.object({
   email: z.string().email("Invalid email address"),
@@ -57,7 +58,7 @@ const Login = () => {
     setIsLoading(true);
     const payload = {
       action: "login",
-      mail: watch("email"),
+      name: watch("email"),
       pass: watch("password"),
     }
     try {
@@ -72,6 +73,21 @@ const Login = () => {
       if (response.data.success === false) {
         toast.error(response.data.message || "Login failed. Please try again.");
       } else {
+        // console.log(response.data.session_id)
+        // console.log(response.data.user_id)
+
+        setCookie("session_id", response.data.session_id, {
+          // httpOnly: true, 
+          secure: true, 
+          sameSite: "strict",
+        });
+
+        setCookie("user_id", response.data.user_id, {
+          // httpOnly: true, 
+          secure: true, 
+          sameSite: "strict",
+        });
+
         toast.success("Login successful");
         router.push("/dashboard");
       }
