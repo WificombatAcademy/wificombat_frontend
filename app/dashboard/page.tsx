@@ -29,7 +29,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
-        const response = await axiosInstance.get(`${API_VERSION_ONE}/dashboard/${userId}`, {
+        const response = await axiosInstance.get(`${API_VERSION_ONE}/dashboard/${userId}/`, {
           headers: {
             "Content-Type": "application/json",
           },

@@ -45,7 +45,7 @@ const testimonialData = [
 export const Testimonials = () => {
   const [activeSlide, setActiveSlide] = useState(0);
   return (
-    <div className="w-full py-7 md:py-10 lg:pb-40 bg-black-500">
+    <div className="w-full py-7 pb-40 bg-black-500">
         <div
             className="w-[93%] md:w-[88%] mx-auto mt-3 flex max-[330px]:flex-col 
             flex-row items-center justify-center gap-2 md:gap-4">
@@ -62,7 +62,21 @@ export const Testimonials = () => {
                 autoplay={{delay: 10000}}
                 modules={[ Autoplay ]}
                 spaceBetween={20}
-                slidesPerView={3}
+                slidesPerView={"auto"}
+                breakpoints={{
+                    320: {
+                      slidesPerView: 1,
+                      spaceBetween: 20,
+                    },
+                    640: {
+                      slidesPerView: 1,
+                      spaceBetween: 10,
+                    },
+                    1000: {
+                      slidesPerView: 3,
+                      spaceBetween: 30,
+                    },
+                  }}
                 onActiveIndexChange={
                     (swiper) => setActiveSlide(swiper.realIndex)
                 }>
