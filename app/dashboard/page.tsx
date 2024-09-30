@@ -14,7 +14,7 @@ import { useMain } from "../context/MainContext";
 import Loader from "../utils/loader";
 import toast, { Toaster } from "react-hot-toast";
 import axiosInstance from "../utils/auth-interceptor";
-import { API } from "../utils/types-and-links";
+import { API_VERSION_ONE } from "../utils/types-and-links";
 
 
 const Dashboard = () => {
@@ -30,12 +30,12 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
-        const response = await axiosInstance.get(`${API}/dashboard/${userId}`, {
+        const response = await axiosInstance.get(`${API_VERSION_ONE}/dashboard/${userId}/`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${sessionId}`
           },
-          withCredentials: true,
+          // withCredentials: true,
         });
 
         // Check if the response contains the dashboard data

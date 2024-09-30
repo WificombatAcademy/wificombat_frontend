@@ -58,7 +58,7 @@ const Login = () => {
     setIsLoading(true);
     const payload = {
       action: "login",
-      email: watch("email"),
+      name: watch("email"),
       pass: watch("password"),
     }
     try {
