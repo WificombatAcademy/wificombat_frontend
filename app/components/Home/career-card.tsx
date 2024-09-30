@@ -48,7 +48,7 @@ const CareerCard = ({ bgColor ,desc, pathway, linkTo, level, subject, textWhite,
                     </div>} */}
 
                     {pathways && 
-                    <div className="mt-3 flex flex-wrap items-center gap-2">
+                    <div className="mt-3 flex flex-wrap items-center gap-1">
                         {pathways?.map((pathway, index) => (
                             <div 
                             key={index}
