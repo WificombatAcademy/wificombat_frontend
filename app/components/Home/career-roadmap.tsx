@@ -6,7 +6,7 @@ export const CareerRoadmap = () => {
     <section className="relative">
       <HeadingDesign heading="Career Roadmap" />
 
-      <div className="">
+      <div className="mt-10 mb-4 lg:mb-7">
         <Image 
         width={1440}
         height={2015}
