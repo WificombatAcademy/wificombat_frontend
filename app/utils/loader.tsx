@@ -31,7 +31,7 @@ const Loader = ({ isError = false, isSessionExpired = false, noDesign = false, }
   }
 
   return (
-    <div className="relative lg:left-[7%] flex flex-col justify-center items-center h-screen bg-white">
+    <div className={`relative ${noDesign && "lg:left-[7%]"} flex flex-col justify-center items-center h-screen bg-white`}>
      {!noDesign &&  <AssessmentDesign />}
       
       {!isError && !isSessionExpired && (
