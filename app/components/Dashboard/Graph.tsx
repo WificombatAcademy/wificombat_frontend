@@ -39,7 +39,7 @@ function SimpleLineChart() {
       <Line
         type="monotone"
         dataKey="Pathway"
-        stroke="#0784C3"
+        stroke="#BC00DD"
         activeDot={{ r: 8 }}
       />
       {/* <Line type="monotone" dataKey="Gaming" stroke="#BC00DD" /> */}

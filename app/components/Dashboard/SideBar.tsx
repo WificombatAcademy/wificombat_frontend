@@ -92,8 +92,8 @@ const SideBar = ({ sidebarOpen, setSidebarOpen }: Props) => {
               </Transition.Child>
               {/* Sidebar component, swap this element with another sidebar if you like */}
               <div className={`${raleway.className} 
-              flex grow flex-col gap-y-5 overflow-y-auto bg-[#0C0C0D] px-6 pb-4 ring-1 ring-white/10`}>
-                <div className="flex h-16 shrink-0 items-center">
+              flex grow flex-col gap-y-5 overflow-y-auto bg-[#BC00DD] px-6 pb-4 ring-1 ring-white/10`}>
+                <div className="mt-3 flex h-16 shrink-0 items-center">
                 <Image
                   src={`/assets/auth/logo.svg`}
                   alt={`logo`}
@@ -117,7 +117,7 @@ const SideBar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                                 pathname === item.href ||
                                 (isCareerPathActive && item.name === "Career Path")
                                   ? "text-[#F2F2F3]"
-                                  : "text-gray-400 hover:text-white hover:bg-gray-800",
+                                  : "text-gray-200 hover:text-white hover:bg-gray-800",
                                 "group flex gap-x-3 items-center rounded-md p-3 text-lg leading-6 font-semibold cursor-pointer"
                               )}
                               style={
@@ -125,7 +125,7 @@ const SideBar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                                 (isCareerPathActive && item.name === "Career Path")
                                   ? {
                                       background:
-                                        "#0784C3",
+                                        "#131314",
                                     }
                                   : {}
                               }
@@ -159,12 +159,12 @@ const SideBar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                                       className={classNames(
                                         pathname === subItem.href
                                           ? "text-[#F2F2F3]"
-                                          : "text-gray-400 hover:text-white hover:bg-gray-800",
+                                          : "text-gray-200 hover:text-white hover:bg-gray-800",
                                         "group flex gap-x-3 rounded-md p-2 text-base leading-5 font-medium"
                                       )}
                                       style={
                                         pathname === subItem.href
-                                          ? { color: "#0784C3" }
+                                          ? { color: "#131314" }
                                           : {}
                                       }
                                     >
@@ -182,7 +182,8 @@ const SideBar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                     <li className="mt-auto">
                       <a
                         href="#"
-                        className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white"
+                        className="group -mx-2 flex gap-x-3 rounded-md p-3 text-sm font-semibold 
+                        leading-6 text-gray-400 hover:bg-gray-800 hover:text-white"
                       >
                         <MdOutlineLogout
                           className="h-6 w-6 shrink-0"

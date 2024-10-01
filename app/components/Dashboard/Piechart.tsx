@@ -37,7 +37,7 @@ const Piechart = () => {
             value: uncompletedValue,
           },
           {
-            color: completedValue === 0 ?   "#F2F4F7" : "#0784C3",
+            color: completedValue === 0 ?   "#F2F4F7" : "#BC00DD",
             title: "Completed",
             value: completedValue,
           },

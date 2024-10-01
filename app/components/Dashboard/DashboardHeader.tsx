@@ -6,9 +6,10 @@ import Header from "./Header";
 
 type Props = {
     setSidebarOpen: Dispatch<SetStateAction<boolean>>
+    name?: string;
 }
 
-const DashboardHeader = ({setSidebarOpen}: Props) => {
+const DashboardHeader = ({setSidebarOpen, name}: Props) => {
   return (
     <div className="sticky top-0 z-40 flex shrink-0 items-center gap-x-4 bg-white sm:gap-x-6">
         <button
@@ -26,7 +27,7 @@ const DashboardHeader = ({setSidebarOpen}: Props) => {
             aria-hidden="true"
         />
 
-        <Header />
+        <Header name={name}/>
     </div>
   )
 }

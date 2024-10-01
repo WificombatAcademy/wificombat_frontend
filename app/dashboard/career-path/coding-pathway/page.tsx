@@ -1,7 +1,6 @@
 "use client";
 
 import DashboardHeader from "@/app/components/Dashboard/DashboardHeader";
-import Header from "@/app/components/Dashboard/Header";
 import SideBar from "@/app/components/Dashboard/SideBar";
 import { useMain } from "@/app/context/MainContext";
 import { raleway } from "@/app/fonts";
@@ -9,7 +8,6 @@ import { Courses, stage } from "@/app/utils/types-and-links";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { HiBars3 } from "react-icons/hi2";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { SlLock } from "react-icons/sl";
 
@@ -83,8 +81,8 @@ const Page = () => {
                                     <Link href={`/dashboard/report-card/course_${ind + 1}`}>
                                         <button 
                                         disabled={!course.reportCard}
-                                        className={`disabled:bg-[#B1B1B4] disabled:cursor-not-allowed bg-black-500 text-white 
-                                            py-2 md:py-3 2xl:py-4 px-3 md:px-4 lg:px-6 
+                                        className={`disabled:bg-[#B1B1B4] disabled:cursor-not-allowed bg-purple-500 
+                                            text-white md:py-3 2xl:py-4 px-3 md:px-4 lg:px-6 
                                             transition duration-300 hover:bg-opacity-90 rounded-lg`}>
                                             Report Card
                                         </button>

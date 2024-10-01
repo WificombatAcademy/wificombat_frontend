@@ -5,6 +5,11 @@ import { Fragment, useContext, useEffect, useState } from "react";
 import { HiOutlineBell, HiOutlineMagnifyingGlass } from "react-icons/hi2";
 import Boy from "@/app/utils/boy";
 
+type Props = {
+  name?: string;
+
+}
+
 interface StudentProfile {
   _id: string;
   firstname: string;
@@ -23,14 +28,14 @@ const userNavigation = [
   { name: "Sign out", href: "#" },
 ];
 
-const Header = () => {
+const Header = ({name}: Props) => {
 
   return (
     <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6 items-center py-7 lg:px-10 max-lg:pr-2.5 border-b border-black-50">
       <div className="text-lg lg:items-center font-semibold leading-6 text-gray-900 hidden lg:flex">
         <Boy />
         <div>
-          <p>Hi, User</p>
+          <p>Hi, {name}</p>
           <p className="font-normal text-sm text-[#4B4B4E]">
             Please continue learning
           </p>
@@ -75,10 +80,9 @@ const Header = () => {
             <span className="sr-only">Open user menu</span>
             <div
               style={{
-                border: "1px solid",
                 padding: "1px",
                 background:
-                  "#0784C3",
+                  "#BC00DD",
                 borderRadius: "50%",
                 display: "inline-block",
               }}
@@ -101,7 +105,8 @@ const Header = () => {
             leaveFrom="transform opacity-100 scale-100"
             leaveTo="transform opacity-0 scale-95"
           >
-            <Menu.Items className="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
+            <Menu.Items className="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md 
+            bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
               {userNavigation.map((item) => (
                 <Menu.Item key={item.name}>
                   {({ active }) => (

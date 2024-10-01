@@ -4,8 +4,10 @@ import { IoBookOutline } from "react-icons/io5";
 import { TbCertificate } from "react-icons/tb";
 
 type Props = {
-  numberOfCourses: number;
-  numberOfCoursesInProgress: number;
+  coursesCompleted: string;
+  completedProjects: string;
+  badges: string;
+  certificates: string;
 }
 
 const cardData = [
@@ -43,9 +45,11 @@ const cardData = [
   },
 ];
 
-const Main = ({ numberOfCourses, numberOfCoursesInProgress }: Props) => {
-  cardData[0].stats = numberOfCourses.toString();
-  cardData[1].stats = numberOfCoursesInProgress.toString();
+const Main = ({ coursesCompleted, completedProjects, badges, certificates }: Props) => {
+  cardData[0].stats = coursesCompleted.toString();
+  cardData[1].stats = completedProjects.toString();
+  cardData[2].stats = badges.toString();
+  cardData[3].stats = certificates.toString();
   return (
     <div>
       <div className="w-full flex gap-4 max-lg:flex-col">
@@ -78,10 +82,12 @@ const Card = ({
     <div
       className={`p-5 border flex flex-col gap-3 rounded-2xl shadow w-full  ${cardBg}`}
     >
-      <div className={`flex flex-row items-center gap-3 mb-2`}>
-        <div className={`${iconBg} p-2 rounded-full`}>
-          <Icon className={` ${iconColor} font-bold text-2xl`} />
+      <div className={`flex flex-col items-center gap-3`}>
+
+        <div className={`${iconBg} p-4 rounded-full`}>
+          <Icon className={`${iconColor} font-bold text-2xl`} />
         </div>
+
         <h5 className="text-lg tracking-tight text-gray-900">{title}</h5>
       </div>
       

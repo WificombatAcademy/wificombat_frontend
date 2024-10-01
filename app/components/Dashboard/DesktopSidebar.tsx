@@ -137,21 +137,22 @@ const DesktopSidebar = () => {
       initial="full"
       animate={toggleSidebar ? "iconsOnly" : "full"}
       variants={sidebarVariants}
-      className={` ${raleway.className} flex grow flex-col gap-y-16 overflow-y-auto bg-[#0C0C0D] px-6 pb-4`}>
+      className={` ${raleway.className} flex grow flex-col gap-y-16 overflow-y-auto bg-[#BC00DD] px-6 pb-4`}>
 
       {toggleButtonVisible && ( 
         <motion.div
         whileHover={{scale:1.1 }}
           whileTap={{scale:0.9 }}
           transition={{duration:1 }}
-          onClick={handleToggle}className="toggle-button hidden z-[53] small-view-arrow-bg absolute h-8 w-8 bg-white lg:flex items-center 
-          justify-center rounded-full border border-blue-500 shadow-xl top-8 right-[-1rem] transition 
+          onClick={handleToggle}className="toggle-button hidden z-[53] small-view-arrow-bg absolute 
+          h-8 w-8 bg-white lg:flex items-center 
+          justify-center rounded-full border border-[#BC00DD] shadow-xl top-8 right-[-1rem] transition 
           duration-300 cursor-pointer"
         >
           {toggleSidebar ? (
-            <MdOutlineKeyboardDoubleArrowRight size={14} className="" />
+            <MdOutlineKeyboardDoubleArrowRight size={14} className="text-purple-500" />
           ) : (
-            <MdOutlineKeyboardDoubleArrowLeft size={14}className="" />
+            <MdOutlineKeyboardDoubleArrowLeft size={14}className="text-purple-500" />
           )}
         </motion.div>
       )}
@@ -184,7 +185,7 @@ const DesktopSidebar = () => {
                         : normalizePath(pathname) === normalizePath(item.href) ||
                         (isCareerPathActive && item.name === "Career Path")
                         ? `text-[#F2F2F3]`
-                        : `text-gray-400 hover:text-white hover:bg-gray-800`,
+                        : `text-gray-200 hover:text-white hover:bg-gray-50/40`,
                       `group flex items-center gap-x-3 rounded-md p-3 text-lg leading-6 
                       font-medium transition duration-700 ease-in-out cursor-pointer ${
                         toggleSidebar && "w-fit mx-auto"
@@ -193,7 +194,7 @@ const DesktopSidebar = () => {
                     style={
                       normalizePath(pathname) === normalizePath(item.href) ||
                        (isCareerPathActive && item.name === "Career Path")
-                        ? { background: "#0784C3" }
+                        ? { background: "#131314" }
                         : {}
                     }
                   >
@@ -231,13 +232,13 @@ const DesktopSidebar = () => {
                             className={classNames(
                               normalizePath(pathname) === normalizePath(subItem.href)
                                 ? `text-[#F2F2F3]`
-                                : `text-gray-400 hover:text-blue-500`,
+                                : `text-gray-200 hover:text-gray-100`,
                               `group flex gap-x-3 rounded-md p-2 text-base text-center leading-5 font-medium 
                               transition duration-300 ease-in-out`
                             )}
                             style={
                               normalizePath(pathname) === normalizePath(subItem.href)
-                                ? { color: "#0784C3" }
+                                ? { color: "#131314" }
                                 : {}
                             }
                           >
@@ -255,7 +256,8 @@ const DesktopSidebar = () => {
             <li className="mt-auto">
               <a
                 href="#"
-                className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white"
+                className="group -mx-2 flex gap-x-3 rounded-md p-3 text-sm font-semibold leading-6 
+                text-gray-200 hover:bg-gray-800 hover:text-white"
               >
                 <MdOutlineLogout
                   className="h-6 w-6 shrink-0"

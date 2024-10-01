@@ -31,14 +31,20 @@ const Loader = ({ isError = false, isSessionExpired = false, noDesign = false, }
   }
 
   return (
-    <div className={`relative ${noDesign && "lg:left-[7%]"} flex flex-col justify-center items-center h-screen bg-white`}>
+    <div className={`relative ${noDesign && "lg:left-[7%] overflow-hidden"} 
+    flex flex-col justify-center items-center w-full h-screen bg-white overflow-hidden`}>
      {!noDesign &&  <AssessmentDesign />}
       
       {!isError && !isSessionExpired && (
         <div className="relative w-28 h-28 lg:w-40 lg:h-40 rounded-full">
+          
           <div className="absolute top-0 left-0 w-full h-full rounded-full 
-          border-[16px] border-t-transparent border-r-purple-600 border-b-blue-600 
-          border-l-orange-400 animate-spin"></div>
+          border-[16px] border-[#F2F4F7]">
+
+          </div>
+          <div className="z-[1] absolute top-0 left-0 w-full border-[16px] animate-spin
+           border-[#BC00DD] border-t-transparent border-l-transparent h-full rounded-full 
+          "></div>
         </div>
       )}
 

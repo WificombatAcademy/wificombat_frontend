@@ -27,7 +27,8 @@ export default function RecommendationPage() {
 
     if (!recommendation || !recommendation.best_pathway) {
         return (
-            <div className="container w-full h-screen flex items-center justify-center mx-auto text-center ">
+            <div className="container w-full h-screen flex items-center
+             justify-center mx-auto text-center ">
                <div className="w-[97%] mx-auto lg:-mt-20">
                 <Image
                 src={`/oops.png`}
@@ -69,7 +70,7 @@ export default function RecommendationPage() {
                     <div className="w-[93%] md:w-[90%] mx-auto flex flex-col md:flex-row md:items-center gap-10 md:gap-14 lg:gap-20 text-black-500">
                         <div className="w-full md:basis-[50%]">
                             <Image
-                                src={recommendation.best_pathway.image}
+                                src={`https://wificombatacademy.com/${recommendation.best_pathway.image}`}
                                 alt={"pathway"}
                                 width={500}
                                 height={500}
