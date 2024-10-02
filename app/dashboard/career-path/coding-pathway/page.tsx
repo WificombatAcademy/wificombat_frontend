@@ -5,132 +5,168 @@ import SideBar from "@/app/components/Dashboard/SideBar";
 import { useMain } from "@/app/context/MainContext";
 import { useDashboardStore } from "@/app/context/useDashboardStore";
 import { raleway } from "@/app/fonts";
+import axiosInstance from "@/app/utils/auth-interceptor";
+import Loader from "@/app/utils/loader";
+import { API_VERSION_ONE, stage } from "@/app/utils/types-and-links";
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { SlLock } from "react-icons/sl";
-import axios from "axios";
-import { API_VERSION_ONE, stage } from "@/app/utils/types-and-links";
-import Loader from "@/app/utils/loader";
+
+// Fetch functions
+export const fetchCourses = async () => {
+    const response = await axiosInstance.get(`${API_VERSION_ONE}/career-pathway/20/courses`);
+    return response.data;
+};
+
+// Function to fetch modules by course ID
+export const fetchModules = async (courseId: string) => {
+    const response = await axiosInstance.get(`${API_VERSION_ONE}/course/${courseId}/modules`);
+    return response.data;
+};
 
 const Page = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const { toggleSidebar } = useMain();
-  const dashboardData = useDashboardStore((state) => state.dashboardData);
-  
-  const [courses, setCourses] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+    const { toggleSidebar } = useMain();
+    const dashboardData = useDashboardStore((state) => state.dashboardData);
+    const [courses, setCourses] = useState<any[]>([]); // State to hold courses
+    const [modules, setModules] = useState<{ [key: string]: any[] }>({}); // State to hold modules
 
-  useEffect(() => {
-    const fetchCourses = async () => {
-      if (!dashboardData || !dashboardData.course_ids) return;
+    useEffect(() => {
+        const loadCourses = async () => {
+            try {
+                const fetchedCourses = await fetchCourses();
+                setCourses(fetchedCourses);
 
-      try {
-        // Fetch course details for each course ID
-        const coursePromises = dashboardData.course_ids.map((id: string) =>
-          axios.get(`${API_VERSION_ONE}/career-pathway/${id}/courses`) // Fetching course titles
-        );
+                // Fetch modules for each course after loading courses
+                const modulesPromises = fetchedCourses.map(async (course: any) => {
+                    const fetchedModules = await fetchModules(course.course_id);
+                    return { courseId: course.course_id, modules: fetchedModules };
+                });
 
-        const courseResults = await Promise.all(coursePromises);
-        const courseData = courseResults.map((result) => result.data); // Extract the data
+                const modulesArray = await Promise.all(modulesPromises);
+                const modulesMap = modulesArray.reduce((acc, { courseId, modules }) => {
+                    acc[courseId] = modules;
+                    return acc;
+                }, {} as { [key: string]: any[] });
 
-        // Now fetch modules for each course
-        const modulePromises = courseData.map((course: any) =>
-          axios.get(`${API_VERSION_ONE}/course/${course.id}/modules/`) // Fetching course modules
-        );
+                setModules(modulesMap);
+            } catch (error) {
+                console.error('Error fetching courses or modules:', error);
+            }
+        };
 
-        const moduleResults = await Promise.all(modulePromises);
-        const coursesWithModules = courseData.map((course: any, index: number) => ({
-          ...course,
-          modules: moduleResults[index].data, // Attach modules to each course
-        }));
+        loadCourses();
+    }, []);
 
-        setCourses(coursesWithModules);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching courses:", error);
-        setLoading(false);
-      }
-    };
+    console.log(courses);
+    console.log(modules);
 
-    fetchCourses();
-  }, [dashboardData]);
+    if (!dashboardData || !courses.length || !Object.keys(modules).length) 
+        return <div className="overflow-hidden"> <Loader noDesign/></div>;
 
-  if (loading) {
-    return <div className="overflow-hidden"><Loader noDesign /></div>;
-  }
+    return (
+        <>
+            <SideBar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+            <div className={`${raleway.className} relative`}>
+                <div className={`${toggleSidebar ? "lg:pl-36" : "lg:pl-64"} transition-all duration-500 ease-in-out`}>
+                    <DashboardHeader setSidebarOpen={setSidebarOpen} name={dashboardData?.username} />
 
-  console.log(courses)
-  return (
-    <>
-      <SideBar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-      <div className={`${raleway.className} relative`}>
-        <div className={`${toggleSidebar ? "lg:pl-36" : "lg:pl-64"} transition-all duration-500 ease-in-out`}>
-          <DashboardHeader setSidebarOpen={setSidebarOpen} name={dashboardData?.username} />
+                    <main className="pb-10 mt-2">
+                        <div className="px-4 sm:px-6 lg:px-8 space-y-10">
+                            <div className="flex items-center gap-3">
+                                <div className="z-10 relative w-fit bg-purple-50 border-purple-100 
+                                rounded-md shadow-sm cursor-pointer">
+                                    <div className="absolute inset-0 flex items-center justify-end">
+                                        <IoMdArrowDropdown size={22} className="text-black-500 relative right-2" />    
+                                    </div>
+                                    <select className={`relative appearance-none w-full block bg-transparent 
+                                        outline-none sm:text-sm sm:leading-6 py-3 px-7 font-medium`}>
+                                        {stage.map((stage, index) => (
+                                            <option key={index}>{stage}</option>
+                                        ))}
+                                    </select>
+                                </div>
 
-          <main className="pb-10 mt-2">
-            <div className="px-4 sm:px-6 lg:px-8 space-y-10">
-              <div className="flex items-center gap-3">
-                <div className="z-10 relative w-fit bg-purple-50 border-purple-100 rounded-md shadow-sm cursor-pointer">
-                  <div className="absolute inset-0 flex items-center justify-end">
-                    <IoMdArrowDropdown size={22} className="text-black-500 relative right-2" />
-                  </div>
+                                <div className="z-10 relative w-fit bg-blue-50 border-blue-100 rounded-md 
+                                shadow-sm cursor-pointer">
+                                    <div className="absolute inset-0 flex items-center justify-end">
+                                        <IoMdArrowDropdown size={22} className="text-black-500 relative right-2" />    
+                                    </div>
+                                    <select className={`relative appearance-none w-full block bg-transparent outline-none 
+                                        sm:text-sm sm:leading-6 py-3 px-5 pr-10 font-medium`}>
+                                        <option>Level 1</option>
+                                    </select>
+                                </div>
+                            </div>
 
-                  <select className={`relative appearance-none w-full block bg-transparent outline-none sm:text-sm sm:leading-6 py-3 px-7 font-medium`}>
-                    {stage.map((stage, index) => (
-                      <option key={index}>{stage}</option>
-                    ))}
-                  </select>
-                </div>
+                            <div className="flex flex-col gap-9">
+                                {courses.map((course, ind) => (
+                                    <div key={ind} className="flex flex-col gap-8">
+                                        <div className="flex items-center justify-between gap-6">
+                                            <h6 className="text-[#131314] text-xl md:text-[28px] font-bold">{course.subject}</h6>
+                                            <div>
+                                                <Link href={`/dashboard/report-card/course_${ind + 1}`}>
+                                                    <button 
+                                                        disabled={!course.reportCard}
+                                                        className={`disabled:bg-[#B1B1B4] disabled:cursor-not-allowed 
+                                                            bg-purple-500 
+                                                        text-white md:py-3 2xl:py-4 px-3 md:px-4 lg:px-6 
+                                                        transition duration-300 hover:bg-opacity-90 rounded-lg`}>
+                                                        Report Card
+                                                    </button>
+                                                </Link>
+                                            </div>
+                                        </div>
 
-                <div className="z-10 relative w-fit bg-blue-50 border-blue-100 rounded-md shadow-sm cursor-pointer">
-                  <div className="absolute inset-0 flex items-center justify-end">
-                    <IoMdArrowDropdown size={22} className="text-black-500 relative right-2" />
-                  </div>
-
-                  <select className={`relative appearance-none w-full block bg-transparent outline-none sm:text-sm sm:leading-6 py-3 px-5 pr-10 font-medium`}>
-                    <option>Level 1</option>
-                  </select>
-                </div>
-              </div>      
-
-              {/* Course List */}
-              <div className="flex flex-col gap-9">
-                {courses.map((course, ind) => (
-                  <div key={ind} className="flex flex-col gap-8">
-                    {/* TITLE */}
-                    <div className="flex items-center justify-between gap-6">
-                      <h6 className="text-black-500 text-xl md:text-[28px] font-bold">
-                        {course.title}
-                      </h6>
-
-                      <div>
-                        <Link href={`/dashboard/report-card/course_${course.id}`}>
-                          <button className="bg-purple-500 text-white py-3 2xl:py-4 px-3 md:px-4 lg:px-6 transition duration-300 hover:bg-opacity-90 rounded-lg">
-                            Report Card
-                          </button>
-                        </Link>
-                      </div>
-                    </div>
-                    {/* MODULES */}
-                    <div className="flex flex-col gap-4">
-                      {course.modules.map((module: any, index: number) => (
-                        <div key={index} className="bg-gray-100 p-4 rounded-lg">
-                          <h3 className="font-semibold text-lg">{module.title}</h3>
-                          <p>{module.body}</p>
+                                        <div className="flex items-center gap-5 overflow-x-scroll">
+                                            {modules[course.course_id] && modules[course.course_id].map((module: any, index: number) => (
+                                                <div key={module.id} className="w-[60%] md:w-[50%] lg:w-[25%] flex-shrink-0 mb-5">
+                                                    <Link href={module.unlocked ? 
+                                                        `/dashboard/career-path/coding-pathway/fund_${ind + 1}/module_${index + 1}` 
+                                                        : ""}>
+                                                        <button disabled={!module.unlocked} className="relative w-full 
+                                                        h-[150px] md:h-[190px] lg:h-[215px] disabled:cursor-not-allowed">
+                                                            {!module.unlocked && <div className="absolute inset-0 
+                                                            bg-[#B1B1B4]/30 rounded-2xl"></div>}
+                                                            <Image 
+                                                                src={module.thumbnail ?? `/assets/dashboard/course.png`}
+                                                                alt={module.thumbnail}
+                                                                width={282}
+                                                                height={215}
+                                                                className="w-full h-full object-cover rounded-2xl"
+                                                            />
+                                                        </button>
+                                                    </Link>
+                                                    <div className="px-1">
+                                                        <div className="mt-3 flex items-center justify-between">
+                                                            <h3 className="font-semibold text-lg">{module.title}</h3>
+                                                            {!module.unlocked && <SlLock size={20} className="text-black-700"/>}
+                                                        </div>
+                                                        <div className="mt-2 font-medium">
+                                                            <h3>{module.desc}</h3>
+                                                        </div>
+                                                        <div className="mt-2 flex flex-wrap gap-3 md:gap-5 text-black-600">
+                                                            <div>{module.lessons} {module.lessons > 1 ? "lessons" : "lesson"}</div>
+                                                            <div>{module.quiz} Quiz</div>
+                                                            <div>{module.assignment} 
+                                                                {module.assignment > 1 ? "Assignments" : "Assignment"}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
+                    </main>
+                </div>
             </div>
-          </main>
-        </div>
-      </div>
-    </>
-  );
+        </>
+    );
 };
 
 export default Page;
