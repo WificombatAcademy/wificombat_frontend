@@ -144,7 +144,8 @@ const DesktopSidebar = () => {
         whileHover={{scale:1.1 }}
           whileTap={{scale:0.9 }}
           transition={{duration:1 }}
-          onClick={handleToggle}className="toggle-button hidden z-[53] small-view-arrow-bg absolute 
+          onClick={handleToggle}
+          className="toggle-button hidden z-[53] small-view-arrow-bg absolute 
           h-8 w-8 bg-white lg:flex items-center 
           justify-center rounded-full border border-[#BC00DD] shadow-xl top-8 right-[-1rem] transition 
           duration-300 cursor-pointer"
@@ -263,7 +264,7 @@ const DesktopSidebar = () => {
                   className="h-6 w-6 shrink-0"
                   aria-hidden="true"
                 />
-                Logout
+                {!toggleSidebar && `Logout`}
               </a>
             </li>
           </ul>
