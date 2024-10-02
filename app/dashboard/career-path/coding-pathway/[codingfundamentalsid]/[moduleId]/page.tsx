@@ -33,9 +33,9 @@ const Page = ({params}: any) => {
     fetchLessons();
 }, [params.moduleId]);
 
-if (loading) {
-    return <Loader noDesign />;
-}
+if (loading) return <div className="overflow-hidden"> <Loader noDesign />;</div>
+
+if (!lessons) return <div className="overflow-hidden"> <Loader isError/> </div>
 
   return (
     <>
