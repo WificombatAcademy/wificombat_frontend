@@ -28,7 +28,7 @@ export default function RecommendationPage() {
     if (!recommendation || !recommendation.best_pathway) {
         return (
             <div className="container w-full h-screen flex items-center
-             justify-center mx-auto text-center ">
+             justify-center mx-auto text-center overflow-hidden">
                <div className="w-[97%] mx-auto lg:-mt-20">
                 <Image
                 src={`/oops.png`}
@@ -48,7 +48,7 @@ export default function RecommendationPage() {
     }
 
     return (
-        <div className="mx-auto relative container w-full max-w-[2000px]">
+        <div className="mx-auto relative container w-full max-w-[2000px] overflow-hidden">
             {/* Navbar and Footer */}
             <GeneralNavbar />
             <div className="w-full relative">
