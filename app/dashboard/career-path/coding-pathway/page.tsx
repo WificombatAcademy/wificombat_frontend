@@ -108,7 +108,7 @@ const Page = () => {
                                             {modules[course.course_id] && modules[course.course_id].map((module: any, index: number) => (
                                                 <div key={module.id} className="w-[60%] md:w-[50%] lg:w-[25%] flex-shrink-0 mb-5">
                                                     <Link href={!(module.unlocked) ? 
-                                                        `/dashboard/career-path/coding-pathway/fund_${ind + 1}/module_${index + 1}` 
+                                                        `/dashboard/career-path/coding-pathway/${course.course_id}/${module.id}` 
                                                         : ""}>
                                                         <button disabled={module.unlocked} className="relative w-full 
                                                         h-[150px] md:h-[190px] lg:h-[215px] disabled:cursor-not-allowed">

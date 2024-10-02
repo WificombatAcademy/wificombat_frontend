@@ -1,17 +1,10 @@
 "use client";
 
 import DashboardHeader from "@/app/components/Dashboard/DashboardHeader";
-import Header from "@/app/components/Dashboard/Header";
 import SideBar from "@/app/components/Dashboard/SideBar";
 import { useMain } from "@/app/context/MainContext";
 import { raleway } from "@/app/fonts";
-import { Courses, stage } from "@/app/utils/types-and-links";
-import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
-import { HiBars3 } from "react-icons/hi2";
-import { IoMdArrowDropdown } from "react-icons/io";
-import { SlLock } from "react-icons/sl";
 
 const Page = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
