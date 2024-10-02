@@ -14,18 +14,6 @@ import { useEffect, useState } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { SlLock } from "react-icons/sl";
 
-// Fetch functions
-export const fetchCourses = async () => {
-    const response = await axiosInstance.get(`${API_VERSION_ONE}/career-pathway/20/courses`);
-    return response.data;
-};
-
-// Function to fetch modules by course ID
-export const fetchModules = async (courseId: string) => {
-    const response = await axiosInstance.get(`${API_VERSION_ONE}/course/${courseId}/modules`);
-    return response.data;
-};
-
 const Page = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const { toggleSidebar } = useMain();
@@ -60,9 +48,6 @@ const Page = () => {
         loadCourses();
     }, []);
 
-    console.log(courses);
-    console.log(modules);
-
     if (!dashboardData || !courses.length || !Object.keys(modules).length) 
         return <div className="overflow-hidden"> <Loader noDesign/></div>;
 
@@ -89,7 +74,7 @@ const Page = () => {
                                     </select>
                                 </div>
 
-                                <div className="z-10 relative w-fit bg-blue-50 border-blue-100 rounded-md 
+                                {/* <div className="z-10 relative w-fit bg-blue-50 border-blue-100 rounded-md 
                                 shadow-sm cursor-pointer">
                                     <div className="absolute inset-0 flex items-center justify-end">
                                         <IoMdArrowDropdown size={22} className="text-black-500 relative right-2" />    
@@ -98,7 +83,7 @@ const Page = () => {
                                         sm:text-sm sm:leading-6 py-3 px-5 pr-10 font-medium`}>
                                         <option>Level 1</option>
                                     </select>
-                                </div>
+                                </div> */}
                             </div>
 
                             <div className="flex flex-col gap-9">
@@ -140,13 +125,17 @@ const Page = () => {
                                                         </button>
                                                     </Link>
                                                     <div className="px-1">
+
                                                         <div className="mt-3 flex items-center justify-between">
                                                             <h3 className="font-semibold text-lg">{module.title}</h3>
-                                                            {!module.unlocked && <SlLock size={20} className="text-black-700"/>}
+                                                            {!module.unlocked && <SlLock size={20} 
+                                                            className="flex-shrink-0 text-black-700"/>}
                                                         </div>
+
                                                         <div className="mt-2 font-medium">
                                                             <h3>{module.desc}</h3>
                                                         </div>
+
                                                         <div className="mt-2 flex flex-wrap gap-3 md:gap-5 text-black-600">
                                                             <div>{module.lessons} {module.lessons > 1 ? "lessons" : "lesson"}</div>
                                                             <div>{module.quiz} Quiz</div>
@@ -170,3 +159,16 @@ const Page = () => {
 };
 
 export default Page;
+
+
+// Fetch functions
+export const fetchCourses = async () => {
+    const response = await axiosInstance.get(`${API_VERSION_ONE}/career-pathway/20/courses`);
+    return response.data;
+};
+
+// Function to fetch modules by course ID
+export const fetchModules = async (courseId: string) => {
+    const response = await axiosInstance.get(`${API_VERSION_ONE}/course/${courseId}/modules`);
+    return response.data;
+};
