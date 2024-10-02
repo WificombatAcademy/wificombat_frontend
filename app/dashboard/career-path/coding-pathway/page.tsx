@@ -3,7 +3,9 @@
 import DashboardHeader from "@/app/components/Dashboard/DashboardHeader";
 import SideBar from "@/app/components/Dashboard/SideBar";
 import { useMain } from "@/app/context/MainContext";
+import { useDashboardStore } from "@/app/context/useDashboardStore";
 import { raleway } from "@/app/fonts";
+import Loader from "@/app/utils/loader";
 import { Courses, stage } from "@/app/utils/types-and-links";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,6 +16,11 @@ import { SlLock } from "react-icons/sl";
 const Page = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const {toggleSidebar} = useMain();
+  const dashboardData = useDashboardStore((state) => state.dashboardData);
+
+  if (!dashboardData) {
+    return <div className="overflow-hidden"><Loader noDesign/></div>;
+  }
 
   return (
     <>
@@ -25,7 +32,7 @@ const Page = () => {
         <div className={`${toggleSidebar ? "lg:pl-36" : "lg:pl-64"}
         transition-all duration-500 ease-in-out`}>
          
-         <DashboardHeader setSidebarOpen={setSidebarOpen}/>
+         <DashboardHeader setSidebarOpen={setSidebarOpen} name={dashboardData?.username}/>
 
           <main className="pb-10 mt-2">
             <div className="px-4 sm:px-6 lg:px-8 space-y-10">

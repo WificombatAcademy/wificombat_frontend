@@ -232,7 +232,7 @@ const DesktopSidebar = () => {
                             className={classNames(
                               normalizePath(pathname) === normalizePath(subItem.href)
                                 ? `text-[#F2F2F3]`
-                                : `text-gray-200 hover:text-gray-100`,
+                                : `text-gray-700 hover:text-gray-300`,
                               `group flex gap-x-3 rounded-md p-2 text-base text-center leading-5 font-medium 
                               transition duration-300 ease-in-out`
                             )}

@@ -19,12 +19,11 @@ import Link from "next/link";
 import { useDashboardStore } from "../context/useDashboardStore";
 
 const Dashboard = () => {
-  const setDashboardData = useDashboardStore((state) => state.setDashboardData);
+  const { dashboardData, setDashboardData } = useDashboardStore();
   const {toggleSidebar} = useMain();
   const [sidebarOpen, setSidebarOpen] = useState(false);       
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
-  const [dashboardData, setData] = useState<any>(null);
 
   const userId = getCookie("user_id");
   const sessionId = getCookie("session_id");
@@ -42,7 +41,6 @@ const Dashboard = () => {
 
         // Check if the response contains the dashboard data
         if (response.status === 200 && Array.isArray(response.data)) {
-          setData(response.data[0]);
           setDashboardData(response.data[0]);
         } else {
           toast.error("Failed to fetch dashboard data.");
@@ -217,7 +215,7 @@ const courseData = [
       id: 1,
       title: "Coding Fundamental 1",
       thumbnail: "/assets/dashboard/course.png",
-      completedPercentage: 67,
+      completedPercentage: 0,
       module: 20,
       lesson: 14,
     },
