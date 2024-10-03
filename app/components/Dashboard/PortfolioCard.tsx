@@ -23,7 +23,7 @@ const interests = [
 
 const PortoflioHeader = ({ children }: HeaderProps) => {
     return (
-     <header className={`mt-9 md:mt-12 w-full py-3 px-4 md:px-6 lg:px-8 bg-blue-500 text-left text-white
+     <header className={`mt-9 md:mt-12 w-full py-3 px-4 md:px-6 lg:px-8 bg-purple-500 text-left text-white
       ${merriweather.className} text-lg md:text-xl font-bold capitalize`}>
          {children}
      </header>
@@ -76,7 +76,7 @@ export const PortfolioCard = () => {
         <section>
             <div className="my-8 md:my-10 w-[95%] bg-white text-black-500 mx-auto ">
                  {/* HEADER */}
-                 <header className="w-full py-3 px-4 md:px-6 lg:px-8 bg-blue-500 text-white flex items-center justify-between">
+                 <header className="w-full py-3 px-4 md:px-6 lg:px-8 bg-purple-500 text-white flex items-center justify-between">
                     <div className="basis-[30%] lg:basis-[35%]">
                         <Image
                             src={`/assets/auth/logo.svg`}

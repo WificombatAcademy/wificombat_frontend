@@ -80,7 +80,7 @@ const Page = () => {
 
 
       {openModal && 
-      <Modal 
+      <Modal    
       portfolio={true}
       isOpen={openModal}
       onClose={() => setOpenModal(false)}>

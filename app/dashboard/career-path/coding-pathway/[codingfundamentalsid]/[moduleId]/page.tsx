@@ -28,6 +28,9 @@ const Page = ({params}: any) => {
             console.error('Error fetching lessons:', error);
             setLoading(false);
         }
+        finally {
+          setLoading(false);
+        }
     };
 
     fetchLessons();

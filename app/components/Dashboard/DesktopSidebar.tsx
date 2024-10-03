@@ -261,7 +261,7 @@ const DesktopSidebar = () => {
                 text-gray-200 hover:bg-gray-800 hover:text-white"
               >
                 <MdOutlineLogout
-                  className="h-6 w-6 shrink-0"
+                  className={ `h-6 w-6 shrink-0 ${toggleSidebar && "mx-auto"}` }
                   aria-hidden="true"
                 />
                 {!toggleSidebar && `Logout`}
