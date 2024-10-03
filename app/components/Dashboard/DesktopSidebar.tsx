@@ -7,7 +7,6 @@ import { HiOutlineTrophy } from "react-icons/hi2";
 import { IoBookOutline } from "react-icons/io5";
 import { IoMdArrowDropup, IoMdArrowDropdown } from "react-icons/io"
 import {
-  MdGroups,
   MdOutlineAccountCircle,
   MdOutlineDashboard,
   MdOutlineKeyboardDoubleArrowLeft,

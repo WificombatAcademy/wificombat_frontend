@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      {/* <Providers> */}
+      <Providers>
         <AuthProvider>
           <MainProvider>
             <body className={raleway.className}>
@@ -29,7 +29,7 @@ export default function RootLayout({
             </body>
           </MainProvider>
         </AuthProvider>
-      {/* </Providers> */}
+      </Providers>
     </html>
   );
 }
