@@ -14,7 +14,7 @@ import { Testimonials } from "./components/Home/testimonials";
 
 export default function Home() {
   return (
-    <div className="mx-auto relative container w-full max-w-[2000px]">
+    <div className="mx-auto relative container w-full max-w-[4000px]">
       <GeneralNavbar />
       <Hero />
       <CareerPathway />
