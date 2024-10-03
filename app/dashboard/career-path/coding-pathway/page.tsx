@@ -104,9 +104,11 @@ const Page = () => {
                                             </div>
                                         </div>
 
-                                        <div className="flex items-center gap-5 overflow-x-scroll">
+                                        <div className="flex h-auto items-stretch gap-5 overflow-x-scroll">
                                             {modules[course.course_id] && modules[course.course_id].map((module: any, index: number) => (
-                                                <div key={module.id} className="w-[60%] md:w-[50%] lg:w-[25%] flex-shrink-0 mb-5">
+                                                <div key={module.id} 
+                                                className="w-[60%] md:w-[50%] lg:w-[25%] flex-shrink-0 h-full flex flex-col mb-5">
+
                                                     <Link href={!(module.unlocked) ? 
                                                         `/dashboard/career-path/coding-pathway/${course.course_id}/${module.id}` 
                                                         : ""}>
@@ -123,9 +125,12 @@ const Page = () => {
                                                             />
                                                         </button>
                                                     </Link>
-                                                    <div className="px-1">
+
+                                                    <div className="px-1 flex-grow">
                                                         <div className="mt-3 flex items-center justify-between">
-                                                            <h3 className="font-semibold text-lg">{module.title}</h3>
+                                                            <h3 className="font-semibold text-lg">
+                                                                {module.title}
+                                                            </h3>
                                                             {module.unlocked && <SlLock size={20} 
                                                             className="flex-shrink-600 text-black-700"/>}
                                                         </div>
