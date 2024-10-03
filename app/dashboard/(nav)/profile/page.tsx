@@ -52,7 +52,7 @@ const Page = () => {
                   />
 
                   <div className="z-[3] top-[25%] lg:top-[23%] left-[17%] lg:left-[15%] absolute 
-                  w-[90px] h-[90px] lg:w-[140px] lg:h-[140px] rounded-full">
+                  w-[100px] h-[100px] lg:w-[140px] lg:h-[140px] rounded-full">
                     <Image 
                     src={`/dashboard-logo.png`}
                     alt="profile"
