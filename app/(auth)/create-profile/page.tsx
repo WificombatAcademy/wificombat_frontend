@@ -264,7 +264,7 @@ const Profile = () => {
         action: "register",
         mail,
         pass,
-        name: watch("student.fullname"),
+        name: mail,
         account_type: "student",
         age: watch("student.age"),
         career_pathway: watch("student.pathway"),

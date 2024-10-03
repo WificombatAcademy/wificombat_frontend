@@ -30,9 +30,9 @@ export const CareerPathway = () => {
 
           <div className="w-full md:basis-[50%]">
             <div className="w-full h-[350px] 2xl:h-[350px] min-[2000px]:h-[380px]
-             bg-primary-gray rounded-2xl">
+             bg-primary-gray border-4 border-black-500 rounded-2xl">
                 <Image
-                  src={`/pathway.png`}
+                  src={`/pathway.jpeg`}
                   alt="pathway-image"
                   width={514}
                   height={348}
