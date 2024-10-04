@@ -21,6 +21,8 @@ const LessonContent = ({
     loadingQuiz,
     fetchQuiz,
     }: Props) => {
+
+    console.log(selectedContent)
     
   return (
     <>
@@ -33,11 +35,10 @@ const LessonContent = ({
         ) : (
             <p>Select a lesson to view its content.</p>
         )}
-        </div>
+    </div>
         
         {/* Navigation Buttons */}
         <div className="lg:fixed lg:w-[52%] right-0 px-4 sm:px-6 lg:px-8 bottom-[5vh]">
-           {!(currentSlide === selectedContent.length - 1) &&
             <div className="mt-4 flex justify-between">
                 <button
                 onClick={handlePrevSlide}
@@ -47,6 +48,7 @@ const LessonContent = ({
                 >
                 Previous
                 </button>
+                {!(currentSlide === selectedContent.length - 1) &&
                 <button
                 onClick={handleNextSlide}
                 disabled={currentSlide === selectedContent.length - 1}
@@ -54,11 +56,9 @@ const LessonContent = ({
                 disabled:bg-gray-200 disabled:border-none disabled:cursor-not-allowed"
                 >
                 Next
-                </button>
-            </div>}
+                </button>}
 
-            {!isQuizMode && currentSlide === selectedContent.length - 1 &&
-            <div className="mt-4 flex justify-end">
+                {!isQuizMode && currentSlide === selectedContent.length - 1 &&
                 <button
                  onClick={fetchQuiz} 
                 className={`px-4 ${loadingQuiz && 'px-12'} py-2 bg-black-500 text-white border border-black-500 
@@ -69,9 +69,8 @@ const LessonContent = ({
                     <RiLoader4Fill size={23} className='animate-spin'/> :
                     "Proceed to Quiz"
                 }
-                </button>
+                </button>}
             </div>
-            }
         </div>
         {/* Navigation Buttons */}
     </>

@@ -12,6 +12,7 @@ import axiosInstance from "@/app/utils/auth-interceptor";
 import Loader from "@/app/utils/loader";
 import { API_VERSION_ONE } from "@/app/utils/types-and-links";
 import LessonContent from "@/app/components/Dashboard/CareerPathway/lesson-content";
+import toast, { Toaster } from "react-hot-toast";
 
 const Page = ({ params }: any) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -62,14 +63,17 @@ const Page = ({ params }: any) => {
       setIsLessonMode(false);
       setIsQuizMode(true); // Enable quiz mode
       setQuizLoading(false)
-    } catch (error) {
+    } catch (error:any) {
       console.error("Error fetching quiz:", error);
+      toast.error("Error fetching quiz", error);
       setQuizLoading(false); // Enable quiz mode
     }
   };
 
   // Handle lesson click and split content
   const handleLessonClick = (index: number, content: string) => {
+    setIsQuizMode(false);
+    setIsLessonMode(true);
     const splitContent = content.split('***'); // Split content into slides
     setSelectedContent(splitContent); // Store slides in state
     setCurrentSlide(0); // Reset to first slide
@@ -102,6 +106,7 @@ const Page = ({ params }: any) => {
 
   return (
     <>
+    <Toaster />
       <SideBar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       <div className={`${raleway.className} relative`}>
         {/* Main Section */}
@@ -114,15 +119,17 @@ const Page = ({ params }: any) => {
 
                 {/* Sidebar Lessons */}
                 <div className="w-full h-screen lg:w-[40%] xl:w-[35%] px-4 sm:px-6 lg:px-8 space-y-5 overflow-y-auto">
+                  
                   {/* Module Info */}
                   <div className="lg:ml-[12%]">
                     <h1 className="mt-5 text-xl font-medium">{moduleTitle}</h1>
                     <div className="mt-1 text-sm flex gap-3 items-center">
                       <p>{numberOfLessons} Lessons</p>
                       <p>{numberOfQuizzes} Quiz</p>
-                      <p>{numberOfAssignments} Assignments</p>
+                      <p>1 Assignment</p>
                     </div>
                   </div>
+                  {/* Module Info */}
 
                   {/* Lessons List */}
                   {moduleDetails.map((details, index) => (
@@ -150,24 +157,53 @@ const Page = ({ params }: any) => {
                               </div>
 
                               <div>
-                                <p className={`font-medium cursor-pointer
+                                <p 
+                                onClick={fetchQuiz}
+                                className={`font-medium cursor-pointer
                                  ${activeLessonIndex === index && isQuizMode ? "text-purple-500" : ""}`}
                                 >Quiz</p>
                                 <p className="text-sm text-black-600">1:00 mins</p>
                               </div>
 
-                              <div>
+                              {/* <div>
                                 <p className="font-medium cursor-pointer">Assignment</p>
-                              </div>
+                              </div> */}
                             </div>
                           )}
                         </div>
+
                       </div>
+
                       <div>
                         <SlLockOpen size={20} className="" />
                       </div>
+
                     </div>
                   ))}
+                  {/* Lessons List */}
+
+                  {/* Assignment */}
+                  <div className="w-full flex items-stretch justify-between overflow-hidden">
+
+                    <div className="w-full flex items-start gap-2">
+                      <div
+                        className="flex-shrink-0 cursor-pointer">
+                        {numberOfAssignments ? <IoMdArrowDropright size={25} /> :
+                        <IoMdArrowDropdown size={25} />}
+                      </div>
+
+                      <div className="ml-[5%]">
+                        <h2 className={`text-lg font-medium`}>Assignment</h2>      
+                      </div>
+                    </div>
+
+                    <div>
+                      <SlLockOpen size={20} className="" />
+                    </div>
+
+                  </div>
+                  {/* Assignment */}
+
                 </div>
 
                 {/* Content Section */}
