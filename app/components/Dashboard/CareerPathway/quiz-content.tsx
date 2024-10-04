@@ -4,10 +4,9 @@ import React, { useState } from 'react'
 
 type Props = {
     quizData: any[]; 
-    handleSubmitQuiz: () => void;
 }
 
-const QuizContent = ({handleSubmitQuiz, quizData}: Props) => {
+const QuizContent = ({ quizData}: Props) => {
     const [currentQuizQuestion, setCurrentQuizQuestion] = useState(0);
     const [quizAnswers, setQuizAnswers] = useState<{ [key: number]: string }>({});
 
@@ -35,9 +34,17 @@ const QuizContent = ({handleSubmitQuiz, quizData}: Props) => {
 
     const currentQuestion = quizData[currentQuizQuestion];
 
+      // Handle quiz submission
+   const handleSubmitQuiz = () => {
+    console.log("Submitted quiz answers:", quizAnswers);
+    // Add logic to handle the quiz results
+  };
+
+  console.log(quizAnswers)
+
   return (
     <div>
-        <div className='w-[95%] md:w-[80%] mx-auto bg-white
+        <div className='w-full md:w-[80%] mx-auto bg-white
         mt-4 lg:mt-9 py-9 px-6 text-black-500 border border-purple-300 rounded-3xl'>
             <div className='flex items-center justify-between'>
                 <div>
@@ -83,7 +90,7 @@ const QuizContent = ({handleSubmitQuiz, quizData}: Props) => {
                         value={option}
                         checked={quizAnswers[currentQuizQuestion] === option}
                         onChange={() => handleOptionSelect(currentQuizQuestion, option)}
-                        className="mr-2"
+                        className="mr-2 accent-purple-500"
                     />
                     {option}
                     </label>

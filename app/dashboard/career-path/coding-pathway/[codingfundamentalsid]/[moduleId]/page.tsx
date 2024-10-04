@@ -28,8 +28,6 @@ const Page = ({ params }: any) => {
   const [isQuizMode, setIsQuizMode] = useState(false);
   const [quizData, setQuizData] = useState<any>(null);
   const [quizLoading, setQuizLoading] = useState(false);
-  const [quizAnswers, setQuizAnswers] = useState<{ [key: number]: string }>({});
-  const [quizSubmitted, setQuizSubmitted] = useState(false);
 
 
   // Fetch module details
@@ -97,13 +95,6 @@ const Page = ({ params }: any) => {
     if (currentSlide > 0) {
       setCurrentSlide(currentSlide - 1);
     }
-  };
-
-   // Handle quiz submission
-   const handleSubmitQuiz = () => {
-    setQuizSubmitted(true);
-    console.log("Submitted quiz answers:", quizAnswers);
-    // Add logic to handle the quiz results
   };
 
   if (loading) return <div className="overflow-hidden"> <Loader noDesign />;</div>;
@@ -240,7 +231,6 @@ const Page = ({ params }: any) => {
                   {isQuizMode && 
                   <QuizContent
                   quizData={quizData}
-                  handleSubmitQuiz={handleSubmitQuiz}
                   />
 
                   }
