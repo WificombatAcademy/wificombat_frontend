@@ -1,13 +1,20 @@
 import { merriweather } from '@/app/fonts';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast'; // Import toast for notifications
 
 type Props = {
   quizData: any[];
+  activeLessonIndex: number;
+  setActiveLessonIndex: Dispatch<SetStateAction<number>>;
+  moduleDetails: any[];
+  setShowAssignment: Dispatch<SetStateAction<boolean>>;
+  setIsQuizMode: Dispatch<SetStateAction<boolean>>;
+  setIsLessonMode: Dispatch<SetStateAction<boolean>>;
 };
 
-const QuizContent = ({ quizData }: Props) => {
+const QuizContent = ({ quizData, activeLessonIndex, setActiveLessonIndex,
+     moduleDetails, setShowAssignment, setIsQuizMode, setIsLessonMode }: Props) => {
   const [currentQuizQuestion, setCurrentQuizQuestion] = useState(0);
   const [quizAnswers, setQuizAnswers] = useState<{ [key: number]: string }>({});
   const [quizSubmitted, setQuizSubmitted] = useState(false);
@@ -81,6 +88,17 @@ const QuizContent = ({ quizData }: Props) => {
         setQuizAnswers({});        // Clear answers
       }
   };
+
+  const handleProceedToNextLesson = () => {
+    if (activeLessonIndex < moduleDetails.length - 1) {
+        setActiveLessonIndex(activeLessonIndex + 1);
+        setIsQuizMode(false);
+        setIsLessonMode(true);
+    } else {
+      setShowAssignment(true); // Show assignment when last lesson is reached
+    }
+  };
+  
   
 
   return (
@@ -148,7 +166,9 @@ const QuizContent = ({ quizData }: Props) => {
                 onChange={(e) =>
                   handleOptionSelect(currentQuizQuestion, e.target.value)
                 }
-                className="mt-4 outline-none border-b-2 border-dashed border-black-500 p-2 w-full placeholder:text-black-500"
+                className="mt-4 outline-none border-b-2 border-dashed 
+                
+                border-black-500 p-2 w-full placeholder:text-black-500"
               />
             </div>
           )}
@@ -199,21 +219,17 @@ const QuizContent = ({ quizData }: Props) => {
           : <Image src={`/assets/dashboard/student-fail.webp`} alt='score' width={150} height={150} className='mx-auto'/>  }
 
           <h2
-            className={`text-lg lg:text-2xl font-semibold ${merriweather.className}`}
+            className={`text-lg md:text-xl text-black-600`}
           >
             {score >= 45
-              ? `Congratulations! You scored ${Math.round(score)}%.`
-              : `Sorry, you scored ${Math.round(score)}%.`}
+              ? `Congratulations! You're doing great.`
+              : `Unfortunately, you didn't pass`}
           </h2>
 
-          <div className="mt-6">
-            {score >= 45 ? (
-              <p className="text-lg">You passed the quiz! You can proceed to the next lesson or review the quiz.</p>
-            ) : (
-              <p className="text-lg">Unfortunately, you didn't pass. Review the quiz to try again.</p>
-            )}
+          <div className="">
+              <h2 className="text-lg md:text-xl text-black-600 ">You just scored {Math.round(score)}%.</h2>
 
-            <div className='flex items-center justify-center gap-5'>
+            <div className='mt-5 flex items-center justify-center gap-5'>
                 {score >= 45 &&
                < button className='mt-4 px-4 py-2 bg-transparent text-center border border-black-500 rounded-lg'>
                 Review Quiz
@@ -226,13 +242,14 @@ const QuizContent = ({ quizData }: Props) => {
                     if (score >= 45) {
                     // Proceed to next lesson or review quiz
                     // Add navigation logic here to go to the next lesson
+                    handleProceedToNextLesson();
                     } else {
                     setCurrentQuizQuestion(0); // Reset to beginning if failed
                     setQuizSubmitted(false);
                     }
                 }}
                 >
-                {score >= 45 ? "Proceed to Next Lesson" : "Restart Course"}
+                {score >= 45 ? "Proceed to Next Lesson" : "Restart Quiz"}
                 </button>
 
             </div>

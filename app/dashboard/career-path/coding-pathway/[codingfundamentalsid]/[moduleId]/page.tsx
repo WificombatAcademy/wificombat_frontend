@@ -26,6 +26,7 @@ const Page = ({ params }: any) => {
   const [currentSlide, setCurrentSlide] = useState(0); // Track the current slide
   const [isLessonMode, setIsLessonMode] = useState(true);
   const [isQuizMode, setIsQuizMode] = useState(false);
+  const [isAssignmentMode, setIsAssignmentMode] = useState(false);
   const [quizData, setQuizData] = useState<any>(null);
   const [quizLoading, setQuizLoading] = useState(false);
 
@@ -232,10 +233,23 @@ const Page = ({ params }: any) => {
                   {isQuizMode && 
                   <QuizContent
                   quizData={quizData}
+                  activeLessonIndex={activeLessonIndex}
+                  moduleDetails={moduleDetails}
+                  setActiveLessonIndex={setActiveLessonIndex}
+                  setShowAssignment={setIsAssignmentMode}
+                  setIsLessonMode={setIsLessonMode}
+                  setIsQuizMode={setIsQuizMode}
                   />
 
                   }
                   {/* QUIZ CONTENT */}
+
+
+                  {/* ASSIGNMENT CONTENT */}
+                  {isAssignmentMode && 
+                  <>ASSIGNMENT MODE HEHEHEHEHEHE</>
+                  }
+                  {/* ASSIGNMENT CONTENT */}
 
 
                 </div>
