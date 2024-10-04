@@ -140,7 +140,8 @@ const Page = ({ params }: any) => {
                             <div className="space-y-5 font-medium">
                               <div>
                                 <p
-                                  className={`mt-5 cursor-pointer ${activeLessonIndex === index ? "text-purple-500" : ""}`}
+                                  className={`mt-5 cursor-pointer
+                                  ${activeLessonIndex === index && !isQuizMode ? "text-purple-500" : ""}`}
                                   onClick={() => handleLessonClick(index, details.content)}
                                 >
                                   {details.title}
@@ -149,7 +150,9 @@ const Page = ({ params }: any) => {
                               </div>
 
                               <div>
-                                <p className="font-medium cursor-pointer">Quiz</p>
+                                <p className={`font-medium cursor-pointer
+                                 ${activeLessonIndex === index && isQuizMode ? "text-purple-500" : ""}`}
+                                >Quiz</p>
                                 <p className="text-sm text-black-600">1:00 mins</p>
                               </div>
 

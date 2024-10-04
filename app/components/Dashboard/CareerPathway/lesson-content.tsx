@@ -1,4 +1,3 @@
-import axiosInstance from '@/app/utils/auth-interceptor';
 import React from 'react'
 import { RiLoader4Fill } from 'react-icons/ri';
 
@@ -62,12 +61,12 @@ const LessonContent = ({
             <div className="mt-4 flex justify-end">
                 <button
                  onClick={fetchQuiz} 
-                className="px-4 py-2 bg-black-500 text-white border border-black-500 
+                className={`px-4 ${loadingQuiz && 'px-12'} py-2 bg-black-500 text-white border border-black-500 
                 flex items-center justify-center text-center rounded-lg 
-                disabled:bg-gray-200 disabled:border-none disabled:cursor-not-allowed"
+                disabled:bg-gray-200 disabled:border-none disabled:cursor-not-allowed`}
                 >
                 {loadingQuiz ?
-                    <RiLoader4Fill  className='animate-spin'/> :
+                    <RiLoader4Fill size={23} className='animate-spin'/> :
                     "Proceed to Quiz"
                 }
                 </button>
