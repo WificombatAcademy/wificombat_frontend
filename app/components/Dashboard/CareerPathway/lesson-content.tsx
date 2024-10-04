@@ -58,7 +58,7 @@ const LessonContent = ({
 
         {/* LESSON DETAILS */}
         <div>
-            <div className='w-full flex items-center justify-between text-xl font-semibold'>
+            <div className='w-full flex items-center justify-between gap-3 lg:text-xl font-semibold'>
                 <h2 className="">{lessonTitle}</h2>
                 <p className="">
                  {currentSlide + 1}/{totalSlides} Slides

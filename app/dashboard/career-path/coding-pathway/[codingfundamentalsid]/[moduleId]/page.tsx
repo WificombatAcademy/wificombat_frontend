@@ -219,6 +219,9 @@ const Page = ({ params }: any) => {
                   fetchQuiz={fetchQuiz}
                   isQuizMode={isQuizMode}
                   loadingQuiz={quizLoading}
+                  lessonTitle={moduleDetails[activeLessonIndex].title} // Pass the lesson title
+                  lessonIndex={activeLessonIndex + 1} // Pass the lesson number (1-based index)
+                  totalSlides={selectedContent.length}
                   />}
                   {/* LESSON CONTENT */}
 
