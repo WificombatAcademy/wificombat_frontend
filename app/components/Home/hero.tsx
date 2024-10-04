@@ -8,6 +8,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
 import { merriweather } from "@/app/fonts";
 import Image from "next/image";
+import Cart from "@/app/utils/cart";
 
 const slides = [
     {heading1: "Discover Your Coding Career Pathway", 
@@ -53,6 +54,8 @@ export const Hero = () => {
                     <SwiperSlide key={index} className="relative">
                         <div className={`relative isolate overflow-x-hidden pb-[2rem] md:pb-[7rem] md:py-[7rem] lg:py-[10rem] 
                              max-md:min-h-[830px] ${slide.bgColor}`}>
+
+                            <Cart/>
 
                             <div className="relative max-md:mt-[2rem] w-[93%] md:w-[80%] lg:w-[80%] mx-auto h-auto md:h-[16rem] 
                                 xl:h-[20rem] 2xl:h-[24rem] flex flex-col md:flex-row md:items-center gap-10">

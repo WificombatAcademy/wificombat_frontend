@@ -21,7 +21,7 @@ export default function Page() {
       <TechSkill />
       <EmpowerLearningJourney />
       <IntroducingCareerPath />
-      <PricingPlan/>
+      {/* <PricingPlan/> */}
       <Impact />
       <FAQ noSpace={true}/>
       <Footer />
