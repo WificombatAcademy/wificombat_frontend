@@ -14,6 +14,7 @@ export const CareerPath = () => {
             pathway="Coding"
             desc="This pathway emphasizes problem-solving, algorithm development, and mastering various programming languages."
             bgColor="bg-blue-500"
+            pathwayImage="/pathway-1.png"
             pathways={["software developer", "web developer", "system analyst", "mobile app developer", "database administrator",]}
           />
 
@@ -22,6 +23,7 @@ export const CareerPath = () => {
             pathway="Gaming"
             desc="This pathway covers everything from concept art and storytelling to coding and game mechanics."
             bgColor="bg-blue-300"
+            pathwayImage="/pathway-2.png"
             pathways={["Game designer", "Game developer", "Level Designer", "Character Artist", "Game Tester", "Audio Engineer",]}
           />
 
@@ -30,6 +32,7 @@ export const CareerPath = () => {
             pathway="Multimedia"
             desc="This pathway provides the tools and techniques to produce captivating content across various digital platforms."
             bgColor="bg-purple-500"
+            pathwayImage="/pathway-3.png"
             pathways={["Graphic Designer","UI/UX Designer","Multimedia Artist","Animator","Video Editor","Digital Content Creator"]}
 
           />
@@ -40,6 +43,7 @@ export const CareerPath = () => {
             desc="This pathway focuses on building algorithms that enable computers to perform tasks that typically require human intelligence."
             bgColor="bg-black-500"
             textWhite={true}
+            pathwayImage="/pathway-4.png"
             pathways={["Machine Learning Engineer","Data Scientist","AI Ethicist","AI Researcher","Computer Vision Engineer"]}
 
           />
@@ -49,6 +53,7 @@ export const CareerPath = () => {
             pathway="Robotics/IOT"
             desc="This pathway combines mechanical engineering, electronics, and computer science to create innovative solutions."
             bgColor="bg-blue-500"
+            pathwayImage=""
             pathways={["Robotics Engineer","Embedded Systems Engineer","IOT Developer","Control Systems Engineer"]}
           />
 
@@ -57,6 +62,7 @@ export const CareerPath = () => {
             pathway="Techpreneurship"
             desc="This pathway teaches you how to develop, market, and manage tech-based startups and ventures."
             bgColor="bg-yellow-500"
+            pathwayImage=""
             pathways={["Startup Founder","Product Manager","Venture Capitalist","Innovation Mgnr","Business Development Manager"]}
 
           />

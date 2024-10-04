@@ -12,25 +12,39 @@ type Props = {
     textWhite?: boolean;
     pathways?: string[];
     image?: string;
+    pathwayImage?: string;
 }
 
-const CareerCard = ({ bgColor ,desc, pathway, linkTo, level, subject, textWhite, pathways, image }: Props) => {
+const CareerCard = ({ bgColor ,desc, pathway, linkTo, level, subject, textWhite, pathways, image, pathwayImage }: Props) => {
     return (
         <div className="h-full">
             <Link href={`${linkTo && linkTo}`}>
                 <div className="w-full flex flex-col h-full bg-white pb-3 shadow-lg rounded-2xl cursor-pointer">
-                    <div className={`relative w-full h-[220px] 2xl:h-[250px] min-[2000px]:h-[300px] 
+                    <div className={`relative w-full h-[250px] min-[2000px]:h-[330px] 
                         ${bgColor ?? "bg-blue-500"} px-4 flex items-end rounded-tl-2xl rounded-tr-2xl`}>
-                        {image && <div className="absolute inset-0 bg-black rounded-tl-2xl rounded-tr-2xl">
+
+                        {pathwayImage && 
+                            <Image src={pathwayImage} alt="pathway"
+                            width={300} height={300}
+                            className="w-full h-full object-contain rounded-tl-2xl rounded-tr-2xl" 
+                            />
+                        }
+
+                        {image && 
+                        <div className="absolute inset-0 bg-black rounded-tl-2xl rounded-tr-2xl">
                             <div className="absolute inset-0 bg-black/30 rounded-tl-2xl rounded-tr-2xl"></div>
                             <Image src={image} alt="pathway"
                             width={300} height={300}
                             className="w-full h-full object-cover rounded-tl-2xl rounded-tr-2xl" 
                             />
                         </div>}
+
                         <div className="relative z-[7]">
-                            <h3 className={`${textWhite ? "text-white": ""}  my-3 text-lg md:text-2xl text-black-500 font-semibold`}>
-                                {pathway} Pathway</h3>
+                           {!pathwayImage &&
+                            <h3 
+                            className={`${textWhite ? "text-white": ""}  
+                            my-3 text-lg md:text-2xl text-black-500 font-semibold`}>
+                                {pathway} Pathway</h3>}
                         </div>
                     </div>
 

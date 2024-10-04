@@ -42,11 +42,13 @@ const [studentsPopupVisible, setStudentsPopupVisible] = useState(false);
       initial={{ y: -100 }}
     >
       <MobileSideBar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-      <ul className="mx-auto flex max-w-6xl items-center justify-between lg:justify-center gap-4 max-lg:pr-4">
+      <ul className="mx-auto flex lg:w-fit items-center justify-between 
+      lg:justify-center gap-4 max-lg:pr-4 lg:pr-44 min-[1200px]:pr-32">
         <Link
           href="/features"
           onClick={() => scrollToView("features")}
-          className={`px-2.5 py-2 text-lg capitalize text-white hover:text-[#0784C3] max-lg:hidden ${
+          className={`px-2.5 py-2 text-sm min-[1200px]:text-base min-[1400px]:text-lg capitalize
+             text-white hover:text-[#0784C3] max-lg:hidden ${
             pathname === "/features" ? "border-b-4 border-blue-500" : ""
           }`}
         >
@@ -59,7 +61,8 @@ const [studentsPopupVisible, setStudentsPopupVisible] = useState(false);
           onClick={() => setStudentsPopupVisible(!studentsPopupVisible)}
         >
           <li
-            className={`px-2.5 py-2 text-lg capitalize text-white hover:text-[#0784C3] max-lg:hidden cursor-pointer ${
+            className={`px-2.5 py-2 text-sm min-[1200px]:text-base min-[1400px]:text-lg capitalize
+               text-white hover:text-[#0784C3] max-lg:hidden cursor-pointer ${
               pathname.startsWith("/students") ? "border-b-4 border-blue-500" : ""
             }`}
           >
@@ -68,13 +71,14 @@ const [studentsPopupVisible, setStudentsPopupVisible] = useState(false);
           {studentsPopupVisible && <Popup links={studentLinks} />}
         </div>
         <div 
-          className="relative max-lg:hidden"
-          onMouseEnter={() => setSchoolsPopupVisible(true)}
-          onMouseLeave={() => setSchoolsPopupVisible(false)}
-          onClick={() => setSchoolsPopupVisible(!schoolsPopupVisible)}
-          >
+        className="relative max-lg:hidden"
+        onMouseEnter={() => setSchoolsPopupVisible(true)}
+        onMouseLeave={() => setSchoolsPopupVisible(false)}
+        onClick={() => setSchoolsPopupVisible(!schoolsPopupVisible)}
+        >
           <li
-            className={`px-2.5 py-2 text-lg capitalize text-white hover:text-[#0784C3] max-lg:hidden cursor-pointer ${
+            className={`px-2.5 py-2 text-sm min-[1200px]:text-base min-[1400px]:text-lg capitalize
+               text-white hover:text-[#0784C3] max-lg:hidden cursor-pointer ${
               pathname.startsWith("/schools") ? "border-b-4 border-blue-500" : ""
             }`}
           >
@@ -94,7 +98,8 @@ const [studentsPopupVisible, setStudentsPopupVisible] = useState(false);
         <Link
           href="/portfolio-and-projects"
           onClick={() => scrollToView("portfolio-and-projects")}
-          className={`px-2.5 py-2 text-lg capitalize text-white hover:text-[#0784C3] max-lg:hidden ${
+          className={`px-2.5 py-2 text-sm min-[1200px]:text-base min-[1400px]:text-lg capitalize
+             text-white hover:text-[#0784C3] max-lg:hidden ${
             pathname === "/portfolio-and-projects"
               ? "border-b-4 border-blue-500"
               : ""
@@ -105,20 +110,36 @@ const [studentsPopupVisible, setStudentsPopupVisible] = useState(false);
         <Link
           href="/play-games"
           onClick={() => scrollToView("play-games")}
-          className={`px-2.5 py-2 text-lg capitalize text-white hover:text-[#0784C3] max-lg:hidden ${
+          className={`px-2.5 py-2 text-sm min-[1200px]:text-base min-[1400px]:text-lg capitalize
+             text-white hover:text-[#0784C3] max-lg:hidden ${
             pathname === "/play-games" ? "border-b-4 border-blue-500" : ""
           }`}
         >
           Play Games
         </Link>
-        <Link
-          href="/login"
-          className={`xl:absolute right-[7%] 2xl:right-[5%] px-8 py-3 text-lg capitalize bg-white font-bold 
-            rounded-lg max-lg:hidden transition-colors duration-300 hover:bg-opacity-90
-          }`}
-        >
-          Login
-        </Link>
+
+        <div className="flex items-center gap-3 lg:absolute right-[3%] xl:right-[5%] 2xl:right-[7%] ">
+          <Link
+            href="/assessment"
+            className={`px-2 py-2 text-sm min-[1200px]:text-base min-[1400px]:text-lg capitalize
+               border border-white text-white font-bold 
+              rounded-lg max-lg:hidden transition-colors duration-300 hover:bg-slate-50/20 cursor-pointer
+            }`}
+          >
+            Take Assessment
+          </Link>
+
+          <Link
+            href="/login"
+            className={`px-8 py-2 text-sm min-[1200px]:text-base min-[1400px]:text-lg capitalize
+               bg-white font-bold 
+              rounded-lg max-lg:hidden transition-colors duration-300 hover:bg-opacity-90 cursor-pointer
+            }`}
+          >
+            Login
+          </Link>
+        </div>
+        
         <div className="pr-3">
           <RiMenu2Line
             onClick={() => setSidebarOpen(true)}

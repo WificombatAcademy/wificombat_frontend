@@ -16,6 +16,7 @@ export const navigation = [
   { name: "Portfolio & Projects", href: "/portfolio-and-projects" },
   { name: "Play Games", href: "/play-games" },
   { name: "Login", href: "/login" },
+  { name: "Take Assessment", href: "/assessment" },
 ];
 
 type Props = {

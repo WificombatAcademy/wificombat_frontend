@@ -102,7 +102,9 @@ const QuizContent = ({ quizData, activeLessonIndex, setActiveLessonIndex,
   };
 
   if (reviewMode) {
-    return <FlashCardReview quizData={quizData} handleProceedToNextLesson={handleProceedToNextLesson} />;
+    return <FlashCardReview 
+    quizData={quizData} 
+    handleProceedToNextLesson={handleProceedToNextLesson} />;
   }
   
   
@@ -116,7 +118,7 @@ const QuizContent = ({ quizData, activeLessonIndex, setActiveLessonIndex,
           border border-purple-300 rounded-3xl"
         >
           <div className="flex items-center justify-between">
-            <div>TIMER</div>
+            <div>(Timer)</div>
             <div>
               <h2 className={`text-lg lg:text-2xl font-semibold ${merriweather.className}`}>
                 Quiz
@@ -220,14 +222,14 @@ const QuizContent = ({ quizData, activeLessonIndex, setActiveLessonIndex,
             Quiz Score
           </h2>
 
-          {score >= 45 ? 
+          {score >= 75 ? 
           <Image src={`/assets/dashboard/student-pass.png`} alt='score' width={150} height={150} className='mx-auto'/> 
           : <Image src={`/assets/dashboard/student-fail.webp`} alt='score' width={150} height={150} className='mx-auto'/>  }
 
           <h2
             className={`text-lg md:text-xl text-black-600`}
           >
-            {score >= 45
+            {score >= 75
               ? `Congratulations! You're doing great.`
               : `Unfortunately, you didn't pass`}
           </h2>
@@ -236,7 +238,7 @@ const QuizContent = ({ quizData, activeLessonIndex, setActiveLessonIndex,
               <h2 className="text-lg md:text-xl text-black-600 ">You just scored {Math.round(score)}%.</h2>
 
             <div className='mt-5 flex items-center justify-center gap-5'>
-                {score >= 45 &&
+                {score >= 75 &&
                <button 
                onClick={() => setReviewMode(true)}
                className='mt-4 px-4 py-2 bg-transparent text-center border border-black-500 rounded-lg'>
@@ -247,7 +249,7 @@ const QuizContent = ({ quizData, activeLessonIndex, setActiveLessonIndex,
                 <button
                 className="mt-4 px-4 py-2 bg-black-500 text-white border border-black-500 rounded-lg"
                 onClick={() => {
-                    if (score >= 45) {
+                    if (score >= 75) {
                     // Proceed to next lesson or review quiz
                     // Add navigation logic here to go to the next lesson
                     handleProceedToNextLesson();
@@ -257,7 +259,7 @@ const QuizContent = ({ quizData, activeLessonIndex, setActiveLessonIndex,
                     }
                 }}
                 >
-                {score >= 45 ? "Proceed to Next Lesson" : "Restart Quiz"}
+                {score >= 75 ? "Proceed to Next Lesson" : "Restart Quiz"}
                 </button>
 
             </div>

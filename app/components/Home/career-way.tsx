@@ -4,7 +4,12 @@ import HeadingDesign from "../general/HeaderDesign";
 export const CareerPathway = () => {
   return (
     <section className="relative">
-       <HeadingDesign heading={`About\nCareer Pathways`}/>
+       <HeadingDesign headingTwo={<>
+        <div className="mb-2 flex flex-col gap-5 items-center">
+          <h3>About</h3>
+          <h3>Career Pathways</h3>
+        </div>
+        </>}/>
 
       <div className="mt-12 md:mt-16 lg:mt-20 xl:mt-[5.5rem] mb-20 w-[93%] md:w-[90%] lg:w-[88%] mx-auto">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-10 lg:gap-16">

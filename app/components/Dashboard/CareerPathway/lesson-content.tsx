@@ -43,7 +43,7 @@ const LessonContent = ({
             />
         </div>
         {selectedContent.length > 0 ? (
-            <div className='relative z-[1] -mt-[40vh] lg:-mt-[45vh]'>
+            <div className='relative z-[1] -mt-[38vh] lg:-mt-[45vh]'>
             {/* Display current slide */}
             <div 
             className='bg-transparent'

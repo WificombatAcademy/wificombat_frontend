@@ -1,11 +1,11 @@
 "use client"
-import Image from 'next/image'
 
 type Props = {
-    heading: string;
+    heading?: string;
+    headingTwo?: React.ReactNode;
 }
 
-const HeadingDesign = ({ heading }: Props) => {
+const HeadingDesign = ({ heading, headingTwo }: Props) => {
   return (
     <div className="relative">
         <div className="relative flex flex-col gap-5 items-center justify-center">
@@ -42,7 +42,8 @@ const HeadingDesign = ({ heading }: Props) => {
 
                 <h2 className="w-[90%] mx-auto mt-2 text-center md:text-3xl text-2xl 
                 lg:text-5xl uppercase font-semibold md:font-medium block whitespace-pre-line">
-                    {heading}
+                    {heading && heading}
+                    {headingTwo && headingTwo}
                 </h2>
             </div>
         </div>
