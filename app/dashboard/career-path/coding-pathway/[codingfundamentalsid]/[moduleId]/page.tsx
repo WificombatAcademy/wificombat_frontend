@@ -13,6 +13,7 @@ import Loader from "@/app/utils/loader";
 import { API_VERSION_ONE } from "@/app/utils/types-and-links";
 import LessonContent from "@/app/components/Dashboard/CareerPathway/lesson-content";
 import toast, { Toaster } from "react-hot-toast";
+import QuizContent from "@/app/components/Dashboard/CareerPathway/quiz-content";
 
 const Page = ({ params }: any) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -27,6 +28,8 @@ const Page = ({ params }: any) => {
   const [isQuizMode, setIsQuizMode] = useState(false);
   const [quizData, setQuizData] = useState<any>(null);
   const [quizLoading, setQuizLoading] = useState(false);
+  const [quizAnswers, setQuizAnswers] = useState<{ [key: number]: string }>({});
+  const [quizSubmitted, setQuizSubmitted] = useState(false);
 
 
   // Fetch module details
@@ -94,6 +97,13 @@ const Page = ({ params }: any) => {
     if (currentSlide > 0) {
       setCurrentSlide(currentSlide - 1);
     }
+  };
+
+   // Handle quiz submission
+   const handleSubmitQuiz = () => {
+    setQuizSubmitted(true);
+    console.log("Submitted quiz answers:", quizAnswers);
+    // Add logic to handle the quiz results
   };
 
   if (loading) return <div className="overflow-hidden"> <Loader noDesign />;</div>;
@@ -207,8 +217,9 @@ const Page = ({ params }: any) => {
                 </div>
 
                 {/* Content Section */}
-                <div className="relative w-full lg:h-screen  overflow-y-hidden lg:w-[60%] xl:w-[65%] 
-                bg-[#F9F9FF] px-4 pb-16 sm:px-6 lg:px-8 space-y-4 overflow-hidden">
+                <div className={`relative w-full lg:h-screen overflow-y-hidden lg:w-[60%] xl:w-[65%] 
+                bg-[#F9F9FF] px-4 pb-16 sm:px-6 lg:px-8 space-y-4 overflow-hidden`}
+                >
 
                   {/* LESSON CONTENT */}
                  {isLessonMode && <LessonContent 
@@ -227,9 +238,10 @@ const Page = ({ params }: any) => {
 
                   {/* QUIZ CONTENT */}
                   {isQuizMode && 
-                  <div>
-                    QUIZ TIME BABY
-                  </div>
+                  <QuizContent
+                  quizData={quizData}
+                  handleSubmitQuiz={handleSubmitQuiz}
+                  />
 
                   }
                   {/* QUIZ CONTENT */}
