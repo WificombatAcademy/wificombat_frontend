@@ -2,6 +2,7 @@ import { merriweather } from '@/app/fonts';
 import Image from 'next/image';
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast'; // Import toast for notifications
+import FlashCardReview from './flash-card';
 
 type Props = {
   quizData: any[];
@@ -19,6 +20,7 @@ const QuizContent = ({ quizData, activeLessonIndex, setActiveLessonIndex,
   const [quizAnswers, setQuizAnswers] = useState<{ [key: number]: string }>({});
   const [quizSubmitted, setQuizSubmitted] = useState(false);
   const [score, setScore] = useState(0);
+  const [reviewMode, setReviewMode] = useState(false);
 
   // Handle option selection
   const handleOptionSelect = (questionIndex: number, selectedOption: string) => {
@@ -98,6 +100,10 @@ const QuizContent = ({ quizData, activeLessonIndex, setActiveLessonIndex,
       setShowAssignment(true); // Show assignment when last lesson is reached
     }
   };
+
+  if (reviewMode) {
+    return <FlashCardReview quizData={quizData} handleProceedToNextLesson={handleProceedToNextLesson} />;
+  }
   
   
 
@@ -231,7 +237,9 @@ const QuizContent = ({ quizData, activeLessonIndex, setActiveLessonIndex,
 
             <div className='mt-5 flex items-center justify-center gap-5'>
                 {score >= 45 &&
-               < button className='mt-4 px-4 py-2 bg-transparent text-center border border-black-500 rounded-lg'>
+               <button 
+               onClick={() => setReviewMode(true)}
+               className='mt-4 px-4 py-2 bg-transparent text-center border border-black-500 rounded-lg'>
                 Review Quiz
                </button>
                }
