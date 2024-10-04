@@ -11,6 +11,7 @@ import { raleway } from "@/app/fonts";
 import axiosInstance from "@/app/utils/auth-interceptor";
 import Loader from "@/app/utils/loader";
 import { API_VERSION_ONE } from "@/app/utils/types-and-links";
+import LessonContent from "@/app/components/Dashboard/CareerPathway/lesson-content";
 
 const Page = ({ params }: any) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -88,6 +89,7 @@ const Page = ({ params }: any) => {
           <main className="">
             <div className="space-y-10">
               <div className="flex max-lg:flex-col-reverse max-lg:gap-6">
+
                 {/* Sidebar Lessons */}
                 <div className="w-full h-screen lg:w-[40%] xl:w-[35%] px-4 sm:px-6 lg:px-8 space-y-5 overflow-y-auto">
                   {/* Module Info */}
@@ -146,40 +148,21 @@ const Page = ({ params }: any) => {
                 {/* Content Section */}
                 <div className="relative w-full lg:h-screen  overflow-y-hidden lg:w-[60%] xl:w-[65%] 
                 bg-[#F9F9FF] px-4 pb-16 sm:px-6 lg:px-8 space-y-4 overflow-hidden">
-                  <div className="mt-5 p-5 h-[40vh] lg:h-[50vh] bg-white shadow overflow-y-auto rounded-3xl">
-                    {selectedContent.length > 0 ? (
-                      <div>
-                        {/* Display current slide */}
-                        <div dangerouslySetInnerHTML={{ __html: selectedContent[currentSlide] }} />
-                      </div>
-                    ) : (
-                      <p>Select a lesson to view its content.</p>
-                    )}
-                  </div>
-                   {/* Navigation Buttons */}
-                  <div className="lg:fixed lg:w-[52%] right-0 px-4 sm:px-6 lg:px-8 bottom-[5vh]">
-                    <div className="mt-4 flex justify-between">
-                      <button
-                        onClick={handlePrevSlide}
-                        disabled={currentSlide === 0}
-                        className="px-4 py-2 bg-transparent border border-black-500 rounded-lg 
-                        disabled:bg-gray-200 disabled:border-none disabled:cursor-not-allowed"
-                      >
-                        Previous
-                      </button>
-                      <button
-                        onClick={handleNextSlide}
-                        disabled={currentSlide === selectedContent.length - 1}
-                        className="px-4 py-2 bg-transparent border border-black-500 rounded-lg 
-                        disabled:bg-gray-200 disabled:border-none disabled:cursor-not-allowed"
-                      >
-                        Next
-                      </button>
-                    </div>
-                  </div>
-                  {/* Navigation Buttons */}
+
+                  {/* LESSON CONTENT */}
+                  <LessonContent 
+                  currentSlide={currentSlide}
+                  handleNextSlide={handleNextSlide}
+                  handlePrevSlide={handlePrevSlide}
+                  selectedContent={selectedContent}
+                  />
+                  {/* LESSON CONTENT */}
+
                 </div>
+                {/* Content Section */}
+
               </div>
+
             </div>
           </main>
         </div>
