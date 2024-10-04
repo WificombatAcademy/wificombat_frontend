@@ -35,8 +35,10 @@ const ProfileInfo = (props: Props) => {
 
             <h2 className='mt-6 font-semibold'>Interest</h2>
             <div className='mt-2 flex flex-wrap gap-2'>
-                {interests.map((interest) => (
-                   <div className='w-fit mt-3 py-2 px-5 rounded-3xl bg-black-50 
+                {interests.map((interest, index) => (
+                   <div 
+                   key={index}
+                   className='w-fit mt-3 py-2 px-5 rounded-3xl bg-black-50 
                    flex items-center justify-center gap-2'>
                         <p>{interest}</p>
                     </div>
@@ -45,8 +47,10 @@ const ProfileInfo = (props: Props) => {
 
             <h2 className='mt-6 font-semibold'>Earned Badges</h2>
             <div className='mt-2 flex flex-col lg:flex-row overflow-x-scroll gap-4'>
-                {badges.map((badge) => (
-                    <div className='flex flex-col text-center items-center gap-3'>
+                {badges.map((badge, index) => (
+                    <div 
+                    key={index} 
+                    className='flex flex-col text-center items-center gap-3'>
                     <div className='w-16 h-16 bg-black-50 rounded-full'></div>
                         <h3 className='font-semibold'>{badge.title}</h3>
                         <p>{badge.desc}</p>
