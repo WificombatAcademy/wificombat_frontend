@@ -1,163 +1,247 @@
-import { merriweather } from '@/app/fonts'
+import { merriweather } from '@/app/fonts';
 import Image from 'next/image';
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast'; // Import toast for notifications
 
 type Props = {
-    quizData: any[]; 
-}
+  quizData: any[];
+};
 
-const QuizContent = ({ quizData}: Props) => {
-    const [currentQuizQuestion, setCurrentQuizQuestion] = useState(0);
-    const [quizAnswers, setQuizAnswers] = useState<{ [key: number]: string }>({});
+const QuizContent = ({ quizData }: Props) => {
+  const [currentQuizQuestion, setCurrentQuizQuestion] = useState(0);
+  const [quizAnswers, setQuizAnswers] = useState<{ [key: number]: string }>({});
+  const [quizSubmitted, setQuizSubmitted] = useState(false);
+  const [score, setScore] = useState(0);
 
-    // Handle option selection
-    const handleOptionSelect = (questionIndex: number, selectedOption: string) => {
-        setQuizAnswers((prevAnswers) => ({
-        ...prevAnswers,
-        [questionIndex]: selectedOption,
-        }));
-    };
-
-    // Navigate to next question
-    const handleNextQuizQuestion = () => {
-        if (currentQuizQuestion < quizData.length - 1) {
-        setCurrentQuizQuestion(currentQuizQuestion + 1);
-        }
-    };
-
-    // Navigate to previous question
-    const handlePrevQuizQuestion = () => {
-        if (currentQuizQuestion > 0) {
-        setCurrentQuizQuestion(currentQuizQuestion - 1);
-        }
-    };
-
-    const currentQuestion = quizData[currentQuizQuestion];
-
-      // Handle quiz submission
-   const handleSubmitQuiz = () => {
-    console.log("Submitted quiz answers:", quizAnswers);
-    // Add logic to handle the quiz results
+  // Handle option selection
+  const handleOptionSelect = (questionIndex: number, selectedOption: string) => {
+    setQuizAnswers((prevAnswers) => ({
+      ...prevAnswers,
+      [questionIndex]: selectedOption,
+    }));
   };
 
-  console.log(quizAnswers)
+  // Navigate to the next question
+  const handleNextQuizQuestion = () => {
+    if (!quizAnswers[currentQuizQuestion]) {
+      toast.error('Please answer the question before proceeding.'); // Error if no answer is selected
+      return;
+    }
+
+    if (currentQuizQuestion < quizData.length - 1) {
+      setCurrentQuizQuestion(currentQuizQuestion + 1);
+    }
+  };
+
+  // Navigate to the previous question
+  const handlePrevQuizQuestion = () => {
+    if (currentQuizQuestion > 0) {
+      setCurrentQuizQuestion(currentQuizQuestion - 1);
+    }
+  };
+
+  const currentQuestion = quizData[currentQuizQuestion];
+
+  // Handle quiz submission and calculate the score
+  const handleSubmitQuiz = () => {
+    if (!quizAnswers[currentQuizQuestion]) {
+      toast.error('Please answer the question before submitting.');
+      return;
+    }
+  
+    let correctAnswers = 0;
+  
+    quizData.forEach((question, index) => {
+      const userAnswer = quizAnswers[index];
+  
+      if (question.type === 'multiple-choice') {
+        // Compare user's answer with the correct string option
+        if (userAnswer === question.options[parseInt(question.correct_answer) - 1]) {
+          correctAnswers += 1;
+        }
+      } else if (question.type === 'fill-in-the-gap') {
+        // Compare fill-in-the-gap answers directly
+        if (userAnswer.trim().toLowerCase() === question.correct_answer.trim().toLowerCase()) {
+          correctAnswers += 1;
+        }
+      }
+    });
+  
+    const totalScore = (correctAnswers / quizData.length) * 100;
+    setScore(totalScore);
+    setQuizSubmitted(true);
+
+    if (totalScore >= 45) {
+        // Allow proceeding to the next lesson
+        toast.success("You passed! You can now proceed to the next lesson.");
+      } else {
+        // Force restart from the beginning
+        toast.error("You failed. Please restart the course from the beginning.");
+        setCurrentQuizQuestion(0); // Reset quiz
+        setQuizAnswers({});        // Clear answers
+      }
+  };
+  
 
   return (
     <div>
-        <div className='w-full md:w-[80%] mx-auto bg-white
-        mt-4 lg:mt-9 py-9 px-6 text-black-500 border border-purple-300 rounded-3xl'>
-            <div className='flex items-center justify-between'>
-                <div>
-                    TIMER
-                </div>
-
-                <div>
-                    <h2 
-                    className={`text-lg lg:text-2xl font-semibold
-                    ${merriweather.className}`}>
-                    Quiz
-                    </h2>
-                </div>
-
-                <div>
-
-                </div>
+      <Toaster /> {/* To display toast notifications */}
+      {!quizSubmitted ? (
+        <div
+          className="w-full md:w-[80%] mx-auto bg-white mt-4 lg:mt-9 py-9 px-6 text-black-500 
+          border border-purple-300 rounded-3xl"
+        >
+          <div className="flex items-center justify-between">
+            <div>TIMER</div>
+            <div>
+              <h2 className={`text-lg lg:text-2xl font-semibold ${merriweather.className}`}>
+                Quiz
+              </h2>
             </div>
+            <div></div>
+          </div>
 
-            <p className="mt-6 mb-4 lg:text-xl text-center font-semibold">{currentQuestion.question}</p>
+          <p className="mt-6 mb-4 lg:text-xl text-center font-semibold">
+            {currentQuestion.question}
+          </p>
 
-            {currentQuestion.image && (
-                <div className='mt-6 w-full h-[12rem] lg:h-[13rem] bg-gray-50 rounded-lg'>
-                    <Image
-                    src={`${currentQuestion.image}`} 
-                    alt='Quiz Image'
-                    width={500}
-                    height={200}
-                    className='w-full h-full object-cover rounded-lg'
-                    
-                    />
-                </div>
-            )}
+          {currentQuestion.image && (
+            <div className="mt-6 w-full h-[12rem] lg:h-[13rem] bg-gray-50 rounded-lg">
+              <Image
+                src={`${currentQuestion.image}`}
+                alt="Quiz Image"
+                width={500}
+                height={200}
+                className="w-full h-full object-cover rounded-lg"
+              />
+            </div>
+          )}
 
-             {/* Render multiple-choice options */}
-            {currentQuestion.type === "multiple-choice" && (
-                <div className="mt-4 quiz-options space-y-2">
-                {currentQuestion.options.map((option: string, index: number) => (
-                    <label key={index} className="quiz-option flex items-center">
-                    <input
-                        type="radio"
-                        name={`question-${currentQuizQuestion}`}
-                        value={option}
-                        checked={quizAnswers[currentQuizQuestion] === option}
-                        onChange={() => handleOptionSelect(currentQuizQuestion, option)}
-                        className="mr-2 accent-purple-500"
-                    />
-                    {option}
-                    </label>
-                ))}
-                </div>
-            )}
-            {/* Render multiple-choice options */}
-
-             {/* Render fill-in-the-gap input */}
-             {currentQuestion.type === "fill-in-the-gap" && (
-                <div className="quiz-fill-gap">
-                <input
-                    type="text"
-                    placeholder="Your answer here"
-                    value={quizAnswers[currentQuizQuestion] || ""}
-                    onChange={(e) =>
-                    handleOptionSelect(currentQuizQuestion, e.target.value)
+          {/* Multiple-choice options */}
+          {currentQuestion.type === 'multiple-choice' && (
+            <div className="mt-4 quiz-options space-y-2">
+              {currentQuestion.options.map((option: string, index: number) => (
+                <label key={index} className="quiz-option flex items-center">
+                  <input
+                    type="radio"
+                    name={`question-${currentQuizQuestion}`}
+                    value={option}
+                    checked={quizAnswers[currentQuizQuestion] === option}
+                    onChange={() =>
+                      handleOptionSelect(currentQuizQuestion, option)
                     }
-                    className="mt-4 outline-none border-b-2 border-dashed border-black-500 
-                    p-2 w-full placeholder:text-black-500"
-                />
-                </div>
+                    className="mr-2 accent-purple-500"
+                  />
+                  {option}
+                </label>
+              ))}
+            </div>
+          )}
+
+          {/* Fill-in-the-gap input */}
+          {currentQuestion.type === 'fill-in-the-gap' && (
+            <div className="quiz-fill-gap">
+              <input
+                type="text"
+                placeholder="Your answer here"
+                value={quizAnswers[currentQuizQuestion] || ''}
+                onChange={(e) =>
+                  handleOptionSelect(currentQuizQuestion, e.target.value)
+                }
+                className="mt-4 outline-none border-b-2 border-dashed border-black-500 p-2 w-full placeholder:text-black-500"
+              />
+            </div>
+          )}
+
+          {/* Navigation buttons */}
+          <div className="quiz-navigation flex items-center justify-between mt-6">
+            <button
+              onClick={handlePrevQuizQuestion}
+              disabled={currentQuizQuestion === 0}
+              className="px-4 py-2 bg-transparent border border-black-500 rounded-lg disabled:bg-gray-200 disabled:border-none disabled:cursor-not-allowed"
+            >
+              Previous
+            </button>
+
+            <div>
+              <h2 className="">{currentQuizQuestion + 1} of {quizData.length}</h2>
+            </div>
+
+            {currentQuizQuestion === quizData.length - 1 ? (
+              <button
+                onClick={handleSubmitQuiz}
+                className="px-4 py-2 bg-black-500 text-white border border-black-500 rounded-lg"
+              >
+                Submit
+              </button>
+            ) : (
+              <button
+                onClick={handleNextQuizQuestion}
+                className="px-4 py-2 bg-transparent border border-black-500 rounded-lg"
+              >
+                Next
+              </button>
             )}
-             {/* Render fill-in-the-gap input */}
+          </div>
+        </div>
+      ) : (
+        // Show result and quiz review options
+        <div className="w-full md:w-[80%] mx-auto bg-white mt-4 lg:mt-9 py-9 px-6 text-black-500 
+        border border-purple-300 rounded-3xl text-center">
+          <h2
+            className={`text-lg lg:text-2xl font-semibold ${merriweather.className}`}
+          >
+            Quiz Score
+          </h2>
 
-            {/* Quiz navigation buttons */}
-            <div className="quiz-navigation flex items-center justify-between mt-6">
+          {score >= 45 ? 
+          <Image src={`/assets/dashboard/student-pass.png`} alt='score' width={150} height={150} className='mx-auto'/> 
+          : <Image src={`/assets/dashboard/student-fail.webp`} alt='score' width={150} height={150} className='mx-auto'/>  }
+
+          <h2
+            className={`text-lg lg:text-2xl font-semibold ${merriweather.className}`}
+          >
+            {score >= 45
+              ? `Congratulations! You scored ${Math.round(score)}%.`
+              : `Sorry, you scored ${Math.round(score)}%.`}
+          </h2>
+
+          <div className="mt-6">
+            {score >= 45 ? (
+              <p className="text-lg">You passed the quiz! You can proceed to the next lesson or review the quiz.</p>
+            ) : (
+              <p className="text-lg">Unfortunately, you didn't pass. Review the quiz to try again.</p>
+            )}
+
+            <div className='flex items-center justify-center gap-5'>
+                {score >= 45 &&
+               < button className='mt-4 px-4 py-2 bg-transparent text-center border border-black-500 rounded-lg'>
+                Review Quiz
+               </button>
+               }
 
                 <button
-                onClick={handlePrevQuizQuestion}
-                disabled={currentQuizQuestion === 0}
-                className="px-4 py-2 bg-transparent border border-black-500 rounded-lg 
-                disabled:bg-gray-200 disabled:border-none disabled:cursor-not-allowed"
+                className="mt-4 px-4 py-2 bg-black-500 text-white border border-black-500 rounded-lg"
+                onClick={() => {
+                    if (score >= 45) {
+                    // Proceed to next lesson or review quiz
+                    // Add navigation logic here to go to the next lesson
+                    } else {
+                    setCurrentQuizQuestion(0); // Reset to beginning if failed
+                    setQuizSubmitted(false);
+                    }
+                }}
                 >
-                Previous
+                {score >= 45 ? "Proceed to Next Lesson" : "Restart Course"}
                 </button>
-
-                <div>
-                    <h2 className="">
-                        {currentQuizQuestion + 1} of {quizData.length}
-                    </h2>
-                </div>
-
-                {/* If on the last question, show the submit button */}
-                {currentQuizQuestion === quizData.length - 1 ? (
-                <button
-                    onClick={handleSubmitQuiz}
-                    className="px-4 py-2 bg-black-500 text-white border border-black-500 rounded-lg"
-                >
-                    Submit
-                </button>
-                ) : (
-                <button
-                    onClick={handleNextQuizQuestion}
-                    className="px-4 py-2 bg-transparent border border-black-500 rounded-lg"
-                >
-                    Next
-                </button>
-                )}
 
             </div>
-            {/* Quiz navigation buttons */}
 
-
+          </div>
         </div>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default QuizContent
+export default QuizContent;

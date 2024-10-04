@@ -119,7 +119,8 @@ const Page = ({ params }: any) => {
               <div className="flex max-lg:flex-col-reverse max-lg:gap-6">
 
                 {/* Sidebar Lessons */}
-                <div className="w-full h-screen lg:w-[40%] xl:w-[35%] px-4 sm:px-6 lg:px-8 space-y-5 overflow-y-auto">
+                <div className="w-full h-screen lg:w-[40%] xl:w-[35%] 
+                px-4 sm:px-6 lg:px-8 space-y-5 overflow-y-auto">
                   
                   {/* Module Info */}
                   <div className="lg:ml-[12%]">
@@ -154,7 +155,7 @@ const Page = ({ params }: any) => {
                                 >
                                   Lesson note
                                 </p>
-                                <p className="text-sm text-black-600">Reading : 3:00 mins</p>
+                                <p className="text-sm text-black-600">Reading : 2:00 mins</p>
                               </div>
 
                               <div>
