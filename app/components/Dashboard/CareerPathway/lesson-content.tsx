@@ -29,23 +29,21 @@ const LessonContent = ({
     lessonIndex,
     totalSlides,
     }: Props) => {
-
-    console.log(selectedContent)
     
   return (
     <>
     <div className="relative mt-5 p-5 h-[40vh] lg:h-[50vh] bg-white shadow overflow-y-auto rounded-3xl">
-        <div className="absolute bg-white inset-0 flex items-center justify-center">
+        <div className="sticky w-full inset-0  lg:h-[45vh] bg-white flex items-center justify-center">
             <Image 
             src={`/logo.png`}
             alt='background'
-            width={40}
-            height={40}
-            className='w-full h-full object-contain invert-[100%] opacity-10'
+            width={80}
+            height={80}
+            className='w-[90%] h-full object-contain invert-[100%] opacity-10'
             />
         </div>
         {selectedContent.length > 0 ? (
-            <div className='relative z-[1]'>
+            <div className='relative z-[1] -mt-[40vh] lg:-mt-[45vh]'>
             {/* Display current slide */}
             <div 
             className='bg-transparent'

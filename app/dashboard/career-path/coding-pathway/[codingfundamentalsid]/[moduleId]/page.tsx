@@ -97,7 +97,7 @@ const Page = ({ params }: any) => {
   };
 
   if (loading) return <div className="overflow-hidden"> <Loader noDesign />;</div>;
-  if (!moduleDetails) return <div className="overflow-hidden"> <Loader isError /> </div>;
+  if (moduleDetails.length === 0) return <div className="overflow-hidden"> <Loader isError  noDesign/> </div>;
 
   const moduleTitle = moduleDetails.length > 0 ? moduleDetails[0].module : "";
   const numberOfLessons = moduleDetails.length;
@@ -151,9 +151,9 @@ const Page = ({ params }: any) => {
                                   ${activeLessonIndex === index && !isQuizMode ? "text-purple-500" : ""}`}
                                   onClick={() => handleLessonClick(index, details.content)}
                                 >
-                                  {details.title}
+                                  Lesson note
                                 </p>
-                                <p className="text-sm text-black-600">Duration : 3:00 mins</p>
+                                <p className="text-sm text-black-600">Reading : 3:00 mins</p>
                               </div>
 
                               <div>

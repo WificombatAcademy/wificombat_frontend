@@ -140,8 +140,7 @@ const Page = () => {
                                                         <div className="mt-2 flex flex-wrap gap-3 md:gap-5 text-black-600">
                                                             <div>{module.lessons} {module.lessons > 1 ? "lessons" : "lesson"}</div>
                                                             <div>{module.quiz} Quiz</div>
-                                                            <div>{module.assignment} 
-                                                                {module.assignment > 1 ? "Assignments" : "Assignment"}
+                                                            <div>1 {module.assignment > 1 ? "Assignments" : "Assignment"}
                                                             </div>
                                                         </div>
                                                     </div>
