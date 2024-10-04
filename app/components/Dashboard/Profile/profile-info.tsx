@@ -44,9 +44,9 @@ const ProfileInfo = (props: Props) => {
             </div>
 
             <h2 className='mt-6 font-semibold'>Earned Badges</h2>
-            <div className='mt-2 flex flex-col lg:flex-row overflow-x-scroll gap-4 lg:gap-2'>
+            <div className='mt-2 flex flex-col lg:flex-row overflow-x-scroll gap-4'>
                 {badges.map((badge) => (
-                    <div className='flex flex-shrink-0 flex-col text-center items-center gap-2'>
+                    <div className='flex flex-col text-center items-center gap-3'>
                     <div className='w-16 h-16 bg-black-50 rounded-full'></div>
                         <h3 className='font-semibold'>{badge.title}</h3>
                         <p>{badge.desc}</p>

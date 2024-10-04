@@ -66,29 +66,8 @@ const Page = () => {
 
                 </div>
 
-                <div className="w-full max-lg:pt-3 lg:pl-[7%]">
-                  <div className="lg:ml-[16%] flex items-center justify-between gap-3">
-
-                    <div className="flex items-center gap-2">
-                      <TbJewishStarFilled size={23} className="text-purple-500" />
-                      <p className="text-xl font-semibold">3,001 p</p>
-                    </div>
-
-                    <div className="flex gap-2">
-                      <a href="/dashboard/profile/edit"
-                       className="border border-black-200 p-2 rounded-lg">
-                        <BiSolidEdit size={23}/>
-                      </a>
-
-                      <a href="/dashboard/profile/settings"
-                      className="border border-black-200 p-2 rounded-lg">
-                        <SlSettings size={23}/>
-                      </a>
-                    </div>
-
-                  </div>
-
-                  <ProfileInfo />
+                <div className="w-full">
+                  
                 </div>
             </div>
           </main>
