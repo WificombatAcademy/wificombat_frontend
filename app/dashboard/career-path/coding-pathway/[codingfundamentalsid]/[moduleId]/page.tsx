@@ -19,10 +19,14 @@ const Page = ({ params }: any) => {
   const dashboardData = useDashboardStore((state) => state.dashboardData);
   const [moduleDetails, setModuleDetails] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedContent, setSelectedContent] = useState<any[]>([]); // Store array of split content
-  const [modulePlan, setModulePlan] = useState(true);
-  const [activeLessonIndex, setActiveLessonIndex] = useState<number | null>(0); // Track active lesson by index
+  const [selectedContent, setSelectedContent] = useState<any[]>([]); 
+  const [activeLessonIndex, setActiveLessonIndex] = useState(0); // Track active lesson by index
   const [currentSlide, setCurrentSlide] = useState(0); // Track the current slide
+  const [isLessonMode, setIsLessonMode] = useState(true);
+  const [isQuizMode, setIsQuizMode] = useState(false);
+  const [quizData, setQuizData] = useState<any>(null);
+  const [quizLoading, setQuizLoading] = useState(false);
+
 
   // Fetch module details
   useEffect(() => {
@@ -49,6 +53,21 @@ const Page = ({ params }: any) => {
     fetchModuleDetails();
   }, [params.moduleId]);
 
+  //Fetch Quiz
+  const fetchQuiz = async () => {
+    try {
+      const response = await axiosInstance.get(moduleDetails[activeLessonIndex].quiz_url);
+      setQuizLoading(true)
+      setQuizData(response.data); // Store quiz data
+      setIsLessonMode(false);
+      setIsQuizMode(true); // Enable quiz mode
+      setQuizLoading(false)
+    } catch (error) {
+      console.error("Error fetching quiz:", error);
+      setQuizLoading(false); // Enable quiz mode
+    }
+  };
+
   // Handle lesson click and split content
   const handleLessonClick = (index: number, content: string) => {
     const splitContent = content.split('***'); // Split content into slides
@@ -61,8 +80,11 @@ const Page = ({ params }: any) => {
   const handleNextSlide = () => {
     if (currentSlide < selectedContent.length - 1) {
       setCurrentSlide(currentSlide + 1);
+    } else if (moduleDetails[activeLessonIndex].quiz_url) {
+      setIsQuizMode(true); // Show the quiz button
     }
   };
+  
 
   const handlePrevSlide = () => {
     if (currentSlide > 0) {
@@ -150,13 +172,26 @@ const Page = ({ params }: any) => {
                 bg-[#F9F9FF] px-4 pb-16 sm:px-6 lg:px-8 space-y-4 overflow-hidden">
 
                   {/* LESSON CONTENT */}
-                  <LessonContent 
+                 {isLessonMode && <LessonContent 
                   currentSlide={currentSlide}
                   handleNextSlide={handleNextSlide}
                   handlePrevSlide={handlePrevSlide}
                   selectedContent={selectedContent}
-                  />
+                  fetchQuiz={fetchQuiz}
+                  isQuizMode={isQuizMode}
+                  loadingQuiz={quizLoading}
+                  />}
                   {/* LESSON CONTENT */}
+
+                  {/* QUIZ CONTENT */}
+                  {isQuizMode && 
+                  <div>
+                    QUIZ TIME BABY
+                  </div>
+
+                  }
+                  {/* QUIZ CONTENT */}
+
 
                 </div>
                 {/* Content Section */}
