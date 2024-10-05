@@ -59,12 +59,15 @@ const Page = ({ params }: any) => {
   }, [params.moduleId]);
 
   //Fetch Quiz
-  const fetchQuiz = async () => {
-    try {
-      const response = await axiosInstance.get(moduleDetails[activeLessonIndex].quiz_url);
+  const fetchQuiz = async (lessonIndex: number) => {
       setQuizLoading(true)
+      // setTimeout((toast("Fetching Quiz...")), 700);
+      try {
+      const response = await axiosInstance.get(moduleDetails[lessonIndex].quiz_url);
       setQuizData(response.data); // Store quiz data
+      setActiveLessonIndex(lessonIndex)
       setIsLessonMode(false);
+      setIsAssignmentMode(false);
       setIsQuizMode(true); // Enable quiz mode
       setQuizLoading(false)
 
@@ -83,6 +86,7 @@ const Page = ({ params }: any) => {
   // Handle lesson click and split content
   const handleLessonClick = (index: number, content: string) => {
     setIsQuizMode(false);
+    setIsAssignmentMode(false);
     setIsLessonMode(true);
     const splitContent = content.split('***'); // Split content into slides
     setSelectedContent(splitContent); // Store slides in state
@@ -123,20 +127,20 @@ const Page = ({ params }: any) => {
     <>
     <Toaster />
       <SideBar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-      <div className={`${raleway.className} relative`}>
+      <div className={`${raleway.className} relative h-screen lg:overflow-hidden`}>
         
         {/* Main Section */}
-        <div className={`${toggleSidebar ? "lg:pl-36" : "lg:pl-64"} transition-all duration-500 ease-in-out`}>
+        <div className={`${toggleSidebar ? "lg:pl-36" : "lg:pl-64"} transition-all duration-500 ease-in-out pb-4`}>
           <DashboardHeader setSidebarOpen={setSidebarOpen} name={dashboardData?.username} />
 
-          <main className="">
-            <div className="space-y-10">
-              <div className="flex max-lg:flex-col-reverse max-lg:gap-6">
+          <main className="h-full">
+            <div className="h-full space-y-10">
 
-                {/* Sidebar Lessons */}
-                <div className="w-full h-screen lg:w-[40%] xl:w-[35%] 
-                px-4 sm:px-6 lg:px-8 space-y-5 overflow-y-auto">
-                  
+              <div className="h-full flex max-lg:flex-col-reverse max-lg:gap-6 ">
+                {/* Sidebar Section */}
+                <div className="w-full h-full lg:h-screen lg:w-[40%] xl:w-[35%] ">
+                  <div className="h-[83%] w-full px-4 sm:px-6 lg:px-8 pb-4 overflow-scroll">
+
                   {/* Module Info */}
                   <div className="lg:ml-[12%]">
                     <div className="mt-5 text-sm flex gap-3 items-center">
@@ -163,7 +167,7 @@ const Page = ({ params }: any) => {
 
                   {/* Lessons List */}
                   {moduleDetails.map((details, index) => (
-                    <div key={index} className="w-full flex items-stretch justify-between overflow-hidden">
+                    <div key={index} className="mt-4 w-full flex items-stretch justify-between overflow-hidden">
                       <div className="w-full flex items-start gap-2">
                         <div
                           className="flex-shrink-0 cursor-pointer"
@@ -188,7 +192,7 @@ const Page = ({ params }: any) => {
 
                               <div>
                                 <p 
-                                onClick={fetchQuiz}
+                                onClick={() => fetchQuiz(index)}
                                 className={`font-medium cursor-pointer
                                  ${activeLessonIndex === index && isQuizMode ? "text-purple-500" : ""}`}
                                 >Quiz</p>
@@ -213,9 +217,9 @@ const Page = ({ params }: any) => {
                   {/* Lessons List */}
 
                   {/* Assignment */}
-                  <div className="w-full flex items-stretch justify-between overflow-hidden">
+                  <div className="mt-4 w-full flex items-stretch justify-between overflow-hidden">
 
-                    <div className="w-full flex items-start gap-2">
+                    <div className="w-full flex items-start gap-2 cursor-pointer">
                       <div
                         className="flex-shrink-0 cursor-pointer">
                         {numberOfAssignments ? <IoMdArrowDropright size={25} /> :
@@ -223,7 +227,13 @@ const Page = ({ params }: any) => {
                       </div>
 
                       <div className="ml-[5%]">
-                        <h2 className={`text-lg font-medium`}>Assignment</h2>      
+                        <h2 className={`text-lg font-medium cursor-pointer ${isAssignmentMode ? "text-purple-500" : ""}`} 
+                          onClick={() => {
+                            setIsAssignmentMode(true);
+                            setIsQuizMode(false);
+                            setIsLessonMode(false);
+                          }}>
+                          Assignment</h2>      
                       </div>
                     </div>
 
@@ -234,10 +244,13 @@ const Page = ({ params }: any) => {
                   </div>
                   {/* Assignment */}
 
+                  </div>
                 </div>
+                {/* Sidebar Section */}
+                
 
                 {/* Content Section */}
-                <div className={`relative w-full lg:h-screen overflow-y-hidden lg:w-[60%] xl:w-[65%] 
+                <div className={`relative w-full lg:h-[83vh] lg:w-[60%] xl:w-[65%] 
                 bg-[#F9F9FF] px-4 pb-16 sm:px-6 lg:px-8 space-y-4 overflow-hidden`}
                 >
 
@@ -247,7 +260,7 @@ const Page = ({ params }: any) => {
                   handleNextSlide={handleNextSlide}
                   handlePrevSlide={handlePrevSlide}
                   selectedContent={selectedContent}
-                  fetchQuiz={fetchQuiz}
+                  fetchQuiz={() => fetchQuiz(activeLessonIndex)} 
                   isQuizMode={isQuizMode}
                   loadingQuiz={quizLoading}
                   lessonTitle={moduleDetails[activeLessonIndex].title} // Pass the lesson title
@@ -266,6 +279,7 @@ const Page = ({ params }: any) => {
                   setShowAssignment={setIsAssignmentMode}
                   setIsLessonMode={setIsLessonMode}
                   setIsQuizMode={setIsQuizMode}
+                  setIsAssignmentMode={setIsAssignmentMode}
                   />
 
                   }

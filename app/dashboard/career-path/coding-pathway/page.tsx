@@ -21,7 +21,7 @@ const Page = () => {
     const [courses, setCourses] = useState<any[]>([]); // State to hold courses
     const [modules, setModules] = useState<{ [key: string]: any[] }>({}); // State to hold modules
     const [selectedLevel, setSelectedLevel] = useState<string>("All"); // State for selected level
-
+    
     useEffect(() => {
         const loadCourses = async () => {
             try {
@@ -49,8 +49,11 @@ const Page = () => {
         loadCourses();
     }, []);
 
-    if (!dashboardData || !courses.length || !Object.keys(modules).length) 
+    if (!dashboardData) 
         return <div className="overflow-hidden"> <Loader noDesign/></div>;
+
+    if (!courses.length || !Object.keys(modules).length) 
+        return <div className="overflow-hidden"> <Loader noDesign isError noCourses/></div>;
 
     // Filter courses based on selected level
     const filteredCourses = selectedLevel === "All" 
@@ -117,11 +120,13 @@ const Page = () => {
                                                             {module.unlocked && <div className="absolute inset-0 
                                                             bg-[#B1B1B4]/30 rounded-2xl"></div>}
                                                             <Image 
-                                                                src={module.thumbnail ?? `/assets/dashboard/course.png`}
+                                                                src={(module.cimage !== "") ? 
+                                                                    module.cimage :
+                                                                     `/assets/dashboard/course.png`}
                                                                 alt={module.thumbnail}
                                                                 width={282}
                                                                 height={215}
-                                                                className="w-full h-full object-cover rounded-2xl"
+                                                                className="w-full h-full object-cover bg-gray-50 border rounded-2xl"
                                                             />
                                                         </button>
                                                     </Link>

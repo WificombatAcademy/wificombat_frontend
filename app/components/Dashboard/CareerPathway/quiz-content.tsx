@@ -12,10 +12,11 @@ type Props = {
   setShowAssignment: Dispatch<SetStateAction<boolean>>;
   setIsQuizMode: Dispatch<SetStateAction<boolean>>;
   setIsLessonMode: Dispatch<SetStateAction<boolean>>;
+  setIsAssignmentMode: Dispatch<SetStateAction<boolean>>;
 };
 
 const QuizContent = ({ quizData, activeLessonIndex, setActiveLessonIndex,
-     moduleDetails, setShowAssignment, setIsQuizMode, setIsLessonMode }: Props) => {
+     moduleDetails, setShowAssignment, setIsQuizMode, setIsLessonMode, setIsAssignmentMode }: Props) => {
   const [currentQuizQuestion, setCurrentQuizQuestion] = useState(0);
   const [quizAnswers, setQuizAnswers] = useState<{ [key: number]: string }>({});
   const [quizSubmitted, setQuizSubmitted] = useState(false);
@@ -95,11 +96,13 @@ const QuizContent = ({ quizData, activeLessonIndex, setActiveLessonIndex,
     if (activeLessonIndex < moduleDetails.length - 1) {
         setActiveLessonIndex(activeLessonIndex + 1);
         setIsQuizMode(false);
+        setIsAssignmentMode(false);
         setIsLessonMode(true);
     } else {
       // Show assignment when last lesson is reached
       setIsQuizMode(false);
       setIsLessonMode(false);
+      setIsAssignmentMode(false);
       setShowAssignment(true);
     }
   };

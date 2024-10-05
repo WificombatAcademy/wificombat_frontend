@@ -18,7 +18,7 @@ const Loader = ({ isError = false, isSessionExpired = false, noDesign = false, n
   let buttonLink = "";
 
   if (isError) {
-    displayMessage = noCourses ? "no Lesson Available" : "Error loading data.";
+    displayMessage = noCourses ? "no Data Available" : "Error loading data.";
     designSrc = "/assets/dashboard/no-access.svg";
     altText = "Error occurred";
     buttonText = noCourses ? "Go Back To Dashboard" : "Go Back Home";

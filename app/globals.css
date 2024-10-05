@@ -6,6 +6,22 @@
   --swiper-theme-color: #fff !important;
   --swiper-navigation-size: 35px !important;
 }
+
+/* ::-webkit-scrollbar{
+  width: 8px;
+  height: 4px;
+}  
+::-webkit-scrollbar-track{
+  background: #fff;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb{
+  background: #131314;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover{
+  background: #131314;
+} */
 .swiper-button-prev {
   left:4rem !important; 
 }
