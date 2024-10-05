@@ -95,7 +95,8 @@ const Page = () => {
         <div className="relative w-full flex flex-col lg:flex-none overflow-y-auto lg:basis-[50%] mx-auto py-10 px-4 md:px-10 lg:pl-20">
             <IoChevronBackOutline
                 onClick={() => router.back()}
-                className="relative lg:absolute left-0 lg:top-7 max-lg:mb-3 border border-[#5F5F5F1A] p-5 w-14 h-14 cursor-pointer font-bold rounded-lg shadow-sm"
+                className="relative lg:absolute left-0 lg:top-7 max-lg:mb-3 border 
+                border-[#5F5F5F1A] p-5 w-14 h-14 cursor-pointer font-bold rounded-lg shadow-sm"
             />
 
             <div className="flex items-center gap-14 ">

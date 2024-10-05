@@ -1,4 +1,5 @@
 "use client"
+import { merriweather } from '@/app/fonts';
 import Image from 'next/image';
 import React from 'react'
 import { RiLoader4Fill } from 'react-icons/ri';
@@ -32,8 +33,8 @@ const LessonContent = ({
     
   return (
     <>
-    <div className="relative mt-5 p-5 h-[40vh] lg:h-[50vh] bg-white shadow overflow-y-auto rounded-3xl">
-        <div className="sticky w-full inset-0  lg:h-[45vh] bg-white flex items-center justify-center">
+    <div className="relative mt-5 p-5 h-[48vh] lg:h-[85vh] bg-white shadow overflow-y-auto rounded-3xl">
+        <div className="sticky w-full inset-0 lg:h-[45vh] bg-white flex items-center justify-center">
             <Image 
             src={`/logo.png`}
             alt='background'
@@ -43,7 +44,9 @@ const LessonContent = ({
             />
         </div>
         {selectedContent.length > 0 ? (
-            <div className='relative z-[1] -mt-[36vh] lg:-mt-[45vh]'>
+            <div className='relative z-[1] -mt-[41vh] lg:-mt-[45vh]'>
+                <h3 className={`${merriweather.className} text-center font-semibold text-xl lg:text-2xl mb-4`}>
+                    Lesson Note for Lesson {lessonIndex}</h3>
             {/* Display current slide */}
             <div 
             className='bg-transparent'
@@ -55,7 +58,7 @@ const LessonContent = ({
         </div>
 
         {/* LESSON DETAILS */}
-        <div>
+        {/* <div>
             <div className='w-full flex items-center justify-between gap-3 lg:text-xl font-semibold'>
                 <h2 className="">{lessonTitle}</h2>
                 <p className="">
@@ -65,20 +68,20 @@ const LessonContent = ({
             <div>
                 <p className='text-black-600'> Lesson {lessonIndex}</p>
             </div>
-        </div>
+        </div> */}
         {/* LESSON DETAILS */}
         
-        {/* Navigation Buttons */}
-        <div className="lg:fixed lg:w-[52%] right-0 px-4 sm:px-6 lg:px-8 bottom-[5vh]">
-            <div className="mt-4 flex justify-between">
-                <button
+        {/* Navigation Buttons lg:fixed lg:w-[52%] right-0  */}
+        <div className=" px-4 sm:px-6 lg:px-8 bottom-[5vh]">
+            <div className="mt-4 flex justify-end">
+                {/* <button
                 onClick={handlePrevSlide}
                 disabled={currentSlide === 0}
                 className="px-4 py-2 bg-transparent border border-black-500 rounded-lg 
                 disabled:bg-gray-200 disabled:border-none disabled:cursor-not-allowed"
                 >
                 Previous
-                </button>
+                </button> */}
                 {!(currentSlide === selectedContent.length - 1) &&
                 <button
                 onClick={handleNextSlide}

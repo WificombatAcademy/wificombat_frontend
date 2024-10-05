@@ -14,6 +14,8 @@ import { API_VERSION_ONE } from "@/app/utils/types-and-links";
 import LessonContent from "@/app/components/Dashboard/CareerPathway/lesson-content";
 import toast, { Toaster } from "react-hot-toast";
 import QuizContent from "@/app/components/Dashboard/CareerPathway/quiz-content";
+import { IoChevronBackOutline } from "react-icons/io5";
+import AssignmentContent from "@/app/components/Dashboard/CareerPathway/assignment-content";
 
 const Page = ({ params }: any) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -65,6 +67,12 @@ const Page = ({ params }: any) => {
       setIsLessonMode(false);
       setIsQuizMode(true); // Enable quiz mode
       setQuizLoading(false)
+
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+
     } catch (error:any) {
       console.error("Error fetching quiz:", error);
       toast.error("Error fetching quiz", error);
@@ -80,6 +88,11 @@ const Page = ({ params }: any) => {
     setSelectedContent(splitContent); // Store slides in state
     setCurrentSlide(0); // Reset to first slide
     setActiveLessonIndex(index);
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   };
 
   // Handle slide navigation
@@ -99,7 +112,7 @@ const Page = ({ params }: any) => {
   };
 
   if (loading) return <div className="overflow-hidden"> <Loader noDesign />;</div>;
-  if (moduleDetails.length === 0) return <div className="overflow-hidden"> <Loader isError  noDesign/> </div>;
+  if (moduleDetails.length === 0) return <div className="overflow-hidden"> <Loader noCourses isError noDesign/> </div>;
 
   const moduleTitle = moduleDetails.length > 0 ? moduleDetails[0].module : "";
   const numberOfLessons = moduleDetails.length;
@@ -111,6 +124,7 @@ const Page = ({ params }: any) => {
     <Toaster />
       <SideBar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       <div className={`${raleway.className} relative`}>
+        
         {/* Main Section */}
         <div className={`${toggleSidebar ? "lg:pl-36" : "lg:pl-64"} transition-all duration-500 ease-in-out`}>
           <DashboardHeader setSidebarOpen={setSidebarOpen} name={dashboardData?.username} />
@@ -125,12 +139,25 @@ const Page = ({ params }: any) => {
                   
                   {/* Module Info */}
                   <div className="lg:ml-[12%]">
-                    <h1 className="mt-5 text-xl font-medium">{moduleTitle}</h1>
-                    <div className="mt-1 text-sm flex gap-3 items-center">
+                    <div className="mt-5 text-sm flex gap-3 items-center">
+
+                    <a href="/dashboard/career-path/coding-pathway">
+                    <div className="relative border border-[#5F5F5F1A] p-2 
+                        cursor-pointer font-bold rounded-lg shadow-sm">
+                        <IoChevronBackOutline size={20}/>
+                    </div>
+                    </a>
+
+                    <h1 className="text-xl font-medium">{moduleTitle}</h1>
+                    </div>
+
+
+                    <div className="mt-4 text-sm flex gap-3 items-center">
                       <p>{numberOfLessons} Lessons</p>
                       <p>{numberOfQuizzes} Quiz</p>
                       <p>1 Assignment</p>
                     </div>
+
                   </div>
                   {/* Module Info */}
 
@@ -247,7 +274,8 @@ const Page = ({ params }: any) => {
 
                   {/* ASSIGNMENT CONTENT */}
                   {isAssignmentMode && 
-                  <>ASSIGNMENT MODE HEHEHEHEHEHE</>
+                  <AssignmentContent
+                  />
                   }
                   {/* ASSIGNMENT CONTENT */}
 

@@ -97,7 +97,10 @@ const QuizContent = ({ quizData, activeLessonIndex, setActiveLessonIndex,
         setIsQuizMode(false);
         setIsLessonMode(true);
     } else {
-      setShowAssignment(true); // Show assignment when last lesson is reached
+      // Show assignment when last lesson is reached
+      setIsQuizMode(false);
+      setIsLessonMode(false);
+      setShowAssignment(true);
     }
   };
 
@@ -259,7 +262,11 @@ const QuizContent = ({ quizData, activeLessonIndex, setActiveLessonIndex,
                     }
                 }}
                 >
-                {score >= 75 ? "Proceed to Next Lesson" : "Restart Quiz"}
+                {score >= 75
+                ? activeLessonIndex === moduleDetails.length - 1
+                  ? "Proceed to Assignment" // Show this text if it's the last lesson
+                  : "Proceed to Next Lesson"
+                : "Restart Quiz"}
                 </button>
 
             </div>

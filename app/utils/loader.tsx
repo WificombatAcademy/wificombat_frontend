@@ -7,9 +7,10 @@ type LoaderProps = {
   isError?: boolean;
   isSessionExpired?: boolean;
   noDesign?: boolean;
+  noCourses?: boolean;
 };
 
-const Loader = ({ isError = false, isSessionExpired = false, noDesign = false, }: LoaderProps) => {
+const Loader = ({ isError = false, isSessionExpired = false, noDesign = false, noCourses = false }: LoaderProps) => {
   let displayMessage = "Loading...";
   let designSrc = "";
   let altText = "";
@@ -17,11 +18,11 @@ const Loader = ({ isError = false, isSessionExpired = false, noDesign = false, }
   let buttonLink = "";
 
   if (isError) {
-    displayMessage = "Error loading data.";
+    displayMessage = noCourses ? "no Lesson Available" : "Error loading data.";
     designSrc = "/assets/dashboard/no-access.svg";
     altText = "Error occurred";
-    buttonText = "Go Back Home";
-    buttonLink = "/";
+    buttonText = noCourses ? "Go Back To Dashboard" : "Go Back Home";
+    buttonLink = noCourses ? "/dashboard" : "/";
   } else if (isSessionExpired) {
     displayMessage = "Session expired. Please log in again.";
     designSrc = "/assets/dashboard/expired.svg";
