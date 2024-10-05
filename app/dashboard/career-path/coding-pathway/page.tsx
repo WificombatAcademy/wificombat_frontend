@@ -49,11 +49,9 @@ const Page = () => {
         loadCourses();
     }, []);
 
-    if (!dashboardData) 
+    if (!dashboardData || !courses.length || !Object.keys(modules).length) 
         return <div className="overflow-hidden"> <Loader noDesign/></div>;
-
-    if (!courses.length || !Object.keys(modules).length) 
-        return <div className="overflow-hidden"> <Loader noDesign isError noCourses/></div>;
+    
 
     // Filter courses based on selected level
     const filteredCourses = selectedLevel === "All" 
