@@ -13,7 +13,7 @@ export const Breadcrumbs = ({ homeLabel, homeIcon = "/assets/auth/logo.svg", lig
     const activeTextColor = lightMode ? "text-black-500" : "text-white";
 
     return (
-        <div className="absolute w-full left-0 top-[-1.8rem] lg:top-[-3rem] flex items-center gap-3">
+        <div className="absolute w-full left-0 top-[-1rem] lg:top-[-3rem] flex items-center gap-3">
             {/* Home link */}
             <div className="flex items-center gap-2">
                 <Link href="/">

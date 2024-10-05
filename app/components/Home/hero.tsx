@@ -52,7 +52,8 @@ export const Hero = () => {
             >
                 {slides.map((slide, index) => (
                     <SwiperSlide key={index} className="relative">
-                        <div className={`relative isolate overflow-x-hidden pb-[2rem] md:pb-[7rem] md:py-[7rem] lg:py-[10rem] 
+                        <div className={`relative isolate overflow-x-hidden pb-[2rem] md:pb-[7rem] 
+                        md:py-[7rem] lg:py-[10rem] 
                              max-md:min-h-[830px] ${slide.bgColor}`}>
 
                             <Cart/>
@@ -63,7 +64,7 @@ export const Hero = () => {
                                 <div className="w-full md:basis-[50%]">
                                     <h1 className={`${merriweather.className} 
                                     text-3xl md:text-4xl lg:text-5xl 2xl:text-6xl 
-                                    max-md:leading-[45px] lg:leading-[67.2px] 2xl:leading-[78px] font-bold`}>
+                                    max-md:leading-[45px] lg:leading-[67.2px] 2xl:leading-[78px] font-bold max-lg:mt-8`}>
                                         {slide.heading1}
                                     </h1>
 

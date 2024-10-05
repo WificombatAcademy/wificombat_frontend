@@ -18,7 +18,7 @@ export const StudentsHero = ({bgColor, headerOne, headerTwo, text}: Props) => {
         <section 
         id="home"
         className="text-white">
-            <div className={`relative isolate overflow-hidden pb-[7rem] md:py-[7rem] lg:py-[10rem] 
+            <div className={`relative isolate overflow-hidden pb-[2rem] lg:pb-[7rem] md:py-[7rem] lg:py-[10rem] 
                 ${bgColor ?  "bg-blue-500" : "bg-purple-500"}`}>
                     <Cart/>
                 <div className={`relative max-lg:mt-[5rem] w-[93%] md:w-[80%] lg:w-[85%] mx-auto 
@@ -28,7 +28,7 @@ export const StudentsHero = ({bgColor, headerOne, headerTwo, text}: Props) => {
                         <Breadcrumbs homeLabel="Home"/>
                         <h1 className={`${merriweather.className} 
                             text-3xl md:text-4xl lg:text-5xl 2xl:text-6xl 
-                            max-md:leading-[45px] lg:leading-[67.2px] 2xl:leading-[78px] font-bold max-lg:pt-3`}>
+                            max-md:leading-[45px] lg:leading-[67.2px] 2xl:leading-[78px] font-bold max-lg:pt-8`}>
                             {headerOne}
                         </h1>
 
@@ -48,7 +48,8 @@ export const StudentsHero = ({bgColor, headerOne, headerTwo, text}: Props) => {
                         </div>
                     </div>
 
-                    <div className="w-full md:basis-[50%] max-md:hidden">
+                    <div className="w-full md:basis-[50%] max-md:h-[350px]
+                        max-md:flex max-md:items-center max-md:justify-center">
                     {text!= undefined && <Image 
                     src={`/${text}`}
                     alt={text}

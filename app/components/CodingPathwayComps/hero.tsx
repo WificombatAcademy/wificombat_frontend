@@ -18,7 +18,8 @@ export const PathwayHero = ({bgColor, image, desc, header, buttonWhite, widthSty
         <section 
         id="home"
         className="text-white">
-            <div className={`relative isolate overflow-hidden pb-[7rem] md:py-[7rem] lg:py-[10rem] ${bgColor}`}>
+            <div className={`relative isolate overflow-hidden pb-[2rem] lg:pb-[7rem] 
+                md:py-[7rem] lg:py-[10rem] ${bgColor}`}>
                 <Cart/>
                 <div className="relative max-md:mt-[4rem] w-[93%] md:w-[80%] lg:w-[85%] mx-auto 
                 max-lg:h-full h-[16rem] xl:h-[20rem] 2xl:h-[24rem] flex flex-col md:flex-row md:items-center gap-10">
@@ -26,7 +27,7 @@ export const PathwayHero = ({bgColor, image, desc, header, buttonWhite, widthSty
                         <Breadcrumbs homeLabel="Home" />
                         <h1 className={`${merriweather.className} 
                             text-3xl md:text-4xl lg:text-5xl 2xl:text-6xl 
-                            max-md:leading-[45px] lg:leading-[67.2px] 2xl:leading-[78px] font-bold max-lg:mt-5`}>
+                            max-md:leading-[45px] lg:leading-[67.2px] 2xl:leading-[78px] font-bold max-lg:mt-8`}>
                             {header}
                         </h1>
 
@@ -39,7 +40,8 @@ export const PathwayHero = ({bgColor, image, desc, header, buttonWhite, widthSty
                             <Link 
                             href={`/registration`}
                             className={`${buttonWhite ? "bg-white text-black-500" :
-                                "bg-[#131314] text-white focus-visible:outline-black"} rounded-lg px-16 py-5 font-medium  shadow-sm 
+                                "bg-[#131314] text-white focus-visible:outline-black"} 
+                                rounded-lg px-16 py-5 font-medium  shadow-sm 
                                hover:bg-opacity-80 focus-visible:outline focus-visible:outline-2 
                                focus-visible:outline-offset-2 `}
                             >
@@ -49,14 +51,15 @@ export const PathwayHero = ({bgColor, image, desc, header, buttonWhite, widthSty
                         </div>
                     </div>
 
-                    <div className="w-full md:basis-[50%] max-md:hidden">
+                    <div className="w-full md:basis-[50%] max-md:h-[350px]
+                        max-md:flex max-md:items-center max-md:justify-center">
                         {image && 
                         <Image 
                         src={image ?? ""}
                         alt={image ?? ""}
                         width={500}
                         height={500}
-                        className={`object-cover ${widthStyle ?? "w-full h-full"} border-none`}
+                        className={`object-contain ${widthStyle ?? "w-full h-full"} border-none`}
                         />}
                     </div>
                 </div>
