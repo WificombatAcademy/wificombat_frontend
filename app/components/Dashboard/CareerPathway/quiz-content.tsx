@@ -3,6 +3,7 @@ import Image from 'next/image';
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast'; // Import toast for notifications
 import FlashCardReview from './flash-card';
+import { IoCheckmark } from 'react-icons/io5';
 
 type Props = {
   quizData: any[];
@@ -24,12 +25,13 @@ const QuizContent = ({ quizData, activeLessonIndex, setActiveLessonIndex,
   const [reviewMode, setReviewMode] = useState(false);
 
   // Handle option selection
-  const handleOptionSelect = (questionIndex: number, selectedOption: string) => {
-    setQuizAnswers((prevAnswers) => ({
-      ...prevAnswers,
-      [questionIndex]: selectedOption,
-    }));
-  };
+const handleOptionSelect = (questionIndex: number, selectedOptionIndex: number | string) => {
+  setQuizAnswers((prevAnswers) => ({
+    ...prevAnswers,
+    [questionIndex]: selectedOptionIndex.toString(), // Convert selected option index to string
+  }));
+};
+
 
   // Navigate to the next question
   const handleNextQuizQuestion = () => {
@@ -55,49 +57,54 @@ const QuizContent = ({ quizData, activeLessonIndex, setActiveLessonIndex,
   // Handle quiz submission and calculate the score
   const handleSubmitQuiz = () => {
     if (!quizAnswers[currentQuizQuestion]) {
-      toast.error('Please answer the question before submitting.');
-      return;
+        toast.error('Please answer the question before submitting.');
+        return;
     }
-  
+
     let correctAnswers = 0;
-  
+
     quizData.forEach((question, index) => {
-      const userAnswer = quizAnswers[index];
-  
-      if (question.type === 'multiple-choice') {
-        // Compare user's answer with the correct string option
-        if (userAnswer === question.options[parseInt(question.correct_answer) - 1]) {
-          correctAnswers += 1;
+        const userAnswer = quizAnswers[index];
+
+        if (question.type === 'multiple-choice') {
+            // Use the correct index to compare with the selected option
+            const userAnswerIndex = parseInt(quizAnswers[index]) + 1;
+            const correctAnswerIndex = parseInt(question.correct_answer); // The correct answer index from the API
+
+            // console.log("user answer:", userAnswer)
+            // console.log("Right answer from data:", correctAnswerIndex)
+
+            if (userAnswerIndex === correctAnswerIndex) {
+                correctAnswers += 1;
+            }
+        } else if (question.type === 'fill-in-the-gap') {
+            // Check if the user's answer matches the correct answer for fill-in-the-gap questions
+            if (userAnswer.trim().toLowerCase() === question.correct_answer.trim().toLowerCase()) {
+                correctAnswers += 1;
+            }
         }
-      } else if (question.type === 'fill-in-the-gap') {
-        // Compare fill-in-the-gap answers directly
-        if (userAnswer.trim().toLowerCase() === question.correct_answer.trim().toLowerCase()) {
-          correctAnswers += 1;
-        }
-      }
     });
-  
+
     const totalScore = (correctAnswers / quizData.length) * 100;
     setScore(totalScore);
     setQuizSubmitted(true);
 
-    if (totalScore >= 45) {
-        // Allow proceeding to the next lesson
+    if (totalScore >= 75) {
         toast.success("You passed! You can now proceed to the next lesson.");
-      } else {
-        // Force restart from the beginning
+    } else {
         toast.error("You failed. Please restart the course from the beginning.");
         setCurrentQuizQuestion(0); // Reset quiz
-        setQuizAnswers({});        // Clear answers
-      }
-  };
+        setQuizAnswers({}); // Clear answers
+    }
+};
+
 
   const handleProceedToNextLesson = () => {
     if (activeLessonIndex < moduleDetails.length - 1) {
-        setActiveLessonIndex(activeLessonIndex + 1);
-        setIsQuizMode(false);
-        setIsAssignmentMode(false);
-        setIsLessonMode(true);
+      setActiveLessonIndex(activeLessonIndex + 1);
+      setIsQuizMode(false);
+      setIsAssignmentMode(false);
+      setIsLessonMode(true);
     } else {
       // Show assignment when last lesson is reached
       setIsQuizMode(false);
@@ -113,10 +120,8 @@ const QuizContent = ({ quizData, activeLessonIndex, setActiveLessonIndex,
     handleProceedToNextLesson={handleProceedToNextLesson} />;
   }
   
-  
-
   return (
-    <div>
+    <div className='h-[110%] overflow-auto'>
       <Toaster /> {/* To display toast notifications */}
       {!quizSubmitted ? (
         <div
@@ -151,23 +156,86 @@ const QuizContent = ({ quizData, activeLessonIndex, setActiveLessonIndex,
 
           {/* Multiple-choice options */}
           {currentQuestion.type === 'multiple-choice' && (
-            <div className="mt-4 quiz-options space-y-2">
-              {currentQuestion.options.map((option: string, index: number) => (
-                <label key={index} className="quiz-option flex items-center">
-                  <input
-                    type="radio"
-                    name={`question-${currentQuizQuestion}`}
-                    value={option}
-                    checked={quizAnswers[currentQuizQuestion] === option}
-                    onChange={() =>
-                      handleOptionSelect(currentQuizQuestion, option)
-                    }
-                    className="mr-2 accent-purple-500"
-                  />
-                  {option}
-                </label>
-              ))}
-            </div>
+            <div className="mt-4 quiz-options">
+            {currentQuestion.options.some((option:any) => option.image) 
+            && currentQuestion.options.some((option:any) => option.text) ? (
+              // If there are both image and text options
+              <div className="grid grid-cols-2 gap-4">
+                {currentQuestion.options.map((option: { text: string; image: string }, index: number) => (
+                  <div
+                    key={index}
+                    className={`relative border rounded-lg p-2 cursor-pointer ${
+                     quizAnswers[currentQuizQuestion] === index.toString() ? 'border-blue-500' : 'border-gray-300 bg-gray-50'
+                    }`}
+                    onClick={() => handleOptionSelect(currentQuizQuestion, index)}
+                  >
+                    {option.image && (
+                      <Image
+                        src={option.image}
+                        alt={`Option ${index}`}
+                        width={100} // Adjust as necessary
+                        height={100} // Adjust as necessary
+                        className="w-full h-[140px] object-contain rounded-lg"
+                      />
+                    )}
+                    {quizAnswers[currentQuizQuestion] === index.toString() && (
+                      <div className="absolute top-2 right-2 bg-green-500 text-white rounded-full">
+                        <IoCheckmark />
+                      </div>
+                    )}
+                    <p className="mt-2 text-center">{option.text}</p>
+                  </div>
+                ))}
+              </div>
+            ) : currentQuestion.options.some((option:any) => option.image) ? (
+              // If there are only image options
+              <div className="grid grid-cols-2 gap-4">
+                {currentQuestion.options.map((option: { image: string }, index: number) => (
+                  <div
+                    key={index}
+                    className={`relative border rounded-lg p-2 cursor-pointer ${
+                      quizAnswers[currentQuizQuestion] === index.toString() ? 'border-blue-500' : 'border-gray-300 bg-gray-50'
+                    }`}
+                    onClick={() => handleOptionSelect(currentQuizQuestion, index)}
+                  >
+                    {option.image && (
+                      <Image
+                        src={option.image}
+                        alt={`Option ${index}`}
+                        width={100} // Adjust as necessary
+                        height={100} // Adjust as necessary
+                        className="w-full h-[140px] object-contain rounded-lg"
+                      />
+                    )}
+                    {quizAnswers[currentQuizQuestion] === index.toString() && (
+                      <div className="absolute top-2 right-2 bg-green-500 text-white rounded-full">
+                        <IoCheckmark />
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            ) : (
+              // If there are only text options
+              <div className="space-y-2">
+                {currentQuestion.options.map((option: { text: string }, index: number) => (
+                  <label key={index} className="quiz-option flex items-center">
+                    <input
+                      type="radio"
+                      name={`question-${currentQuizQuestion}`}
+                      value={option.text}
+                      checked={quizAnswers[currentQuizQuestion] === index.toString()}
+                      onChange={() =>
+                        handleOptionSelect(currentQuizQuestion, index)
+                      }
+                      className="mr-2 accent-purple-500"
+                    />
+                    {option.text}
+                  </label>
+                ))}
+              </div>
+            )}
+          </div>
           )}
 
           {/* Fill-in-the-gap input */}
@@ -181,7 +249,6 @@ const QuizContent = ({ quizData, activeLessonIndex, setActiveLessonIndex,
                   handleOptionSelect(currentQuizQuestion, e.target.value)
                 }
                 className="mt-4 outline-none border-b-2 border-dashed 
-                
                 border-black-500 p-2 w-full placeholder:text-black-500"
               />
             </div>

@@ -7,21 +7,22 @@
   --swiper-navigation-size: 35px !important;
 }
 
-/* ::-webkit-scrollbar{
+::-webkit-scrollbar{
   width: 8px;
   height: 4px;
+  background: transparent;
 }  
 ::-webkit-scrollbar-track{
-  background: #fff;
+  background: transparent;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb{
-  background: #131314;
+  background: transparent;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover{
   background: #131314;
-} */
+}
 .swiper-button-prev {
   left:4rem !important; 
 }

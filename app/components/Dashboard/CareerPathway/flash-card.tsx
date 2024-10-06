@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { merriweather } from '@/app/fonts';
-import Image from 'next/image';
 
 type FlashCardProps = {
   quizData: any[];
@@ -52,7 +51,7 @@ const FlashCardReview = ({ quizData, handleProceedToNextLesson }: FlashCardProps
           >
             <h2 className={`text-lg lg:text-2xl font-semibold ${merriweather.className}`}>
               Answer: {currentQuestion.type === 'multiple-choice'
-                ? currentQuestion.options[parseInt(currentQuestion.correct_answer) - 1]
+                ? currentQuestion.options[parseInt(currentQuestion.correct_answer)].text
                 : currentQuestion.correct_answer}
             </h2>
           </div>
@@ -61,14 +60,14 @@ const FlashCardReview = ({ quizData, handleProceedToNextLesson }: FlashCardProps
         {/* Navigation buttons */}
         <div className="z-[1] relative top-[-3rem] quiz-navigation flex items-center justify-center gap-7 mt-6">
 
-        {/* Flip button */}
-           {!(currentCard === quizData.length - 1 && isFlipped) &&<> 
-           <button
+          {/* Flip button */}
+          {!(currentCard === quizData.length - 1 && isFlipped) &&<> 
+          <button
             onClick={handleFlipCard}
             className="px-12 py-2 font-medium bg-white text-black-500 border border-black-500 rounded-lg"
-            >
+          >
             Flip
-            </button>
+          </button>
 
           <button
             onClick={handleNextCard}
