@@ -49,7 +49,8 @@ export const OnboardingCard = ({buttonText, checkmark, dontCenter, title, desc, 
                 <div className="mt-14">
                     <Link
                     href={linkTo ?? "/registration"}
-                    className="rounded-lg bg-[#131314] px-16 py-5 font-medium text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                    className="rounded-lg bg-[#131314] px-8 py-5 font-medium text-white shadow-sm hover:bg-black/80 
+                    focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                     >
                     {buttonText}
                     </Link>

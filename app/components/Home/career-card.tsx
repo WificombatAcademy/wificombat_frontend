@@ -13,14 +13,16 @@ type Props = {
     pathways?: string[];
     image?: string;
     pathwayImage?: string;
+    curriculum?: boolean;
 }
 
-const CareerCard = ({ bgColor ,desc, pathway, linkTo, level, subject, textWhite, pathways, image, pathwayImage }: Props) => {
+const CareerCard = ({ bgColor ,desc, pathway, linkTo, level, subject, textWhite, pathways, image, pathwayImage, curriculum }: Props) => {
     return (
         <div className="h-full">
             <Link href={`${linkTo && linkTo}`}>
                 <div className="w-full flex flex-col h-full bg-white pb-3 shadow-lg rounded-2xl cursor-pointer">
-                    <div className={`relative w-full h-[250px] min-[2000px]:h-[330px] 
+                    <div className={`relative w-full 
+                    ${curriculum ? "h-[200px] min-[2000px]:h-[300px]" : "h-[250px] min-[2000px]:h-[330px]" } 
                         ${bgColor ?? "bg-blue-500"} px-4 flex items-end rounded-tl-2xl rounded-tr-2xl`}>
 
                         {pathwayImage && 
@@ -31,25 +33,25 @@ const CareerCard = ({ bgColor ,desc, pathway, linkTo, level, subject, textWhite,
                         }
 
                         {image && 
-                        <div className="absolute inset-0 bg-black rounded-tl-2xl rounded-tr-2xl">
-                            <div className="absolute inset-0 bg-black/30 rounded-tl-2xl rounded-tr-2xl"></div>
+                        <div className="absolute inset-0 bg-gray-50 rounded-tl-2xl rounded-tr-2xl">
                             <Image src={image} alt="pathway"
                             width={300} height={300}
-                            className="w-full h-full object-cover rounded-tl-2xl rounded-tr-2xl" 
+                            className="w-full h-full object-cover rounded-tl-2xl rounded-tr-2xl border-b" 
                             />
                         </div>}
 
-                        <div className="relative z-[7]">
+                        {/* <div className="relative z-[7]">
                            {!pathwayImage &&
                             <h3 
                             className={`${textWhite ? "text-white": ""}  
                             my-3 text-lg md:text-2xl text-black-500 font-semibold`}>
                                 {pathway} Pathway</h3>}
-                        </div>
+                        </div> */}
                     </div>
 
                     <div className="py-3 px-4">
-                        {subject && <h3 className="pt-3 font-medium text-lg md:text-xl text-black-800">{subject}</h3>}
+                        {subject && <h3 className={`font-medium text-lg 
+                        ${!curriculum ? "md:text-xl pt-3" : "font-semibold"} text-black-800`}>{subject}</h3>}
                         {level && <h3 className="pt-1 font-medium md:text-lg text-black-800">{level}</h3>}
                         <p className="pt-4 text-black-800">{desc}</p>
 

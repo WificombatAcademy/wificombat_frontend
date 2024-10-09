@@ -166,7 +166,9 @@ export const HomeCourses = () => {
         </Swiper>
 
         <div className="relative w-[93%] md:w-[90%] lg:w-[88%] mx-auto mt-8 md:mt-12 flex items-center justify-between">
-          <div className="courses-swiper-button-prev bg-blue-50 w-9 h-9 md:w-14 md:h-14 rounded flex items-center justify-center transition duration-500 ease-in-out hover:bg-blue-100 max-m cursor-pointer">
+          <div className="courses-swiper-button-prev bg-blue-50 w-9 h-9 md:w-14 md:h-14 
+          rounded flex items-center justify-center transition duration-500 ease-in-out
+           hover:bg-blue-100 max-m cursor-pointer">
             <GrFormPrevious size={28} />
           </div>
 
@@ -174,7 +176,9 @@ export const HomeCourses = () => {
             <div className={`courses-swiper-pagination`}></div>
           </div>
 
-          <div className="courses-swiper-button-next bg-blue-50 w-9 h-9 md:w-14 md:h-14 rounded flex items-center justify-center transition duration-500 ease-in-out hover:bg-blue-100 max-m cursor-pointer">
+          <div className="courses-swiper-button-next bg-blue-50 w-9 h-9 md:w-14 md:h-14 
+          rounded flex items-center justify-center transition duration-500 ease-in-out
+           hover:bg-blue-100 max-m cursor-pointer">
             <GrFormNext size={28} />
           </div>
         </div>
