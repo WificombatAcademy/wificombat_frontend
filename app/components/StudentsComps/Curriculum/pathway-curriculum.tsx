@@ -47,6 +47,25 @@ export const CareerPathwayCurriculum = ({schoolCurriculum}: CareerPathwayCurricu
     }
   };
 
+  const formatPrice = (price: string) => {
+    if (!price || price === "0.00") return "Free"; // Handle free courses
+    return `₦${parseFloat(price).toLocaleString()}`; // Format the price as Nigerian Naira
+  };
+
+  // Truncate description to 15 words, stripping HTML tags first
+  const truncateDescription = (htmlString: string) => {
+    // Create a DOMParser to parse the HTML string
+    const parser = new DOMParser();
+    const parsedDocument = parser.parseFromString(htmlString, "text/html");
+    const plainText = parsedDocument.body.textContent || ""; // Extract plain text from the HTML
+
+    const words = plainText.split(" ");
+    if (words.length > 15) {
+      return words.slice(0, 15).join(" ") + "...";
+    }
+    return plainText;
+  };
+
   const handlePathwayClick = (index: number, pathwayId: string) => {
     setActivePathIndex(index);
     fetchCourses(pathwayId); // Fetch courses when a pathway is clicked
@@ -115,18 +134,19 @@ export const CareerPathwayCurriculum = ({schoolCurriculum}: CareerPathwayCurricu
                     .map((course, index) => (
                       <CareerCard
                       curriculum={true}
-                      image={`https://wificombatacademy.com/${course.image}`}
-                      linkTo="/coding-pathway/course"
+                      linkTo={`/course/${activePath.pathway_id}${course.course_id}`}
                       key={index}
                       pathway={course.subject}
+                      price={formatPrice(course.price)}
                       subject={course.subject}
+                      image={`https://wificombatacademy.com/${course.image}`}
                       level={course.level}
-                      desc="neienei"
+                      desc={truncateDescription(course.note)} 
                       />
                     ))}
                 </div>
               ) : (
-                <p>No courses available for this level.</p>
+                <p className="w-full m-auto text-center">No courses available for this level.</p>
               )}
             </div>
             

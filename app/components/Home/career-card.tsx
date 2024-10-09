@@ -5,6 +5,7 @@ import { FaPlus } from "react-icons/fa6";
 type Props = {
     pathway: string;
     desc: string;
+    price?: string;
     linkTo?: string;
     subject?: string;
     level?: string;
@@ -16,7 +17,8 @@ type Props = {
     curriculum?: boolean;
 }
 
-const CareerCard = ({ bgColor ,desc, pathway, linkTo, level, subject, textWhite, pathways, image, pathwayImage, curriculum }: Props) => {
+const CareerCard = ({ bgColor ,desc, pathway, linkTo, level, subject, 
+    textWhite, pathways, image, pathwayImage, curriculum, price }: Props) => {
     return (
         <div className="h-full">
             <Link href={`${linkTo && linkTo}`}>
@@ -52,16 +54,25 @@ const CareerCard = ({ bgColor ,desc, pathway, linkTo, level, subject, textWhite,
                     <div className="py-3 px-4">
                         {subject && <h3 className={`font-medium text-lg 
                         ${!curriculum ? "md:text-xl pt-3" : "font-semibold"} text-black-800`}>{subject}</h3>}
-                        {level && <h3 className="pt-1 font-medium md:text-lg text-black-800">{level}</h3>}
-                        <p className="pt-4 text-black-800">{desc}</p>
+                        <div className="flex items-center gap-5">
+                        {level && <h3 className={`pt-1 font-medium md:text-lg 
+                        ${curriculum ? "text-black-600 font-semibold" : "text-black-800"} `}>{level}</h3>}
+                        {price && <h3 className={`pt-1 font-bold text-black-500`}>{price}</h3>}
+                        </div>
+                        <p className={`${!curriculum ? "pt-4" : "pt-3"} text-black-800`}>{desc}</p>
 
-                    {/* {linkTo &&
-                        <div className="mt-8">
-                            <Link href={linkTo} className="w-full">
-                                <p className="w-full bg-black-500 py-4 text-white 
-                    text-center transition ease-in-out duration-300 hover:bg-opacity-80 rounded-lg"> View More</p>
-                            </Link>
-                    </div>} */}
+                    {curriculum &&
+                        <div className="mt-8 flex items-center justify-between gap-4">
+                            <button className="w-full">
+                                <p className="w-full border border-black-500 py-3 text-black-500 
+                                    text-center transition ease-in-out duration-300 hover:bg-opacity-80 rounded-lg"> Add to Cart</p>
+                            </button>
+
+                            <button className="w-full">
+                                <p className="w-full bg-black-500 py-3 text-white 
+                                    text-center transition ease-in-out duration-300 hover:bg-opacity-80 rounded-lg"> Buy Now</p>
+                            </button>
+                        </div>}
 
                     {pathways && 
                     <div className="mt-3 flex flex-wrap items-center gap-1">
