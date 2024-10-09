@@ -8,10 +8,11 @@ type LoaderProps = {
   isSessionExpired?: boolean;
   noDesign?: boolean;
   noCourses?: boolean;
+  curriculum?: boolean;
 };
 
-const Loader = ({ isError = false, isSessionExpired = false, noDesign = false, noCourses = false }: LoaderProps) => {
-  let displayMessage = "Loading...";
+const Loader = ({ isError = false, isSessionExpired = false, noDesign = false, noCourses = false, curriculum }: LoaderProps) => {
+  let displayMessage = curriculum ? "Loading Curriculum..." : "Loading...";
   let designSrc = "";
   let altText = "";
   let buttonText = "";

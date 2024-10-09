@@ -5,6 +5,8 @@ import HeadingDesign from "../../general/HeaderDesign";
 import CareerCard from "../../Home/career-card";
 import axiosInstance from "@/app/utils/auth-interceptor";
 import Link from "next/link";
+import Loader from "@/app/utils/loader";
+import { RiLoader4Fill } from "react-icons/ri";
 
 type CareerPathwayCurriculumProps = {
   schoolCurriculum?: boolean;
@@ -17,13 +19,16 @@ export const CareerPathwayCurriculum = ({schoolCurriculum}: CareerPathwayCurricu
   const [selectedLevel, setSelectedLevel] = useState<CurriculumLevel>("Beginner");
   const [pathways, setPathways] = useState<any[]>([]);
   const [courses, setCourses] = useState<any[]>([]);
-  const headingText = schoolCurriculum ? "school curriculum" : "career pathway curriculum";
+  const [pathwaysLoading, setPathwaysLoading] = useState(true);
+  const [coursesLoading, setCoursesLoading] = useState(false);
 
-  const activePath = pathways[activePathIndex];
+  const headingText = schoolCurriculum ? "school curriculum" : "career pathway curriculum";
+const activePath = pathways[activePathIndex];
 
 
   useEffect(() => {
     const fetchPathways = async () => {
+      setPathwaysLoading(true);
       try {
         const response = await axiosInstance.get(`${API_VERSION_ONE}/career-pathways`);
         setPathways(response.data); // Set fetched pathways to state
@@ -32,6 +37,8 @@ export const CareerPathwayCurriculum = ({schoolCurriculum}: CareerPathwayCurricu
         }
       } catch (error) {
         console.error("Error fetching pathways:", error);
+      } finally {
+        setPathwaysLoading(false); // Done loading
       }
     };
 
@@ -40,11 +47,14 @@ export const CareerPathwayCurriculum = ({schoolCurriculum}: CareerPathwayCurricu
 
   // Fetch courses by pathway ID
   const fetchCourses = async (pathwayId: string) => {
-    try {
+      setCoursesLoading(true); // loading courses
+      try {
       const response = await axiosInstance.get(`${API_VERSION_ONE}/career-pathway/${pathwayId}/courses`);
       setCourses(response.data); // Set fetched courses to state
     } catch (error) {
       console.error("Error fetching courses:", error);
+    }finally {
+      setCoursesLoading(false); // Done loading
     }
   };
 
@@ -78,6 +88,14 @@ export const CareerPathwayCurriculum = ({schoolCurriculum}: CareerPathwayCurricu
   : { Beginner: "Beginner", Intermediate: "Intermediate", Advanced: "Advanced" };
 
   const levels: CurriculumLevel[] = ["Beginner", "Intermediate", "Advanced"];
+
+  if(pathwaysLoading) {
+    return (
+      <div className="overflow-hidden">
+        <Loader curriculum={true}/>
+      </div>
+    )
+  }
   
 
   return (
@@ -101,10 +119,10 @@ export const CareerPathwayCurriculum = ({schoolCurriculum}: CareerPathwayCurricu
           </div>
 
           <div className="mt-10 md:mt-16 flex flex-col lg:flex-row gap-16 items-center lg:items-start justify-between">
+
             <div
-             
-            className="w-full lg:basis-[13%] py-3 px-2 md:px-3 flex flex-wrap 
-            lg:flex-col items-center max-sm:justify-between rounded shadow-xl max-lg:px-4 border">
+              className="w-full lg:basis-[13%] py-3 px-2 md:px-3 flex flex-wrap 
+              lg:flex-col items-center max-sm:justify-between rounded shadow-xl max-lg:px-4 border">
                {[...pathways].reverse().map((pathway:any, index) => (
                   <div
                   key={pathway.id}
@@ -127,7 +145,13 @@ export const CareerPathwayCurriculum = ({schoolCurriculum}: CareerPathwayCurricu
                 ))}
             </div>
 
-            <div className="w-full lg:basis-[87%]">
+            {coursesLoading ? (
+                <div className="w-full h-[20rem] flex items-center justify-center">
+                  <RiLoader4Fill size={145} className="animate-spin text-purple-500" />
+                </div>
+              ) :
+              
+              ( <div className="w-full lg:basis-[87%]">
               {courses.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9">
                   {courses
@@ -149,7 +173,7 @@ export const CareerPathwayCurriculum = ({schoolCurriculum}: CareerPathwayCurricu
               ) : (
                 <p className="w-full m-auto text-center">No courses available for this level.</p>
               )}
-            </div>
+            </div>)}
             
           </div>
 

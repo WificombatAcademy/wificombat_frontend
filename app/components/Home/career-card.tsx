@@ -21,7 +21,7 @@ const CareerCard = ({ bgColor ,desc, pathway, linkTo, level, subject,
     textWhite, pathways, image, pathwayImage, curriculum, price }: Props) => {
     return (
         <div className="h-full">
-            <div className="w-full flex flex-col h-full bg-white pb-3 shadow-lg rounded-2xl cursor-pointer">
+            <div className="w-full flex flex-col h-full bg-[#fafafa] pb-3 shadow-lg rounded-2xl cursor-pointer">
 
 
             <Link href={`${linkTo && linkTo}`}
@@ -41,7 +41,7 @@ const CareerCard = ({ bgColor ,desc, pathway, linkTo, level, subject,
                     <div className="absolute inset-0 bg-gray-50 rounded-tl-2xl rounded-tr-2xl">
                         <Image src={image} alt="pathway"
                         width={300} height={300}
-                        className="w-full h-full object-cover rounded-tl-2xl rounded-tr-2xl border-b" 
+                        className="w-full h-full object-cover rounded-tl-2xl rounded-tr-2xl" 
                         />
                     </div>
                     </Link>
