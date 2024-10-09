@@ -15,11 +15,12 @@ type CareerPathwayCurriculumProps = {
 export const CareerPathwayCurriculum = ({schoolCurriculum}: CareerPathwayCurriculumProps) => {
   const [activePathIndex, setActivePathIndex] = useState(0);
   const [selectedLevel, setSelectedLevel] = useState<CurriculumLevel>("Beginner");
-  const [pathways, setPathways] = useState([]);
+  const [pathways, setPathways] = useState<any[]>([]);
   const [courses, setCourses] = useState<any[]>([]);
   const headingText = schoolCurriculum ? "school curriculum" : "career pathway curriculum";
 
-  const activePath: PathCurriculumType = pathsCurriculum[activePathIndex];
+  const activePath = pathways[activePathIndex];
+
 
   useEffect(() => {
     const fetchPathways = async () => {
@@ -134,7 +135,7 @@ export const CareerPathwayCurriculum = ({schoolCurriculum}: CareerPathwayCurricu
                     .map((course, index) => (
                       <CareerCard
                       curriculum={true}
-                      linkTo={`/course/${activePath.pathway_id}${course.course_id}`}
+                      linkTo={`/course/${activePath.pathway_id}/${course.course_id}`}
                       key={index}
                       pathway={course.subject}
                       price={formatPrice(course.price)}
