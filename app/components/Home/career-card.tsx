@@ -23,8 +23,9 @@ const CareerCard = ({ bgColor ,desc, pathway, linkTo, level, subject,
         <div className="h-full">
             <div className="w-full flex flex-col h-full bg-white pb-3 shadow-lg rounded-2xl cursor-pointer">
 
-                
-                <div className={`relative w-full 
+
+            <Link href={`${linkTo && linkTo}`}
+                className={`relative w-full 
                 ${curriculum ? "h-[200px] min-[2000px]:h-[300px]" : "h-[250px] min-[2000px]:h-[330px]" } 
                     ${bgColor ?? "bg-blue-500"} px-4 flex items-end rounded-tl-2xl rounded-tr-2xl`}>
 
@@ -53,16 +54,26 @@ const CareerCard = ({ bgColor ,desc, pathway, linkTo, level, subject,
                         my-3 text-lg md:text-2xl text-black-500 font-semibold`}>
                             {pathway} Pathway</h3>}
                     </div> */}
-                </div>
+                 </Link>
 
                 <div className="py-3 px-4">
-                    {subject && <h3 className={`font-medium text-lg 
-                    ${!curriculum ? "md:text-xl pt-3" : "font-semibold"} text-black-800`}>{subject}</h3>}
+
+                    {subject && 
+                    <Link href={`${linkTo && linkTo}`}>
+                    <h3 className={`font-medium text-lg 
+                    ${!curriculum ? "md:text-xl pt-3" : "font-semibold"} text-black-800`}>{subject}</h3>
+                    </Link>
+                    }
+
                     <div className="flex items-center gap-5">
-                    {level && <h3 className={`pt-1 font-medium md:text-lg 
+
+                    {level && 
+                    <h3 className={`pt-1 font-medium md:text-lg 
                     ${curriculum ? "text-black-600 font-semibold" : "text-black-800"} `}>{level}</h3>}
+
                     {price && <h3 className={`pt-1 font-bold text-black-500`}>{price}</h3>}
                     </div>
+
                     <p className={`${!curriculum ? "pt-4" : "pt-3"} text-black-800`}>{desc}</p>
 
                 {curriculum &&
