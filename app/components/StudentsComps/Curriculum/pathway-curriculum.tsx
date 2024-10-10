@@ -154,22 +154,31 @@ const activePath = pathways[activePathIndex];
               ( <div className="w-full lg:basis-[87%]">
               {courses.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9">
-                  {courses
-                    .filter((course) => course.level === selectedLevel)
-                    .map((course, index) => (
-                      <CareerCard
-                      curriculum={true}
-                      linkTo={`/course/${activePath.pathway_id}/${course.course_id}`}
+                {courses
+                  .filter((course) => course.level === selectedLevel)
+                  .map((course, index) => (
+                    <Link
+                      href={{
+                        pathname: `/course/${course.course_id}`,
+                        query: { title: course.title, subject: course.subject, image: course.image, description: course.note }
+                      }}
                       key={index}
-                      pathway={course.subject}
-                      price={formatPrice(course.price)}
-                      subject={course.subject}
-                      image={`https://wificombatacademy.com/${course.image}`}
-                      level={course.level}
-                      desc={truncateDescription(course.note)} 
+                    >
+                      <CareerCard
+                        key={index}
+                        linkTo={`/course/${course.course_id}`}
+                        curriculum={true}
+                        pathway={course.subject}
+                        price={formatPrice(course.price)}
+                        subject={course.subject}
+                        image={`https://wificombatacademy.com/${course.image}`}
+                        level={course.level}
+                        desc={truncateDescription(course.note)} 
                       />
-                    ))}
-                </div>
+                    </Link>
+                  ))}
+              </div>
+              
               ) : (
                 <p className="w-full m-auto text-center">No courses available for this level.</p>
               )}

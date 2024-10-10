@@ -106,7 +106,8 @@ const Page = () => {
                                         </div>
 
                                         <div className="flex h-auto items-stretch gap-5 overflow-x-scroll">
-                                            {modules[course.course_id] && modules[course.course_id].map((module: any, index: number) => (
+                                            {modules[course.course_id] 
+                                            && modules[course.course_id].map((module: any, index: number) => (
                                                 <div key={module.id} 
                                                 className="w-[60%] md:w-[50%] lg:w-[25%] flex-shrink-0 h-full flex flex-col mb-5">
 
