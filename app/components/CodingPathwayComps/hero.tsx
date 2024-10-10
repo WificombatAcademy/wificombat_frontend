@@ -10,10 +10,11 @@ type Props = {
     header: string;
     desc: string;
     buttonWhite?:boolean;
+    coursePage?:boolean;
     widthStyle?: string;
 }
 
-export const PathwayHero = ({bgColor, image, desc, header, buttonWhite, widthStyle}: Props) => {
+export const PathwayHero = ({bgColor, image, desc, header, buttonWhite, widthStyle, coursePage}: Props) => {
     return (
         <section 
         id="home"
@@ -36,7 +37,7 @@ export const PathwayHero = ({bgColor, image, desc, header, buttonWhite, widthSty
                         </p>
                         
                         <div className="mt-10 lg:mt-16"> 
-                            <>
+                           {!coursePage ? <>
                             <Link 
                             href={`/registration`}
                             className={`${buttonWhite ? "bg-white text-black-500" :
@@ -47,7 +48,28 @@ export const PathwayHero = ({bgColor, image, desc, header, buttonWhite, widthSty
                             >
                                 Register
                             </Link>
-                            </>
+                            </>: 
+                            <div className="flex items-center gap-6">
+                             <button 
+                            className={`${buttonWhite ? "bg-white text-black-500" :
+                                "bg-[#131314] text-white focus-visible:outline-black"} 
+                                rounded-lg px-8 py-3 font-medium shadow-sm 
+                               hover:bg-opacity-80 focus-visible:outline focus-visible:outline-2 
+                               focus-visible:outline-offset-2 md:text-lg`}
+                            >
+                                Buy Now
+                            </button>
+
+                            <button 
+                            className={` bg-transparent border-black-500
+                                border text-black-500 focus-visible:outline-black
+                                rounded-lg px-8 py-3 font-medium shadow-sm 
+                               hover:bg-opacity-80 focus-visible:outline focus-visible:outline-2 
+                               focus-visible:outline-offset-2 md:text-lg`}
+                            >
+                                Add to Cart
+                            </button>
+                            </div>}
                         </div>
                     </div>
 

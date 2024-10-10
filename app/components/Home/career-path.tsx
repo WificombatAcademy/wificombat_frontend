@@ -53,7 +53,7 @@ export const CareerPath = () => {
             pathway="Robotics/IOT"
             desc="This pathway combines mechanical engineering, electronics, and computer science to create innovative solutions."
             bgColor="bg-blue-500"
-            pathwayImage=""
+            pathwayImage="/pathway-5.png"
             pathways={["Robotics Engineer","Embedded Systems Engineer","IOT Developer","Control Systems Engineer"]}
           />
 
@@ -62,7 +62,7 @@ export const CareerPath = () => {
             pathway="Techpreneurship"
             desc="This pathway teaches you how to develop, market, and manage tech-based startups and ventures."
             bgColor="bg-yellow-500"
-            pathwayImage=""
+            pathwayImage="/pathway-6.png"
             pathways={["Startup Founder","Product Manager","Venture Capitalist","Innovation Mgnr","Business Development Manager"]}
 
           />
