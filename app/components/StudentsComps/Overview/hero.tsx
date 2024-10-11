@@ -13,7 +13,6 @@ type Props = {
 }
 
 export const StudentsHero = ({bgColor, headerOne, headerTwo, text}: Props) => {
-    console.log("IMAGE READ:", text, headerOne)
     return (
         <section 
         id="home"

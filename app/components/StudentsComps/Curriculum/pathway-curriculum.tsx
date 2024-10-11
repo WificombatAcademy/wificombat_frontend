@@ -1,6 +1,6 @@
 "use client"
 import { useEffect, useState } from "react";
-import { API_VERSION_ONE, CurriculumLevel, PathCurriculumType, pathsCurriculum, Pathways } from "@/app/utils/types-and-links";
+import { API_VERSION_ONE, CurriculumLevel } from "@/app/utils/types-and-links";
 import HeadingDesign from "../../general/HeaderDesign";
 import CareerCard from "../../Home/career-card";
 import axiosInstance from "@/app/utils/auth-interceptor";
@@ -23,7 +23,7 @@ export const CareerPathwayCurriculum = ({schoolCurriculum}: CareerPathwayCurricu
   const [coursesLoading, setCoursesLoading] = useState(false);
 
   const headingText = schoolCurriculum ? "school curriculum" : "career pathway curriculum";
-const activePath = pathways[activePathIndex];
+  const activePath = pathways[activePathIndex];
 
 
   useEffect(() => {
@@ -157,16 +157,19 @@ const activePath = pathways[activePathIndex];
                 {courses
                   .filter((course) => course.level === selectedLevel)
                   .map((course, index) => (
-                    <Link
-                      href={{
-                        pathname: `/course/${course.course_id}`,
-                        query: { title: course.title, subject: course.subject, image: course.image, description: course.note }
-                      }}
-                      key={index}
-                    >
+                    // <Link
+                    //   href={{
+                    //     pathname: `/course/${course.course_id}`,
+                    //     query: { 
+                    //       title: course.title, 
+                    //       subject: course.subject, 
+                    //       image: course.image, 
+                    //       description: course.note }
+                    //   }}
+                    //   key={index}
+                    // >
                       <CareerCard
                         key={index}
-                        linkTo={`/course/${course.course_id}`}
                         curriculum={true}
                         pathway={course.subject}
                         price={formatPrice(course.price)}
@@ -174,8 +177,16 @@ const activePath = pathways[activePathIndex];
                         image={`https://wificombatacademy.com/${course.image}`}
                         level={course.level}
                         desc={truncateDescription(course.note)} 
+                        coursePageLinkTo={{
+                          pathname:  `/course/${course.course_id}`,
+                          query: { 
+                            title: course.title, 
+                            subject: course.subject, 
+                            image: course.image, 
+                            description: course.note },
+                      }}
                       />
-                    </Link>
+                    // </Link>
                   ))}
               </div>
               

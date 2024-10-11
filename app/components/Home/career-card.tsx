@@ -15,10 +15,25 @@ type Props = {
     image?: string;
     pathwayImage?: string;
     curriculum?: boolean;
+    coursePageLinkTo?: {
+        pathname: string;
+        query: {
+          title: string;
+          subject: string;
+          image: string;
+          description: string;
+        };
+      };
 }
 
-const CareerCard = ({ bgColor ,desc, pathway, linkTo, level, subject, 
+const CareerCard = ({ bgColor ,desc, coursePageLinkTo, linkTo, level, subject, 
     textWhite, pathways, image, pathwayImage, curriculum, price }: Props) => {
+
+
+    const finalLink = 
+    linkTo || 
+    (coursePageLinkTo && { pathname: coursePageLinkTo.pathname, query: coursePageLinkTo.query });
+
     return (
         <div className="h-full">
             <div className="w-full flex flex-col h-full bg-[#fafafa] pb-3 shadow-lg rounded-2xl cursor-pointer">
@@ -36,15 +51,16 @@ const CareerCard = ({ bgColor ,desc, pathway, linkTo, level, subject,
                         />
                     }
 
-                    {image && 
-                    <Link href={`${linkTo && linkTo}`}>
-                    <div className="absolute inset-0 bg-gray-50 rounded-tl-2xl rounded-tr-2xl">
-                        <Image src={image} alt="pathway"
-                        width={300} height={300}
-                        className="w-full h-full object-cover rounded-tl-2xl rounded-tr-2xl" 
-                        />
-                    </div>
-                    </Link>
+                    {image &&  finalLink &&
+                    <Link  href={typeof finalLink === "string" ? 
+                            finalLink : { pathname: finalLink.pathname, query: finalLink.query }}>
+                        <div className="absolute inset-0 bg-gray-50 rounded-tl-2xl rounded-tr-2xl">
+                            <Image src={image} alt="pathway"
+                            width={300} height={300}
+                            className="w-full h-full object-cover rounded-tl-2xl rounded-tr-2xl" 
+                            />
+                        </div>
+                        </Link>
                     }
 
                     {/* <div className="relative z-[7]">
@@ -58,12 +74,14 @@ const CareerCard = ({ bgColor ,desc, pathway, linkTo, level, subject,
 
                 <div className="py-3 px-4">
 
-                    {subject && 
-                    <Link href={`${linkTo && linkTo}`}>
-                    <h3 className={`font-medium text-lg 
-                    ${!curriculum ? "md:text-xl pt-3" : "font-semibold"} text-black-800`}>{subject}</h3>
-                    </Link>
-                    }
+                    {subject && finalLink && (
+                        <Link href={typeof finalLink === "string" ? 
+                        finalLink : { pathname: finalLink.pathname, query: finalLink.query }}>
+                            <h3 className={`font-medium text-lg 
+                            ${!curriculum ? "md:text-xl pt-3" : "font-semibold"} text-black-800`}>
+                            {subject}</h3>
+                        </Link>
+                    )}
 
                     <div className="flex items-center gap-5">
 

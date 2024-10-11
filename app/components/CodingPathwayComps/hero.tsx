@@ -14,7 +14,15 @@ type Props = {
     widthStyle?: string;
 }
 
-export const PathwayHero = ({bgColor, image, desc, header, buttonWhite, widthStyle, coursePage}: Props) => {
+export const PathwayHero = ({
+    bgColor, 
+    image, 
+    desc, 
+    header, 
+    buttonWhite,
+    widthStyle, 
+    coursePage}: Props) => {
+        
     return (
         <section 
         id="home"
@@ -44,7 +52,7 @@ export const PathwayHero = ({bgColor, image, desc, header, buttonWhite, widthSty
                                 "bg-[#131314] text-white focus-visible:outline-black"} 
                                 rounded-lg px-16 py-5 font-medium  shadow-sm 
                                hover:bg-opacity-80 focus-visible:outline focus-visible:outline-2 
-                               focus-visible:outline-offset-2 `}
+                               focus-visible:outline-offset-2`}
                             >
                                 Register
                             </Link>
@@ -53,7 +61,7 @@ export const PathwayHero = ({bgColor, image, desc, header, buttonWhite, widthSty
                              <button 
                             className={`${buttonWhite ? "bg-white text-black-500" :
                                 "bg-[#131314] text-white focus-visible:outline-black"} 
-                                rounded-lg px-8 py-3 font-medium shadow-sm 
+                                rounded-lg px-8 md:px-12 py-3 font-medium shadow-sm 
                                hover:bg-opacity-80 focus-visible:outline focus-visible:outline-2 
                                focus-visible:outline-offset-2 md:text-lg`}
                             >
@@ -63,7 +71,7 @@ export const PathwayHero = ({bgColor, image, desc, header, buttonWhite, widthSty
                             <button 
                             className={` bg-transparent border-black-500
                                 border text-black-500 focus-visible:outline-black
-                                rounded-lg px-8 py-3 font-medium shadow-sm 
+                                rounded-lg px-8 md:px-12 py-3 font-medium shadow-sm 
                                hover:bg-opacity-80 focus-visible:outline focus-visible:outline-2 
                                focus-visible:outline-offset-2 md:text-lg`}
                             >
@@ -73,15 +81,18 @@ export const PathwayHero = ({bgColor, image, desc, header, buttonWhite, widthSty
                         </div>
                     </div>
 
-                    <div className="w-full md:basis-[50%] max-md:h-[350px]
-                        max-md:flex max-md:items-center max-md:justify-center">
+                    <div className={`w-full md:basis-[50%] 
+                    ${coursePage ? "max-md:h-[3470px] h-[370px] rounded-3xl" : "max-md:h-[350px]"}
+                        max-md:flex max-md:items-center max-md:justify-center`}>
                         {image && 
                         <Image 
                         src={image ?? ""}
                         alt={image ?? ""}
                         width={500}
                         height={500}
-                        className={`object-contain ${widthStyle ?? "w-full h-full"} border-none`}
+                        className={`object-contain border-none
+                            ${widthStyle ?? "w-full h-full"}
+                            ${coursePage && "rounded-3xl object-cover"}`}
                         />}
                     </div>
                 </div>
