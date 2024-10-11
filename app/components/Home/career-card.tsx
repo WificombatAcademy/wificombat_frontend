@@ -22,6 +22,7 @@ type Props = {
           subject: string;
           image: string;
           description: string;
+          level: string;
         };
       };
 }
@@ -51,7 +52,7 @@ const CareerCard = ({ bgColor ,desc, coursePageLinkTo, linkTo, level, subject,
                         />
                     }
 
-                    {image &&  finalLink &&
+                    {image && finalLink &&
                     <Link  href={typeof finalLink === "string" ? 
                             finalLink : { pathname: finalLink.pathname, query: finalLink.query }}>
                         <div className="absolute inset-0 bg-gray-50 rounded-tl-2xl rounded-tr-2xl">

@@ -183,7 +183,8 @@ export const CareerPathwayCurriculum = ({schoolCurriculum}: CareerPathwayCurricu
                             title: course.title, 
                             subject: course.subject, 
                             image: course.image, 
-                            description: course.note },
+                            description: course.note,
+                            level: course.level, },
                       }}
                       />
                     // </Link>

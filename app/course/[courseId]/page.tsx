@@ -20,6 +20,7 @@ const page = ({ params }: any) => {
   const courseSubject = searchParams.get("subject");
   const courseImage = searchParams.get("image");
   const courseDescription = searchParams.get("description");
+  const courseLevel = searchParams.get("level");
 
   useEffect(() => {
     if (courseId) {
@@ -55,6 +56,7 @@ const page = ({ params }: any) => {
           desc='Turn your passion for technology into a thriving career 
           in software engineering or DevOps. Begin your path with us'
           header={`${courseSubject}`}
+          level={`${courseLevel}`}
           image={`${courseImage ? `https://wificombatacademy.com/${courseImage}` : `` }`}
           />
       </div>
