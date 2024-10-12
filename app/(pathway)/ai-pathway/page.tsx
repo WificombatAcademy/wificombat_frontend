@@ -9,11 +9,13 @@ import Footer from "@/app/components/general/Footer";
 import GeneralNavbar from "@/app/components/general/GeneralNavbar";
 import { AIOnboarding } from "@/app/components/OnboardingComps/ai-onboarding";
 import { aiSteps, outcomes } from "@/app/utils/types-and-links";
+import { Suspense } from 'react'
 
 
 export default function Page() {
   return (
-    <div className="mx-auto relative container w-full max-w-[2000px]">
+   <Suspense>
+     <div className="mx-auto relative container w-full max-w-[2000px]">
       <GeneralNavbar />
 
       <PathwayHero
@@ -52,5 +54,6 @@ export default function Page() {
       <Footer />
       
     </div>
+   </Suspense>
   );
 }

@@ -58,11 +58,6 @@ export const CareerPathwayCurriculum = ({schoolCurriculum}: CareerPathwayCurricu
     }
   };
 
-  const formatPrice = (price: string) => {
-    if (!price || price === "0.00") return "Free"; // Handle free courses
-    return `₦${parseFloat(price).toLocaleString()}`; // Format the price as Nigerian Naira
-  };
-
   // Truncate description to 15 words, stripping HTML tags first
   const truncateDescription = (htmlString: string) => {
     // Create a DOMParser to parse the HTML string
@@ -177,15 +172,7 @@ export const CareerPathwayCurriculum = ({schoolCurriculum}: CareerPathwayCurricu
                         image={`https://wificombatacademy.com/${course.image}`}
                         level={course.level}
                         desc={truncateDescription(course.note)} 
-                        coursePageLinkTo={{
-                          pathname:  `/course/${course.course_id}`,
-                          query: { 
-                            title: course.title, 
-                            subject: course.subject, 
-                            image: course.image, 
-                            description: course.note,
-                            level: course.level, },
-                      }}
+                        linkTo={`/course/${course.course_id}`}
                       />
                     // </Link>
                   ))}
@@ -213,4 +200,10 @@ export const CareerPathwayCurriculum = ({schoolCurriculum}: CareerPathwayCurricu
       </div>
     </section>
   );
+};
+
+
+export const formatPrice = (price: string) => {
+  if (!price || price === "0.00") return "Free"; // Handle free courses
+  return `₦${parseFloat(price).toLocaleString()}`; // Format the price as Nigerian Naira
 };

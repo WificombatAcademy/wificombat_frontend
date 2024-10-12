@@ -118,12 +118,12 @@ const CareerCard = ({ bgColor ,desc, coursePageLinkTo, linkTo, level, subject,
                 {curriculum &&
                     <div className="mt-8 flex items-center justify-between gap-4">
                         <button className="w-full">
-                            <p className="w-full border border-black-500 py-3 text-black-500 
+                            <p className="w-full border border-black-500 py-3 text-black-500 font-semibold 
                                 text-center transition ease-in-out duration-300 hover:bg-opacity-80 rounded-lg"> Add to Cart</p>
                         </button>
 
                         <button className="w-full">
-                            <p className="w-full bg-black-500 py-3 text-white 
+                            <p className="w-full bg-black-500 font-semibold py-3 text-white 
                                 text-center transition ease-in-out duration-300 hover:bg-opacity-80 rounded-lg"> Buy Now</p>
                         </button>
                     </div>}

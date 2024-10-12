@@ -1,45 +1,41 @@
 "use client"
 
 import { PathwayHero } from '@/app/components/CodingPathwayComps/hero'
+import { TodayComp } from '@/app/components/CodingPathwayComps/today-comp'
 import CourseOverview from '@/app/components/CourseComps/courseOverview'
 import Modules from '@/app/components/CourseComps/modules'
+import Footer from '@/app/components/general/Footer'
 import GeneralNavbar from '@/app/components/general/GeneralNavbar'
-import axiosInstance from '@/app/utils/auth-interceptor'
-import { API_VERSION_ONE } from '@/app/utils/types-and-links'
-import { useSearchParams } from 'next/navigation'
-import React, { useEffect, useState, Suspense } from 'react'
+import { FAQ } from '@/app/components/Home/faq'
+import { API } from '@/app/utils/types-and-links'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 
 type Props = {}
 
 const Page = ({ params }: any) => {
   const { courseId } = params;
-  const searchParams = useSearchParams();
   const [course, setCourse] = useState<any>(null);
-  const [modules, setModules] = useState<any>([]);
   const [loading, setLoading] = useState(true);
 
-  const courseTitle = searchParams.get("title");
-  const courseSubject = searchParams.get("subject");
-  const courseImage = searchParams.get("image");
-  const courseDescription = searchParams.get("description");
-  const courseLevel = searchParams.get("level");
+  // const courseTitle = searchParams.get("title");
+  // const courseSubject = searchParams.get("subject");
+  // const courseImage = searchParams.get("image");
+  // const courseDescription = searchParams.get("description");
+  // const courseLevel = searchParams.get("level");
 
   useEffect(() => {
     if (courseId) {
-      fetchCourseData(courseId); // Fetch both course details and modules
+      fetchCourseData(); // Fetch both course details and modules
     }
   }, [courseId]);
 
   // Fetch the course details and modules together
-  const fetchCourseData = async (id: string) => {
+  const fetchCourseData = async () => {
     setLoading(true);
     try {
-      const [courseResponse, modulesResponse] = await Promise.all([
-        axiosInstance.get(`${API_VERSION_ONE}/career-pathway/20/courses`),
-        axiosInstance.get(`${API_VERSION_ONE}/course/${id}/modules`)
-      ]);
-      setCourse(courseResponse.data); // Assume response contains course details
-      setModules(modulesResponse.data); // Set modules
+      const response = await axios.get(`${API}/course/${courseId}`);
+      setCourse(response.data);
     } catch (error) {
       console.error("Error fetching course data:", error);
     } finally {
@@ -47,7 +43,10 @@ const Page = ({ params }: any) => {
     }
   };
 
-  if(!loading) {
+  if(course) {
+    const totalModules = course.modules.length;
+    const pricePerModule = course.price / totalModules;
+
     return (
       <div className="mx-auto relative container w-full max-w-[4000px]">
           <GeneralNavbar />
@@ -57,20 +56,32 @@ const Page = ({ params }: any) => {
           bgColor='bg-blue-500'
           desc='Turn your passion for technology into a thriving career 
           in software engineering or DevOps. Begin your path with us'
-          header={`${courseSubject}`}
-          level={`${courseLevel}`}
-          image={`${courseImage ? `https://wificombatacademy.com/${courseImage}` : `` }`}
+          header={`${course.subject}`}
+          level={`${course.level}`}
+          image={`${course.image ? `https://wificombatacademy.com/${course.image}` : `` }`}
           />
 
           <CourseOverview 
-          desc={courseDescription ?? ''}
+          desc={course.note ?? ''}
           />
 
-          <Modules modules={modules} />
+          <Modules 
+          modules={course.modules} 
+          pricePerModule={pricePerModule}
+          courseLevel={course.level}
+          />
+
+          <TodayComp 
+          desc="Lorem ipsum dolor sit amet consectetur. Senectus in consequat egestas 
+          faucibus morbi pulvinar nec ac. Morbi phasellus sed augue neque ac nibh varius vitae sagittis." 
+          header="Start Coding Today!" 
+          linkto="/schools/pricing-plan" />
+
+          <FAQ noSpace/>
+
+          <Footer />
       </div>
-  
     )
   }
 }
-
 export default Page

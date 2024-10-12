@@ -10,12 +10,15 @@ import "swiper/css/free-mode";
 import HeadingDesign from '../general/HeaderDesign'
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import CareerCard from '../Home/career-card';
+import { formatPrice } from '../StudentsComps/Curriculum/pathway-curriculum';
 
 type Props = {
     modules: any[];
+    pricePerModule: number;
+    courseLevel: string;
 }
 
-const Modules = ({ modules }: Props) => {
+const Modules = ({ modules, pricePerModule, courseLevel }: Props) => {
 
   return (
     <section>
@@ -62,11 +65,12 @@ const Modules = ({ modules }: Props) => {
                         <CareerCard
                             curriculum={true}
                             pathway={module.title}
-                            price={``}
                             moduleSubject={module.title}
                             moduleImage={module.cimage}
+                            level={courseLevel}
                             desc='This pathway covers everything from concept art 
                             and storytelling to coding and game mechanics.'
+                            price={formatPrice(pricePerModule.toFixed(2))}
                         />
                     </SwiperSlide>
                 ))}
