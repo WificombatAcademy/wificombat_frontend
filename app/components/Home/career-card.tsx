@@ -1,3 +1,6 @@
+"use client"
+
+import { useCart } from "@/app/context/CartContext";
 import Image from "next/image";
 import Link from "next/link";
 import { FaPlus } from "react-icons/fa6";
@@ -8,6 +11,7 @@ type Props = {
     price?: string;
     linkTo?: string;
     subject?: string;
+    item?: any;
     moduleSubject?: string;
     level?: string;
     bgColor?: string;
@@ -29,8 +33,19 @@ type Props = {
       };
 }
 
-const CareerCard = ({ bgColor ,desc, coursePageLinkTo, linkTo, level, subject, 
+const CareerCard = ({ bgColor ,desc, coursePageLinkTo, linkTo, level, subject, item,
     textWhite, pathways, image, pathwayImage, curriculum, price, moduleImage, moduleSubject }: Props) => {
+
+        const { addItemToCart, isInCart } = useCart();
+
+        const handleAddToCart = () => {
+            if (!isInCart(item.id)) {
+              addItemToCart(item);
+              alert(`${item.name} added to cart`);
+            } else {
+              alert(`${item.name} is already in the cart`);
+            }
+          };
 
 
     const finalLink = 
@@ -119,12 +134,16 @@ const CareerCard = ({ bgColor ,desc, coursePageLinkTo, linkTo, level, subject,
                     <div className="mt-8 flex items-center justify-between gap-4">
                         <button className="w-full">
                             <p className="w-full border border-black-500 py-3 text-black-500 font-semibold 
-                                text-center transition ease-in-out duration-300 hover:bg-opacity-80 rounded-lg"> Add to Cart</p>
+                                text-center transition ease-in-out duration-300 hover:bg-opacity-80 rounded-lg"> 
+                            Add to Cart
+                            
+                            </p>
                         </button>
 
                         <button className="w-full">
                             <p className="w-full bg-black-500 font-semibold py-3 text-white 
-                                text-center transition ease-in-out duration-300 hover:bg-opacity-80 rounded-lg"> Buy Now</p>
+                                text-center transition ease-in-out duration-300 hover:bg-opacity-80 rounded-lg"> 
+                            Buy Now</p>
                         </button>
                     </div>}
 

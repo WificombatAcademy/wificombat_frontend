@@ -1,5 +1,6 @@
 import { merriweather } from "@/app/fonts";
 import { Breadcrumbs } from "@/app/utils/breadcrumb";
+import Cart from "@/app/utils/cart";
 import Image from "next/image";
 import Link from "next/link"
 
@@ -9,6 +10,7 @@ export const FeaturesHero = () => {
         id="home"
         className="text-white">
             <div className={`relative isolate overflow-hidden pb-[7rem] md:py-[7rem] lg:py-[10rem] bg-blue-500`}>
+                <Cart />
                 <div className={`relative max-lg:mt-[5rem] w-[93%] md:w-[80%] lg:w-[85%] mx-auto max-md:h-full h-[16rem] xl:h-[20rem] 2xl:h-[24rem] 
                     flex flex-col md:flex-row md:items-center md:justify-between gap-10`}>
                     <div className="w-full md:basis-[50%] relative">

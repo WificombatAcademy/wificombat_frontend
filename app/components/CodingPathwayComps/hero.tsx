@@ -89,7 +89,7 @@ export const PathwayHero = ({
                     </div>
 
                     <div className={`w-full md:basis-[50%] 
-                    ${coursePage ? "max-md:h-[340px] h-[370px] rounded-3xl" : "max-md:h-[350px]"}
+                    ${coursePage ? "md:w-[300px] max-md:h-[340px] h-[370px] rounded-3xl" : "max-md:h-[350px]"}
                         max-md:flex max-md:items-center max-md:justify-center`}>
                         {image && 
                         <Image 
