@@ -60,7 +60,7 @@ const Dashboard = () => {
       setError("User not found.");
       setLoading(false);
     }
-  }, [userId]);
+  }, [userId, sessionId, setDashboardData]);
 
   // console.log(dashboardData)
 

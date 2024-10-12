@@ -251,7 +251,7 @@ const Profile = () => {
         setCountryStates(result.data.data.states)
       })
     }
-  }, [selectedStudentCountry, selectedAdminCountry, selectedRole])
+  }, [selectedStudentCountry, selectedAdminCountry, selectedRole, selectedCountry])
 
 
   const submitRegister = async (e: FormEvent, paymentOption:string) => {
