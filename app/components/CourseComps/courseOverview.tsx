@@ -43,14 +43,14 @@ const CourseOverview = ({desc}: Props) => {
         {overview.map((overview, index) => (
           <div key={index} className='flex items-center gap-4'>
 
-            <div className="relative w-[4.5rem] h-[4.5rem] ">
+            <div className="relative w-[3.5rem] h-[3.5rem] md:w-[4.5rem] md:h-[4.5rem] ">
               <div className="polygon w-full h-full flex items-center justify-center bg-black-50">
                   <div className="text-2xl font-bold">{overview.image}</div>
               </div>
             </div>
 
             <div>
-              <p className='text-xl md:text-2xl 2xl:text-3xl'>{overview.content}</p>
+              <p className='text-lg md:text-2xl 2xl:text-3xl'>{overview.content}</p>
             </div>
           </div>
         ))}

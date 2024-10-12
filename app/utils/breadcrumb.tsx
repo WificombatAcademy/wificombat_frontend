@@ -21,7 +21,8 @@ export const Breadcrumbs = ({ homeLabel, homeIcon = "/assets/auth/logo.svg", lig
     const isCoursePage = pathname.startsWith("/course");
 
     return (
-        <div className="absolute w-full left-0 top-[-1rem] lg:top-[-3rem] flex items-center gap-3">
+        <div className={`absolute w-full left-0 
+        ${isCoursePage ? 'top-[1rem]' : 'top-[-1rem]'} lg:top-[-3rem] flex items-center gap-3`}>
             {/* Home link */}
             <div className="flex items-center gap-2">
                 <Link href="/">
@@ -34,7 +35,7 @@ export const Breadcrumbs = ({ homeLabel, homeIcon = "/assets/auth/logo.svg", lig
                     />
                 </Link>
                 <Link href="/" className={notActiveTextColor}>
-                    <h3 className="text-lg">{homeLabel}</h3>
+                    <h3 className={`${isCoursePage ? "text-sm lg:text-lg" : "text-lg"}`}>{homeLabel}</h3>
                 </Link>
                 <IoIosArrowForward className={notActiveTextColor} />
             </div>
@@ -43,10 +44,10 @@ export const Breadcrumbs = ({ homeLabel, homeIcon = "/assets/auth/logo.svg", lig
             {isCoursePage ? (
                 <>
                     <Link href="/Student/Curriculum" className={notActiveTextColor}>
-                        <h3 className="text-lg">Student Curriculum</h3>
+                        <h3 className="text-sm lg:text-lg">Student Curriculum</h3>
                     </Link>
                     <IoIosArrowForward className={notActiveTextColor} />
-                    <h3 className={`text-lg cursor-pointer ${activeTextColor}`}>{"Course"}</h3>
+                    <h3 className={`text-sm lg:text-lg cursor-pointer ${activeTextColor}`}>{"Course"}</h3>
                 </>
             ) : (
                 // Default behavior

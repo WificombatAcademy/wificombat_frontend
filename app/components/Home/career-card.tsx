@@ -8,11 +8,13 @@ type Props = {
     price?: string;
     linkTo?: string;
     subject?: string;
+    moduleSubject?: string;
     level?: string;
     bgColor?: string;
     textWhite?: boolean;
     pathways?: string[];
     image?: string;
+    moduleImage?: string;
     pathwayImage?: string;
     curriculum?: boolean;
     coursePageLinkTo?: {
@@ -28,7 +30,7 @@ type Props = {
 }
 
 const CareerCard = ({ bgColor ,desc, coursePageLinkTo, linkTo, level, subject, 
-    textWhite, pathways, image, pathwayImage, curriculum, price }: Props) => {
+    textWhite, pathways, image, pathwayImage, curriculum, price, moduleImage, moduleSubject }: Props) => {
 
 
     const finalLink = 
@@ -40,20 +42,23 @@ const CareerCard = ({ bgColor ,desc, coursePageLinkTo, linkTo, level, subject,
             <div className="w-full flex flex-col h-full bg-[#fafafa] pb-3 shadow-lg rounded-2xl cursor-pointer">
 
 
-            <Link href={`${linkTo && linkTo}`}
+            <div 
                 className={`relative w-full 
                 ${curriculum ? "h-[200px] min-[2000px]:h-[300px]" : "h-[250px] min-[2000px]:h-[330px]" } 
                     ${bgColor ?? "bg-blue-500"} px-4 flex items-end rounded-tl-2xl rounded-tr-2xl`}>
 
-                    {pathwayImage && 
+                    {pathwayImage && finalLink &&
+                    <Link href={typeof finalLink === "string" ? 
+                        finalLink : { pathname: finalLink.pathname, query: finalLink.query }}>
                         <Image src={pathwayImage} alt="pathway"
                         width={300} height={300}
                         className="w-full h-full object-contain rounded-tl-2xl rounded-tr-2xl" 
                         />
+                    </Link>
                     }
 
                     {image && finalLink &&
-                    <Link  href={typeof finalLink === "string" ? 
+                    <Link href={typeof finalLink === "string" ? 
                             finalLink : { pathname: finalLink.pathname, query: finalLink.query }}>
                         <div className="absolute inset-0 bg-gray-50 rounded-tl-2xl rounded-tr-2xl">
                             <Image src={image} alt="pathway"
@@ -61,7 +66,16 @@ const CareerCard = ({ bgColor ,desc, coursePageLinkTo, linkTo, level, subject,
                             className="w-full h-full object-cover rounded-tl-2xl rounded-tr-2xl" 
                             />
                         </div>
-                        </Link>
+                    </Link>
+                    }
+
+                    {moduleImage &&
+                        <div className="absolute inset-0 bg-gray-50 rounded-tl-2xl rounded-tr-2xl">
+                            <Image src={moduleImage} alt="pathway"
+                            width={300} height={300}
+                            className="w-full h-full object-cover rounded-tl-2xl rounded-tr-2xl" 
+                            />
+                        </div>
                     }
 
                     {/* <div className="relative z-[7]">
@@ -71,7 +85,7 @@ const CareerCard = ({ bgColor ,desc, coursePageLinkTo, linkTo, level, subject,
                         my-3 text-lg md:text-2xl text-black-500 font-semibold`}>
                             {pathway} Pathway</h3>}
                     </div> */}
-                 </Link>
+                </div>
 
                 <div className="py-3 px-4">
 
@@ -82,6 +96,12 @@ const CareerCard = ({ bgColor ,desc, coursePageLinkTo, linkTo, level, subject,
                             ${!curriculum ? "md:text-xl pt-3" : "font-semibold"} text-black-800`}>
                             {subject}</h3>
                         </Link>
+                    )}
+
+                     {moduleSubject && (
+                        <h3 className={`font-medium text-lg 
+                        ${!curriculum ? "md:text-xl pt-3" : "font-semibold"} text-black-800`}>
+                        {moduleSubject}</h3>
                     )}
 
                     <div className="flex items-center gap-5">

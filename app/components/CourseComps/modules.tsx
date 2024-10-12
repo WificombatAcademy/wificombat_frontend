@@ -9,12 +9,14 @@ import "swiper/css/pagination";
 import "swiper/css/free-mode";
 import HeadingDesign from '../general/HeaderDesign'
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
+import CareerCard from '../Home/career-card';
 
 type Props = {
     modules: any[];
 }
 
 const Modules = ({ modules }: Props) => {
+
   return (
     <section>
         <HeadingDesign heading={`Modules`} noUppercase={true} />
@@ -28,15 +30,11 @@ const Modules = ({ modules }: Props) => {
             {/* MODULES SLIDES */}
             <div className=''>
                 <Swiper
-                freeMode={true}
-                slidesPerGroup={1}
-                slidesPerView={"auto"}
-                centeredSlides={true}
                 navigation={{
                     nextEl: ".courses-swiper-button-next",
                     prevEl: ".courses-swiper-button-prev",
                 }}
-                pagination={{ clickable: true, el: ".courses-swiper-pagination" }}
+                pagination={{ clickable: true, el: ".modules-swiper-pagination" }}
                 breakpoints={{
                     320: {
                     slidesPerView: 1,
@@ -52,18 +50,46 @@ const Modules = ({ modules }: Props) => {
                     },
                 }}
                 loop={true}
-                modules={[FreeMode, Navigation, Pagination]}
-                className="mt-16 relative w-[93%] md:w-[90%] lg:w-[88%] mx-auto flex items-center justify-center overflow-visible"
+                modules={[Navigation, Pagination]}
+                className="mt-16 relative w-[93%] md:w-[90%] lg:w-[88%] 
+                mx-auto flex items-center justify-center overflow-visible"
                 >
-                {modules.map((module, index) => (
+                {modules && modules.map((module) => (
                     <SwiperSlide
                     key={module.id}
                     className="pt-5 md:pt-12 pb-8 relative flex items-center justify-center overflow-visible"
                     >
-                    
+                        <CareerCard
+                            curriculum={true}
+                            pathway={module.title}
+                            price={``}
+                            moduleSubject={module.title}
+                            moduleImage={module.cimage}
+                            desc='This pathway covers everything from concept art 
+                            and storytelling to coding and game mechanics.'
+                        />
                     </SwiperSlide>
                 ))}
                 </Swiper>
+
+                <div className="relative w-[93%] md:w-[90%] lg:w-[88%] mx-auto mt-8 md:mt-12 flex items-center justify-between">
+                    <div className="courses-swiper-button-prev bg-transparent w-9 h-9 md:w-14 md:h-14 
+                    rounded flex items-center justify-center transition duration-500 ease-in-out
+                     max-m cursor-pointer">
+                        <GrFormPrevious size={28} />
+                    </div>
+
+                    <div className="flex items-center gap-2 md:gap-3">
+                        <div className={`modules-swiper-pagination`}></div>
+                    </div>
+
+                    <div className="courses-swiper-button-next bg-transparent w-9 h-9 md:w-14 md:h-14 
+                    rounded flex items-center justify-center transition duration-500 ease-in-out
+                     max-m cursor-pointer">
+                        <GrFormNext size={28} />
+                    </div>
+                </div>
+
             </div>
             {/* MODULES SLIDE */}
 

@@ -37,13 +37,13 @@ export const PathwayHero = ({
                     <div className="w-full md:basis-[50%] relative">
 
                         <Breadcrumbs homeLabel="Home" />
-                        <h3 className="mt-9 font-bold text-lg md:text-2xl">
+                        <h3 className="mt-16 lg:mt-9 font-bold text-lg md:text-2xl">
                             {level}
                         </h3>
 
                         <h1 className={`${merriweather.className} 
                             text-3xl md:text-4xl lg:text-5xl 2xl:text-6xl 
-                            max-md:leading-[45px] lg:leading-[67.2px] 2xl:leading-[78px] font-bold max-lg:mt-8`}>
+                            max-md:leading-[45px] lg:leading-[67.2px] 2xl:leading-[78px] font-bold max-lg:mt-4`}>
                             {header}
                         </h1>
 
@@ -89,7 +89,7 @@ export const PathwayHero = ({
                     </div>
 
                     <div className={`w-full md:basis-[50%] 
-                    ${coursePage ? "max-md:h-[3470px] h-[370px] rounded-3xl" : "max-md:h-[350px]"}
+                    ${coursePage ? "max-md:h-[340px] h-[370px] rounded-3xl" : "max-md:h-[350px]"}
                         max-md:flex max-md:items-center max-md:justify-center`}>
                         {image && 
                         <Image 

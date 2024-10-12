@@ -11,7 +11,7 @@ import React, { useEffect, useState } from 'react'
 
 type Props = {}
 
-const page = ({ params }: any) => {
+const Page = ({ params }: any) => {
   const { courseId } = params;
   const searchParams = useSearchParams();
   const [course, setCourse] = useState<any>(null);
@@ -73,4 +73,4 @@ const page = ({ params }: any) => {
   }
 }
 
-export default page
+export default Page
