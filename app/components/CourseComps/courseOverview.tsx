@@ -69,7 +69,9 @@ const CourseOverview = ({desc}: Props) => {
 
           <div className='mt-7 flex flex-col gap-4'>
             {objectives.map((objective, index) => (
-              <div className='flex items-center gap-4'>
+              <div 
+              key={index}
+              className='flex items-center gap-4'>
                 <div>
                   <FaCheckCircle size={18} className='text-yellow-500' />
                 </div>
