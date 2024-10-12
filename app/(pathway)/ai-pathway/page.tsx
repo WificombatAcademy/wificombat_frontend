@@ -1,3 +1,5 @@
+"use client"
+
 import { PathwayHero } from "@/app/components/CodingPathwayComps/hero";
 import { Outcomes } from "@/app/components/CodingPathwayComps/outcomes";
 import { PathwayRoadmap } from "@/app/components/CodingPathwayComps/pathway-roadmap";

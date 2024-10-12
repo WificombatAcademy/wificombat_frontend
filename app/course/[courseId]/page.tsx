@@ -7,7 +7,7 @@ import GeneralNavbar from '@/app/components/general/GeneralNavbar'
 import axiosInstance from '@/app/utils/auth-interceptor'
 import { API_VERSION_ONE } from '@/app/utils/types-and-links'
 import { useSearchParams } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Suspense } from 'react'
 
 type Props = {}
 
