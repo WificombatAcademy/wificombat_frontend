@@ -46,7 +46,7 @@ export const Hero = () => {
             spaceBetween={50}
             slidesPerView={1}
             navigation
-            autoplay={{delay: 7000}}
+            autoplay={{delay: 4000}}
             pagination={{ clickable: true }}
             className="relative text-white w-full h-full"
             >

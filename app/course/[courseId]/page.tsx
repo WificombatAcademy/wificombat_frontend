@@ -1,6 +1,8 @@
 "use client"
 
 import { PathwayHero } from '@/app/components/CodingPathwayComps/hero'
+import CourseOverview from '@/app/components/CourseComps/courseOverview'
+import Modules from '@/app/components/CourseComps/modules'
 import GeneralNavbar from '@/app/components/general/GeneralNavbar'
 import axiosInstance from '@/app/utils/auth-interceptor'
 import { API_VERSION_ONE } from '@/app/utils/types-and-links'
@@ -44,12 +46,12 @@ const page = ({ params }: any) => {
       setLoading(false); // Done loading both requests
     }
   };
-  
 
   if(!loading) {
     return (
       <div className="mx-auto relative container w-full max-w-[4000px]">
           <GeneralNavbar />
+
           <PathwayHero 
           coursePage={true}
           bgColor='bg-blue-500'
@@ -59,6 +61,12 @@ const page = ({ params }: any) => {
           level={`${courseLevel}`}
           image={`${courseImage ? `https://wificombatacademy.com/${courseImage}` : `` }`}
           />
+
+          <CourseOverview 
+          desc={courseDescription ?? ''}
+          />
+
+          <Modules />
       </div>
   
     )

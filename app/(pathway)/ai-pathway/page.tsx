@@ -13,6 +13,7 @@ export default function Page() {
   return (
     <div className="mx-auto relative container w-full max-w-[2000px]">
       <GeneralNavbar />
+
       <PathwayHero
       image="/hero-4.png"
       widthStyle="w-[450px] object-contain"
@@ -20,6 +21,7 @@ export default function Page() {
       header="Navigate the AI Career Pathway"
        bgColor="bg-black-500" 
        buttonWhite/>
+
       <WhyCodingPathway
       pathwayImage="/assets/pathway/ai-pathway.png"
         headerOne="Why Artifical Intelligence Pathway?"
@@ -32,14 +34,20 @@ export default function Page() {
         continues to shape the future, this pathway equips learners with the knowledge and tools to ead and 
         innovate in a rapidly evolving digital world."
       />
+      
       <PathwayRoadmap title="Artifical Intelligence" steps={aiSteps}/>
+
       <Outcomes outcomes={outcomes} />
+
       <AIOnboarding />
+
       <TodayComp 
       desc="Lorem ipsum dolor sit amet consectetur. Senectus in consequat egestas faucibus morbi pulvinar nec ac. Morbi phasellus sed augue neque ac nibh varius vitae sagittis." 
       header="Start Learning Artifical Intelligence Today!" 
       linkto="/schools/pricing-plan" />
+
       <Footer />
+      
     </div>
   );
 }

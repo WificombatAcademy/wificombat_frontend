@@ -33,7 +33,7 @@ const StepItem = ({ number, title, description, image, courseslist, isLast }:
                     </div>
                 )}
                 <div className="relative w-[4rem] h-[5rem] md:w-[6rem] md:h-[7rem] ">
-                    <div className="roadmap-polygon w-full h-full flex items-center justify-center bg-purple-50 border ">
+                    <div className="roadmap-polygon w-full h-full flex items-center justify-center bg-purple-50 border">
                         <div className="text-2xl font-bold">{number}</div>
                     </div>
                 </div>
