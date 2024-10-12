@@ -66,7 +66,7 @@ const page = ({ params }: any) => {
           desc={courseDescription ?? ''}
           />
 
-          <Modules />
+          <Modules modules={modules} />
       </div>
   
     )

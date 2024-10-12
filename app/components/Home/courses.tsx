@@ -182,7 +182,9 @@ export const HomeCourses = () => {
             <GrFormNext size={28} />
           </div>
         </div>
+        
       </div>
+
     </section>
   );
 };
