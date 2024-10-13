@@ -10,7 +10,7 @@ import "swiper/css/free-mode";
 import HeadingDesign from '../general/HeaderDesign'
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import CareerCard from '../Home/career-card';
-import { formatPrice } from '../StudentsComps/Curriculum/pathway-curriculum';
+import { formatPrice } from '@/app/utils/types-and-links';
 
 type Props = {
     modules: any[];

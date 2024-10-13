@@ -1,10 +1,9 @@
 "use client"
 import { useEffect, useState } from "react";
-import { API_VERSION_ONE, CurriculumLevel } from "@/app/utils/types-and-links";
+import { API_VERSION_ONE, CurriculumLevel, formatPrice } from "@/app/utils/types-and-links";
 import HeadingDesign from "../../general/HeaderDesign";
 import CareerCard from "../../Home/career-card";
 import axiosInstance from "@/app/utils/auth-interceptor";
-import Link from "next/link";
 import Loader from "@/app/utils/loader";
 import { RiLoader4Fill } from "react-icons/ri";
 import { Toaster } from "react-hot-toast";
@@ -203,10 +202,4 @@ export const CareerPathwayCurriculum = ({schoolCurriculum}: CareerPathwayCurricu
       </div>
     </section>
   );
-};
-
-
-export const formatPrice = (price: string) => {
-  if (!price || price === "0.00") return "Free"; // Handle free courses
-  return `₦${parseFloat(price).toLocaleString()}`; // Format the price as Nigerian Naira
 };

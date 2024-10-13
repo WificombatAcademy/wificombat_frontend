@@ -105,14 +105,14 @@ export const PathwayHero = ({
                                                 <button 
                                                     className="bg-transparent border-black-500
                                                     border text-black-500 focus-visible:outline-black
-                                                    rounded-lg px-8 md:px-12 py-1 font-medium shadow-sm 
+                                                    rounded-lg px-8 md:px-12 py-3 font-medium shadow-sm 
                                                     hover:bg-opacity-80 focus-visible:outline focus-visible:outline-2 
                                                     focus-visible:outline-offset-2 md:text-lg"
                                                 >
                                                     View in Cart
                                                 </button>
                                             </Link>
-                                            <button 
+                                            {/* <button 
                                                 onClick={() => handleRemoveFromCart(course.course_id)}
                                                 className="bg-transparent border-red-50
                                                 border text-red-50 focus-visible:outline-red-50
@@ -121,7 +121,7 @@ export const PathwayHero = ({
                                                 focus-visible:outline-offset-2 md:text-lg"
                                             >
                                                 Remove
-                                            </button>
+                                            </button> */}
                                         </div>
                                     ) : (
                                         <button 

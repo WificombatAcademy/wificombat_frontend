@@ -493,6 +493,11 @@ function generateUUID(): string {
   });
 }
 
+export const formatPrice = (price: string) => {
+  if (!price || price === "0.00") return "Free"; // Handle free courses
+  return `₦${parseFloat(price).toLocaleString()}`; // Format the price as Nigerian Naira
+};
+
 // // Store device ID in localStorage
 // function getDeviceID(): string {
 //   let deviceId = localStorage.getItem('device_id');

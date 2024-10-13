@@ -148,8 +148,8 @@ const CareerCard = ({ bgColor ,desc, coursePageLinkTo, linkTo, level, subject, i
                                <div className="w-full basis-[50%] flex flex-col gap-2">
                                     <Link 
                                         href={`/students/cart`}
-                                        className="w-full border border-black-500 text-black-500 py-1
-                                        font-semibold text-center text-sm transition ease-in-out duration-300 
+                                        className="w-full border border-black-500 text-black-500 py-2
+                                        font-semibold text-center transition ease-in-out duration-300 
                                         hover:bg-opacity-80 rounded-lg">
                                         View in Cart
                                     </Link>
