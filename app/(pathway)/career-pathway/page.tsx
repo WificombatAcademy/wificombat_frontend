@@ -1,3 +1,5 @@
+"use client"
+
 import { Catalog } from "@/app/components/CareerPathwayComps/catalog";
 import { CareerPathwayHero } from "@/app/components/CareerPathwayComps/hero";
 import { CareerPathwayCourses } from "@/app/components/CareerPathwayComps/pathway-courses";
