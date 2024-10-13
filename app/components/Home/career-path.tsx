@@ -10,7 +10,7 @@ export const CareerPath = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9 lg:gap-12 2xl:gap-16">
 
             <CareerCard
-            linkTo="/coding-pathway"
+      
             pathway="Coding"
             desc="This pathway emphasizes problem-solving, algorithm development, and mastering various programming languages."
             bgColor="bg-blue-500"
@@ -38,7 +38,6 @@ export const CareerPath = () => {
           />
 
           <CareerCard
-            linkTo="/ai-pathway"
             pathway="AI"
             desc="This pathway focuses on building algorithms that enable computers to perform tasks that typically require human intelligence."
             bgColor="bg-black-500"
@@ -49,7 +48,7 @@ export const CareerPath = () => {
           />
 
           <CareerCard
-            linkTo="/robotics-pathway"
+          
             pathway="Robotics/IOT"
             desc="This pathway combines mechanical engineering, electronics, and computer science to create innovative solutions."
             bgColor="bg-blue-500"
@@ -58,7 +57,6 @@ export const CareerPath = () => {
           />
 
           <CareerCard
-            linkTo="/techpreneurship-pathway"
             pathway="Techpreneurship"
             desc="This pathway teaches you how to develop, market, and manage tech-based startups and ventures."
             bgColor="bg-yellow-500"

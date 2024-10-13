@@ -47,7 +47,6 @@ export const PathwayHero = ({
 
     const handleRemoveFromCart = (courseId: any) => {
         removeItemFromCart(courseId);
-        toast.success('Course Removed from Cart');
     };
 
     const isCourseInCart = course && isInCart(course.course_id);
@@ -89,7 +88,7 @@ export const PathwayHero = ({
                                     Register
                                 </Link>
                             ) : (
-                                <div className="flex items-center gap-6">
+                                <div className="flex items-center gap-6 h-[4rem]">
                                     <button 
                                         className={`${buttonWhite ? "bg-white text-black-500" :
                                             "bg-[#131314] text-white focus-visible:outline-black"} 
@@ -102,7 +101,7 @@ export const PathwayHero = ({
 
                                     {isCourseInCart ? (
                                         <div className="flex flex-col gap-2">
-                                            <Link href="/cart">
+                                            <Link href="/students/cart">
                                                 <button 
                                                     className="bg-transparent border-black-500
                                                     border text-black-500 focus-visible:outline-black

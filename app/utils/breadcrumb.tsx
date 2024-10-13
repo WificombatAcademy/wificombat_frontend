@@ -10,7 +10,7 @@ export const Breadcrumbs = ({ homeLabel, homeIcon = "/assets/auth/logo.svg", lig
     const searchParams = useSearchParams();
     const pathnames = pathname.split("/").filter((x) => x);
 
-    const notActiveTextColor = lightMode ? "text-black-50" : "text-gray-300";
+    const notActiveTextColor = lightMode ? "text-black-600" : "text-black-200";
     const activeTextColor = lightMode ? "text-black-500" : "text-white";
 
     // Extract the course-related query parameters
