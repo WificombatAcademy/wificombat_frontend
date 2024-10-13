@@ -19,7 +19,7 @@ export const TodayComp = ({ desc, header, linkto}: Props) => {
        <div className="mt-10 w-full flex items-center justify-center">
            <Link
              href={linkto}
-             className="px-16 md:px-20 py-5 md:text-lg font-medium lg:font-semibold text-white shadow-sm 
+             className="px-8 md:px-12 py-5 md:text-lg font-medium lg:font-semibold text-white shadow-sm 
              bg-black-500 rounded-lg transition duration-300 hover:bg-opacity-90">
                Start Now
            </Link>
