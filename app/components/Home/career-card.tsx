@@ -80,8 +80,9 @@ const CareerCard = ({ bgColor ,desc, coursePageLinkTo, linkTo, level, subject, i
                     {pathwayImage &&
                     <Link href={linkTo ?? ''}>
                         <Image src={pathwayImage} alt="pathway"
-                        width={300} height={300}
-                        className="w-full h-full object-cover rounded-tl-2xl rounded-tr-2xl" 
+                        width={800} height={500}
+                        className="w-full h-[250px] min-[2000px]:h-[330px] 
+                        object-contain rounded-tl-2xl rounded-tr-2xl" 
                         />
                     </Link>
                     }
