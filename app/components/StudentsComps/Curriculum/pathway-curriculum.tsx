@@ -7,6 +7,7 @@ import axiosInstance from "@/app/utils/auth-interceptor";
 import Link from "next/link";
 import Loader from "@/app/utils/loader";
 import { RiLoader4Fill } from "react-icons/ri";
+import { Toaster } from "react-hot-toast";
 
 type CareerPathwayCurriculumProps = {
   schoolCurriculum?: boolean;
@@ -96,6 +97,7 @@ export const CareerPathwayCurriculum = ({schoolCurriculum}: CareerPathwayCurricu
   return (
     <section>
       <HeadingDesign heading={headingText}/>
+      <Toaster />
 
       <div className="mt-8 md:mt-10 lg:mt-20 mb-20">
         <div className="w-[93%] md:w-[90%] lg:w-[88%] mx-auto">
@@ -173,6 +175,7 @@ export const CareerPathwayCurriculum = ({schoolCurriculum}: CareerPathwayCurricu
                         level={course.level}
                         desc={truncateDescription(course.note)} 
                         linkTo={`/course/${course.course_id}`}
+                        item={{ ...course, id: course.course_id,}}
                       />
                     // </Link>
                   ))}

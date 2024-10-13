@@ -9,9 +9,18 @@ type LoaderProps = {
   noDesign?: boolean;
   noCourses?: boolean;
   curriculum?: boolean;
+  notCenter?: boolean;
 };
 
-const Loader = ({ isError = false, isSessionExpired = false, noDesign = false, noCourses = false, curriculum }: LoaderProps) => {
+const Loader = ({ 
+  isError = false, 
+  isSessionExpired = false, 
+  noDesign = false, 
+  noCourses = false, 
+  curriculum,
+  notCenter 
+}: LoaderProps) => {
+
   let displayMessage = curriculum ? "Loading Curriculum..." : "Loading...";
   let designSrc = "";
   let altText = "";
@@ -24,7 +33,10 @@ const Loader = ({ isError = false, isSessionExpired = false, noDesign = false, n
     altText = "Error occurred";
     buttonText = noCourses ? "Go Back To Dashboard" : "Go Back Home";
     buttonLink = noCourses ? "/dashboard" : "/";
-  } else if (isSessionExpired) {
+
+  } 
+  
+  else if (isSessionExpired) {
     displayMessage = "Session expired. Please log in again.";
     designSrc = "/assets/dashboard/expired.svg";
     altText = "Session expired";
@@ -33,7 +45,7 @@ const Loader = ({ isError = false, isSessionExpired = false, noDesign = false, n
   }
 
   return (
-    <div className={`relative ${noDesign && "lg:left-[7%] overflow-hidden"} 
+    <div className={`relative ${noDesign && !notCenter && "lg:left-[7%] overflow-hidden"} 
     flex flex-col justify-center items-center w-full h-screen bg-white overflow-hidden`}>
      {!noDesign &&  <AssessmentDesign />}
       

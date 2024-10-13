@@ -8,9 +8,11 @@ import Footer from '@/app/components/general/Footer'
 import GeneralNavbar from '@/app/components/general/GeneralNavbar'
 import { FAQ } from '@/app/components/Home/faq'
 import { useCart } from '@/app/context/CartContext'
+import Loader from '@/app/utils/loader'
 import { API } from '@/app/utils/types-and-links'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { Toaster } from 'react-hot-toast'
 
 type Props = {}
 
@@ -26,12 +28,13 @@ const Page = ({ params }: any) => {
   // const courseLevel = searchParams.get("level");
 
   useEffect(() => {
+    console.log("Params", params); // Check if courseId is correct
     if (courseId) {
-      fetchCourseData(); // Fetch both course details and modules
+      fetchCourseData();
     }
   }, [courseId]);
 
-  // Fetch the course details and modules together
+  // Fetch the course details 
   const fetchCourseData = async () => {
     setLoading(true);
     try {
@@ -44,13 +47,22 @@ const Page = ({ params }: any) => {
     }
   };
 
-  if(course) {
+
+  if (loading) {
+    return <Loader noDesign notCenter/>; // Show loader while data is being fetched
+  }
+
+  if (!course) {
+    return <div>No course found.</div>; // Handle the case when no course is found
+  }
+
     const totalModules = course.modules.length;
     const pricePerModule = course.price / totalModules;
 
     return (
       <div className="mx-auto relative container w-full max-w-[4000px]">
           <GeneralNavbar />
+          <Toaster />
 
           <PathwayHero 
           coursePage={true}
@@ -60,6 +72,7 @@ const Page = ({ params }: any) => {
           header={`${course.subject}`}
           level={`${course.level}`}
           image={`${course.image ? `https://wificombatacademy.com/${course.image}` : `` }`}
+          course={course}
           />
 
           <CourseOverview 
@@ -83,6 +96,5 @@ const Page = ({ params }: any) => {
           <Footer />
       </div>
     )
-  }
-}
+   }
 export default Page

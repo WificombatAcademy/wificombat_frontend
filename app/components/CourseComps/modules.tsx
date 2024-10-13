@@ -71,6 +71,7 @@ const Modules = ({ modules, pricePerModule, courseLevel }: Props) => {
                             desc='This pathway covers everything from concept art 
                             and storytelling to coding and game mechanics.'
                             price={formatPrice(pricePerModule.toFixed(2))}
+                            item={module} 
                         />
                     </SwiperSlide>
                 ))}
