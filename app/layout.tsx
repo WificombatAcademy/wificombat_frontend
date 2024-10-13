@@ -7,6 +7,7 @@ import { AuthProvider } from "./context/AuthContext";
 import SuccessModal from "./utils/success-modal";
 import RegModal from "./utils/reg-modal";
 import { CartProvider } from "./context/CartContext";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Wificombat-Elearning",
@@ -24,8 +25,10 @@ export default function RootLayout({
         <AuthProvider>
           <CartProvider>
             <MainProvider>
-              <body className={raleway.className}>
+              <body className={raleway.className}>    
+                <Suspense>
                 {children}
+                </Suspense>
                 <SuccessModal />
                 <RegModal />
               </body>
