@@ -3,7 +3,9 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 
 type CartItem = {
   id: string;
-  name: string;
+  subject?: string;
+  title?: string;
+  name?: string;
   type: 'course' | 'module';
   price: string;
   quantity: number;

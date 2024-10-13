@@ -27,11 +27,11 @@ const Page = (props: Props) => {
     <div className="mx-auto relative container w-full max-w-[4000px]">
       <GeneralNavbar />
 
-      <div className='relative mt-8 lg:mt-28 w-[93%] md:w-[90%] lg:w-[88%] mx-auto text-black-500'>
+      <div className='relative mt-8 lg:mt-20 w-[93%] md:w-[90%] lg:w-[88%] mx-auto text-black-500'>
         <Breadcrumbs homeLabel='Home' lightMode={true} />
       
-        <div className='pt-7 w-[90%] mx-auto'>
-          <h1 className='mt-7 font-semibold text-3xl lg:text-4xl text-center'>Cart</h1>
+        <div className='pt-7 md:pt-4 w-[90%] mx-auto'>
+          <h1 className='mt-7 lg:mt-0 font-semibold text-3xl lg:text-4xl text-center'>Cart</h1>
           <p className='text-center mt-3 font-medium'>
             You can buy all the courses or module on the cart or buy one at a time. </p>
         </div>
@@ -53,22 +53,23 @@ const Page = (props: Props) => {
           transition-colors duration-300 hover:opacity-90'>Go back to courses</Link>
         </div>
       ) : (
-        <div className="grid grid-cols-1 gap-8">
+        <div className="mt-5 grid grid-cols-1 gap-8">
           {cart.map((item) => (
             <div key={item.id} className="flex flex-col lg:flex-row items-start lg:items-center
-             bg-white shadow-lg rounded-lg p-6 gap-6">
+             bg-transparent border border-black-100 rounded-3xl p-6 gap-6">
               {/* Item Image */}
               <Image 
-                src={(item.details.image || item.details.cimage )?? '/placeholder.jpg'} 
-                alt={item.name} 
+                src={`https:wificombatacademy.com/${(item.details.image || item.details.cimage )?? '/placeholder.jpg'}`} 
+                alt={item.name ?? ''} 
                 width={150} 
                 height={150} 
-                className="rounded-lg object-cover w-[150px] h-[150px]" 
+                className="rounded-lg object-cover w-[80px] h-[80px] lg:w-[150px] lg:h-[150px]" 
               />
 
               {/* Item Details */}
               <div className="flex-1">
-                <h2 className="text-xl font-semibold">{item.name}</h2>
+                <h2 className="text-xl font-semibold">
+                  {(item.details.subject || item.details.title || item.details.name) ?? ''}</h2>
                 <p className="text-gray-600">Level: {item.level}</p>
                 {item.type === 'course' ? (
                   <p className="text-gray-600">
@@ -84,12 +85,13 @@ const Page = (props: Props) => {
               <div className="flex flex-col gap-2 lg:flex-row lg:items-center">
                 <button 
                   onClick={() => handleRemove(item.id)}
-                  className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
+                  className="border border-black-500 text-black-500 px-4 py-2 rounded-lg"
                 >
                   Remove from Cart
                 </button>
                 
-                <Link href="/checkout" className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 text-center">
+                <Link href="/checkout" className="bg-black-500 text-white px-4 py-2 
+                rounded-lg hover:bg-black-600 text-center">
                   Buy Now
                 </Link>
               </div>
