@@ -1,5 +1,6 @@
 import { merriweather } from "@/app/fonts";
 import { Breadcrumbs } from "@/app/utils/breadcrumb";
+import BreadcrumbsWrapper from "@/app/utils/breadcrumbsWrapper";
 import Cart from "@/app/utils/cart";
 import Image from "next/image";
 import Link from "next/link"
@@ -14,6 +15,7 @@ type Props = {
 
 export const StudentsHero = ({bgColor, headerOne, headerTwo, text}: Props) => {
     return (
+        <BreadcrumbsWrapper>
         <section 
         id="home"
         className="text-white">
@@ -60,5 +62,6 @@ export const StudentsHero = ({bgColor, headerOne, headerTwo, text}: Props) => {
                 </div>
             </div>
         </section>
+        </BreadcrumbsWrapper>
     )
 }

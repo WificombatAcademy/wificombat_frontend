@@ -145,7 +145,7 @@ const CareerCard = ({ bgColor ,desc, coursePageLinkTo, linkTo, level, subject, i
                     {curriculum && (
                         <div className="mt-8 flex items-center justify-between gap-4 h-[4rem]">
                             {isInCart(item?.id) ? (
-                               <div className="w-full basis-[50%] flex flex-col gap-2">
+                               <div className="relative w-full basis-[50%] flex flex-col gap-2">
                                     <Link 
                                         href={`/students/cart`}
                                         className="w-full border border-black-500 text-black-500 py-2
@@ -153,13 +153,14 @@ const CareerCard = ({ bgColor ,desc, coursePageLinkTo, linkTo, level, subject, i
                                         hover:bg-opacity-80 rounded-lg">
                                         View in Cart
                                     </Link>
-                                    {/* <button 
+                                    <button 
                                         onClick={handleRemoveFromCart} 
-                                        className="w-full border border-red-500 text-red-500 py-1
-                                        font-semibold text-center text-sm transition ease-in-out duration-300
-                                        hover:bg-opacity-80 rounded-lg">
-                                        Remove
-                                    </button> */}
+                                        className="absolute right-[-0.4rem] top-[-0.4rem] flex justify-center items-center">
+                                        <div className="flex items-center justify-center w-4 h-4 bg-red-500 
+                                        text-white rounded-full transition duration-300 hover:bg-red-600">
+                                            <span className="text-[10px] font-bold">X</span>
+                                        </div>
+                                    </button>
                                </div>
                             ) : (
                                 <button 

@@ -1,6 +1,7 @@
 import { useCart } from "@/app/context/CartContext";
 import { merriweather } from "@/app/fonts"
 import { Breadcrumbs } from "@/app/utils/breadcrumb";
+import BreadcrumbsWrapper from "@/app/utils/breadcrumbsWrapper";
 import Cart from "@/app/utils/cart";
 import Image from "next/image"
 import Link from "next/link"
@@ -52,6 +53,7 @@ export const PathwayHero = ({
     const isCourseInCart = course && isInCart(course.course_id);
 
     return (
+        <BreadcrumbsWrapper>
         <section id="home" className="text-white">
             <div className={`relative isolate overflow-hidden pb-[2rem] lg:pb-[7rem] 
                 md:py-[7rem] lg:py-[10rem] ${bgColor}`}>
@@ -158,5 +160,6 @@ export const PathwayHero = ({
                 </div>
             </div>
         </section>
+        </BreadcrumbsWrapper>
     );
 }

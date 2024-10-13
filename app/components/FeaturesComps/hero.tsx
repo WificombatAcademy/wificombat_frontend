@@ -1,11 +1,13 @@
 import { merriweather } from "@/app/fonts";
 import { Breadcrumbs } from "@/app/utils/breadcrumb";
+import BreadcrumbsWrapper from "@/app/utils/breadcrumbsWrapper";
 import Cart from "@/app/utils/cart";
 import Image from "next/image";
 import Link from "next/link"
 
 export const FeaturesHero = () => {
     return (
+        <BreadcrumbsWrapper>
         <section 
         id="home"
         className="text-white">
@@ -47,5 +49,6 @@ export const FeaturesHero = () => {
                 </div>
             </div>
         </section>
+        </BreadcrumbsWrapper>
     )
 }
