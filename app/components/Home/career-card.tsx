@@ -63,12 +63,10 @@ const CareerCard = ({ bgColor ,desc, coursePageLinkTo, linkTo, level, subject, i
                 removeItemFromCart(item.id);
             }
         };
-          
 
-
-    const finalLink = 
-    linkTo || 
-    (coursePageLinkTo && { pathname: coursePageLinkTo.pathname, query: coursePageLinkTo.query });
+    // const finalLink = 
+    // linkTo || 
+    // (coursePageLinkTo && { pathname: coursePageLinkTo.pathname, query: coursePageLinkTo.query });
 
     return (
         <div className="h-full">
@@ -79,9 +77,8 @@ const CareerCard = ({ bgColor ,desc, coursePageLinkTo, linkTo, level, subject, i
                 ${curriculum ? "h-[200px] min-[2000px]:h-[300px]" : "h-[250px] min-[2000px]:h-[330px]" } 
                     ${bgColor ?? "bg-blue-500"} px-4 flex items-end rounded-tl-2xl rounded-tr-2xl`}>
 
-                    {pathwayImage && finalLink &&
-                    <Link href={typeof finalLink === "string" ? 
-                        finalLink : { pathname: finalLink.pathname, query: finalLink.query }}>
+                    {pathwayImage &&
+                    <Link href={linkTo ?? ''}>
                         <Image src={pathwayImage} alt="pathway"
                         width={300} height={300}
                         className="w-full h-full object-contain rounded-tl-2xl rounded-tr-2xl" 
@@ -89,9 +86,8 @@ const CareerCard = ({ bgColor ,desc, coursePageLinkTo, linkTo, level, subject, i
                     </Link>
                     }
 
-                    {image && finalLink &&
-                    <Link href={typeof finalLink === "string" ? 
-                            finalLink : { pathname: finalLink.pathname, query: finalLink.query }}>
+                    {image && 
+                     <Link href={linkTo ?? ''}>
                         <div className="absolute inset-0 bg-gray-50 rounded-tl-2xl rounded-tr-2xl">
                             <Image src={image} alt="pathway"
                             width={300} height={300}
@@ -121,9 +117,8 @@ const CareerCard = ({ bgColor ,desc, coursePageLinkTo, linkTo, level, subject, i
 
                 <div className="py-3 px-4">
 
-                    {subject && finalLink && (
-                        <Link href={typeof finalLink === "string" ? 
-                        finalLink : { pathname: finalLink.pathname, query: finalLink.query }}>
+                    {subject && (
+                    <Link href={linkTo ?? ''}>
                             <h3 className={`font-medium text-lg 
                             ${!curriculum ? "md:text-xl pt-3" : "font-semibold"} text-black-800`}>
                             {subject}</h3>
@@ -158,13 +153,13 @@ const CareerCard = ({ bgColor ,desc, coursePageLinkTo, linkTo, level, subject, i
                                         hover:bg-opacity-80 rounded-lg">
                                         View in Cart
                                     </Link>
-                                    <button 
+                                    {/* <button 
                                         onClick={handleRemoveFromCart} 
                                         className="w-full border border-red-500 text-red-500 py-1
                                         font-semibold text-center text-sm transition ease-in-out duration-300
                                         hover:bg-opacity-80 rounded-lg">
                                         Remove
-                                    </button>
+                                    </button> */}
                                </div>
                             ) : (
                                 <button 
