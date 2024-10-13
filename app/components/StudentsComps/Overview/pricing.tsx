@@ -1,6 +1,7 @@
 import { Breadcrumbs } from "@/app/utils/breadcrumb";
 import HeadingDesign from "../../general/HeaderDesign";
 import { PricingCard } from "./pricing-card";
+import BreadcrumbsWrapper from "@/app/utils/breadcrumbsWrapper";
 
 type Props = {
   pricingPage?: boolean;
@@ -14,6 +15,7 @@ export const pricingPlans = [
 
 export const PricingPlan = ({ pricingPage }: Props) => {
   return (
+    <BreadcrumbsWrapper>
     <section>
       {pricingPage ? <></> : <HeadingDesign heading="pricing plan" />}
 
@@ -50,5 +52,6 @@ export const PricingPlan = ({ pricingPage }: Props) => {
         </div>
       </div>
     </section>
+    </BreadcrumbsWrapper>
   );
 };

@@ -3,6 +3,7 @@
 import GeneralNavbar from '@/app/components/general/GeneralNavbar';
 import { useCart } from '@/app/context/CartContext';
 import { Breadcrumbs } from '@/app/utils/breadcrumb'
+import BreadcrumbsWrapper from '@/app/utils/breadcrumbsWrapper';
 import React from 'react'
 import toast from 'react-hot-toast';
 
@@ -18,6 +19,7 @@ const Page = (props: Props) => {
   };
 
   return (
+    <BreadcrumbsWrapper>
     <div className="mx-auto relative container w-full max-w-[4000px]">
       <GeneralNavbar />
       <div className='relative mt-28 w-[93%] md:w-[90%] lg:w-[88%] mx-auto text-black-500'>
@@ -30,6 +32,7 @@ const Page = (props: Props) => {
      </div>
       </div>
     </div>
+    </BreadcrumbsWrapper>
   )
 }
 

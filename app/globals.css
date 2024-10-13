@@ -7,7 +7,7 @@
   --swiper-navigation-size: 35px !important;
 }
 
-::-webkit-scrollbar{
+/* ::-webkit-scrollbar{
   width: 8px;
   height: 4px;
   background: transparent;
@@ -22,7 +22,7 @@
 }
 ::-webkit-scrollbar-thumb:hover{
   background: #131314;
-}
+} */
 .swiper-button-prev {
   left:4rem !important; 
 }
