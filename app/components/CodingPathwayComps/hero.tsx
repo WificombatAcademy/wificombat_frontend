@@ -102,28 +102,26 @@ export const PathwayHero = ({
                                     </button>
 
                                     {isCourseInCart ? (
-                                        <div className="flex flex-col gap-2">
+                                        <div className="relative flex flex-col gap-2">
                                             <Link href="/students/cart">
                                                 <button 
-                                                    className="bg-transparent border-black-500
-                                                    border text-black-500 focus-visible:outline-black
+                                                    className="bg-transparent border-black-50
+                                                    border text-black-50 focus-visible:outline-black
                                                     rounded-lg px-8 md:px-12 py-3 font-medium shadow-sm 
                                                     hover:bg-opacity-80 focus-visible:outline focus-visible:outline-2 
-                                                    focus-visible:outline-offset-2 md:text-lg"
+                                                    focus-visible:outline-offset-2 md:text-lg transition-colors duration-300"
                                                 >
                                                     View in Cart
                                                 </button>
                                             </Link>
-                                            {/* <button 
+                                            <button 
                                                 onClick={() => handleRemoveFromCart(course.course_id)}
-                                                className="bg-transparent border-red-50
-                                                border text-red-50 focus-visible:outline-red-50
-                                                rounded-lg px-8 md:px-12 py-1 font-medium shadow-sm 
-                                                hover:bg-opacity-80 focus-visible:outline focus-visible:outline-2 
-                                                focus-visible:outline-offset-2 md:text-lg"
-                                            >
-                                                Remove
-                                            </button> */}
+                                                className="absolute right-[-0.4rem] top-[-0.4rem] flex justify-center items-center">
+                                                <div className="flex items-center justify-center w-4 h-4 bg-red-500 
+                                                text-white rounded-full transition duration-300 hover:bg-red-600">
+                                                    <span className="text-[10px] font-bold">X</span>
+                                                </div>
+                                            </button>
                                         </div>
                                     ) : (
                                         <button 
@@ -132,7 +130,7 @@ export const PathwayHero = ({
                                             border text-black-500 focus-visible:outline-black
                                             rounded-lg px-8 md:px-12 py-3 font-medium shadow-sm 
                                             hover:bg-opacity-80 focus-visible:outline focus-visible:outline-2 
-                                            focus-visible:outline-offset-2 md:text-lg"
+                                            focus-visible:outline-offset-2 md:text-lg transition-colors duration-300"
                                         >
                                             Add to Cart
                                         </button>
