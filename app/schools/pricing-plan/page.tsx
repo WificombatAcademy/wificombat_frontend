@@ -1,3 +1,5 @@
+"use client"
+
 import Footer from "@/app/components/general/Footer";
 import GeneralNavbar from "@/app/components/general/GeneralNavbar";
 import { FAQ } from "@/app/components/Home/faq";
