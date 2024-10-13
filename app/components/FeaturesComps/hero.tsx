@@ -29,7 +29,7 @@ export const FeaturesHero = () => {
                         <div className="mt-10 lg:mt-16"> 
                             <Link 
                             href={`/assessment`}
-                            className="px-16 py-5 font-bold bg-black-500 shadow-sm text-white rounded-lg transition 
+                            className="px-12 py-5 font-bold bg-black-500 shadow-sm text-white rounded-lg transition 
                             duration-300 hover:bg-opacity-90">
                                 Take Assesment
                             </Link>

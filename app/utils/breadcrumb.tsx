@@ -1,9 +1,11 @@
 "use client";
+
 import Image from "next/image";
 import { IoIosArrowForward } from "react-icons/io";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { BreadcrumbsProps } from "./types-and-links";
+import { Suspense } from "react";
 
 export const Breadcrumbs = ({ homeLabel, homeIcon = "/assets/auth/logo.svg", lightMode }: BreadcrumbsProps) => {
     const pathname = usePathname();
@@ -21,6 +23,7 @@ export const Breadcrumbs = ({ homeLabel, homeIcon = "/assets/auth/logo.svg", lig
     const isCoursePage = pathname.startsWith("/course");
 
     return (
+        <Suspense>
         <div className={`absolute w-full left-0 
         ${isCoursePage ? 'top-[1rem]' : 'top-[-1rem]'} lg:top-[-3rem] flex items-center gap-3`}>
             {/* Home link */}
@@ -71,5 +74,6 @@ export const Breadcrumbs = ({ homeLabel, homeIcon = "/assets/auth/logo.svg", lig
                 })
             )}
         </div>
+        </Suspense>
     );
 };
