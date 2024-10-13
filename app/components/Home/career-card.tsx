@@ -132,7 +132,7 @@ const CareerCard = ({ bgColor ,desc, coursePageLinkTo, linkTo, level, subject, i
                         {moduleSubject}</h3>
                     )}
 
-                    <div className="flex items-center gap-5">
+                    <div className="flex items-center gap-5 mt-4">
 
                     {level && 
                     <h3 className={`pt-1 font-medium md:text-lg 
@@ -144,7 +144,7 @@ const CareerCard = ({ bgColor ,desc, coursePageLinkTo, linkTo, level, subject, i
                     <p className={`${!curriculum ? "pt-4" : "pt-3"} text-black-800`}>{desc}</p>
 
                     {curriculum && (
-                        <div className="mt-8 flex items-center justify-between gap-4 h-[4rem]">
+                        <div className="mt-3 flex items-center justify-between gap-4 h-[4rem]">
                             {isInCart(item?.id) ? (
                                <div className="relative w-full basis-[50%] flex flex-col gap-2">
                                     <Link 

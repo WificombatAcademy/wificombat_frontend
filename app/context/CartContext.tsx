@@ -5,7 +5,7 @@ type CartItem = {
   id: string;
   name: string;
   type: 'course' | 'module';
-  price: number;
+  price: string;
   quantity: number;
   details: any; // additional details of the course/module
   level?: string;
