@@ -16,9 +16,10 @@ type Props = {
     modules: any[];
     pricePerModule: number;
     courseLevel: string;
+    courseId: string; 
 }
 
-const Modules = ({ modules, pricePerModule, courseLevel }: Props) => {
+const Modules = ({ modules, pricePerModule, courseLevel, courseId }: Props) => {
 
   return (
     <section>
@@ -76,7 +77,7 @@ const Modules = ({ modules, pricePerModule, courseLevel }: Props) => {
                             desc='This pathway covers everything from concept art 
                             and storytelling to coding and game mechanics.'
                             price={formatPrice(pricePerModule.toFixed(2))}
-                            item={module} 
+                            item={{...module, course_id: courseId }} 
                             type='module'
                         />
                     </SwiperSlide>

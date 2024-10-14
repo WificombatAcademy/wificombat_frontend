@@ -81,6 +81,7 @@ const Page = ({ params }: any) => {
           modules={course.modules} 
           pricePerModule={pricePerModule}
           courseLevel={course.level}
+          courseId={course.course_id}
           />
 
           <TodayComp 

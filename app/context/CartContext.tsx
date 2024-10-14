@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import toast from 'react-hot-toast';
@@ -22,9 +22,6 @@ type CartContextType = {
   cartQuantity: number;
   isInCart: (id: string) => boolean;
   isNotificationDisplayed: boolean;
-  removedCourseSubject: string;
-  removedModuleName: string;
-  setIsNotificationDisplayed: React.Dispatch<React.SetStateAction<boolean>>
 };
 
 type CartProviderProps = {
@@ -45,8 +42,6 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [cartQuantity, setCartQuantity] = useState(0);
   const [isNotificationDisplayed, setIsNotificationDisplayed] = useState(false);
-  const [removedCourseSubject, setRemovedCourseSubject] = useState('');
-  const [removedModuleName, setRemovedModuleName] = useState('');
 
   // Load cart from localStorage on initialization
   useEffect(() => {
@@ -62,42 +57,57 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
 
-    const removeModulesFromCourse = (courseModules: any[]) => {
-    setCart((prevCart) =>
-      prevCart.filter((item) => {
-        // Keep only items that are not in the list of course modules
-        return !(
-          item.type === 'module' &&
-          courseModules.some((module) => module.id === item.id)
-        );
-      })
-    );
-  };
-
   const addItemToCart = (item: CartItem) => {
     setCart((prevCart) => {
-      const itemIndex = prevCart.findIndex((cartItem) => cartItem.id === item.id);
+      // If the item is a course, ensure its modules aren't added separately
+      if (item.type === 'course' && item.details?.modules?.length > 0) {
+        
+        // Check if any module of this course is already in the cart
+        const courseModulesInCart = prevCart.filter(
+          (cartItem) => cartItem.type === 'module' && cartItem.details?.course_id === item.id
+        );
+        
+        if (courseModulesInCart.length > 0) {
+          // Notify the user that they cannot add the course if modules are already in the cart
+          toast.error('Please remove individual modules before adding the full course.');
+          return prevCart; // Do not add the course
+        }
 
-      // If the item is a module, remove its associated course if it exists
+        // Remove any existing modules of this course before adding the course
+        const updatedCart = prevCart.filter(
+          (cartItem) => cartItem.type !== 'module' || cartItem.details?.course_id !== item.id
+        );
+        return [...updatedCart, { ...item, quantity: 1 }];
+      }
+
+      // If the item is a module, ensure the course is not already in the cart
       if (item.type === 'module') {
-        const associatedCourse = prevCart.find((cartItem) => 
-          cartItem.type === 'course' && 
-          cartItem.details?.modules?.some((module: any) => module.id === item.id)
+        const courseInCart = prevCart.find(
+          (cartItem) => cartItem.type === 'course' && cartItem.id === item.details.course_id
         );
 
-        // Remove the associated course if found
-        if (associatedCourse) {
-          setRemovedCourseSubject(associatedCourse.subject ?? '');
-          setRemovedModuleName(item.name ?? '');
-          setIsNotificationDisplayed(true);
-          return prevCart.filter(cartItem => cartItem.id !== associatedCourse.id);
+        if (courseInCart) {
+          // Notify the user that they cannot add a module if the course is already in the cart
+          toast.error('The course has already been added to the cart. You cannot add individual modules.');
+          return prevCart; // Do not add the module
+        }
+
+        // Check if all modules of the course are already in the cart
+        const modulesInCart = prevCart.filter(
+          (cartItem) => cartItem.type === 'module' && cartItem.details?.course_id === item.details.id
+        );
+
+        const totalModules = item.details?.totalModules || 0;
+
+        if (modulesInCart.length + 1 === totalModules) {
+          // Notify the user that they should add the full course instead of all modules
+          toast.error('You are trying to add all modules. Please add the full course instead.');
+          return prevCart; // Do not add the last module
         }
       }
 
-      // If the item is a course, remove its modules from the cart
-      if (item.type === 'course' && item.details?.modules?.length > 0) {
-        removeModulesFromCourse(item.details.modules);
-      }
+      // Add item (course or module) to the cart
+      const itemIndex = prevCart.findIndex((cartItem) => cartItem.id === item.id);
 
       if (itemIndex === -1) {
         // Add new item to cart
@@ -111,7 +121,6 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     });
   };
 
-
   const removeItemFromCart = (id: string) => {
     setCart((prevCart) => {
       const newCart = prevCart.filter((item) => item.id !== id);
@@ -124,16 +133,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   };
 
   return (
-    <CartContext.Provider value={{ 
-    cart, 
-    addItemToCart, 
-    removeItemFromCart, 
-    cartQuantity, 
-    isInCart, 
-    isNotificationDisplayed,
-    removedCourseSubject, 
-    removedModuleName,  
-    setIsNotificationDisplayed}}>
+    <CartContext.Provider value={{ cart, addItemToCart, removeItemFromCart, cartQuantity, isInCart, isNotificationDisplayed }}>
       {children}
     </CartContext.Provider>
   );

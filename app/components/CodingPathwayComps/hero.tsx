@@ -34,6 +34,7 @@ export const PathwayHero = ({
     const { addItemToCart, isInCart, removeItemFromCart, isNotificationDisplayed } = useCart();
 
     const handleAddToCart = (course: any) => {
+        
         const cartItem = {
             id: course.course_id,
             name: course.name,
@@ -44,13 +45,28 @@ export const PathwayHero = ({
             quantity: 1,  // Initial quantity
             details: course,  // Add any other details
         };
-        
-        addItemToCart(cartItem);
-        if (!isNotificationDisplayed) {
-            toast.success('Item Added to Cart');
-        }
-    };
+    
+        // Check if the course is already in the cart
+        const isCourseInCart = isInCart(course.course_id);
+        const courseModules = course.modules || []; // Assuming course.modules contains the module items
+        const areModulesInCart = courseModules.some((module: any) => isInCart(module.id)); // Check if any module is in the cart
 
+        console.log(areModulesInCart)
+    
+        // Logic to add to cart and display appropriate messages
+        if (!isCourseInCart && !areModulesInCart) {
+            addItemToCart(cartItem);
+            toast.success(`${course.subject} has been added to your cart!`); // Success message
+        } else if (isCourseInCart) {
+            toast.error(`The course ${course.subject} is already in your cart. You cannot add modules.`); // Course already in cart message
+        } else if (areModulesInCart) {
+            toast.error(`Some modules of ${course.subject} are already in your cart.`); // Modules in cart message
+        } else {
+            toast.error(`The course ${course.subject} is already in your cart.`); // Fallback message
+        }
+    };    
+    
+    
     const handleRemoveFromCart = (courseId: any) => {
         removeItemFromCart(courseId);
     };

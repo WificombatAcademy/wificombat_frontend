@@ -3,7 +3,6 @@
 import { useCart } from "@/app/context/CartContext";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import toast from "react-hot-toast";
 import { FaPlus } from "react-icons/fa6";
 
@@ -29,38 +28,49 @@ type Props = {
 const CareerCard = ({ bgColor ,desc, linkTo, level, subject, item, type,
     textWhite, pathways, image, pathwayImage, curriculum, price, moduleImage, moduleSubject }: Props) => {
 
-        const { addItemToCart, removeItemFromCart, isInCart,
-            isNotificationDisplayed, removedCourseSubject, removedModuleName } = useCart();
-            const [toastDisplayed, setToastDisplayed] = useState(false);
-
-        console.log(isNotificationDisplayed)
+        const { addItemToCart, removeItemFromCart, isInCart } = useCart();
 
         const handleAddToCart = () => {
-            if (item && item.id) { // Check if item and item.id are defined
-                if (!isInCart(item.id)) {
-                    addItemToCart({
-                        id: item.id,
-                        name: item.title,
-                        level: item.level, // course or module
-                        type: type ?? 'course', // course or module
-                        price: item.price,
-                        details: item,
-                        quantity: 1
-                    });
-
-                    if (isNotificationDisplayed) {
-                        toast(`The course "${removedCourseSubject}" has been removed 
-                        from the cart to add the module "${removedModuleName}".`);
-                    }
+            console.log("Item:", item); // Check the item being passed
+        
+            if (item) { // Check if item is defined
+                const { id, course_id, title, subject, level } = item; // Extract properties directly from item
+                console.log(course_id);
+                
+                if (id) { // Ensure item.id is defined
+                    // Check if the main course is in the cart
+                    const isCourseInCart = isInCart(course_id); // Now check course_id directly
+                    const isModuleInCart = isInCart(id); // Check if the module is already in cart
                     
-                    if (!isNotificationDisplayed) {
-                        toast.success('Item Added to Cart');
+                    // console.log(isCourseInCart);
+                    // console.log(course_id);
+                    
+                    if (!isModuleInCart) {
+                        if (!isCourseInCart) {
+                            // Show success message only if the main course is not in the cart
+                            toast.success(`${title || subject} has been added to your cart!`);
+                        }
+                        addItemToCart({
+                            id: id,
+                            name: title || subject,
+                            subject: subject,
+                            level: level, // course or module
+                            type: 'module', // Update this if you want to distinguish between course/module
+                            price: item.price, // Ensure price is defined in item
+                            details: item, // Keep the original item for further detail
+                            quantity: 1
+                        });
+                    } else if (isCourseInCart) {
+                        toast.error(`The main course is already in your cart. You cannot add this module.`);
                     }
+                } else {
+                    toast.error("Item ID is undefined.");
                 }
             } else {
-                toast.error("Item or Item ID is undefined.");
+                toast.error("Item is undefined.");
             }
-        };
+        };                    
+        
     
         const handleRemoveFromCart = () => {
             if (item && item.id) {
