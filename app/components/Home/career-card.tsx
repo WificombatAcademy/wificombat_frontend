@@ -22,19 +22,10 @@ type Props = {
     moduleImage?: string;
     pathwayImage?: string;
     curriculum?: boolean;
-    coursePageLinkTo?: {
-        pathname: string;
-        query: {
-          title: string;
-          subject: string;
-          image: string;
-          description: string;
-          level: string;
-        };
-      };
+    type?: 'course' | 'module';
 }
 
-const CareerCard = ({ bgColor ,desc, coursePageLinkTo, linkTo, level, subject, item,
+const CareerCard = ({ bgColor ,desc, linkTo, level, subject, item, type,
     textWhite, pathways, image, pathwayImage, curriculum, price, moduleImage, moduleSubject }: Props) => {
 
         const { addItemToCart, removeItemFromCart, isInCart } = useCart();
@@ -46,7 +37,7 @@ const CareerCard = ({ bgColor ,desc, coursePageLinkTo, linkTo, level, subject, i
                     id: item.id,
                     name: item.title,
                     level: item.level, // course or module
-                    type: item.type, // course or module
+                    type: type ?? 'course', // course or module
                     price: item.price,
                     details: item,
                     quantity: 1

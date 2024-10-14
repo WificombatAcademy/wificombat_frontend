@@ -48,9 +48,13 @@ const Modules = ({ modules, pricePerModule, courseLevel }: Props) => {
                     spaceBetween: 10,
                     },
                     1000: {
-                    slidesPerView: 4,
+                    slidesPerView: 3,
                     spaceBetween: 30,
                     },
+                    1300: {
+                        slidesPerView: 4,
+                        spaceBetween: 30,
+                        },
                 }}
                 loop={true}
                 modules={[Navigation, Pagination]}
@@ -60,7 +64,8 @@ const Modules = ({ modules, pricePerModule, courseLevel }: Props) => {
                 {modules && modules.map((module) => (
                     <SwiperSlide
                     key={module.id}
-                    className="pt-5 md:pt-12 pb-8 relative flex items-center justify-center overflow-visible"
+                    className="pt-5 md:pt-12 pb-8 relative flex 
+                    items-center justify-center overflow-visible"
                     >
                         <CareerCard
                             curriculum={true}
@@ -72,6 +77,7 @@ const Modules = ({ modules, pricePerModule, courseLevel }: Props) => {
                             and storytelling to coding and game mechanics.'
                             price={formatPrice(pricePerModule.toFixed(2))}
                             item={module} 
+                            type='module'
                         />
                     </SwiperSlide>
                 ))}

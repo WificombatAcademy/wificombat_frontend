@@ -17,6 +17,7 @@ type Props = {
     coursePage?: boolean;
     widthStyle?: string;
     course?: any;
+    type?: 'course' | 'module';
 }
 
 export const PathwayHero = ({
@@ -27,6 +28,7 @@ export const PathwayHero = ({
     buttonWhite,
     widthStyle, 
     level,
+    type,
     coursePage,
     course }: Props) => {
     const { addItemToCart, isInCart, removeItemFromCart } = useCart();
@@ -36,7 +38,7 @@ export const PathwayHero = ({
             id: course.course_id,
             name: course.name,
             level: course.level,
-            type: course,
+            type: type ?? 'course',
             price: course.price,
             quantity: 1,  // Initial quantity
             details: course,  // Add any other details

@@ -55,11 +55,13 @@ const Page = (props: Props) => {
       ) : (
         <div className="mt-5 grid grid-cols-1 gap-8">
           {cart.map((item) => (
-            <div key={item.id} className="flex flex-col lg:flex-row items-start lg:items-center
+            <div key={item.id} className="flex flex-col lg:flex-row items-start
              bg-transparent border border-black-100 rounded-3xl p-6 gap-6">
               {/* Item Image */}
               <Image 
-                src={`https:wificombatacademy.com/${(item.details.image || item.details.cimage )?? '/placeholder.jpg'}`} 
+                src={`${(`https:wificombatacademy.com/${item.details.image}`
+                  || item.details.cimage )
+                  ?? '/placeholder.jpg'}`} 
                 alt={item.name ?? ''} 
                 width={150} 
                 height={150} 
@@ -67,35 +69,46 @@ const Page = (props: Props) => {
               />
 
               {/* Item Details */}
-              <div className="flex-1">
+              <div className="mt-4 flex-1">
                 <h2 className="text-xl font-semibold">
                   {(item.details.subject || item.details.title || item.details.name) ?? ''}</h2>
-                <p className="text-gray-600">Level: {item.level}</p>
+                <p className="text-black-800">Level: {item.level}</p>
                 {item.type === 'course' ? (
-                  <p className="text-gray-600">
-                    Modules: {item.details.modules.length} | Lessons: {item.details.lessons}
-                  </p>
+                  <div>
+                    <p className="text-gray-600">
+                     {item.details.modules !== "" || item.details.modules !== null  ? item.details.modules : 0} 
+                     Modules 
+                     {item.details.lessons !== "" || item.details.lessons !== null  ? item.details.lessons : 0} Lessons
+                    </p> 
+                    {/* item.details.lessons !== "" || item.details.lessons !== null  ? item.details.lessons : 0 */}
+
+                    <p className='text-black-600 font-medium'>{item.type}</p>
+                  </div>
                 ) : (
-                  <p className="text-gray-600">Lessons: {item.details.lessons}</p>
+                  <p className="text-gray-600">
+                  {(item.details.num_lessons) !== "" ? item.details.num_lessons : 0} Lessons</p>
                 )}
-                <p className="text-lg font-bold mt-2">Price: {formatPrice(item.price)}</p>
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-col gap-2 lg:flex-row lg:items-center">
-                <button 
-                  onClick={() => handleRemove(item.id)}
-                  className="border border-black-500 text-black-500 px-4 py-2 rounded-lg"
-                >
-                  Remove from Cart
-                </button>
-                
-                <Link href="/checkout" className="bg-black-500 text-white px-4 py-2 
-                rounded-lg hover:bg-black-600 text-center">
-                  Buy Now
-                </Link>
+              <div className='flex flex-col gap-2'>
+                <p className="text-2xl font-bold my-4">{formatPrice(item.price)}</p>
+                <div className="flex flex-col gap-2 lg:flex-row lg:items-center">
+                  <button 
+                    onClick={() => handleRemove(item.id)}
+                    className="border border-black-500 text-black-500 px-4 py-2 rounded-lg"
+                  >
+                    Remove from Cart
+                  </button>
+                  
+                  <Link href="/checkout" className="bg-black-500 text-white px-4 py-2 
+                  rounded-lg hover:bg-black-600 text-center">
+                    Buy Now
+                  </Link>
+                </div>
               </div>
-            </div>
+
+              </div>
           ))}
         </div>
       )}
