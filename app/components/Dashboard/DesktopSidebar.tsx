@@ -157,7 +157,9 @@ const DesktopSidebar = () => {
         </motion.div>
       )}
 
-        <div className="flex h-16 shrink-0 items-center">
+        <Link 
+        href={`/`}
+        className="flex h-16 shrink-0 items-center">
          <Image
             src={`/assets/auth/logo.svg`}
             alt={`logo`}
@@ -165,7 +167,7 @@ const DesktopSidebar = () => {
             height={60}
             className="mt-5 object-contain text-neutral-400"
           />
-        </div>
+        </Link>
 
         <nav className="flex flex-1 flex-col">
           <ul role="list" className="flex flex-1 flex-col gap-y-7">
