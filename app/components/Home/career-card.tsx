@@ -69,7 +69,7 @@ const CareerCard = ({ bgColor ,desc, linkTo, level, subject, item, type, viewCou
                             subject: subject,
                             level: level,
                             type: 'module',
-                            price: item.price,
+                            price: item.price || price,
                             details: item,
                             quantity: 1
                         });
@@ -165,7 +165,7 @@ const CareerCard = ({ bgColor ,desc, linkTo, level, subject, item, type, viewCou
                     <h3 className={`pt-1 font-medium md:text-lg 
                     ${curriculum ? "text-black-600 font-semibold" : "text-black-800"} `}>{level}</h3>}
 
-                    {/* {price && <h3 className={`pt-1 font-bold text-black-500`}>{price}</h3>} */}
+                    {price && <h3 className={`pt-1 font-bold text-black-500`}>{price}</h3>}
                     </div>
 
                     <p className={`${!curriculum ? "pt-4" : "pt-3"} text-black-800`}>{desc}</p>

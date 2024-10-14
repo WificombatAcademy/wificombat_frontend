@@ -142,7 +142,7 @@ const Page = (props: Props) => {
             </div>
           )}
 
-      {cart.length > 0 && <div className='pt-7 md:pt-4 w-[90%] mx-auto flex items-center justify-center'>
+      {cart.length > 1 && <div className='py-7 w-[90%] mx-auto flex items-center justify-center'>
         <button 
           className={`bg-black-500 text-white px-8 md:px-16 py-2 max-lg:py-3 
           rounded-lg hover:bg-black-600 text-center`}
