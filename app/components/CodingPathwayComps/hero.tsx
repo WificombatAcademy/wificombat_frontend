@@ -51,8 +51,6 @@ export const PathwayHero = ({
         const courseModules = course.modules || []; // Assuming course.modules contains the module items
         const areModulesInCart = courseModules.some((module: any) => isInCart(module.id)); // Check if any module is in the cart
 
-        console.log(areModulesInCart)
-    
         // Logic to add to cart and display appropriate messages
         if (!isCourseInCart && !areModulesInCart) {
             addItemToCart(cartItem);

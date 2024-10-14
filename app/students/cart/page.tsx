@@ -9,6 +9,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
 import toast, { Toaster } from 'react-hot-toast';
+import { TiTag } from "react-icons/ti";
+import { HiMiniTag } from "react-icons/hi2";
 
 type Props = {}
 
@@ -66,7 +68,7 @@ const Page = (props: Props) => {
       ) : (
         <div className="mt-5 grid grid-cols-1 gap-8 h-[70vh] overflow-y-scroll">
           {cart.map((item) => (
-            <div key={item.id} className="flex flex-col lg:flex-row items-start
+            <div key={item.id} className="flex lg:flex-row items-start
              bg-transparent border border-black-100 rounded-3xl p-6 gap-6">
               {/* Item Image */}
               <Image 
@@ -74,34 +76,43 @@ const Page = (props: Props) => {
                 alt={item.name ?? ''} 
                 width={150} 
                 height={150} 
-                className="rounded-lg object-cover w-[80px] h-[80px] lg:w-[150px] lg:h-[150px]" 
+                className="rounded-lg object-cover w-[30px] h-[30px] md:w-[40px] md:h-[40px] lg:w-[150px] lg:h-[150px]" 
               />
 
               {/* Item Details */}
-              <div className="mt-4 flex-1">
+              <div className="lg:mt-4 flex-1">
                 <h2 className="text-xl font-semibold">
                   {(item.details.subject || item.details.title || item.details.name) ?? ''}</h2>
-                <p className="text-black-800">Level: {item.level}</p>
+
+                <p className="mt-1 text-black-800">Level: {item.level}</p>
+
                 {item.type === 'course' ? (
-                  <div>
+                  <div className='mt-1'>
                     <p className="text-gray-600">
                       {Array.isArray(item.details.modules) && item.details.modules.length > 0 
                         ? item.details.modules.length 
-                        : 0} 
-                      Modules 
+                        : 0} {""}
+                      Modules &nbsp;
                       {Array.isArray(item.details.lessons) && item.details.lessons.length > 0 
                         ? item.details.lessons.length 
-                        : 0} Lessons
+                        : 0} Lessons  &nbsp;
                     </p> 
-                    <p className='text-black-600 font-medium'>{item.type}</p>
                   </div>
                 ) : (
-                  <p className="text-gray-600">
+                  <p className="mt-1 text-gray-600">
                     {(item.details.num_lessons !== "" && item.details.num_lessons !== null) 
                       ? item.details.num_lessons 
                       : 0} Lessons
                   </p>
                 )}
+
+                <div className="text-black-600 flex items-center gap-1 font-semibold">
+                  <div className={item.type === 'course' ? `text-blue-500` : `text-purple-500`}>
+                  <HiMiniTag />
+                  </div>
+                  {item.type}
+                </div>
+
               </div>
 
               {/* Action Buttons */}

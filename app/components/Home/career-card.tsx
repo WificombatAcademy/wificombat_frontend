@@ -36,7 +36,6 @@ const CareerCard = ({ bgColor ,desc, linkTo, level, subject, item, type, viewCou
         
             if (item) { // Check if item is defined
                 const { id, course_id, title, subject, level } = item; // Extract properties directly from item
-                console.log(course_id);
         
                 if (id) { // Ensure item.id is defined
                     // Check if the main course is in the cart
@@ -176,27 +175,36 @@ const CareerCard = ({ bgColor ,desc, linkTo, level, subject, item, type, viewCou
                             {viewCourse ? ( // Check for viewCourse flag
                                 <Link 
                                     href={linkTo ?? ''} 
-                                    className="w-full border bg-black-500 text-white py-2 text-black-500 
+                                    className="w-full border bg-black-500 text-white py-3
                                     font-semibold text-center transition ease-in-out duration-300 
                                     hover:bg-opacity-80 rounded-lg">
                                     View Course
                                 </Link>
                             ) : isInCart(item?.id) ? (
-                                <div className="relative w-full basis-[50%] flex flex-col gap-2">
-                                    <Link 
-                                        href={`/students/cart`}
-                                        className="w-full border border-black-500 text-black-500 py-2
-                                        font-semibold text-center transition ease-in-out duration-300 
-                                        hover:bg-opacity-80 rounded-lg">
-                                        View in Cart
-                                    </Link>
-                                    <button 
-                                        onClick={handleRemoveFromCart} 
-                                        className="absolute right-[-0.4rem] top-[-0.4rem] flex justify-center items-center">
-                                        <div className="flex items-center justify-center w-4 h-4 bg-red-500 
-                                        text-white rounded-full transition duration-300 hover:bg-red-600">
-                                            <span className="text-[10px] font-bold">X</span>
-                                        </div>
+                                <div className="w-full flex items-center gap-4">
+                                    <div className="relative w-full basis-[50%] flex flex-col gap-2">
+                                        <Link 
+                                            href={`/students/cart`}
+                                            className="w-full border border-black-500 text-black-500 py-2
+                                            font-semibold text-center transition ease-in-out duration-300 
+                                            hover:bg-opacity-80 rounded-lg">
+                                            View in Cart
+                                        </Link>
+                                        <button 
+                                            onClick={handleRemoveFromCart} 
+                                            className="absolute right-[-0.4rem] top-[-0.4rem] flex justify-center items-center">
+                                            <div className="flex items-center justify-center w-4 h-4 bg-red-500 
+                                            text-white rounded-full transition duration-300 hover:bg-red-600">
+                                                <span className="text-[10px] font-bold">X</span>
+                                            </div>
+                                        </button>
+                                    </div>
+                    
+                                    <button className="w-full basis-[50%]">
+                                        <p className="w-full bg-black-500 font-semibold py-2 text-white 
+                                        text-center transition ease-in-out duration-300 hover:bg-opacity-80 rounded-lg"> 
+                                            Buy Now
+                                        </p>
                                     </button>
                                 </div>
                             ) : (

@@ -96,10 +96,8 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
         const modulesInCart = prevCart.filter(
           (cartItem) => cartItem.type === 'module' && cartItem.details?.course_id === item.details.id
         );
-          console.log("Modules In cart: " ,modulesInCart)
 
         const totalModules = item.details?.totalModules || 0;
-            console.log("total Modules: ", totalModules)
 
         if (modulesInCart.length + 1 === totalModules) {
           // Notify the user that they should add the full course instead of all modules
