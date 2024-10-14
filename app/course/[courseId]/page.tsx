@@ -27,7 +27,6 @@ const Page = ({ params }: any) => {
   // const courseLevel = searchParams.get("level");
 
   useEffect(() => {
-    console.log("Params", params); // Check if courseId is correct
     if (courseId) {
       fetchCourseData();
     }

@@ -1,4 +1,5 @@
 "use client"
+
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import toast from 'react-hot-toast';
 
@@ -20,6 +21,10 @@ type CartContextType = {
   removeItemFromCart: (id: string) => void;
   cartQuantity: number;
   isInCart: (id: string) => boolean;
+  isNotificationDisplayed: boolean;
+  removedCourseSubject: string;
+  removedModuleName: string;
+  setIsNotificationDisplayed: React.Dispatch<React.SetStateAction<boolean>>
 };
 
 type CartProviderProps = {
@@ -39,6 +44,9 @@ export const useCart = () => {
 export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [cartQuantity, setCartQuantity] = useState(0);
+  const [isNotificationDisplayed, setIsNotificationDisplayed] = useState(false);
+  const [removedCourseSubject, setRemovedCourseSubject] = useState('');
+  const [removedModuleName, setRemovedModuleName] = useState('');
 
   // Load cart from localStorage on initialization
   useEffect(() => {
@@ -54,7 +62,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
 
-  const removeModulesFromCourse = (courseModules: any[]) => {
+    const removeModulesFromCourse = (courseModules: any[]) => {
     setCart((prevCart) =>
       prevCart.filter((item) => {
         // Keep only items that are not in the list of course modules
@@ -66,44 +74,29 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     );
   };
 
-  // Function to check if all modules of a course are in the cart
-  const areAllModulesSelected = (courseModules: any[]) => {
-    return courseModules.every((module: any) =>
-      cart.some((cartItem) => cartItem.id === module.id && cartItem.type === 'module')
-    );
-  };
-
   const addItemToCart = (item: CartItem) => {
     setCart((prevCart) => {
       const itemIndex = prevCart.findIndex((cartItem) => cartItem.id === item.id);
 
-      // Handle adding a course
-      if (item.type === 'course' && item.details?.modules?.length > 0) {
-        removeModulesFromCourse(item.details.modules);
-        // toast.success('Course has been added to the cart, removing individual modules.');
+      // If the item is a module, remove its associated course if it exists
+      if (item.type === 'module') {
+        const associatedCourse = prevCart.find((cartItem) => 
+          cartItem.type === 'course' && 
+          cartItem.details?.modules?.some((module: any) => module.id === item.id)
+        );
+
+        // Remove the associated course if found
+        if (associatedCourse) {
+          setRemovedCourseSubject(associatedCourse.subject ?? '');
+          setRemovedModuleName(item.name ?? '');
+          setIsNotificationDisplayed(true);
+          return prevCart.filter(cartItem => cartItem.id !== associatedCourse.id);
+        }
       }
 
-      // Handle the case where all modules are selected for a course
-      if (item.type === 'module' && item.details?.course) {
-        const courseModules = item.details.course.modules;
-
-        // If all modules are selected, remove the modules and add the course
-        if (areAllModulesSelected(courseModules)) {
-          removeModulesFromCourse(courseModules);
-          setCart((prevCart) => [
-            ...prevCart,
-            { 
-              id: item.details.course.course_id, 
-              title: item.details.course.title, 
-              type: 'course', 
-              price: item.details.course.price, 
-              quantity: 1, 
-              details: item.details.course 
-            }
-          ]);
-          toast.success('All modules selected. The course has been added to the cart.');
-          return prevCart; // Stop further module addition
-        }
+      // If the item is a course, remove its modules from the cart
+      if (item.type === 'course' && item.details?.modules?.length > 0) {
+        removeModulesFromCourse(item.details.modules);
       }
 
       if (itemIndex === -1) {
@@ -118,6 +111,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     });
   };
 
+
   const removeItemFromCart = (id: string) => {
     setCart((prevCart) => {
       const newCart = prevCart.filter((item) => item.id !== id);
@@ -130,7 +124,16 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   };
 
   return (
-    <CartContext.Provider value={{ cart, addItemToCart, removeItemFromCart, cartQuantity, isInCart, }}>
+    <CartContext.Provider value={{ 
+    cart, 
+    addItemToCart, 
+    removeItemFromCart, 
+    cartQuantity, 
+    isInCart, 
+    isNotificationDisplayed,
+    removedCourseSubject, 
+    removedModuleName,  
+    setIsNotificationDisplayed}}>
       {children}
     </CartContext.Provider>
   );

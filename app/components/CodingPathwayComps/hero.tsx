@@ -31,12 +31,13 @@ export const PathwayHero = ({
     type,
     coursePage,
     course }: Props) => {
-    const { addItemToCart, isInCart, removeItemFromCart } = useCart();
+    const { addItemToCart, isInCart, removeItemFromCart, isNotificationDisplayed } = useCart();
 
     const handleAddToCart = (course: any) => {
         const cartItem = {
             id: course.course_id,
             name: course.name,
+            subject: course.subject,
             level: course.level,
             type: type ?? 'course',
             price: course.price,
@@ -45,7 +46,9 @@ export const PathwayHero = ({
         };
         
         addItemToCart(cartItem);
-        toast.success('Item Added to Cart');
+        if (!isNotificationDisplayed) {
+            toast.success('Item Added to Cart');
+        }
     };
 
     const handleRemoveFromCart = (courseId: any) => {

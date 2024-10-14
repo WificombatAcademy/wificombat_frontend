@@ -3,7 +3,8 @@
 import { useCart } from "@/app/context/CartContext";
 import Image from "next/image";
 import Link from "next/link";
-import toast, { Toaster } from "react-hot-toast";
+import { useState } from "react";
+import toast from "react-hot-toast";
 import { FaPlus } from "react-icons/fa6";
 
 type Props = {
@@ -28,28 +29,40 @@ type Props = {
 const CareerCard = ({ bgColor ,desc, linkTo, level, subject, item, type,
     textWhite, pathways, image, pathwayImage, curriculum, price, moduleImage, moduleSubject }: Props) => {
 
-        const { addItemToCart, removeItemFromCart, isInCart } = useCart();
+        const { addItemToCart, removeItemFromCart, isInCart,
+            isNotificationDisplayed, removedCourseSubject, removedModuleName } = useCart();
+            const [toastDisplayed, setToastDisplayed] = useState(false);
+
+        console.log(isNotificationDisplayed)
 
         const handleAddToCart = () => {
             if (item && item.id) { // Check if item and item.id are defined
-              if (!isInCart(item.id)) {
-                addItemToCart({
-                    id: item.id,
-                    name: item.title,
-                    level: item.level, // course or module
-                    type: type ?? 'course', // course or module
-                    price: item.price,
-                    details: item,
-                    quantity: 1
-                });
-              }
-              toast.success('Item Added to Cart')
-            } else {
-              toast.error("Item or Item ID is undefined.");
-            }
-          };
+                if (!isInCart(item.id)) {
+                    addItemToCart({
+                        id: item.id,
+                        name: item.title,
+                        level: item.level, // course or module
+                        type: type ?? 'course', // course or module
+                        price: item.price,
+                        details: item,
+                        quantity: 1
+                    });
 
-          const handleRemoveFromCart = () => {
+                    if (isNotificationDisplayed) {
+                        toast(`The course "${removedCourseSubject}" has been removed 
+                        from the cart to add the module "${removedModuleName}".`);
+                    }
+                    
+                    if (!isNotificationDisplayed) {
+                        toast.success('Item Added to Cart');
+                    }
+                }
+            } else {
+                toast.error("Item or Item ID is undefined.");
+            }
+        };
+    
+        const handleRemoveFromCart = () => {
             if (item && item.id) {
                 removeItemFromCart(item.id);
             }
