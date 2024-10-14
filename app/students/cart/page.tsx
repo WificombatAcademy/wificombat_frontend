@@ -9,7 +9,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
 import toast, { Toaster } from 'react-hot-toast';
-import { TiTag } from "react-icons/ti";
 import { HiMiniTag } from "react-icons/hi2";
 
 type Props = {}
@@ -66,28 +65,31 @@ const Page = (props: Props) => {
           transition-colors duration-300 hover:opacity-90'>Go back to courses</Link>
         </div>
       ) : (
-        <div className="mt-5 grid grid-cols-1 gap-8 h-[70vh] overflow-y-scroll">
+        <div className={`mt-5 grid grid-cols-1 gap-8 h-[70vh] overflow-y-scroll`}>
           {cart.map((item) => (
             <div key={item.id} className="flex lg:flex-row items-start
-             bg-transparent border border-black-100 rounded-3xl p-6 gap-6">
+             bg-transparent border border-black-100 rounded-3xl max-md:px-4 p-6 max-md:gap-2 gap-6">
+
               {/* Item Image */}
               <Image 
                 src={formatImageUrl(item.details.image || item.details.cimage || '/placeholder.jpg')} 
                 alt={item.name ?? ''} 
                 width={150} 
                 height={150} 
-                className="rounded-lg object-cover w-[30px] h-[30px] md:w-[40px] md:h-[40px] lg:w-[150px] lg:h-[150px]" 
+                className="rounded-lg object-cover 
+                w-[40px] h-[40px] md:w-[40px] md:h-[40px] 
+                lg:w-[150px] lg:h-[150px]" 
               />
-
               {/* Item Details */}
+
               <div className="lg:mt-4 flex-1">
-                <h2 className="text-xl font-semibold">
+                <h2 className="md:text-xl font-semibold">
                   {(item.details.subject || item.details.title || item.details.name) ?? ''}</h2>
 
-                <p className="mt-1 text-black-800">Level: {item.level}</p>
+                <p className="mt-1 text-black-800 max-lg:text-xs">Level: {item.level}</p>
 
                 {item.type === 'course' ? (
-                  <div className='mt-1'>
+                  <div className='mt-1 max-lg:text-xs'>
                     <p className="text-gray-600">
                       {Array.isArray(item.details.modules) && item.details.modules.length > 0 
                         ? item.details.modules.length 
@@ -99,14 +101,14 @@ const Page = (props: Props) => {
                     </p> 
                   </div>
                 ) : (
-                  <p className="mt-1 text-gray-600">
+                  <p className="mt-1 text-gray-600 max-lg:text-xs">
                     {(item.details.num_lessons !== "" && item.details.num_lessons !== null) 
                       ? item.details.num_lessons 
                       : 0} Lessons
                   </p>
                 )}
 
-                <div className="text-black-600 flex items-center gap-1 font-semibold">
+                <div className="text-black-600 flex items-center gap-1 font-semibold max-lg:text-sm">
                   <div className={item.type === 'course' ? `text-blue-500` : `text-purple-500`}>
                   <HiMiniTag />
                   </div>
@@ -116,17 +118,17 @@ const Page = (props: Props) => {
               </div>
 
               {/* Action Buttons */}
-              <div className='flex flex-col gap-2'>
-                <p className="text-2xl font-bold my-4">{formatPrice(item.price)}</p>
-                <div className="flex flex-col gap-2 lg:flex-row lg:items-center">
+              <div className='flex flex-col gap-2 max-lg:items-end'>
+                <p className="text-lg lg:text-2xl font-bold lg:my-4">{formatPrice(item.price)}</p>
+                <div className="flex flex-col gap-2 lg:flex-row lg:items-center max-md:text-xs">
                   <button 
                     onClick={() => handleRemove(item.id)}
-                    className="border border-black-500 text-black-500 px-4 py-2 rounded-lg"
+                    className="border border-black-500 text-black-500 px-4 py-2 max-lg:py-3 rounded-lg"
                   >
                     Remove from Cart
                   </button>
                   
-                  <Link href="/checkout" className="bg-black-500 text-white px-4 py-2 
+                  <Link href="/checkout" className="bg-black-500 text-white px-4 py-2 max-lg:py-3 
                   rounded-lg hover:bg-black-600 text-center">
                     Buy Now
                   </Link>
