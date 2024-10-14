@@ -27,6 +27,12 @@ const objectives = [
   "Creative challenges with coding elements",
 ]
 
+const notes = [
+  "You can buy the whole course or buy per module",
+  "If you buy a course, you only have access to the course for 6 months",
+  "If you buy a module, you only have access to the module for 6 weeks",
+]
+
 const CourseOverview = ({desc}: Props) => {
   return (
   <>
@@ -61,13 +67,16 @@ const CourseOverview = ({desc}: Props) => {
 
 
     {/* OBJECTIVES */}
-    <div className='py-8 md:py-12 llg:py-16 text-black-500 bg-blue-50'>
+    <div className='pt-5 pb-8 md:pb-12 lg:pb-16 text-black-500 bg-blue-50'>
         <div className='w-[93%] md:w-[90%] lg:w-[88%] mx-auto'>
+
+          <div className='flex flex-col lg:flex-row justify-between gap-7'>
+          <div className='mt-7 flex flex-col gap-4'>
+
           <h2 className='font-semibold text-2xl md:text-3xl'>
             Objectives
           </h2>
 
-          <div className='mt-7 flex flex-col gap-4'>
             {objectives.map((objective, index) => (
               <div 
               key={index}
@@ -82,6 +91,27 @@ const CourseOverview = ({desc}: Props) => {
               </div>
             ))}
           </div>
+
+          <div className='mt-7 flex flex-col gap-4'>
+          <h2 className='font-semibold text-2xl md:text-3xl'>
+            Please Note:
+          </h2>
+            {notes.map((note, index) => (
+              <div 
+              key={index}
+              className='flex items-center gap-4'>
+                <div>
+                  <FaCheckCircle size={18} className='text-yellow-500' />
+                </div>
+
+                <div>
+                  <p className='text-lg md:text-xl'>{note}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          </div>
+
         </div>
     </div>
     {/* OBJECTIVES */}
