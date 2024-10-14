@@ -8,7 +8,7 @@ import { formatPrice } from '@/app/utils/types-and-links';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
-import toast from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 
 type Props = {}
 
@@ -21,9 +21,20 @@ const Page = (props: Props) => {
     toast.success('Item removed from cart');
   };
 
+
+  // Helper function to ensure the image URL starts with the required base URL
+  const formatImageUrl = (imagePath: string) => {
+    const baseUrl = "https://wificombatacademy.com/";
+    // Check if the image path already starts with the base URL
+    if (imagePath.startsWith(baseUrl)) {
+      return imagePath;
+    }
+    return `${baseUrl}${imagePath}`;
+  };
+
   return (
     <BreadcrumbsWrapper>
-
+    <Toaster />
     <div className="mx-auto relative container w-full max-w-[4000px]">
       <GeneralNavbar />
 
@@ -40,7 +51,7 @@ const Page = (props: Props) => {
         <div className='mt-5 lg:h-[50vh] w-[90%] mx-auto flex items-center justify-center flex-col gap-4 text-center'>
           <div className='mx-auto flex items-center justify-center'>
             <Image 
-                src={'/empty-cart.png'} 
+                src={'/empty-cart.gif'} 
                 alt={`empty-cart`} 
                 width={500} 
                 height={500} 
@@ -53,15 +64,13 @@ const Page = (props: Props) => {
           transition-colors duration-300 hover:opacity-90'>Go back to courses</Link>
         </div>
       ) : (
-        <div className="mt-5 grid grid-cols-1 gap-8">
+        <div className="mt-5 grid grid-cols-1 gap-8 h-[70vh] overflow-y-scroll">
           {cart.map((item) => (
             <div key={item.id} className="flex flex-col lg:flex-row items-start
              bg-transparent border border-black-100 rounded-3xl p-6 gap-6">
               {/* Item Image */}
               <Image 
-                src={`${(`https:wificombatacademy.com/${item.details.image}`
-                  || item.details.cimage )
-                  ?? '/placeholder.jpg'}`} 
+                src={formatImageUrl(item.details.image || item.details.cimage || '/placeholder.jpg')} 
                 alt={item.name ?? ''} 
                 width={150} 
                 height={150} 

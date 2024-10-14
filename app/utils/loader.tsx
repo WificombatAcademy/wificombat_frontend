@@ -8,6 +8,7 @@ type LoaderProps = {
   isSessionExpired?: boolean;
   noDesign?: boolean;
   noCourses?: boolean;
+  loadingCourses?: boolean;
   curriculum?: boolean;
   notCenter?: boolean;
 };
@@ -17,12 +18,13 @@ const Loader = ({
   isSessionExpired = false, 
   noDesign = false, 
   noCourses = false, 
+  loadingCourses = false,
   curriculum,
   notCenter 
 }: LoaderProps) => {
 
-  let displayMessage = curriculum ? "Loading Curriculum..." : "Loading...";
-  let designSrc = "";
+  let displayMessage = curriculum ? "Loading Curriculum..." : loadingCourses ? "Loading Courses..." : "Loading...";
+  let designSrc = loadingCourses ? "/loading-courses.gif" : "";
   let altText = "";
   let buttonText = "";
   let buttonLink = "";
@@ -49,7 +51,7 @@ const Loader = ({
     flex flex-col justify-center items-center w-full h-screen bg-white overflow-hidden`}>
      {!noDesign &&  <AssessmentDesign />}
       
-      {!isError && !isSessionExpired && (
+      {!isError && !isSessionExpired && !loadingCourses && (
         <div className="relative w-28 h-28 lg:w-40 lg:h-40 rounded-full">
           
           <div className="absolute top-0 left-0 w-full h-full rounded-full 
@@ -62,7 +64,7 @@ const Loader = ({
         </div>
       )}
 
-      {(isError || isSessionExpired) && (
+      {(isError || isSessionExpired || loadingCourses) && (
         <div className="w-80 h-80 relative">
           <Image
             src={designSrc}

@@ -50,7 +50,7 @@ const Page = () => {
     }, []);
 
     if (!dashboardData || !courses.length || !Object.keys(modules).length) 
-        return <div className="overflow-hidden"> <Loader noDesign/></div>;
+        return <div className="overflow-hidden"> <Loader noDesign loadingCourses/></div>;
     
 
     // Filter courses based on selected level

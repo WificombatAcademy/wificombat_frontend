@@ -149,7 +149,7 @@ export const CareerPathwayCurriculum = ({schoolCurriculum}: CareerPathwayCurricu
               
               ( <div className="w-full lg:basis-[87%]">
               {courses.length > 0 ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 min-[1200px]:grid-cols-3 gap-9">
+                <div className="grid grid-cols-1 md:grid-cols-2 min-[1250px]:grid-cols-3 gap-9">
                 {courses
                   .filter((course) => course.level === selectedLevel)
                   .map((course, index) => (

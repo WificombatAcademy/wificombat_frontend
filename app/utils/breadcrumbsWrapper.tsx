@@ -7,7 +7,7 @@ type Props = {
 
 const BreadcrumbsWrapper = ({  children }: Props) => {
     return (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<></>}>
             {children}
         </Suspense>
     );
