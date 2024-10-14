@@ -46,7 +46,7 @@ export const Breadcrumbs = ({ homeLabel, homeIcon = "/assets/auth/logo.svg", lig
             {/* Custom breadcrumb for course page */}
             {isCoursePage ? (
                 <>
-                    <Link href="/Student/Curriculum" className={notActiveTextColor}>
+                    <Link href="/students/curriculum" className={notActiveTextColor}>
                         <h3 className="text-sm lg:text-lg">Student Curriculum</h3>
                     </Link>
                     <IoIosArrowForward className={notActiveTextColor} />
@@ -56,8 +56,21 @@ export const Breadcrumbs = ({ homeLabel, homeIcon = "/assets/auth/logo.svg", lig
                 // Default behavior
                 pathnames.map((path, index) => {
                     const isLast = index === pathnames.length - 1;
-                    const label = decodeURIComponent(path).replace(/-/g, ' ');
+                    let label = decodeURIComponent(path).replace(/-/g, ' ');
                     const href = `/${pathnames.slice(0, index + 1).join('/')}`;
+
+                     // Custom condition for "student"
+                     if (label.toLowerCase() === 'students') {
+                        label = "Students";
+                        return (
+                            <div key={index} className="flex items-center gap-1 capitalize">
+                                <Link href="/students/curriculum" className={notActiveTextColor}>
+                                    <h3 className={`text-lg cursor-pointer ${notActiveTextColor}`}>{label}</h3>
+                                </Link>
+                                <IoIosArrowForward className={notActiveTextColor} />
+                            </div>
+                        );
+                    }
 
                     return (
                         <div key={index} className="flex items-center gap-1 capitalize">

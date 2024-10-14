@@ -3,6 +3,7 @@ import { merriweather } from "@/app/fonts"
 import { Breadcrumbs } from "@/app/utils/breadcrumb";
 import BreadcrumbsWrapper from "@/app/utils/breadcrumbsWrapper";
 import Cart from "@/app/utils/cart";
+import { formatPrice } from "@/app/utils/types-and-links";
 import Image from "next/image"
 import Link from "next/link"
 import toast from "react-hot-toast";
@@ -13,6 +14,7 @@ type Props = {
     header: string;
     desc: string;
     level?: string;
+    price?: string;
     buttonWhite?: boolean;
     coursePage?: boolean;
     widthStyle?: string;
@@ -28,6 +30,7 @@ export const PathwayHero = ({
     buttonWhite,
     widthStyle, 
     level,
+    price,
     type,
     coursePage,
     course }: Props) => {
@@ -83,13 +86,21 @@ export const PathwayHero = ({
                     <div className="w-full md:basis-[50%] relative">
 
                         <Breadcrumbs homeLabel="Home" />
-                        <h3 className="mt-16 lg:mt-9 font-bold text-lg md:text-2xl">
-                            {level}
-                        </h3>
+                        <div className="mt-16 lg:mt-9 font-bold flex items-center gap-4">
+                            <h3 className="text-lg md:text-2xl text-black-200">
+                                {level}
+                            </h3>
+
+                            {price && 
+                            <h3 className="text-xl md:text-3xl">
+                            {formatPrice(price)}
+                            </h3>
+                        }
+                        </div>
 
                         <h1 className={`${merriweather.className} 
-                            text-3xl md:text-4xl lg:text-5xl 2xl:text-6xl 
-                            max-md:leading-[45px] lg:leading-[67.2px] 2xl:leading-[78px] font-bold max-lg:mt-4`}>
+                            text-3xl md:text-4xl min-[1200px]:text-5xl 2xl:text-6xl 
+                            max-md:leading-[45px] lg:leading-[67.2px] 2xl:leading-[78px] font-bold mt-4`}>
                             {header}
                         </h1>
 

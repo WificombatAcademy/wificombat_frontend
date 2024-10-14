@@ -70,6 +70,7 @@ const Page = ({ params }: any) => {
           header={`${course.subject}`}
           level={`${course.level}`}
           image={`${course.image ? `https://wificombatacademy.com/${course.image}` : `` }`}
+          price={course.price}
           course={course}
           />
 
