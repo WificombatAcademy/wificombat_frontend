@@ -23,30 +23,44 @@ type Props = {
     pathwayImage?: string;
     curriculum?: boolean;
     type?: 'course' | 'module';
+    viewCourse?: boolean;
 }
 
-const CareerCard = ({ bgColor ,desc, linkTo, level, subject, item, type,
+const CareerCard = ({ bgColor ,desc, linkTo, level, subject, item, type, viewCourse,
     textWhite, pathways, image, pathwayImage, curriculum, price, moduleImage, moduleSubject }: Props) => {
 
         const { addItemToCart, removeItemFromCart, isInCart } = useCart();
 
         const handleAddToCart = () => {
-            console.log("Item:", item); // Check the item being passed
+            // console.log("Item:", item); // Check the item being passed
         
             if (item) { // Check if item is defined
                 const { id, course_id, title, subject, level } = item; // Extract properties directly from item
                 console.log(course_id);
-                
+        
                 if (id) { // Ensure item.id is defined
                     // Check if the main course is in the cart
                     const isCourseInCart = isInCart(course_id); // Now check course_id directly
                     const isModuleInCart = isInCart(id); // Check if the module is already in cart
+        
+                    // Check how many modules of this course are already in the cart
+                    const modulesInCart = item.details?.modules?.filter((module:any) => isInCart(module.id)).length || 0; // Assuming pathways contains modules
+                    // console.log("Modules In cart: " ,modulesInCart)
+                    // console.log("Item: " , item)
+                    // Calculate total modules
+                    const totalModules = item.details?.totalModules || 0; // Adjust based on your item structure
+
+                    // console.log("total Modules: ", totalModules)
                     
-                    // console.log(isCourseInCart);
-                    // console.log(course_id);
-                    
+                    // Handle adding modules or courses
                     if (!isModuleInCart) {
                         if (!isCourseInCart) {
+                            // If all modules are already in the cart, show a toast and prevent adding
+                            if (modulesInCart + 1 === totalModules) {
+                                toast.error('You are trying to add all modules. Please add the full course instead.');
+                                return; // Prevent further execution
+                            }
+        
                             // Show success message only if the main course is not in the cart
                             toast.success(`${title || subject} has been added to your cart!`);
                         }
@@ -54,10 +68,10 @@ const CareerCard = ({ bgColor ,desc, linkTo, level, subject, item, type,
                             id: id,
                             name: title || subject,
                             subject: subject,
-                            level: level, // course or module
-                            type: 'module', // Update this if you want to distinguish between course/module
-                            price: item.price, // Ensure price is defined in item
-                            details: item, // Keep the original item for further detail
+                            level: level,
+                            type: 'module',
+                            price: item.price,
+                            details: item,
                             quantity: 1
                         });
                     } else if (isCourseInCart) {
@@ -69,7 +83,7 @@ const CareerCard = ({ bgColor ,desc, linkTo, level, subject, item, type,
             } else {
                 toast.error("Item is undefined.");
             }
-        };                    
+        };
         
     
         const handleRemoveFromCart = () => {
@@ -152,15 +166,23 @@ const CareerCard = ({ bgColor ,desc, linkTo, level, subject, item, type,
                     <h3 className={`pt-1 font-medium md:text-lg 
                     ${curriculum ? "text-black-600 font-semibold" : "text-black-800"} `}>{level}</h3>}
 
-                    {price && <h3 className={`pt-1 font-bold text-black-500`}>{price}</h3>}
+                    {/* {price && <h3 className={`pt-1 font-bold text-black-500`}>{price}</h3>} */}
                     </div>
 
                     <p className={`${!curriculum ? "pt-4" : "pt-3"} text-black-800`}>{desc}</p>
 
                     {curriculum && (
-                        <div className="mt-3 flex items-center justify-between gap-4 h-[4rem]">
-                            {isInCart(item?.id) ? (
-                               <div className="relative w-full basis-[50%] flex flex-col gap-2">
+                        <div className="mt-3 flex items-center justify-center gap-4 h-[4rem]">
+                            {viewCourse ? ( // Check for viewCourse flag
+                                <Link 
+                                    href={linkTo ?? ''} 
+                                    className="w-full border bg-black-500 text-white py-2 text-black-500 
+                                    font-semibold text-center transition ease-in-out duration-300 
+                                    hover:bg-opacity-80 rounded-lg">
+                                    View Course
+                                </Link>
+                            ) : isInCart(item?.id) ? (
+                                <div className="relative w-full basis-[50%] flex flex-col gap-2">
                                     <Link 
                                         href={`/students/cart`}
                                         className="w-full border border-black-500 text-black-500 py-2
@@ -176,23 +198,25 @@ const CareerCard = ({ bgColor ,desc, linkTo, level, subject, item, type,
                                             <span className="text-[10px] font-bold">X</span>
                                         </div>
                                     </button>
-                               </div>
+                                </div>
                             ) : (
-                                <button 
-                                    onClick={handleAddToCart} 
-                                    className="w-full basis-[50%] border border-black-500 py-2 text-black-500 
-                                    font-semibold text-center transition ease-in-out duration-300 
-                                    hover:bg-opacity-80 rounded-lg">
-                                    Add to Cart
-                                </button>
-                            )}
+                                <>
+                                    <button 
+                                        onClick={handleAddToCart} 
+                                        className="w-full basis-[50%] border border-black-500 py-2 text-black-500 
+                                        font-semibold text-center transition ease-in-out duration-300 
+                                        hover:bg-opacity-80 rounded-lg">
+                                        Add to Cart
+                                    </button>
 
-                            <button className="w-full basis-[50%]">
-                                <p className="w-full bg-black-500 font-semibold py-2 text-white 
-                                text-center transition ease-in-out duration-300 hover:bg-opacity-80 rounded-lg"> 
-                                    Buy Now
-                                </p>
-                            </button>
+                                    <button className="w-full basis-[50%]">
+                                        <p className="w-full bg-black-500 font-semibold py-2 text-white 
+                                        text-center transition ease-in-out duration-300 hover:bg-opacity-80 rounded-lg"> 
+                                            Buy Now
+                                        </p>
+                                    </button>
+                                </>
+                            )}
                         </div>
                     )}
 

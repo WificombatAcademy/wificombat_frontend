@@ -175,6 +175,7 @@ export const CareerPathwayCurriculum = ({schoolCurriculum}: CareerPathwayCurricu
                         desc={truncateDescription(course.note)} 
                         linkTo={`/course/${course.course_id}`}
                         item={{ ...course, id: course.course_id,}}
+                        viewCourse={true}
                       />
                     // </Link>
                   ))}

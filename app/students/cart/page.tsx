@@ -85,17 +85,22 @@ const Page = (props: Props) => {
                 {item.type === 'course' ? (
                   <div>
                     <p className="text-gray-600">
-                     {item.details.modules !== "" || item.details.modules !== null  ? item.details.modules : 0} 
-                     Modules 
-                     {item.details.lessons !== "" || item.details.lessons !== null  ? item.details.lessons : 0} Lessons
+                      {Array.isArray(item.details.modules) && item.details.modules.length > 0 
+                        ? item.details.modules.length 
+                        : 0} 
+                      Modules 
+                      {Array.isArray(item.details.lessons) && item.details.lessons.length > 0 
+                        ? item.details.lessons.length 
+                        : 0} Lessons
                     </p> 
-                    {/* item.details.lessons !== "" || item.details.lessons !== null  ? item.details.lessons : 0 */}
-
                     <p className='text-black-600 font-medium'>{item.type}</p>
                   </div>
                 ) : (
                   <p className="text-gray-600">
-                  {(item.details.num_lessons) !== "" ? item.details.num_lessons : 0} Lessons</p>
+                    {(item.details.num_lessons !== "" && item.details.num_lessons !== null) 
+                      ? item.details.num_lessons 
+                      : 0} Lessons
+                  </p>
                 )}
               </div>
 
