@@ -99,7 +99,7 @@ export const PathwayHero = ({
                         </div>
 
                         <h1 className={`${merriweather.className} 
-                            text-3xl md:text-3xl 2xl:text-5xl 
+                            text-2xl md:text-3xl 2xl:text-5xl 
                             max-md:leading-[45px] lg:leading-[47.2px] 2xl:leading-[78px] font-bold mt-4`}>
                             {header}
                         </h1>

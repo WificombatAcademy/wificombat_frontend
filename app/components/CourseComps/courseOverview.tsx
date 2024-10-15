@@ -56,7 +56,7 @@ const CourseOverview = ({desc}: Props) => {
             </div>
 
             <div>
-              <p className='text-lg md:text-2xl 2xl:text-3xl'>{overview.content}</p>
+              <p className='text-lg md:text-lg 2xl:text-3xl'>{overview.content}</p>
             </div>
           </div>
         ))}
@@ -86,7 +86,7 @@ const CourseOverview = ({desc}: Props) => {
                 </div>
 
                 <div>
-                  <p className='text-lg md:text-xl'>{objective}</p>
+                  <p className='md:text-lg'>{objective}</p>
                 </div>
               </div>
             ))}
@@ -105,7 +105,7 @@ const CourseOverview = ({desc}: Props) => {
                 </div>
 
                 <div>
-                  <p className='text-lg md:text-xl'>{note}</p>
+                  <p className='md:text-lg'>{note}</p>
                 </div>
               </div>
             ))}
