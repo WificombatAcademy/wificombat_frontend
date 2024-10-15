@@ -99,12 +99,12 @@ export const PathwayHero = ({
                         </div>
 
                         <h1 className={`${merriweather.className} 
-                            text-3xl md:text-4xl min-[1200px]:text-5xl 2xl:text-6xl 
-                            max-md:leading-[45px] lg:leading-[67.2px] 2xl:leading-[78px] font-bold mt-4`}>
+                            text-3xl md:text-3xl 2xl:text-5xl 
+                            max-md:leading-[45px] lg:leading-[47.2px] 2xl:leading-[78px] font-bold mt-4`}>
                             {header}
                         </h1>
 
-                        <p className="mt-5 font-semibold text-lg md:text-xl lg:w-[85%]">
+                        <p className="mt-2 font-semibold text-lg lg:text-xl lg:w-[85%]">
                             {desc}
                         </p>
 
@@ -112,7 +112,9 @@ export const PathwayHero = ({
                             {!coursePage ? (
                                 <Link 
                                     href={`/registration`}
-                                    className={`${buttonWhite ? "bg-white text-black-500" : "bg-[#131314] text-white focus-visible:outline-black"} 
+                                    className={`${buttonWhite ? 
+                                        "bg-white text-black-500" : 
+                                        "bg-[#131314] text-white focus-visible:outline-black"} 
                                         rounded-lg px-16 py-5 font-medium shadow-sm 
                                         hover:bg-opacity-80 focus-visible:outline focus-visible:outline-2 
                                         focus-visible:outline-offset-2`}
@@ -172,16 +174,17 @@ export const PathwayHero = ({
 
                     <div className={`w-full md:basis-[50%] 
                     ${coursePage ? "max-md:h-[340px] h-[300px] rounded-3xl" : "max-md:h-[350px]"}
-                        max-md:flex max-md:items-center max-md:justify-center`}>
+                        flex items-center justify-center`}>
                         {image && (
                             <Image 
-                                src={image ?? ""}
+                                src={`/course-page.jpeg`}
+                                // src={image ?? ""}
                                 alt={image ?? ""}
                                 width={500}
                                 height={500}
                                 className={`object-contain border-none
                                 ${widthStyle ?? "w-full h-full"}
-                                ${coursePage && "rounded-3xl object-contain bg-gray-50"}`}
+                                ${coursePage && "lg:w-[90%] h-[300px] rounded-3xl object-cover bg-blue-500"}`}
                             />
                         )}
                     </div>

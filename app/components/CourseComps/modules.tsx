@@ -74,8 +74,7 @@ const Modules = ({ modules, pricePerModule, courseLevel, courseId }: Props) => {
                             moduleSubject={module.title}
                             // moduleImage={module.cimage}
                             level={courseLevel}
-                            desc='This pathway covers everything from concept art 
-                            and storytelling to coding and game mechanics.'
+                            desc={`Whether you're starting or advancing, our modules offer a comprehensive and engaging learning experience.`}
                             price={formatPrice(pricePerModule.toFixed(2))}
                             item={{...module, course_id: courseId }} 
                             type='module'

@@ -11,6 +11,7 @@ type LoaderProps = {
   loadingCourses?: boolean;
   curriculum?: boolean;
   notCenter?: boolean;
+  home?: boolean;
 };
 
 const Loader = ({ 
@@ -20,7 +21,8 @@ const Loader = ({
   noCourses = false, 
   loadingCourses = false,
   curriculum,
-  notCenter 
+  notCenter,
+  home 
 }: LoaderProps) => {
 
   let displayMessage = curriculum ? "Loading Curriculum..." : loadingCourses ? "Loading Courses..." : "Loading...";
@@ -33,7 +35,7 @@ const Loader = ({
     displayMessage = noCourses ? "no Data Available" : "Error loading data.";
     designSrc = "/assets/dashboard/no-access.svg";
     altText = "Error occurred";
-    buttonText = noCourses ? "Go Back To Dashboard" : "Go Back Home";
+    buttonText = (noCourses && !home) ? "Go Back To Dashboard" : "Go Back Home";
     buttonLink = noCourses ? "/dashboard" : "/";
 
   } 

@@ -51,7 +51,7 @@ const Page = ({ params }: any) => {
   }
 
   if (!course) {
-    return <div>No course found.</div>; // Handle the case when no course is found
+    return <Loader isError home noCourses noDesign notCenter/>; // Show loader while data is being fetched
   }
 
     const totalModules = course.modules.length;
