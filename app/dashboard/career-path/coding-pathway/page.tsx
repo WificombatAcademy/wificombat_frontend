@@ -109,16 +109,17 @@ const Page = () => {
                                             {modules[course.course_id] 
                                             && modules[course.course_id].map((module: any, index: number) => (
                                                 <div key={module.id} 
-                                                className="w-[60%] md:w-[50%] lg:w-[25%] flex-shrink-0 h-full flex flex-col mb-5">
+                                                className="w-[60%] md:w-[50%] lg:w-[25%] flex-shrink-0 h-full flex flex-col mb-5
+                                                rounded-2xl">
 
                                                     <Link href={!(module.unlocked) ? 
                                                         `/dashboard/career-path/coding-pathway/${course.course_id}/${module.id}` 
-                                                        : ""}>
+                                                        : ""} className="rounded-2xl  bg-blue-500">
                                                         <button disabled={module.unlocked} className="relative w-full 
                                                         h-[150px] md:h-[190px] lg:h-[215px] disabled:cursor-not-allowed">
                                                             {module.unlocked && <div className="absolute inset-0 
                                                             bg-[#B1B1B4]/30 rounded-2xl"></div>}
-                                                            <Image 
+                                                            {/* <Image 
                                                                 src={(module.cimage !== "") ? 
                                                                     module.cimage :
                                                                      `/assets/dashboard/course.png`}
@@ -126,7 +127,7 @@ const Page = () => {
                                                                 width={282}
                                                                 height={215}
                                                                 className="w-full h-full object-cover bg-gray-50 border rounded-2xl"
-                                                            />
+                                                            /> */}
                                                         </button>
                                                     </Link>
 
