@@ -146,8 +146,8 @@ const CareerCard = ({ bgColor ,desc, linkTo, level, subject, item, type, viewCou
                 <div className="py-3 px-4">
 
                     {subject && (
-                    <Link href={linkTo ?? ''}>
-                            <h3 className={`font-medium text-lg 
+                        <Link href={linkTo ?? ''}>
+                            <h3 className={`font-medium text-lg
                             ${!curriculum ? "md:text-xl pt-3" : "font-semibold"} text-black-800`}>
                             {subject}</h3>
                         </Link>
@@ -159,7 +159,7 @@ const CareerCard = ({ bgColor ,desc, linkTo, level, subject, item, type, viewCou
                         {moduleSubject}</h3>
                     )}
 
-                    <div className="flex items-center gap-5 mt-4">
+                    <div className={`flex items-center gap-5 ${curriculum ? "" : "mt-4"}`}>
 
                     {level && 
                     <h3 className={`pt-1 font-medium md:text-lg 
@@ -171,7 +171,7 @@ const CareerCard = ({ bgColor ,desc, linkTo, level, subject, item, type, viewCou
                     <p className={`${!curriculum ? "pt-4" : "pt-3"} text-black-800`}>{desc}</p>
 
                     {curriculum && (
-                        <div className="mt-3 flex items-center justify-center gap-4 h-[4rem]">
+                        <div className="mt-3 flex items-center justify-center gap-4 h-[4rem] ">
                             {viewCourse ? ( // Check for viewCourse flag
                                 <Link 
                                     href={linkTo ?? ''} 

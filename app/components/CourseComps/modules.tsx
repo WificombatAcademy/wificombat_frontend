@@ -72,7 +72,7 @@ const Modules = ({ modules, pricePerModule, courseLevel, courseId }: Props) => {
                             curriculum={true}
                             pathway={module.title}
                             moduleSubject={module.title}
-                            moduleImage={module.cimage}
+                            // moduleImage={module.cimage}
                             level={courseLevel}
                             desc='This pathway covers everything from concept art 
                             and storytelling to coding and game mechanics.'
