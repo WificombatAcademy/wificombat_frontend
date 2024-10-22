@@ -21,7 +21,7 @@ const slides = [
 
     {heading1: "Explore the Multimedia Pathway", 
     heading2: `Your Journey in Multimedia Starts Here! Join our program to become a skilled Animator, Illustrator, and 2D & 3D Designer. Shape your creative future with us.`,
-    bgColor: "bg-purple-500", buttonBlack: true, img:"/hero-3.png", width:"w-[85%]" },
+    bgColor: "bg-purple-500", buttonBlack: true, img:"/hero-3.png", width:"w-[85%] min-[785px]:w-[70%]" },
 
     {heading1: "Navigate the AI Career Pathway", 
     heading2: `Dive into the exciting world of artificial intelligence. Gain expertise, innovate, and lead the way in AI technology with our specialized career pathway.`,
@@ -58,12 +58,12 @@ export const Hero = () => {
 
                             <Cart/>
 
-                            <div className="relative max-md:mt-[2rem] w-[93%] md:w-[80%] lg:w-[80%] mx-auto h-auto md:h-[16rem] 
+                            <div className="relative max-md:mt-[2rem] w-[93%] md:w-[90%] lg:w-[80%] mx-auto h-auto md:h-[16rem] 
                                 xl:h-[20rem] 2xl:h-[24rem] flex flex-col md:flex-row md:items-center gap-10">
                                     
                                 <div className="w-full md:basis-[50%]">
                                     <h1 className={`${merriweather.className} 
-                                    text-3xl md:text-4xl lg:text-5xl 2xl:text-6xl 
+                                    max-sm:text-3xl text-4xl lg:text-5xl 2xl:text-6xl 
                                     max-md:leading-[45px] lg:leading-[67.2px] 2xl:leading-[78px] font-bold max-lg:mt-8`}>
                                         {slide.heading1}
                                     </h1>
@@ -87,7 +87,8 @@ export const Hero = () => {
                                 </div>
 
                                 <div className="w-full md:basis-[50%] max-md:h-[350px]
-                                 max-md:flex max-md:items-center max-md:justify-center">
+                                 max-md:flex max-md:items-center max-md:justify-center
+                                 min-[585px]:mt-8 min-[585px]:mb-5 lg:mt-0 lg:mb-0 ">
                                     {slide.img !== ""
                                      && 
                                     <Image 
@@ -95,7 +96,9 @@ export const Hero = () => {
                                     alt={slide.img ?? ""}
                                     width={500}
                                     height={500}
-                                    className={`${slide.width} md:w-full md:h-[570px] object-contain border-none`}
+                                    className={`${slide.width} 
+                                    min-[585px]:w-[80%] min-[785px]:w-[70%]
+                                    lg:w-full lg:h-[570px] object-contain border-none`}
                                     />}
                                 </div>
 

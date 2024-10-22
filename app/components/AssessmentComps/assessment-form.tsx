@@ -228,7 +228,8 @@ const AssessmentForm = () => {
                             </h1>
 
                             <div className="mt-8 space-y-4">
-                                <label className="font-medium">Name</label>
+                               <div>
+                                 <label className="font-medium">Name</label>
 
                                 <input 
                                 required
@@ -238,6 +239,31 @@ const AssessmentForm = () => {
                                 placeholder="Enter your name"
                                 className="outline-none w-full p-3 border border-black-300 rounded-lg placeholder:text-[#656765]"
                                 />
+                               </div>
+                               <div className="mt-3">
+                                 <label className="font-medium">Email</label>
+
+                                <input 
+                                required
+                                type="text"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                placeholder="Enter your email"
+                                className="outline-none w-full p-3 border border-black-300 rounded-lg placeholder:text-[#656765]"
+                                />
+                               </div>
+                               <div className="mt-3">
+                                 <label className="font-medium">Mobile Number(Optional)</label>
+
+                                <input 
+                                required
+                                type="text"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                placeholder="Mobile Number"
+                                className="outline-none w-full p-3 border border-black-300 rounded-lg placeholder:text-[#656765]"
+                                />
+                               </div>
                             </div>
 
 

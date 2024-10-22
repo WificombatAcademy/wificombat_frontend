@@ -65,55 +65,95 @@ const StudentInfo = ({
         </div>
         </div>
 
-        <div className="w-full">
-        <label
-            htmlFor="student.age"
-            className="block text-sm font-medium leading-6 text-gray-900"
-        >
-            Age
-        </label>
-        <div className="mt-2 relative">
-            <div className="absolute inset-0 flex items-start justify-end">
-            <IoIosArrowDown className="text-black-500 relative top-5 right-4" />
-            </div>
-            <select
-            id="student.age"
-            {...register("student.age", {
-                required: true,
-                valueAsNumber: true,
-            })}
-            className={`relative appearance-none block outline-none w-full bg-transparent rounded-md border border-gray-600 py-4 px-4 shadow-sm ring-1 ring-inset ring-gray-300 text-gray-700 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6 ${
-                errors.student?.age
-                ? "border-[#F00101]"
-                : "border-neutral-300"
-            }
-            ${
-                errors.student?.age
-                ? "focus:border-red-500"
-                : "focus:border-black"
-            }`}
+        <div className="flex gap-6">
+            <div className="w-1/2">
+            <label
+                htmlFor="student.age"
+                className="block text-sm font-medium leading-6 text-gray-900"
             >
-            <option value="0" disabled>
-                Select an age
-            </option>
-            {Array.from({ length: 11 }, (_, i) => i + 8).map(
-                (age) => (
-                <option
-                    key={age}
-                    value={age}
-                    className="text-gray-700"
+                Age
+            </label>
+            <div className="mt-2 relative">
+                <div className="absolute inset-0 flex items-start justify-end">
+                <IoIosArrowDown className="text-black-500 relative top-5 right-4" />
+                </div>
+                <select
+                id="student.age"
+                {...register("student.age", {
+                    required: true,
+                    valueAsNumber: true,
+                })}
+                className={`relative appearance-none block outline-none w-full bg-transparent rounded-md border border-gray-600 py-4 px-4 shadow-sm ring-1 ring-inset ring-gray-300 text-gray-700 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6 ${
+                    errors.student?.age
+                    ? "border-[#F00101]"
+                    : "border-neutral-300"
+                }
+                ${
+                    errors.student?.age
+                    ? "focus:border-red-500"
+                    : "focus:border-black"
+                }`}
                 >
-                    {age}
+                <option value="0" disabled>
+                    Select an age
                 </option>
-                )
-            )}
-            </select>
-            {errors.student?.age && (
-            <p className="h-[1rem] text-[#F00101]">
-                {errors.student.age.message}
-            </p>
-            )}
-        </div>
+                {Array.from({ length: 11 }, (_, i) => i + 8).map(
+                    (age) => (
+                    <option
+                        key={age}
+                        value={age}
+                        className="text-gray-700"
+                    >
+                        {age}
+                    </option>
+                    )
+                )}
+                </select>
+                {errors.student?.age && (
+                <p className="h-[1rem] text-[#F00101]">
+                    {errors.student.age.message}
+                </p>
+                )}
+            </div>
+            </div>
+
+            <div className='w-1/2'>
+                <label
+                    htmlFor="student.class"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                    Class
+                </label>
+                <div className="mt-2 relative">
+                    <div className="absolute inset-0 flex items-start justify-end">
+                    <IoIosArrowDown className="text-black-500 relative top-5 right-4" />    
+                    </div>
+                    <select
+                    id="student.class"
+                    disabled={isLoading}
+                    {...register("student.class", { required: true })}
+                    className={`relative appearance-none block outline-none w-full bg-transparent rounded-md border border-gray-600 py-4 px-4 shadow-sm ring-1 ring-inset ring-gray-300 text-gray-700 focus:ring-2 focus:ring-inset focus:ring-purple-600 sm:text-sm sm:leading-6 ${
+                        errors.student?.class
+                        ? "border-[#F00101]"
+                        : "border-neutral-300"
+                    }
+                    ${errors.student?.class ? "focus:border-red-500" : "focus:border-black"}`}
+                    >
+                    <option value="" className="text-gray-600">Select Class</option>
+                    <option value="JSS1" className="text-gray-600">JSS 1 / Grade 7 / Year 7</option>
+                    <option value="JSS2" className="text-gray-600">JSS 2 / Grade 8 / Year 8</option>
+                    <option value="JSS3" className="text-gray-600">JSS 3 / Grade 9 / Year 9</option>
+                    <option value="SSS1" className="text-gray-600">SSS 1 / Grade 10 / Year 10</option>
+                    <option value="SSS2" className="text-gray-600">SSS 2 / Grade 11 / Year 11</option>
+                    <option value="SS33" className="text-gray-600">SS3 3 / Grade 12 / Year 12</option>
+                    </select>
+                    {errors.student?.class && (
+                    <p className="text-[#F00101]">
+                        {errors.student.class.message}
+                    </p>
+                    )}
+                </div>
+            </div>
         </div>
 
         <div className="flex gap-6">
@@ -214,7 +254,7 @@ const StudentInfo = ({
         </div>
         </div>
 
-        <div className="flex gap-6">
+        {/* <div className="flex gap-6">
         <div className="w-1/2">
             <label
             htmlFor="student.pathway"
@@ -300,9 +340,9 @@ const StudentInfo = ({
             )}
             </div>
         </div>
-        </div>
+        </div> */}
 
-        <div className="w-full">
+        {/* <div className="w-full">
         <label
             htmlFor="student.course"
             className="block text-sm font-medium leading-6 text-gray-900"
@@ -332,7 +372,7 @@ const StudentInfo = ({
             }`}
             >
             <option value="Coding">Nil</option>
-            {/* <option value="TeenTechpreneurship">TeenTechpreneurship</option> */}
+            <option value="TeenTechpreneurship">TeenTechpreneurship</option> 
             </select>
             {errors.student?.course && (
             <p className="text-[#F00101]">
@@ -340,7 +380,7 @@ const StudentInfo = ({
             </p>
             )}
         </div>
-        </div>
+        </div> */}
 
         <div className="mt-10 lg:mt-14 flex items-center justify-between gap-8">
         {/* <button

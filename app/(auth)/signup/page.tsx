@@ -99,23 +99,29 @@ export default function Page () {
     const requestOtp = async () => {
         setIsLoading(true);
         try {
-           await axiosInstance.post(`${API}/otp/`, {
+          const response = await axiosInstance.post(`${API}/otp/`, {
             email,
             action: 'request',
           });
-          toast.success('OTP sent:');
-          setModalOpen(true);
-          setIsLoading(false);
-        } catch (error:any) {
-          toast.error('Error sending OTP:', error)
+      
+          // Check if the email is already validated
+          if (response.data && response.data.code === "EMAIL_ALREADY_VALIDATED") {
+            toast.error('This email has already been validated.');
+          } else {
+            toast.success('OTP sent:');
+            setModalOpen(true);
+          }
+        } catch (error: any) {
+          toast.error('Error sending OTP:', error);
+        } finally {
           setIsLoading(false);
         }
-      };
-
+    };
+      
     const onSubmit: SubmitHandler<SignupValues> = async (data) => {
         setIsLoading(true);
         try {
-          console.log("Form data:", data);
+        //   console.log("Form data:", data);
           await new Promise((resolve) => setTimeout(resolve, 2000));
           setMail(email);
           setPass(password);

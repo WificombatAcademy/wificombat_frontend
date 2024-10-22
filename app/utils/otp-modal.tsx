@@ -65,17 +65,23 @@ const OtpModal = ({isOpen, onClose}: ModalProps) => {
         action: 'validate',
         otp
       });
-      console.log('OTP verified:');
-      if(isFromForgotPassword){
-        toast.success('OTP verified');
-        router.push("/create-password")
-        onClose();
+       // Check if the API returned an error in the body even with a 200 status code
+      if (response.data && response.data.code === "OTP_INVALID") {
+        toast.error('OTP is invalid or has expired.');
+        setIsVerifyingLoading(false);
       }
       else {
-        setIsVerifyingLoading(false);
-        toast.success('OTP verified');
-        setSuccessfulSignup(true);
-        onClose();
+        if(isFromForgotPassword){
+          toast.success('OTP verified');
+          router.push("/create-password")
+          onClose();
+        }
+        else {
+          setIsVerifyingLoading(false);
+          toast.success('OTP verified');
+          setSuccessfulSignup(true);
+          onClose();
+        }
       }
     } catch (error) {
       toast.error('Error sending OTP');
@@ -111,7 +117,7 @@ const OtpModal = ({isOpen, onClose}: ModalProps) => {
         OTP Verification
         </div>
         <p className="text-lg font-medium my-4 text-center">
-        Please enter the 4-digit code sent to your email
+        Please enter the 6-digit code sent to your email
         </p>
 
         <div className="my-4 pt-6 md:py-10 text-center space-y-3">

@@ -2,7 +2,7 @@ import Image from "next/image"
 
 const RegisterDesign = () => {
     return (
-        <div className="absolute inset-0 w-full max-md:hidden">
+        <div className="absolute inset-0 w-full max-lg:hidden">
             {/* 1ST DESIGN FROM TOP */}
             <div className="absolute top-2 lg:top-8 left-[35%]">
                 <svg width="40" height="33" viewBox="0 0 40 33" fill="none" xmlns="http://www.w3.org/2000/svg">

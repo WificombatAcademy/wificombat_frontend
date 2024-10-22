@@ -29,11 +29,12 @@ export type FormValues = {
   student: {
     fullname: string;
     age: number;
+    class:string;
     country: string;
     state: string;
-    pathway: string;
-    stage: string;
-    course: string;
+    // pathway: string;
+    // stage: string;
+    // course: string;
     password: string;
     confirm_password: string;
   };
@@ -62,12 +63,13 @@ export type FormValues = {
 
 type FormFields =
   | "student.fullname"
-  | "student.course"
+  // | "student.course"
   | "student.age"
+  | "student.class"
   | "student.country"
   | "student.state"
-  | "student.pathway"
-  | "student.stage"
+  // | "student.pathway"
+  // | "student.stage"
   | "schoolStudent.fullname"
   | "schoolStudent.age"
   | "schoolStudent.class"
@@ -109,11 +111,12 @@ const Profile = () => {
       student: {
         fullname: "",
         age: 0,
+        class:"",
         country: "",
         state: "",
-        pathway: "",
-        stage: "",
-        course: "",
+        // pathway: "",
+        // stage: "",
+        // course: "",
       },
       schoolStudent: {
         fullname:"",
@@ -150,8 +153,9 @@ const Profile = () => {
           studentValues.age > 0 &&
           studentValues.country.trim() &&
           studentValues.state.trim() &&
-          studentValues.pathway.trim() &&
-          studentValues.stage.trim()
+          // studentValues.pathway.trim() &&
+          // studentValues.stage.trim() && 
+          studentValues.class.trim()
         );
       case "Student":
         const schoolStudentValues = getValues("schoolStudent");
@@ -182,7 +186,8 @@ const Profile = () => {
     }
   };
   
-  const watchFields = watch(["student.fullname", "student.age", "student.country", "student.state", "student.pathway", "student.stage"]);
+  const watchFields = watch(["student.fullname", "student.age", "student.country", 
+    "student.state", "student.class"]);
   const watchSchoolFields = watch(["schoolStudent.fullname", "schoolStudent.age", "schoolStudent.class"]);
   
 
@@ -191,8 +196,7 @@ const Profile = () => {
     watchFields[1] > 0 && // Age validation
     watchFields[2].trim() && // Country validation
     watchFields[3].trim() && // State validation
-    watchFields[4].trim() && // Pathway validation
-    watchFields[5].trim()   // Stage validation
+    watchFields[4].trim() // Class validation
   );
 
     const isSchoolStudentFormFilled = !!(
@@ -208,10 +212,11 @@ const Profile = () => {
       fieldsToWatch = [
         "student.fullname",
         "student.age",
+        "student.class",
         "student.country",
         "student.state",
-        "student.pathway",
-        "student.stage",
+        // "student.pathway",
+        // "student.stage",
         "schoolStudent.fullname",
         "schoolStudent.age",
         "schoolStudent.class",
@@ -267,9 +272,10 @@ const Profile = () => {
         name: mail,
         account_type: "student",
         age: watch("student.age"),
-        career_pathway: watch("student.pathway"),
+        class: watch("student.class"),
+        // career_pathway: watch("student.pathway"),
         country: watch("student.country"),
-        learning_stage: watch("student.stage"),
+        // learning_stage: watch("student.stage"),
         name_in_full: watch("student.fullname"),
         state: watch("student.state"),
       }
@@ -371,8 +377,9 @@ const Profile = () => {
         "student.age",
         "student.country",
         "student.state",
-        "student.pathway",
-        "student.stage",
+        "student.class",
+        // "student.pathway",
+        // "student.stage",
       ];
     }
   
@@ -488,11 +495,12 @@ const Profile = () => {
 
         
         <div className={`
-          relative max-lg:w-full flex flex-1 flex-col pb-10 lg:flex-none overflow-y-auto mx-auto lg:min-w-[769px]
-        ${selectedRole!=="" ? "pt-0" : "pt-10"}
+          relative max-lg:w-full flex flex-1 flex-col pb-10 
+          lg:flex-none overflow-y-auto mx-auto lg:min-w-[769px]
+        ${selectedRole!=="" ? "pt-8" : "pt-0"}
         ${selectedRole==="Student" ? "-mt-16" : ""}`}>
-          {step === STEPS.STUDENT_INFO ? (
-            <div className="w-14 h-14"></div>
+          {/* {step === STEPS.STUDENT_INFO ? (
+            <div className="w-14 h-14 border-4 border-red-700"></div>
           ) : (
             <IoChevronBackOutline
               fontSize={10}
@@ -504,17 +512,18 @@ const Profile = () => {
           )}
 
           {step === STEPS.STUDENT_INFO ? (
-            <div className="w-14 h-14"></div>
+            <div className="w-14 h-14 border-4 border-blue-500"></div>
           ) : (
             <div className="lg:hidden relative px-4 mb-2">
               <IoChevronBackOutline
                 fontSize={10}
                 style={{ bottom: "2rem" }}
                 onClick={handleBack}
-                className="border border-[#5F5F5F1A] py-5 px-4 w-14 h-14 cursor-pointer font-bold rounded-lg shadow-sm"
+                className="border border-[#5F5F5F1A] py-5 px-4 w-14 h-14 
+                cursor-pointer font-bold rounded-lg shadow-sm"
               />
             </div>
-          )}
+          )} */}
 
           {/* <div className="w-full px-4 md:px-20">
             {/* <ProgressBar
@@ -542,6 +551,13 @@ const Profile = () => {
                   ? "Choose a plan"
                   : "Payment Description"}
               </h2>
+
+              {
+                selectedRole === "" &&
+                <h4 className="mt-5 text-black-700 text-xl md:text-2xl font-bold">
+                Create your student profile
+                </h4>
+              }
             </div>
 
             <div className="mt-10">
@@ -610,7 +626,7 @@ const Profile = () => {
                             </p>
 
                             <p className="mt-4 text-lg md:text-xl text-black-500 font-semibold">
-                              {watch("student.pathway")}
+                              {/* {watch("student.pathway")} */}
                             </p>
                           </div>
 
@@ -620,7 +636,7 @@ const Profile = () => {
                             </p>
 
                             <p className="mt-4 text-lg md:text-xl text-black-500 font-semibold">
-                              {watch("student.stage")}
+                              {/* {watch("student.stage")} */}
                             </p>
                           </div>
 
