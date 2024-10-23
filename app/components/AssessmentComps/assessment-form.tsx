@@ -13,6 +13,7 @@ import { useMain } from "@/app/context/MainContext";
 import { API, assessmentAges, assessmentGender, 
     assessmentImages, getAnswerText } from "@/app/utils/types-and-links";
 import axios from "axios";
+import { Question } from "./assessment-questions";
 
 type Option = {
     [key: string]: number;
@@ -41,7 +42,7 @@ const getQuestionsEndpoint = (age: string) => {
 const AssessmentForm = () => {
     const router = useRouter();
     const {setUsername} = useMain();
-    const [questions, setQuestions] = useState([]);
+    const [questions, setQuestions] = useState<any>([]);
     const [loading, setLoading] = useState(false);
     const [submitting, setSubmitting] = useState(false);
     const [currentStep, setCurrentStep] = useState(0);
@@ -52,16 +53,19 @@ const AssessmentForm = () => {
     const [selectedGender, setSelectedGender] = useState<String | null>(null);
     const handleSelectAge = (age: string) => setSelectedAge(age);
     const handleSelectGender = (gender: string) => setSelectedGender(gender);
-    const [responses, setResponses] = useState<Response[]>([]);
+    const [responses, setResponses] = useState<{ questionId: number; answer: string; pathway: string; }[]>([]);
     const [validationErrors, setValidationErrors] = useState<String []>([]);
 
 
-    console.log(selectedAge)
+    // console.log(selectedAge)
+    // console.log(questions)
 
     useEffect(() => {
         const fetchQuestions = async () => {
           const endpoint = getQuestionsEndpoint(selectedAge);
           if (!endpoint) return;
+
+          setLoading(true);
     
           try {
             const response = await axios.get(endpoint)
@@ -76,37 +80,104 @@ const AssessmentForm = () => {
         fetchQuestions();
       }, [selectedAge]);
 
-    const validateCurrentStep = () => {
+      const handleResponseChange = (questionId: number, answer: string, pathway: string) => {
+        setResponses((prev) => {
+            const existingResponseIndex = prev.findIndex(response => response.questionId === questionId);
+            if (existingResponseIndex !== -1) {
+                // Update existing response
+                const updatedResponses = [...prev];
+                updatedResponses[existingResponseIndex] = { questionId, answer, pathway };
+                return updatedResponses;
+            }
+            // Add new response
+            return [...prev, { questionId, answer, pathway }];
+        });
+    };
+    
+
+    const validateCurrentStep = (): string[] => {
         const errors: string[] = [];
         if (currentStep === 0 && !name) {
             errors.push("Name is required.");
-            toast.error("Name is required!");
+            // toast.error("Name is required!");
         }
         if (currentStep === 0 && (!email && name)) {
             errors.push("Email is required.");
-            toast.error("Email is required!");
+            // toast.error("Email is required!");
         }
         if (currentStep === 1 && !selectedGender) {
             errors.push("Gender is required.");
-            toast.error("Gender is required.");
+            // toast.error("Gender is required.");
         }
         if (currentStep === 2 && !selectedAge) {
             errors.push("Age is required.");
-            toast.error("Age is required.");
+            // toast.error("Age is required.");
         }
-        if (currentStep >= 3 && currentStep <= 10) {
-            const questionIndex = currentStep - 3;
-            const answered = responses.some(response => response.question_id === questionIndex);
+        if (currentStep >= 3 && currentStep <= totalSteps) {
+            const questionIndex = currentStep - 3 + 1;
+            const answered = responses.some(response => response.questionId === questionIndex);
             if (!answered) {
                 errors.push(`Please answer the question for step ${currentStep + 1}.`);
-                toast.error(`Please answer the question for step ${currentStep + 1}.`);
             }
         }
         setValidationErrors(errors);
-        return errors.length === 0;
+        return errors;
+    };
+
+    const analyzeResponses = () => {
+        const pathwayCounts: { [key: string]: number } = {};
+        
+        responses.forEach(response => {
+            if (response.answer === "yes") { // Assuming "yes" indicates a positive response for pathways
+                pathwayCounts[response.pathway] = (pathwayCounts[response.pathway] || 0) + 1;
+            }
+        });
+    
+        // Determine the highest count
+        let selectedPathway = null;
+        let maxCount = 0;
+    
+        for (const [pathway, count] of Object.entries(pathwayCounts)) {
+            if (count > maxCount) {
+                maxCount = count;
+                selectedPathway = pathway;
+            }
+        }
+    
+        // If there is a tie, select the first pathway encountered
+        if (selectedPathway) {
+            console.log(`Selected pathway: ${selectedPathway}`);
+        } else {
+            console.log("No pathway selected.");
+        }
+    };
+
+    
+    const next = () => {
+        const errors = validateCurrentStep();
+    
+        if (errors.length > 0) {
+            errors.forEach(error => {
+                toast.error(error);
+            });
+        } else {
+            // Move to the next step
+            if (currentStep === totalSteps - 1) {
+                analyzeResponses(); // Analyze after the last question
+            }
+            setCurrentStep(currentStep + 1);
+        }
+    };
+    
+
+    const prev = () => {
+        if (currentStep !== 0) {
+            setCurrentStep(currentStep - 1);
+        }
     };
 
     // NAVIGATIONS
+    const totalSteps = 3 + questions.length;
     const Navigations = () => {
         const prev = () => {
             if (currentStep !== 0) {
@@ -115,7 +186,18 @@ const AssessmentForm = () => {
         };
 
         const next = () => {
-            if (validateCurrentStep()) {
+            // if (validateCurrentStep()) {
+            //     setCurrentStep(currentStep + 1);
+            // }
+            const errors = validateCurrentStep();
+
+            if (errors.length > 0) {
+                // Display all validation errors as toast messages
+                errors.forEach(error => {
+                    toast.error(error);
+                });
+            } else {
+                // Proceed to the next step if no errors
                 setCurrentStep(currentStep + 1);
             }
         };
@@ -123,7 +205,7 @@ const AssessmentForm = () => {
         return (
             <div>
                 {
-                currentStep === 10 ? 
+                (currentStep === totalSteps - 1 && !questions)? 
                 <>
                     <div className="mt-16 flex items-center justify-center">
                         <div>
@@ -156,15 +238,15 @@ const AssessmentForm = () => {
                         </button>  
 
                         <div>
-                            {currentStep + 1} of 11
+                            {currentStep + 1} of {totalSteps}
                         </div>
 
                         <button
-                        disabled={currentStep >= 10}
+                        disabled={currentStep >= totalSteps}
                         onClick={next}
                         className="py-2 px-4 border border-[#D0D5DD] shadow-md rounded-lg
                         disabled:text-gray-400 disabled:cursor-not-allowed">
-                            Next
+                            {loading ? <RiLoader4Fill className="animate-spin"/> : "Next"} 
                         </button> 
                     </div>
                 </>
@@ -191,6 +273,7 @@ const AssessmentForm = () => {
 
 
                 <form 
+                 onSubmit={(e) => e.preventDefault()}
                 className="z-20 relative text-black-500 pb-12">
                     {validationErrors.length > 0 && (
                         <div className="text-red-500 mb-4 text-center">
@@ -358,6 +441,41 @@ const AssessmentForm = () => {
                             <Navigations />
                         </div>
                     )}
+
+                    {currentStep >= 3 && currentStep < totalSteps && (
+                    () => {
+                        const questionIndex = currentStep - 3;
+                        const question = questions[questionIndex];
+
+                        if (!question) {
+                        return (
+                            <div className="text-center text-red-500">
+                            No question found for step {currentStep}
+                            </div>
+                        );
+                        }
+
+                        return (
+                        <div key={question.id} className="max-md:pt-8 pt-32 h-screen">
+                            
+                        <Question
+                        key={question.id}
+                        question={question}
+                        index={questionIndex}
+                        selectedAnswer={responses.find(response => response.questionId === question.id)?.answer}
+                        onChange={handleResponseChange} // Ensure pathway is passed
+                        onNext={next}
+                        onPrev={prev}
+                        isLastStep={currentStep === totalSteps - 1}
+                        stepNumber={currentStep - 2} 
+                        totalQuestions={totalSteps}
+                        />
+
+                        </div>
+                        );
+                    }
+                    )()}
+
 
                 </form>
             </div>
