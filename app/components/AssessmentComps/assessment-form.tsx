@@ -34,10 +34,12 @@ const AssessmentForm = () => {
     const router = useRouter();
     const {setUsername} = useMain();
     const [recommendation, setRecommendation] = useState<any>(null);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [submitting, setSubmitting] = useState(false);
     const [currentStep, setCurrentStep] = useState(0);
     const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [number, setNumber] = useState("");
     const [selectedAge, setSelectedAge] = useState<String | null>(null);
     const [selectedGender, setSelectedGender] = useState<String | null>(null);
     const handleSelectAge = (age: string) => setSelectedAge(age);
@@ -87,6 +89,10 @@ const AssessmentForm = () => {
         if (currentStep === 0 && !name) {
             errors.push("Name is required.");
             toast.error("Name is required!");
+        }
+        if (currentStep === 0 && (!email && name)) {
+            errors.push("Email is required.");
+            toast.error("Email is required!");
         }
         if (currentStep === 1 && !selectedGender) {
             errors.push("Gender is required.");
@@ -237,7 +243,8 @@ const AssessmentForm = () => {
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                                 placeholder="Enter your name"
-                                className="outline-none w-full p-3 border border-black-300 rounded-lg placeholder:text-[#656765]"
+                                className="outline-none w-full p-3 border border-black-300 
+                                rounded-lg placeholder:text-[#656765]"
                                 />
                                </div>
                                <div className="mt-3">
@@ -245,23 +252,25 @@ const AssessmentForm = () => {
 
                                 <input 
                                 required
-                                type="text"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                                 placeholder="Enter your email"
-                                className="outline-none w-full p-3 border border-black-300 rounded-lg placeholder:text-[#656765]"
+                                className="outline-none w-full p-3 border border-black-300 
+                                rounded-lg placeholder:text-[#656765]"
                                 />
                                </div>
                                <div className="mt-3">
-                                 <label className="font-medium">Mobile Number(Optional)</label>
+                                 <label className="font-medium">Mobile Number (Optional)</label>
 
                                 <input 
                                 required
-                                type="text"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                                placeholder="Mobile Number"
-                                className="outline-none w-full p-3 border border-black-300 rounded-lg placeholder:text-[#656765]"
+                                type="tel"
+                                value={number}
+                                onChange={(e) => setNumber(e.target.value)}
+                                placeholder="e.g 07012345678"
+                                className="outline-none w-full p-3 border border-black-300 rounded-lg 
+                                placeholder:text-[#656765]"
                                 />
                                </div>
                             </div>
@@ -363,7 +372,8 @@ const AssessmentForm = () => {
                                     <div className="mt-4 font-medium">{AgeType.age}</div>
 
                                     {selectedAge === AgeType.age && (
-                                        <div className="absolute top-[-0.3rem] right-0 bg-green-500 text-white rounded-full">
+                                        <div className="absolute top-[-0.3rem] right-0 
+                                        bg-green-500 text-white rounded-full">
                                             <IoCheckmark />
                                         </div>
                                     )}

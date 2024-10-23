@@ -532,24 +532,24 @@ export const formatPrice = (price: string) => {
 
   export const assessmentAges = [
     { id: 1,
-      age: "6-8 years old",
-      maleImage: "/assessment-age-5.png",
-      femaleImage: "/student-reg.png",
+      age: "5-7 years old",
+      maleImage: "/student-reg-male.png",
+      femaleImage: "/student-reg-female.png",
     },
     { id: 2,
-      age: "9-12 years old",
-      maleImage: "/educator-reg.png",
-      femaleImage: "/assessment-age-2.png",
+      age: "8-10 years old",
+      maleImage: "/student-reg-male-2.png",
+      femaleImage: "/student-reg-female-2.png",
     },
     { id: 3,
-      age: "13-15 years old",
-      maleImage: "/assessment-age-6.png",
-      femaleImage: "/assessment-age-3.png",
+      age: "11-14 years old",
+      maleImage: "/student-reg-male-3.png",
+      femaleImage: "/student-reg-female-3.png",
     },
     { id: 4,
-      age: "16-18 years old",
-      maleImage: "/assessment-age-7.png",
-      femaleImage: "/assessment-age-4.png",
+      age: "15-18 years old",
+      maleImage: "/student-reg-male-4.png",
+      femaleImage: "/student-reg-female-4.png",
     },
   ]
 
@@ -557,12 +557,12 @@ export const formatPrice = (price: string) => {
     {
       id: 1,
       sex: "Female",
-      image: "/student-reg.png"
+      image: "/student-reg-female.png"
     },
     {
       id: 2,
       sex: "Male",
-      image: "/educator-reg.png"
+      image: "/student-reg-male.png"
     }
   ]
 
