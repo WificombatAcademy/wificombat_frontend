@@ -6,7 +6,7 @@ import GeneralNavbar from "../components/general/GeneralNavbar";
 import Link from "next/link";
 import RecommendationDesign from "../components/AssessmentComps/recommendation-design";
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useMain } from "../context/MainContext";
 import Loader from "../utils/loader";
 
@@ -74,6 +74,7 @@ export default function RecommendationPage() {
     }
 
     return (
+        <Suspense>≈
         <div className="mx-auto relative container w-full max-w-[2000px] overflow-hidden">
             {/* Navbar and Footer */}
             <GeneralNavbar />
@@ -216,5 +217,6 @@ export default function RecommendationPage() {
             />
             <Footer />
         </div>
+        </Suspense>
     );
 }
