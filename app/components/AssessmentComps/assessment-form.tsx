@@ -4,14 +4,11 @@ import { IoCheckmark, IoChevronBackOutline } from "react-icons/io5"
 import AssessmentDesign from "./assessment-design";
 import {useEffect, useState } from "react";
 import Image from "next/image";
-import Loader from "@/app/utils/loader";
-import axiosInstance from "@/app/utils/auth-interceptor";
 import toast, { Toaster } from "react-hot-toast";
 import { merriweather } from "@/app/fonts";
 import { RiLoader4Fill } from "react-icons/ri";
 import { useMain } from "@/app/context/MainContext";
-import { API, assessmentAges, assessmentGender, 
-    assessmentImages, getAnswerText } from "@/app/utils/types-and-links";
+import { API, assessmentAges, assessmentGender, } from "@/app/utils/types-and-links";
 import axios from "axios";
 import { Question } from "./assessment-questions";
 
@@ -43,6 +40,8 @@ const AssessmentForm = () => {
     const router = useRouter();
     const {setUsername} = useMain();
     const [questions, setQuestions] = useState<any>([]);
+    const [pathways, setPathways] = useState<any>([]);
+    const [noQuestions, setNoQuestions] = useState(false);
     const [loading, setLoading] = useState(false);
     const [submitting, setSubmitting] = useState(false);
     const [currentStep, setCurrentStep] = useState(0);
@@ -53,12 +52,8 @@ const AssessmentForm = () => {
     const [selectedGender, setSelectedGender] = useState<String | null>(null);
     const handleSelectAge = (age: string) => setSelectedAge(age);
     const handleSelectGender = (gender: string) => setSelectedGender(gender);
-    const [responses, setResponses] = useState<{ questionId: number; answer: string; pathway: string; }[]>([]);
+    const [responses, setResponses] = useState<{ questionId: number; answer: string; pathway: string; pathwayId: number; }[]>([]);
     const [validationErrors, setValidationErrors] = useState<String []>([]);
-
-
-    // console.log(selectedAge)
-    // console.log(questions)
 
     useEffect(() => {
         const fetchQuestions = async () => {
@@ -70,8 +65,12 @@ const AssessmentForm = () => {
           try {
             const response = await axios.get(endpoint)
             setQuestions(response.data.quiz || []);
-          } catch (error) {
+            setPathways(response.data.reasons || []);
+            setNoQuestions(false);
+        } catch (error) {
             console.error("Failed to fetch questions:", error);
+            setNoQuestions(true);
+            return
           } finally {
             setLoading(false);
           }
@@ -80,31 +79,31 @@ const AssessmentForm = () => {
         fetchQuestions();
       }, [selectedAge]);
 
-      const handleResponseChange = (questionId: number, answer: string, pathway: string) => {
+      const handleResponseChange = (questionId: number, answer: string, pathway: string, pathwayId: number) => {
         setResponses((prev) => {
             const existingResponseIndex = prev.findIndex(response => response.questionId === questionId);
             if (existingResponseIndex !== -1) {
                 // Update existing response
                 const updatedResponses = [...prev];
-                updatedResponses[existingResponseIndex] = { questionId, answer, pathway };
+                updatedResponses[existingResponseIndex] = { questionId, answer, pathway, pathwayId };
                 return updatedResponses;
             }
             // Add new response
-            return [...prev, { questionId, answer, pathway }];
+            return [...prev, { questionId, answer, pathway, pathwayId }];
         });
     };
     
-
     const validateCurrentStep = (): string[] => {
         const errors: string[] = [];
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
         if (currentStep === 0 && !name) {
             errors.push("Name is required.");
             // toast.error("Name is required!");
         }
-        if (currentStep === 0 && (!email && name)) {
-            errors.push("Email is required.");
-            // toast.error("Email is required!");
-        }
+        if (currentStep === 0 && ( !email || !emailPattern.test(email)) && name ) {
+            errors.push("A valid email is required.");
+          }
         if (currentStep === 1 && !selectedGender) {
             errors.push("Gender is required.");
             // toast.error("Gender is required.");
@@ -114,8 +113,11 @@ const AssessmentForm = () => {
             // toast.error("Age is required.");
         }
         if (currentStep >= 3 && currentStep <= totalSteps) {
-            const questionIndex = currentStep - 3 + 1;
-            const answered = responses.some(response => response.questionId === questionIndex);
+            // Get the actual question based on current step
+            const questionIndex = currentStep - 3;
+            const currentQuestion = questions[questionIndex];
+            const answered = responses.some(response => response.questionId === currentQuestion?.id);
+            
             if (!answered) {
                 errors.push(`Please answer the question for step ${currentStep + 1}.`);
             }
@@ -127,49 +129,117 @@ const AssessmentForm = () => {
     const analyzeResponses = () => {
         const pathwayCounts: { [key: string]: number } = {};
         
+        // Assuming the pathwayId is passed correctly
         responses.forEach(response => {
-            if (response.answer === "yes") { // Assuming "yes" indicates a positive response for pathways
-                pathwayCounts[response.pathway] = (pathwayCounts[response.pathway] || 0) + 1;
+            if (response.answer === "yes") { // Adjust based on your logic for positive response
+                pathwayCounts[response.pathwayId] = (pathwayCounts[response.pathwayId] || 0) + 1;
             }
         });
     
-        // Determine the highest count
-        let selectedPathway = null;
+        let selectedPathwayId = '';
         let maxCount = 0;
     
-        for (const [pathway, count] of Object.entries(pathwayCounts)) {
+        for (const [pathwayId, count] of Object.entries(pathwayCounts)) {
             if (count > maxCount) {
                 maxCount = count;
-                selectedPathway = pathway;
+                selectedPathwayId = pathwayId; // This now correctly captures the ID
             }
         }
     
-        // If there is a tie, select the first pathway encountered
-        if (selectedPathway) {
-            console.log(`Selected pathway: ${selectedPathway}`);
-        } else {
-            console.log("No pathway selected.");
-        }
-    };
-
+        // console.log("Selected pathway ID:", selectedPathwayId);
+        
+        // Find the reason associated with the selected pathway ID
+        const selectedPathwayData = pathways.find((item: any) => String(item.pathway.id) === String(selectedPathwayId));
+        // console.log("Selected pathway Data:", selectedPathwayData);
+        const reason = selectedPathwayData ? selectedPathwayData.pathway.reason : ""; // Get the reason
     
-    const next = () => {
-        const errors = validateCurrentStep();
+        // console.log("Reason for selected pathway:", reason);
+        
+        return { selectedPathwayId, selectedPathwayData }; // Return both the pathwayId and reason
+    };   
+    
+    // SEND EMAIL
+    const sendRecommendationEmail = async (userEmail: string, pathwayData: any) => {
+        setSubmitting(true)
+        try {
+            const content = `
+            <h1>Recommended Pathway</h1>
+            <h4>Hi, ${name}</h4>
+            <p>We have analyzed your responses and based on that, we recommend the following pathway:</p>
+            <h2>Pathway Title</h2>
+            <p>${pathwayData.pathway.description}</p>
+            <p><b>Skills:</b> ${pathwayData.pathway.skills}</p>
+            <p><b>Outlook:</b> ${pathwayData.pathway.outlook}</p>
+            <p>Click the button below to register and learn more:</p>
+            `;
+        
+            // Sending the email
+            await axios.post(
+            'https://wificombatacademy.com/api/v2/assessment/mail',
+            {
+                email: userEmail,
+                content,
+            },
+            {
+                headers: {
+                'X-API-KEY': '4TjhoZiPVpXBwBRfkIHfOgiatLuY4n5WMUb6Wnc17OM',
+                },
+            }
+            );
+        
+            return true;
+        } catch (error) {
+            console.error("Failed to send recommendation email:", error);
+            toast.error("Failed to send email. Please try again.");
+            return false;
+        }
+        finally {
+        setSubmitting(false);
+
+        }
+        };
+        
+    // SEND EMAIL
+    
+    const handleNext = async () => {
+        const errors = validateCurrentStep(); // Your validation logic
     
         if (errors.length > 0) {
             errors.forEach(error => {
-                toast.error(error);
+                toast.error(error); // Display error messages
             });
         } else {
-            // Move to the next step
             if (currentStep === totalSteps - 1) {
-                analyzeResponses(); // Analyze after the last question
+                // If it's the last step, gather the data and navigate to the recommendation page
+                const { selectedPathwayId, selectedPathwayData } = analyzeResponses(); // Collect responses
+
+                // Make sure selectedPathway is a string, not null or undefined
+                if (selectedPathwayId && selectedPathwayData) {
+
+                    const emailSent = await sendRecommendationEmail(email, selectedPathwayData);
+
+                    if (emailSent) {
+                        const pathwayDataEncoded = encodeURIComponent(JSON.stringify(selectedPathwayData));
+
+                        // Build the URL string manually
+                        const url = `/recommendation?pathwayId=${selectedPathwayId}
+                        &pathwayData=${pathwayDataEncoded}
+                        &userName=${name}`;
+
+                        // Navigate to the recommendation page
+                        router.push(url);
+                    }
+
+                } else {
+                    console.error("selectedPathway is null or undefined");
+                }
+            } else {
+                // Move to the next question
+                setCurrentStep(currentStep + 1);
             }
-            setCurrentStep(currentStep + 1);
         }
     };
     
-
     const prev = () => {
         if (currentStep !== 0) {
             setCurrentStep(currentStep - 1);
@@ -189,6 +259,10 @@ const AssessmentForm = () => {
             // if (validateCurrentStep()) {
             //     setCurrentStep(currentStep + 1);
             // }
+            if(noQuestions) {
+                toast.error("Failed to fetch questions due to network");
+                return;
+            }
             const errors = validateCurrentStep();
 
             if (errors.length > 0) {
@@ -256,7 +330,6 @@ const AssessmentForm = () => {
     }
     // END NAVIGATIONS
 
-
     return (
         <section className="relative w-full h-screen bg-white pb-20 flex justify-center overflow-y-auto">
             <AssessmentDesign />
@@ -284,7 +357,7 @@ const AssessmentForm = () => {
                     )}
 
                     {currentStep === 0 && (
-                        <div className="form-box max-md:mt-32 md:mt-48 md:w-[70%] lg:w-[50%] mx-auto 
+                        <div className="form-box mt-32 md:w-[70%] lg:w-[50%] mx-auto 
                         py-10 px-5 md:px-8 rounded-3xl overflow-y-auto">
                             <h1 className={`${merriweather.className} font-bold text-lg md:text-2xl text-center`}>
                                 Part 1: Introductory Questions
@@ -456,7 +529,7 @@ const AssessmentForm = () => {
                         }
 
                         return (
-                        <div key={question.id} className="max-md:pt-8 pt-32 h-screen">
+                        <div key={question.id} className="max-md:py-4 max-md:mb-4 pt-32 lg:h-screen">
                             
                         <Question
                         key={question.id}
@@ -464,11 +537,12 @@ const AssessmentForm = () => {
                         index={questionIndex}
                         selectedAnswer={responses.find(response => response.questionId === question.id)?.answer}
                         onChange={handleResponseChange} // Ensure pathway is passed
-                        onNext={next}
+                        onNext={handleNext}
                         onPrev={prev}
                         isLastStep={currentStep === totalSteps - 1}
                         stepNumber={currentStep - 2} 
-                        totalQuestions={totalSteps}
+                        totalQuestions={questions.length}
+                        submitting={submitting}
                         />
 
                         </div>

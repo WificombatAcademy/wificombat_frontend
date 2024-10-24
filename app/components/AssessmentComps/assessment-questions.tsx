@@ -1,16 +1,18 @@
+import { merriweather } from "@/app/fonts";
 import Image from "next/image";
-import { useState } from "react";
+import { FaSpinner } from "react-icons/fa";
 
 type Props ={
-    question: any;
-    index: number;
-    onChange: (questionId: number, answer: string, pathway: string) => void;
-    selectedAnswer: any;
-    onNext: () => void; // New prop for "Next" button
-    onPrev: () => void; // New prop for "Previous" button
-    isLastStep: boolean; // Indicates if it's the last question
-    stepNumber: number; 
-    totalQuestions:number;
+  question: any;
+  index: number;
+  onChange: (questionId: number, answer: string, pathway: string, pathwayId: number) => void;
+  selectedAnswer: any;
+  onNext: () => void; // New prop for "Next" button
+  onPrev: () => void; // New prop for "Previous" button
+  isLastStep: boolean; // Indicates if it's the last question
+  stepNumber: number; 
+  totalQuestions:number;
+  submitting: boolean;
 }
 
 const colorSchemes = [
@@ -32,7 +34,9 @@ export const Question = ({ question,
   onPrev,
   isLastStep,
   stepNumber,
-  totalQuestions }: Props) => {
+  totalQuestions,
+  submitting }: Props) => {
+
   const { question: questionText, options } = question;
   const colorIndex = index % colorSchemes.length;
   const { primary, secondary } = colorSchemes[colorIndex];
@@ -50,12 +54,26 @@ export const Question = ({ question,
     }
   };
 
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      onNext();
+    }
+  };
+
+  // Part 2: Scenario-Based Questions
   return (
     <div className={`z-[5] relative h-fit form-box max-md:mt-32 md:mt-6 md:w-[70%] lg:w-[50%] 
       mx-auto py-10 px-5 rounded-3xl`}>
-      <h2 className={`${primary} text-white font-bold text-center py-4 rounded-xl`}>
+
+    <h1 className={`${merriweather.className} font-bold text-lg md:text-2xl text-center`}>
+        Part 2: Scenario-Based Questions
+    </h1>
+
+      <div className={`mt-6 w-full ${primary} text-white 
+      font-bold text-lg md:text-xl 2xl:text-2xl py-6 px-[10px] text-center rounded-2xl`}>
         {questionText}
-      </h2>
+      </div>
+
       <div className="mt-5 w-full p-3 space-y-4">
         {Object.keys(options).map((optionKey) => (
           <div
@@ -69,9 +87,10 @@ export const Question = ({ question,
               checked={selectedAnswer === optionKey}
               // onChange={() => onChange(question.id, optionKey, question.pathway)}
               onChange={() => {
-                onChange(question.id, optionKey, question.pathway);
+                onChange(question.id, optionKey, question.pathway, question.pathway_id);
                 console.log(`Answered: ${question.id} with ${optionKey}`); // Log the answered question
               }}
+              onKeyDown={handleKeyPress} 
               className="mr-2 accent-blue-500 border-none rounded-full"
             />
             <div className="font-medium flex items-center gap-1">
@@ -99,17 +118,29 @@ export const Question = ({ question,
         >
             Previous
         </button>
+
          {/* Display step number */}
           <div className="flex items-center">
             Step {stepNumber} of {totalQuestions} {/* Replace `totalQuestions` with the total number of questions */}
           </div>
+
         <button
             onClick={onNext}
-            className="py-2 px-4 border border-[#D0D5DD] shadow-md rounded-lg
-            disabled:text-gray-400 disabled:cursor-not-allowed"
+            className={`py-2 px-4 
+              ${isLastStep ? "bg-black-500 text-white" : "border border-[#D0D5DD]"}
+               shadow-md rounded-lg disabled:text-gray-400 disabled:cursor-not-allowed 
+               flex items-center justify-center gap-1`}
         >
-            {isLastStep ? "Submit" : "Next"}
+            {submitting ? (
+            <>
+              <div className="max-md:hidden">Submitting..</div>
+              <FaSpinner className="animate-spin" />
+              </>
+          ) : (
+            isLastStep ? "Submit" : "Next"
+          )}
         </button>
+
       </div>
 
     </div>
