@@ -177,7 +177,7 @@ const AssessmentForm = () => {
         
             // Sending the email
             await axios.post(
-            'https://wificombatacademy.com/api/v2/assessment/mail',
+            'https://wificombatacademy.com/api/v2/assessment/mail/',
             {
                 email: userEmail,
                 content,
