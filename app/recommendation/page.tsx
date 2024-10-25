@@ -25,11 +25,18 @@ function RecommendationContent() {
             .join(" ");
     };
 
+    // Function to normalize the pathway name
+    const normalizePathwayName = (name: string | null) => {
+        if (!name) return name;
+        if (name === "Artificial Intelligence (AI)") return "ai";
+        return name.toLowerCase(); // Convert all other names to lowercase
+    };
+
     const getStageAndSkills = (age: AgeRange | null, pathwayName: string | null) => {
         if (!age || !pathwayName) return { stage: "N/A", skills: "N/A" };
     
-        // Convert pathwayName to lowercase
-        const normalizedPathwayName = pathwayName.toLowerCase() as PathwayName;
+        // Normalize the pathway name
+        const normalizedPathwayName = normalizePathwayName(pathwayName) as PathwayName;
     
         // Retrieve information for the specified age and pathway
         const ageGroup = ageToStageAndSkills[age];
@@ -38,7 +45,7 @@ function RecommendationContent() {
         }
     
         return { stage: "N/A", skills: "N/A" };
-    };    
+    };   
 
 
     useEffect(() => {
@@ -55,7 +62,7 @@ function RecommendationContent() {
     }, [pathwayData]);
 
     console.log(recommendation)
-    
+
     if(!recommendation) return <Loader />
     
     const { stage, skills } = getStageAndSkills(age, recommendation.pathway.pathway_recommendation.name);
@@ -110,7 +117,7 @@ function RecommendationContent() {
 
                             <div className="mt-8 lg:mt-12">
                                 <Link
-                                    href={`/${recommendation.pathway.pathway_recommendation.name.toLowerCase()}-pathway`}
+                                    href={`/${normalizePathwayName(recommendation.pathway.pathway_recommendation.name)}-pathway`}
                                     className={`bg-[#131314] text-white focus-visible:outline-black 
                                         rounded-lg px-16 py-5 font-medium shadow-sm hover:bg-opacity-80 
                                         focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
@@ -169,7 +176,7 @@ function RecommendationContent() {
                             </p>
                             <div className="mt-8 lg:mt-12">
                                 <Link
-                                    href={`/${recommendation.pathway.pathway_recommendation.name.toLowerCase()}-pathway`}
+                                    href={`/${normalizePathwayName(recommendation.pathway.pathway_recommendation.name)}-pathway`}
                                     className={`bg-[#131314] text-white focus-visible:outline-black 
                                         rounded-lg px-8 py-3 lg:py-4 font-medium shadow-sm hover:bg-opacity-80 
                                         focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
@@ -240,7 +247,7 @@ export default function RecommendationPage() {
                     desc="Lorem ipsum dolor sit amet consectetur. Senectus in consequat 
                     egestas faucibus morbi pulvinar nec ac. Morbi phasellus sed augue neque ac nibh varius vitae sagittis."
                     header="Start Pathway Today!"
-                    linkto="/students/pricing-plan"
+                    linkto="/students/curriculum"
                 />
 
                 <Footer />
