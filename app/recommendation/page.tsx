@@ -9,11 +9,12 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { Suspense, useEffect, useState } from "react";
 import { useMain } from "../context/MainContext";
 import Loader from "../utils/loader";
+import { AgeRange, ageToStageAndSkills, normalizeAge, PathwayName } from "../utils/types-and-links";
 
 export default function RecommendationPage() {
     const searchParams = useSearchParams();
     const [recommendation, setRecommendation] = useState<any>(null);
-    const pathwayId = searchParams.get("pathwayId");
+    const age = normalizeAge(searchParams.get("age"));
     const pathwayData = searchParams.get("pathwayData");
     const userName = searchParams.get("userName");
 
@@ -23,6 +24,19 @@ export default function RecommendationPage() {
             .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
             .join(" ");
     };
+
+    const getStageAndSkills = (age: AgeRange | null, pathwayName: string | null) => {
+        if (!age || !pathwayName) return { stage: "N/A", skills: "N/A" };
+        
+        // Retrieve information for the specified age and pathway
+        const ageGroup = ageToStageAndSkills[age];
+        if (ageGroup && ageGroup[pathwayName.toLowerCase() as PathwayName]) {
+            return ageGroup[pathwayName.toLowerCase() as PathwayName];
+        }
+
+        return { stage: "N/A", skills: "N/A" };
+    };
+
 
 
     useEffect(() => {
@@ -75,6 +89,8 @@ export default function RecommendationPage() {
         );
     }
 
+    const { stage, skills } = getStageAndSkills(age, recommendation.pathway.pathway);
+
     return (
         <Suspense>
             <div className="mx-auto relative container w-full max-w-[2000px] overflow-hidden">
@@ -118,8 +134,12 @@ export default function RecommendationPage() {
                                 </div>
 
 
+                                <p className="mt-4 text-lg md:text-xl text-black-700 font-bold">
+                                    {stage}
+                                </p>
+
                                 <p className="mt-4 text-lg md:text-xl text-black-700 font-semibold">
-                                    Key Skills: Python, JavaScript, HTML, CSS, Databases
+                                    Key Skills: {skills}
                                 </p>
 
                                 <div className="mt-8 lg:mt-12">

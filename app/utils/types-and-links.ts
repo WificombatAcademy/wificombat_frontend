@@ -577,3 +577,107 @@ export const formatPrice = (price: string) => {
     { href: "", label: "Competition" },
     { href: "", label: "SDG and Techpreneurship" },
   ];
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////////
+
+  // Map age ranges to stages and key skills for various pathways
+  export type AgeRange = "5-7" | "8-10" | "11-14" | "15-18";
+  export type PathwayName = "coding" | "gaming" | "multimedia" | "robotics" | "ai";
+
+export const ageToStageAndSkills: Record<AgeRange, Record<PathwayName, { stage: string; skills: string }>> = {
+  "5-7": {
+      coding: {
+          stage: "Beginner Level 1",
+          skills: "Lightbot, mBlock"
+      },
+      gaming: {
+          stage: "Beginner Level 1",
+          skills: "Storybird, mBlock, codemonkey"
+      },
+      multimedia: {
+          stage: "Beginner Level 1",
+          skills: "2D Graphics1 & Animation1"
+      },
+      robotics: {
+          stage: "Beginner Level 1",
+          skills: "Simple Robotics Kits, Basic Construction"
+      },
+      ai: {
+          stage: "Beginner Level 1",
+          skills: "Basic AI Concepts, Simple Logic Games"
+      }
+  },
+  "8-10": {
+      coding: {
+          stage: "Beginner Level 2",
+          skills: "Pictoblox"
+      },
+      gaming: {
+          stage: "Beginner Level 2",
+          skills: "2D Game development using Gdevelop"
+      },
+      multimedia: {
+          stage: "Beginner Level 2",
+          skills: "2D Designs and Illustration"
+      },
+      robotics: {
+          stage: "Beginner Level 2",
+          skills: "LEGO Robotics, Basic Programming"
+      },
+      ai: {
+          stage: "Beginner Level 2",
+          skills: "Simple Machine Learning with Games"
+      }
+  },
+  "11-14": {
+      coding: {
+          stage: "Intermediate Level 4",
+          skills: "Android Mobile App development (App Inventor)"
+      },
+      gaming: {
+          stage: "Intermediate Level 4",
+          skills: "3D Game development using MANU"
+      },
+      multimedia: {
+          stage: "Intermediate Level 4",
+          skills: "3D Modelling and Animation Basic 1 Blender"
+      },
+      robotics: {
+          stage: "Intermediate Level 4",
+          skills: "Arduino, Robot Construction"
+      },
+      ai: {
+          stage: "Intermediate Level 4",
+          skills: "AI with Python, Data Analysis Basics"
+      }
+  },
+  "15-18": {
+      coding: {
+          stage: "Advanced Level 6",
+          skills: "Fundamental Web Development (HTML & CSS)"
+      },
+      gaming: {
+          stage: "Advanced Level 6",
+          skills: "3D Game development using Unity 3D"
+      },
+      multimedia: {
+          stage: "Advanced Level 6",
+          skills: "3D Texturing & Character Rigging Advance Blender"
+      },
+      robotics: {
+          stage: "Advanced Level 6",
+          skills: "Advanced Arduino, Robotics Programming"
+      },
+      ai: {
+          stage: "Advanced Level 6",
+          skills: "AI Development, Neural Networks Introduction"
+      }
+  },
+};
+
+export const normalizeAge = (age: string | null): AgeRange | null => {
+  if (!age) return null;
+  const normalizedAge = age.replace(" years old", "").replace(/\s+/g, '');
+  // Cast to AgeRange if it's a valid key
+  return normalizedAge as AgeRange;
+};

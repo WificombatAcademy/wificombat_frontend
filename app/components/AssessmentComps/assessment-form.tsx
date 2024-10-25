@@ -200,10 +200,10 @@ const AssessmentForm = () => {
 
         }
         };
-        
     // SEND EMAIL
     
     const handleNext = async () => {
+        if (submitting) return;
         const errors = validateCurrentStep(); // Your validation logic
     
         if (errors.length > 0) {
@@ -226,7 +226,8 @@ const AssessmentForm = () => {
                         // Build the URL string manually
                         const url = `/recommendation?pathwayId=${selectedPathwayId}
                         &pathwayData=${pathwayDataEncoded}
-                        &userName=${name}`;
+                        &userName=${name}
+                        &age=${selectedAge}`;
 
                         // Navigate to the recommendation page
                         router.push(url);
@@ -261,6 +262,7 @@ const AssessmentForm = () => {
             // if (validateCurrentStep()) {
             //     setCurrentStep(currentStep + 1);
             // }
+            if (submitting) return null;
             if(noQuestions) {
                 toast.error("Failed to fetch questions due to network");
                 return;
@@ -318,7 +320,7 @@ const AssessmentForm = () => {
                         </div>
 
                         <button
-                        disabled={currentStep >= totalSteps}
+                        disabled={currentStep >= totalSteps || loading}
                         onClick={next}
                         className="py-2 px-4 border border-[#D0D5DD] shadow-md rounded-lg
                         disabled:text-gray-400 disabled:cursor-not-allowed">
