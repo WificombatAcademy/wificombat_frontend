@@ -177,14 +177,16 @@ export const PathwayHero = ({
                         flex items-center justify-center`}>
                         {image && (
                             <Image 
-                                src={`/course-page.jpeg`}
+                                src={`${coursePage ? "/course-page.jpeg" : image}`}
                                 // src={image ?? ""}
                                 alt={image ?? ""}
                                 width={500}
                                 height={500}
                                 className={`object-contain border-none
                                 ${widthStyle ?? "w-full h-full"}
-                                ${coursePage && "lg:w-[90%] h-[300px] rounded-3xl object-cover bg-blue-500"}`}
+                                ${coursePage ? "lg:w-[90%] h-[300px] rounded-3xl object-cover bg-blue-500" :
+                                    "w-[75%]"
+                                }`}
                             />
                         )}
                     </div>

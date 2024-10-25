@@ -183,7 +183,7 @@ export default function RecommendationPage() {
                                 <p className="mt-4 text-lg md:text-xl">
                                     You love {skills}? That&apos;s fantastic! It&apos;s just the skill
                                     you need for {recommendation.pathway.pathway_recommendation.name}.
-                                    You&apos;ll turn your ideas into stunning visuals!"
+                                    You&apos;ll turn your ideas into stunning visuals!&quot;
                                 </p>
                             </div>
 
