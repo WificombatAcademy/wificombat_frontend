@@ -192,7 +192,7 @@ const AssessmentForm = () => {
             return true;
         } catch (error) {
             console.error("Failed to send recommendation email:", error);
-            toast.error("Failed to send email. Please try again.");
+            toast.error("Failed to send recommendation email. Please try again.");
             return false;
         }
         finally {
@@ -323,7 +323,7 @@ const AssessmentForm = () => {
                         disabled={currentStep >= totalSteps || loading}
                         onClick={next}
                         className="py-2 px-4 border border-[#D0D5DD] shadow-md rounded-lg
-                        disabled:text-gray-400 disabled:cursor-not-allowed">
+                        disabled:px-6 disabled:text-gray-400 disabled:cursor-not-allowed">
                             {loading ? <RiLoader4Fill className="animate-spin"/> : "Next"} 
                         </button> 
                     </div>
