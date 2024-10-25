@@ -88,7 +88,7 @@ export const Question = ({ question,
               // onChange={() => onChange(question.id, optionKey, question.pathway)}
               onChange={() => {
                 onChange(question.id, optionKey, question.pathway, question.pathway_id);
-                console.log(`Answered: ${question.id} with ${optionKey}`); // Log the answered question
+                // console.log(`Answered: ${question.id} with ${optionKey}`); // Log the answered question
               }}
               onKeyDown={handleKeyPress} 
               className="mr-2 accent-blue-500 border-none rounded-full"

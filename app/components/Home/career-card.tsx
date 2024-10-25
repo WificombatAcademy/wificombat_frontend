@@ -102,7 +102,10 @@ const CareerCard = ({ bgColor ,desc, linkTo, level, subject, item, type, viewCou
             <div 
                 className={`relative w-full 
                 ${curriculum ? "h-[200px] min-[2000px]:h-[300px]" : "h-[250px] min-[2000px]:h-[330px]" } 
-                    ${bgColor ?? "bg-blue-500"} px-4 flex items-end rounded-tl-2xl rounded-tr-2xl`}>
+                     px-4 flex items-end rounded-tl-2xl rounded-tr-2xl
+                    ${bgColor ?? "bg-blue-500"}
+                    ${image && "flex items-center justify-center"}
+                     `}>
 
                     {pathwayImage &&
                     <Link href={linkTo ?? ''}>
@@ -115,13 +118,13 @@ const CareerCard = ({ bgColor ,desc, linkTo, level, subject, item, type, viewCou
                     }
 
                     {image && 
-                     <Link href={linkTo ?? ''}>
-                        <div className="absolute inset-0 bg-gray-50 rounded-tl-2xl rounded-tr-2xl">
+                     <Link href={linkTo ?? ''} className="flex items-center justify-center">
+                        {/* <div className="absolute inset-0 bg-gray-50 rounded-tl-2xl rounded-tr-2xl"> */}
                             <Image src={image} alt="pathway"
                             width={300} height={300}
-                            className="w-full h-full object-cover rounded-tl-2xl rounded-tr-2xl" 
+                            className="w-full h-full object-contain" 
                             />
-                        </div>
+                        {/* </div> */}
                     </Link>
                     }
 

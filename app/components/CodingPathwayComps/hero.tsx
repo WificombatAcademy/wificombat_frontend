@@ -184,9 +184,7 @@ export const PathwayHero = ({
                                 height={500}
                                 className={`object-contain border-none
                                 ${widthStyle ?? "w-full h-full"}
-                                ${coursePage ? "lg:w-[90%] h-[300px] rounded-3xl object-cover bg-blue-500" :
-                                    "w-[75%]"
-                                }`}
+                                ${coursePage && "lg:w-[90%] h-[300px] rounded-3xl object-cover bg-blue-500"}`}
                             />
                         )}
                     </div>

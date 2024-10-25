@@ -16,7 +16,7 @@ export default function Page() {
       <GeneralNavbar />
       <PathwayHero
       image="/hero-3.png"
-      widthStyle="w-[500px] object-contain"
+      widthStyle="w-[75%] object-contain"
       desc="Your Journey in Multimedia Starts Here! Join our program to become a skilled Animator, Illustrator, and 2D & 3D Designer. Shape your creative future with us."
       header="Explore the Multimedia Pathway"
        bgColor="bg-purple-500" />
