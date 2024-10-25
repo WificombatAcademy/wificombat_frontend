@@ -27,16 +27,18 @@ export default function RecommendationPage() {
 
     const getStageAndSkills = (age: AgeRange | null, pathwayName: string | null) => {
         if (!age || !pathwayName) return { stage: "N/A", skills: "N/A" };
-        
+    
+        // Convert pathwayName to lowercase
+        const normalizedPathwayName = pathwayName.toLowerCase() as PathwayName;
+    
         // Retrieve information for the specified age and pathway
         const ageGroup = ageToStageAndSkills[age];
-        if (ageGroup && ageGroup[pathwayName.toLowerCase() as PathwayName]) {
-            return ageGroup[pathwayName.toLowerCase() as PathwayName];
+        if (ageGroup && ageGroup[normalizedPathwayName]) {
+            return ageGroup[normalizedPathwayName];
         }
-
+    
         return { stage: "N/A", skills: "N/A" };
-    };
-
+    };    
 
 
     useEffect(() => {
@@ -89,7 +91,7 @@ export default function RecommendationPage() {
         );
     }
 
-    const { stage, skills } = getStageAndSkills(age, 'coding');
+    const { stage, skills } = getStageAndSkills(age, recommendation.pathway.pathway_recommendation.name);
 
     return (
         <Suspense>
@@ -115,22 +117,22 @@ export default function RecommendationPage() {
                         <div className="w-[93%] md:w-[90%] mx-auto flex flex-col md:flex-row md:items-center gap-10 md:gap-14 lg:gap-20 text-black-500">
                             <div className="w-full md:basis-[50%]">
                                 <Image
-                                    src={`https://wificombatacademy.com/${recommendation.pathway.image}`}
+                                    src={`${recommendation.pathway.pathway_recommendation.image}`}
                                     alt={"pathway"}
                                     width={500}
                                     height={500}
-                                    className="w-full h-[370px] object-cover border"
+                                    className="w-full h-[370px] object-contain border-none"
                                 />
                             </div>
 
                             <div className="w-full md:basis-[50%]">
                                 <h2 className="text-blue-500 font-semibold text-xl md:text-2xl lg:text-4xl">
-                                    {recommendation.pathway.pathway || "No pathway provided"}
+                                    {recommendation.pathway.pathway_recommendation.name || "No pathway provided"} Pathway
                                 </h2>
 
                                 <div
                                     className="mt-4 text-lg md:text-xl">
-                                    {recommendation.pathway.description}
+                                    {recommendation.pathway.pathway_recommendation.description}
                                 </div>
 
 
@@ -144,7 +146,7 @@ export default function RecommendationPage() {
 
                                 <div className="mt-8 lg:mt-12">
                                     <Link
-                                        href={`/`}
+                                          href={`/${recommendation.pathway.pathway_recommendation.name.toLowerCase()}-pathway`}
                                         className={`bg-[#131314] text-white focus-visible:outline-black 
                                             rounded-lg px-16 py-5 font-medium shadow-sm hover:bg-opacity-80 
                                             focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
@@ -160,7 +162,7 @@ export default function RecommendationPage() {
 
                     {/* REASONS */}
                     <div className="relative z-[5] w-[90%] mx-auto py-12 md:py-16">
-                        <h2 className="font-semibold text-xl md:text-2xl lg:text-4xl">
+                        <h2 className="font-semibold text-2xl lg:text-4xl">
                             Reasons For Recommendation
                         </h2>
 
@@ -179,7 +181,9 @@ export default function RecommendationPage() {
                                     Skill Alignment
                                 </h3>
                                 <p className="mt-4 text-lg md:text-xl">
-                                    Coming Soon!
+                                    You love {skills}? That&apos;s fantastic! It&apos;s just the skill
+                                    you need for {recommendation.pathway.pathway_recommendation.name}.
+                                    You&apos;ll turn your ideas into stunning visuals!"
                                 </p>
                             </div>
 
@@ -188,7 +192,7 @@ export default function RecommendationPage() {
                                     Career Outlook
                                 </h3>
                                 <p className="mt-4 text-lg md:text-xl">
-                                    Coming Soon!
+                                {recommendation.pathway.pathway_recommendation.pathway_outlook}
                                 </p>
                             </div>
 
@@ -197,8 +201,19 @@ export default function RecommendationPage() {
                                     Next Step
                                 </h3>
                                 <p className="mt-4 text-lg md:text-xl">
-                                    Coming Soon!
+                                {recommendation.pathway.pathway_recommendation.next_step}
                                 </p>
+                                <div className="mt-8 lg:mt-12">
+                                    <Link
+                                          href={`/${recommendation.pathway.pathway_recommendation.name.toLowerCase()}-pathway`}
+                                        className={`bg-[#131314] text-white focus-visible:outline-black 
+                                            rounded-lg px-8 py-3 lg:py-4 font-medium shadow-sm hover:bg-opacity-80 
+                                            focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                        `}
+                                    >
+                                    Get Started
+                                    </Link>
+                                </div>
                             </div>
 
                             <div>
@@ -206,7 +221,7 @@ export default function RecommendationPage() {
                                     Reasons For {stage}
                                 </h3>
                                 <p className="mt-4 text-lg md:text-xl">
-                                    Coming Soon!
+                                {recommendation.pathway.pathway_recommendation.reason_for_stage}
                                 </p>
                             </div>
 
@@ -217,12 +232,24 @@ export default function RecommendationPage() {
                                 </h3>
 
                                 <p className="mt-4 text-lg md:text-xl">
-                                    If you&apos;re also interested in game development or AI, 
+                                    If you&apos;re interested in {recommendation.pathway.pathway_recommendation.name}, 
                                     you might consider exploring those pathways as well.
                                 </p>
 
                                 <div className="mt-10 flex flex-wrap items-center gap-5">
                                     {/* Alternative pathways can be added here */}
+                                    {recommendation.pathway.pathway_recommendation.alternative_paths.map((path:any, index:number) => (
+                                         <Link
+                                         key={index}
+                                         href={`/${(path).toLowerCase()}-pathway`}
+                                       className={`border border-[#131314] text-black-500 focus-visible:outline-black 
+                                           rounded-lg px-8 py-3 font-medium shadow-sm hover:bg-opacity-80 
+                                           focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                       `}
+                                   >
+                                   {path} Pathway
+                                   </Link>
+                                    ))}
                                 </div>
                             </div>
                             {/* ALTERNATIVE PATHS */}
