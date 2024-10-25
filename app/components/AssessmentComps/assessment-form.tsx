@@ -11,6 +11,8 @@ import { useMain } from "@/app/context/MainContext";
 import { API, assessmentAges, assessmentGender, } from "@/app/utils/types-and-links";
 import axios from "axios";
 import { Question } from "./assessment-questions";
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 
 type Option = {
     [key: string]: number;
@@ -391,18 +393,30 @@ const AssessmentForm = () => {
                                 />
                                </div>
                                <div className="mt-3">
-                                 <label className="font-medium">Mobile Number (Optional)</label>
+                                    <label className="font-medium">Mobile Number (Optional)</label>
 
-                                <input 
-                                required
-                                type="tel"
-                                value={number}
-                                onChange={(e) => setNumber(e.target.value)}
-                                placeholder="e.g 07012345678"
-                                className="outline-none w-full p-3 border border-black-300 rounded-lg 
-                                placeholder:text-[#656765]"
-                                />
-                               </div>
+                                    <div className="outline-none w-full px-3 py-2 border border-black-300 
+                                rounded-lg placeholder:text-[#656765]">
+                                    <PhoneInput
+                                        country={'ng'} // Set the default country
+                                        value={number}
+                                        onChange={(phone) => setNumber(phone)}
+                                        inputStyle={{
+                                            width: '100%',             // Make input take full width
+                                            border: 'none',            // Remove input border
+                                            boxShadow: 'none',         // Remove shadow
+                                            borderRadius: '8px',       // Rounded corners if needed
+                                          }}
+                                          buttonStyle={{
+                                            backgroundColor: 'white',  // Set background of country selector to match
+                                            border: 'none',            // Remove border
+                                          }}
+                                          containerStyle={{
+                                            width: '100%',             // Make container take full width
+                                          }}
+                                    />
+                                    </div>
+                                </div>
                             </div>
 
 
