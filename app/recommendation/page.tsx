@@ -89,7 +89,7 @@ export default function RecommendationPage() {
         );
     }
 
-    const { stage, skills } = getStageAndSkills(age, recommendation.pathway.pathway);
+    const { stage, skills } = getStageAndSkills(age, 'coding');
 
     return (
         <Suspense>
@@ -104,7 +104,7 @@ export default function RecommendationPage() {
                         <h1 className="pt-14 md:pt-20 lg:pt-28 text-2xl lg:text-4xl font-bold text-center">
                             {userName ? capitalizeName(userName) : "Your"}{userName ? "'s" : ""} Assessment
                         </h1>
-                        <h1 className="relative z-[412] mt-4 text-center text-xl md:text-2xl lg:text-3xl">
+                        <h1 className="relative z-[412] mt-4 text-center text-xl md:text-2xl lg:text-3xl font-medium">
                             {recommendation.pathway.reason || "No reason provided"}
                         </h1>
                     </div>
@@ -119,7 +119,7 @@ export default function RecommendationPage() {
                                     alt={"pathway"}
                                     width={500}
                                     height={500}
-                                    className="w-full h-[500px] object-cover border-none"
+                                    className="w-full h-[370px] object-cover border"
                                 />
                             </div>
 
@@ -138,8 +138,8 @@ export default function RecommendationPage() {
                                     {stage}
                                 </p>
 
-                                <p className="mt-4 text-lg md:text-xl text-black-700 font-semibold">
-                                    Key Skills: {skills}
+                                <p className="mt-4 md:text-lg text-black-700 font-medium">
+                                    Key Skills: {skills} 
                                 </p>
 
                                 <div className="mt-8 lg:mt-12">
@@ -203,7 +203,7 @@ export default function RecommendationPage() {
 
                             <div>
                                 <h3 className="font-semibold text-xl md:text-2xl lg:text-3xl">
-                                    Reasons For Pathway
+                                    Reasons For {stage}
                                 </h3>
                                 <p className="mt-4 text-lg md:text-xl">
                                     Coming Soon!

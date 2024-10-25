@@ -220,7 +220,7 @@ const AssessmentForm = () => {
 
                     const emailSent = await sendRecommendationEmail(email, selectedPathwayData);
 
-                    if (emailSent) {
+                    if (!emailSent) {
                         const pathwayDataEncoded = encodeURIComponent(JSON.stringify(selectedPathwayData));
 
                         // Build the URL string manually
