@@ -34,82 +34,6 @@ const Page = (props: Props) => {
     return `${baseUrl}${imagePath}`;
   };
 
-  const handleBuyNow = async () => {
-    if (cart.length === 0) {
-      toast.error('Cart is empty!');
-      return;
-    }
-
-    // Retrieve order_id from cookies
-    const orderId = getCookie('order_id');
-    const userId = getCookie('user_id'); // Assuming the user_id is stored in cookies
-
-    if (!userId) {
-      toast.error('User not authenticated. Please log in.');
-      return;
-    }
-
-    // Separate courses and modules
-    let totalCoursePrice = 0;
-    let totalModulesPrice = 0;
-    const modulesList = [];
-    let selectedCourse = null;
-
-    cart.forEach(item => {
-      if (item.type === 'course') {
-        selectedCourse = {
-          course_id: item.id,
-          course_name: item.details.subject || item.details.title || item.details.name,
-        };
-        totalCoursePrice = parseFloat(item.price) || 0;
-      } else if (item.type === 'module') {
-        modulesList.push({
-          module_id: item.id,
-          module_name: item.details.title || item.details.name,
-          price: parseFloat(item.price.replace('₦', '').replace(',', '')) || 0,
-        });
-        totalModulesPrice += parseFloat(item.price.replace('₦', '').replace(',', '')) || 0;
-      }
-    });
-
-    const finalPrice = totalCoursePrice + totalModulesPrice;
-
-    // Construct the payload
-    const payload = {
-      order_id: orderId,
-      user_id: userId,
-      course: selectedCourse,
-      course_price: totalCoursePrice,
-      modules_total_price: totalModulesPrice,
-      final_price: finalPrice,
-      payment_method: "card", // Assuming the payment method is card for now
-      purchase_type: selectedCourse ? "full_course" : "modules_only",
-      status: "pending",
-      modules: modulesList,
-    };
-
-    try {
-      const response = await fetch('https://wificombatacademy.com/api/v2/order/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-API-KEY': '4TjhoZiPVpXBwBRfkIHfOgiatLuY4n5WMUb6Wnc17OM'
-        },
-        body: JSON.stringify(payload),
-      });
-
-      const data = await response.json();
-      if (response.ok) {
-        toast.success('Purchase successful!');
-        // clearCart(); Clear the cart on success
-      } else {
-        toast.error(data.message || 'Purchase failed.');
-      }
-    } catch (error) {
-      toast.error('An error occurred. Please try again.');
-      console.error(error);
-    }
-  };
 
   return (
     <BreadcrumbsWrapper>
@@ -211,7 +135,6 @@ const Page = (props: Props) => {
                       </button>
                       
                       <button 
-                      onClick={handleBuyNow}
                       className="bg-black-500 text-white px-4 py-2 max-lg:py-3 
                       rounded-lg hover:bg-black-600 text-center">
                         Buy Now
