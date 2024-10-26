@@ -494,9 +494,31 @@ function generateUUID(): string {
 }
 
 export const formatPrice = (price: string) => {
-  if (!price || price === "0.00") return "Free"; // Handle free courses
-  return `₦${parseFloat(price).toLocaleString()}`; // Format the price as Nigerian Naira
+  // Trim whitespace to handle prices with spaces
+  const trimmedPrice = price.trim();
+
+  // Check if price is empty, "0.00", or explicitly "Free"
+  if (!trimmedPrice || trimmedPrice === "0.00" || trimmedPrice.toLowerCase() === "free") {
+    return "Free";
+  }
+
+  // If the price is already a formatted currency string, return it as is
+  if (trimmedPrice.startsWith("₦")) {
+    return trimmedPrice;
+  }
+
+  // Try to parse the price as a float
+  const parsedPrice = parseFloat(trimmedPrice);
+  if (isNaN(parsedPrice)) {
+    // If parsing fails, return "Free" as fallback
+    return "Free";
+  }
+
+  // Format the price with the ₦ symbol and return
+  return `₦${parsedPrice.toLocaleString()}`;
 };
+
+
 
 // // Store device ID in localStorage
 // function getDeviceID(): string {

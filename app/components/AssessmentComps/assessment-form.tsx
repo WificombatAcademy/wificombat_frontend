@@ -168,10 +168,9 @@ const AssessmentForm = () => {
             <h1>Recommended Pathway</h1>
             <h4>Hi, ${name}</h4>
             <p>We have analyzed your responses and based on that, we recommend the following pathway:</p>
-            <h2>Pathway Title</h2>
-            <p>${pathwayData.pathway.description}</p>
-            <p><b>Skills:</b> ${pathwayData.pathway.skills}</p>
-            <p><b>Outlook:</b> ${pathwayData.pathway.outlook}</p>
+            <h2>${pathwayData.pathway.pathway_recommendation.name} Pathway</h2>
+            <p>${pathwayData.pathway.pathway_recommendation.description}</p>
+            <p><b>Outlook:</b> ${pathwayData.pathway.pathway_recommendation.pathway_outlook}</p>
             <p>Click the button below to register and learn more:</p>
             `;
         
@@ -220,7 +219,7 @@ const AssessmentForm = () => {
 
                     const emailSent = await sendRecommendationEmail(email, selectedPathwayData);
 
-                    if (!emailSent) {
+                    if (emailSent) {
                         const pathwayDataEncoded = encodeURIComponent(JSON.stringify(selectedPathwayData));
 
                         // Build the URL string manually

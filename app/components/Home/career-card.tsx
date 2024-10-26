@@ -157,7 +157,7 @@ const CareerCard = ({ bgColor ,desc, linkTo, level, subject, item, type, viewCou
                     )}
 
                      {moduleSubject && (
-                        <h3 className={`font-medium text-lg lg:h-[4rem]
+                        <h3 className={`font-medium lg:h-[4rem]
                         ${!curriculum ? "md:text-xl pt-3" : "font-semibold"} text-black-800`}>
                         {moduleSubject}</h3>
                     )}

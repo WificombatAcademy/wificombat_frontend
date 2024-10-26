@@ -19,7 +19,7 @@ export default function Page() {
 
       <PathwayHero
       image="/hero-4.png"
-      widthStyle="w-[450px] object-contain"
+      widthStyle="w-[75%]"
       desc="Dive into the exciting world of artificial intelligence. Gain expertise, innovate, and lead the way in AI technology with our specialized career pathway."
       header="Navigate the AI Career Pathway"
       bgColor="bg-black-500" 

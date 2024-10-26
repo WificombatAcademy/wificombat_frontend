@@ -5,6 +5,7 @@ import { useCart } from '@/app/context/CartContext';
 import { Breadcrumbs } from '@/app/utils/breadcrumb'
 import BreadcrumbsWrapper from '@/app/utils/breadcrumbsWrapper';
 import { formatPrice } from '@/app/utils/types-and-links';
+import { getCookie } from 'cookies-next';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
@@ -14,7 +15,7 @@ import { HiMiniTag } from "react-icons/hi2";
 type Props = {}
 
 const Page = (props: Props) => {
-  const { cart, removeItemFromCart } = useCart(); // Access cart and remove function
+  const { cart, removeItemFromCart,  } = useCart(); // Access cart and remove function
 
   // Remove item from cart handler
   const handleRemove = (id: string) => {
@@ -33,9 +34,87 @@ const Page = (props: Props) => {
     return `${baseUrl}${imagePath}`;
   };
 
+  const handleBuyNow = async () => {
+    if (cart.length === 0) {
+      toast.error('Cart is empty!');
+      return;
+    }
+
+    // Retrieve order_id from cookies
+    const orderId = getCookie('order_id');
+    const userId = getCookie('user_id'); // Assuming the user_id is stored in cookies
+
+    if (!userId) {
+      toast.error('User not authenticated. Please log in.');
+      return;
+    }
+
+    // Separate courses and modules
+    let totalCoursePrice = 0;
+    let totalModulesPrice = 0;
+    const modulesList = [];
+    let selectedCourse = null;
+
+    cart.forEach(item => {
+      if (item.type === 'course') {
+        selectedCourse = {
+          course_id: item.id,
+          course_name: item.details.subject || item.details.title || item.details.name,
+        };
+        totalCoursePrice = parseFloat(item.price) || 0;
+      } else if (item.type === 'module') {
+        modulesList.push({
+          module_id: item.id,
+          module_name: item.details.title || item.details.name,
+          price: parseFloat(item.price.replace('₦', '').replace(',', '')) || 0,
+        });
+        totalModulesPrice += parseFloat(item.price.replace('₦', '').replace(',', '')) || 0;
+      }
+    });
+
+    const finalPrice = totalCoursePrice + totalModulesPrice;
+
+    // Construct the payload
+    const payload = {
+      order_id: orderId,
+      user_id: userId,
+      course: selectedCourse,
+      course_price: totalCoursePrice,
+      modules_total_price: totalModulesPrice,
+      final_price: finalPrice,
+      payment_method: "card", // Assuming the payment method is card for now
+      purchase_type: selectedCourse ? "full_course" : "modules_only",
+      status: "pending",
+      modules: modulesList,
+    };
+
+    try {
+      const response = await fetch('https://wificombatacademy.com/api/v2/order/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-API-KEY': '4TjhoZiPVpXBwBRfkIHfOgiatLuY4n5WMUb6Wnc17OM'
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        toast.success('Purchase successful!');
+        // clearCart(); Clear the cart on success
+      } else {
+        toast.error(data.message || 'Purchase failed.');
+      }
+    } catch (error) {
+      toast.error('An error occurred. Please try again.');
+      console.error(error);
+    }
+  };
+
   return (
     <BreadcrumbsWrapper>
     <Toaster />
+
     <div className="mx-auto relative container w-full max-w-[4000px]">
       <GeneralNavbar />
 
@@ -64,8 +143,9 @@ const Page = (props: Props) => {
               className='bg-black-500 text-white px-8 py-3 rounded-xl
               transition-colors duration-300 hover:opacity-90'>Go back to courses</Link>
             </div>
-          ) : (
-            <div className={`mt-5 grid grid-cols-1 gap-8 ${cart.length > 1 ? 'h-[70vh]' : ''} overflow-y-scroll`}>
+               ) : (
+            <div className={`mt-5 grid grid-cols-1 gap-8 ${cart.length > 1 ? 'h-[70vh]' : ''} 
+              overflow-y-scroll`}>
               {cart.map((item) => (
                 <div key={item.id} className="flex lg:flex-row items-start
                 bg-transparent border border-black-100 rounded-3xl max-md:px-4 p-6 max-md:gap-2 gap-6">
@@ -130,7 +210,9 @@ const Page = (props: Props) => {
                         Remove from Cart
                       </button>
                       
-                      <button className="bg-black-500 text-white px-4 py-2 max-lg:py-3 
+                      <button 
+                      onClick={handleBuyNow}
+                      className="bg-black-500 text-white px-4 py-2 max-lg:py-3 
                       rounded-lg hover:bg-black-600 text-center">
                         Buy Now
                       </button>
@@ -139,19 +221,20 @@ const Page = (props: Props) => {
 
                   </div>
               ))}
+
+            {cart.length > 1 && <div className='py-7 w-[90%] mx-auto flex items-center justify-center'>
+            <button 
+              className={`bg-black-500 text-white px-8 md:px-16 py-2 max-lg:py-3 
+              rounded-lg hover:bg-black-600 text-center`}
+            >
+              Buy All
+            </button>
+          </div>}
             </div>
+
+            
           )}
-
-      {cart.length > 1 && <div className='py-7 w-[90%] mx-auto flex items-center justify-center'>
-        <button 
-          className={`bg-black-500 text-white px-8 md:px-16 py-2 max-lg:py-3 
-          rounded-lg hover:bg-black-600 text-center`}
-        >
-          Buy All
-        </button>
-      </div>}
-
-    </div>
+      </div>
     </div>
 
     </BreadcrumbsWrapper>
