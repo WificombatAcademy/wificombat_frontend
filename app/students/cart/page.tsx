@@ -5,6 +5,7 @@ import { useCart } from '@/app/context/CartContext';
 import { Breadcrumbs } from '@/app/utils/breadcrumb'
 import BreadcrumbsWrapper from '@/app/utils/breadcrumbsWrapper';
 import { formatPrice } from '@/app/utils/types-and-links';
+import axios from 'axios';
 import { getCookie } from 'cookies-next';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -33,6 +34,55 @@ const Page = (props: Props) => {
     }
     return `${baseUrl}${imagePath}`;
   };
+
+  const handleBuyNow = async () => {
+    const userId = getCookie("user_id"); // Get the user ID from cookies
+
+    if (!userId) {
+        // Redirect to registration if user_id is not found
+        window.location.href = "/registration"; // Update the redirect path as needed
+        return;
+    }
+
+    // Prepare the payload for the order
+    const modules = cart.filter(item => item.type === 'module');
+    const course = cart.find(item => item.type === 'course');
+    const courseId = course?.id;
+    const courseName = course?.subject; // or any other field that contains the course name
+    const coursePrice = parseFloat(course?.price || '0');
+    const modulesTotalPrice = modules.reduce((total, module) => total + parseFloat(module.price), 0);
+    const finalPrice = coursePrice + modulesTotalPrice;
+
+    const payload = {
+       // order_id: `ORDER${Date.now()}`,  Generate a unique order ID
+        user_id: userId,
+        course: {
+            course_id: courseId,
+            course_name: courseName,
+        },
+        course_price: coursePrice,
+        modules_total_price: modulesTotalPrice,
+        final_price: finalPrice,
+        payment_method: "card", // Or however you want to handle payment method
+        purchase_type: modules.length <= 0 ? "full_course" : "single_module", // Determine purchase type
+        status: "pending",
+        modules: modules.map(module => ({
+            module_id: module.id,
+            module_name: module.title, // or whatever field contains the module name
+            price: parseFloat(module.price),
+        })),
+    };
+
+    try {
+        const response = await axios.post("https://wificombatacademy.com/api/v2/order/", payload, {} );
+        // Handle successful response (e.g., show a success message, redirect to a thank you page)
+        toast.success('Order placed successfully!');
+        // Optionally redirect or clear cart here
+    } catch (error) {
+        console.error("Error placing order:", error);
+        toast.error('Failed to place order. Please try again later.');
+    }
+};
 
 
   return (
@@ -65,7 +115,7 @@ const Page = (props: Props) => {
               <p className="text-lg">Your cart is empty.</p>
               <Link href="/students/curriculum"
               className='bg-black-500 text-white px-8 py-3 rounded-xl
-              transition-colors duration-300 hover:opacity-90'>Go back to courses</Link>
+              transition-colors duration-300 hover:opacity-90'>Go back to Curriculum</Link>
             </div>
                ) : (
             <div className={`mt-5 grid grid-cols-1 gap-8 ${cart.length > 1 ? 'h-[70vh]' : ''} 
@@ -134,7 +184,8 @@ const Page = (props: Props) => {
                         Remove from Cart
                       </button>
                       
-                      <button 
+                      <button
+                      onClick={handleBuyNow} 
                       className="bg-black-500 text-white px-4 py-2 max-lg:py-3 
                       rounded-lg hover:bg-black-600 text-center">
                         Buy Now

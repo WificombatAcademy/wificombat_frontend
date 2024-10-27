@@ -189,7 +189,7 @@ function RecommendationContent() {
 
                         <div>
                             <h3 className="font-semibold text-xl md:text-2xl lg:text-3xl">
-                                Reasons For {stage}
+                                Reasons For Pathway
                             </h3>
                             <p className="mt-4 text-lg md:text-xl">
                             {recommendation.pathway.pathway_recommendation.reason_for_stage}
@@ -204,7 +204,7 @@ function RecommendationContent() {
 
                             <p className="mt-4 text-lg md:text-xl">
                                 If you&apos;re interested in {recommendation.pathway.pathway_recommendation.name}, 
-                                you might consider exploring those pathways as well.
+                                you might consider exploring these pathways as well.
                             </p>
 
                             <div className="mt-10 flex flex-wrap items-center gap-5">
