@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 
 type CartItem = {
   id: string;
+  course_id?: string;
   subject?: string;
   title?: string;
   name?: string;
@@ -22,6 +23,8 @@ type CartContextType = {
   cartQuantity: number;
   isInCart: (id: string) => boolean;
   isNotificationDisplayed: boolean;
+  isModalOpen: boolean;
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>
 };
 
 type CartProviderProps = {
@@ -42,6 +45,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [cartQuantity, setCartQuantity] = useState(0);
   const [isNotificationDisplayed, setIsNotificationDisplayed] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Load cart from localStorage on initialization
   useEffect(() => {
@@ -86,23 +90,22 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
           (cartItem) => cartItem.type === 'course' && cartItem.id === item.details.course_id
         );
 
-        if (courseInCart) {
+        if (courseInCart && item.type === 'module') {
           // Notify the user that they cannot add a module if the course is already in the cart
-          toast.error('The course has already been added to the cart. You cannot add individual modules.');
+          // toast.error('The course has already been added to the cart. You cannot add individual modules.');
           return prevCart; // Do not add the module
         }
 
-        // Check if all modules of the course are already in the cart
+         // Get the number of modules of this course already in the cart
         const modulesInCart = prevCart.filter(
-          (cartItem) => cartItem.type === 'module' && cartItem.details?.course_id === item.details.id
+          (cartItem) => cartItem.type === 'module' && cartItem.details?.course_id === item.details.course_id
         );
 
-        const totalModules = item.details?.totalModules || 0;
-
+        // Check if adding this module would mean all modules are in the cart
+        const totalModules = item.details.totalModules;
         if (modulesInCart.length + 1 === totalModules) {
-          // Notify the user that they should add the full course instead of all modules
           toast.error('You are trying to add all modules. Please add the full course instead.');
-          return prevCart; // Do not add the last module
+          return prevCart;
         }
       }
 
@@ -133,7 +136,15 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   };
 
   return (
-    <CartContext.Provider value={{ cart, addItemToCart, removeItemFromCart, cartQuantity, isInCart, isNotificationDisplayed }}>
+    <CartContext.Provider value={{ 
+      cart, 
+      addItemToCart, 
+      removeItemFromCart, 
+      cartQuantity, 
+      isInCart, 
+      isNotificationDisplayed,
+      isModalOpen, 
+      setIsModalOpen }}>
       {children}
     </CartContext.Provider>
   );

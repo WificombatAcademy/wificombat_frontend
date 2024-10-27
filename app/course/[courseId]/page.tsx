@@ -7,7 +7,9 @@ import Modules from '@/app/components/CourseComps/modules'
 import Footer from '@/app/components/general/Footer'
 import GeneralNavbar from '@/app/components/general/GeneralNavbar'
 import { FAQ } from '@/app/components/Home/faq'
+import { useCart } from '@/app/context/CartContext'
 import Loader from '@/app/utils/loader'
+import { FullScreenModal } from '@/app/utils/modal'
 import { API } from '@/app/utils/types-and-links'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
@@ -16,6 +18,7 @@ import { Toaster } from 'react-hot-toast'
 type Props = {}
 
 const Page = ({ params }: any) => {
+  const { removeItemFromCart, cart, isModalOpen, setIsModalOpen } = useCart();
   const { courseId } = params;
   const [course, setCourse] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -57,8 +60,18 @@ const Page = ({ params }: any) => {
     const totalModules = course.modules.length;
     const pricePerModule = course.price / totalModules;
 
+    const handleClearModules = () => {
+      // Logic to clear modules (similar to the existing handleClearModules in CareerCard)
+      cart.forEach((cartItem: any) => {
+          if (cartItem.course_id === courseId && cartItem.type === 'module') {
+              removeItemFromCart(cartItem.id);
+          }
+      });
+      setIsModalOpen(false); // Close the modal after clearing
+  };
+
     return (
-      <div className="mx-auto relative container w-full max-w-[4000px]">
+      <div className="mx-auto  container w-full max-w-[4000px]">
           <GeneralNavbar />
           <Toaster />
 
@@ -83,6 +96,7 @@ const Page = ({ params }: any) => {
           pricePerModule={pricePerModule}
           courseLevel={course.level}
           courseId={course.course_id}
+          totalModules={totalModules}  
           />
 
           <TodayComp 
@@ -94,6 +108,13 @@ const Page = ({ params }: any) => {
           <FAQ noSpace/>
 
           <Footer />
+
+          <FullScreenModal 
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                onClearModules={handleClearModules}
+                courseName={course.subject}
+            />
       </div>
     )
    }

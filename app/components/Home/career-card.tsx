@@ -1,8 +1,10 @@
 "use client"
 
 import { useCart } from "@/app/context/CartContext";
+import Modal from "@/app/utils/modal";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import { FaPlus } from "react-icons/fa6";
 
@@ -29,11 +31,9 @@ type Props = {
 const CareerCard = ({ bgColor ,desc, linkTo, level, subject, item, type, viewCourse,
     textWhite, pathways, image, pathwayImage, curriculum, price, moduleImage, moduleSubject }: Props) => {
 
-        const { addItemToCart, removeItemFromCart, isInCart } = useCart();
+        const { addItemToCart, removeItemFromCart, isInCart, cart, setIsModalOpen } = useCart();
 
-        const handleAddToCart = () => {
-            // console.log("Item:", item); // Check the item being passed
-        
+        const handleAddToCart = () => {        
             if (item) { // Check if item is defined
                 const { id, course_id, title, subject, level } = item; // Extract properties directly from item
         
@@ -43,19 +43,22 @@ const CareerCard = ({ bgColor ,desc, linkTo, level, subject, item, type, viewCou
                     const isModuleInCart = isInCart(id); // Check if the module is already in cart
         
                     // Check how many modules of this course are already in the cart
-                    const modulesInCart = item.details?.modules?.filter((module:any) => isInCart(module.id)).length || 0; // Assuming pathways contains modules
-                    // console.log("Modules In cart: " ,modulesInCart)
-                    // console.log("Item: " , item)
-                    // Calculate total modules
-                    const totalModules = item.details?.totalModules || 0; // Adjust based on your item structure
+                    const modulesInCart = cart.filter(
+                        (cartItem: any) => cartItem.course_id === course_id && cartItem.type === 'module'
+                    ).length;
+                    const totalModules = item.totalModules || 0;
 
-                    // console.log("total Modules: ", totalModules)
+                    if (isCourseInCart) {
+                        toast.error(`The main course is already in your cart. You cannot add this module.`);
+                        return;
+                    }
                     
                     // Handle adding modules or courses
                     if (!isModuleInCart) {
                         if (!isCourseInCart) {
                             // If all modules are already in the cart, show a toast and prevent adding
                             if (modulesInCart + 1 === totalModules) {
+                                setIsModalOpen(true);
                                 toast.error('You are trying to add all modules. Please add the full course instead.');
                                 return; // Prevent further execution
                             }
@@ -65,6 +68,7 @@ const CareerCard = ({ bgColor ,desc, linkTo, level, subject, item, type, viewCou
                         }
                         addItemToCart({
                             id: id,
+                            course_id: course_id,
                             name: title || subject,
                             subject: subject,
                             level: level,
@@ -73,9 +77,7 @@ const CareerCard = ({ bgColor ,desc, linkTo, level, subject, item, type, viewCou
                             details: item,
                             quantity: 1
                         });
-                    } else if (isCourseInCart) {
-                        toast.error(`The main course is already in your cart. You cannot add this module.`);
-                    }
+                    } 
                 } else {
                     toast.error("Item ID is undefined.");
                 }
@@ -89,6 +91,16 @@ const CareerCard = ({ bgColor ,desc, linkTo, level, subject, item, type, viewCou
             if (item && item.id) {
                 removeItemFromCart(item.id);
             }
+        };
+    
+        const handleClearModules = () => {
+            // Logic to clear modules (remove all modules from the cart)
+            cart.forEach((cartItem: any) => {
+                if (cartItem.course_id === item.course_id && cartItem.type === 'module') {
+                    removeItemFromCart(cartItem.id);
+                }
+            });
+            setIsModalOpen(false); // Close the modal after clearing
         };
 
     // const finalLink = 

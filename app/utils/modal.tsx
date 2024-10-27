@@ -1,13 +1,19 @@
 import { ReactNode } from 'react';
 import { VscClose } from 'react-icons/vsc';
 
-interface ModalProps {
+type ModalProps = {
   isOpen: boolean;
   onClose: () => void;
   removeCancelIcon?: boolean;
   portfolio?: boolean;
   children: ReactNode;
 }
+type Props = {
+  isOpen: boolean;
+  onClose: () => void;
+  onClearModules: () => void;
+  courseName: string; // Pass the course name for display
+};
 
 const Modal = ({ isOpen, onClose, removeCancelIcon, children, portfolio }: ModalProps) => {
   if (!isOpen) return null;
@@ -32,3 +38,33 @@ const Modal = ({ isOpen, onClose, removeCancelIcon, children, portfolio }: Modal
 };
 
 export default Modal;
+
+export const FullScreenModal = ({ isOpen, onClose, onClearModules, courseName }: Props) => {
+    if (!isOpen) return null; // Don't render anything if not open
+
+    return (
+        <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex justify-center items-center">
+            <div className="bg-white rounded-lg p-6 max-w-lg mx-auto">
+                <h2 className="text-xl lg:text-2xl font-semibold mb-4">Attention</h2>
+                <p>
+                    You are trying to add all modules. Would you like to clear
+                     the modules from your cart to add <strong>{courseName}</strong> or cancel?
+                </p>
+                <div className="mt-6 flex justify-end space-x-4">
+                    <button
+                        className="bg-black-500 text-white py-2 px-4 rounded"
+                        onClick={onClearModules}
+                    >
+                        Clear Modules
+                    </button>
+                    <button
+                        className="bg-gray-300 text-black py-2 px-4 rounded"
+                        onClick={onClose}
+                    >
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+};
