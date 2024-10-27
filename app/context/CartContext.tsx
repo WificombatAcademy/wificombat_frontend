@@ -22,6 +22,7 @@ type CartContextType = {
   removeItemFromCart: (id: string) => void;
   cartQuantity: number;
   isInCart: (id: string) => boolean;
+  clearCart: () => void;
   isNotificationDisplayed: boolean;
   isModalOpen: boolean;
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>
@@ -131,6 +132,11 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     });
   };
 
+  const clearCart = () => {
+    setCart([]); // Clear the cart state
+    localStorage.removeItem('cart'); // Remove cart from localStorage
+  };
+
   const isInCart = (id: string) => {
     return cart.some((item) => item.id === id);
   };
@@ -140,6 +146,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
       cart, 
       addItemToCart, 
       removeItemFromCart, 
+      clearCart,
       cartQuantity, 
       isInCart, 
       isNotificationDisplayed,
