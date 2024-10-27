@@ -52,13 +52,13 @@ export const FullScreenModal = ({ isOpen, onClose, onClearModules, courseName }:
                 </p>
                 <div className="mt-6 flex justify-end space-x-4">
                     <button
-                        className="bg-black-500 text-white py-2 px-4 rounded"
+                        className="bg-black-500 text-white py-2 px-4 rounded-lg"
                         onClick={onClearModules}
                     >
                         Clear Modules
                     </button>
                     <button
-                        className="bg-gray-300 text-black py-2 px-4 rounded"
+                        className="bg-gray-300 text-black py-2 px-4 rounded-lg"
                         onClick={onClose}
                     >
                         Cancel
