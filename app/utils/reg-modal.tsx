@@ -2,9 +2,21 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useMain } from '../context/MainContext';
+import { useEffect, useState } from 'react';
+import { getCookie, deleteCookie } from 'cookies-next';
 
 const RegModal = () => {
   const { successfulReg, setSuccessfulReg } = useMain();
+  const [redirectPath, setRedirectPath] = useState('/students/curriculum');
+
+  useEffect(() => {
+    // Check if the user came from the cart
+    const cameFromCart = getCookie('redirect_from') === '/students/cart';
+    if (cameFromCart) {
+      setRedirectPath('/students/cart');
+      deleteCookie('redirect_from'); // Clear cookie after setting redirect path
+    }
+  }, []);
 
   if (!successfulReg) return null;
 
@@ -41,7 +53,7 @@ const RegModal = () => {
                   p-4 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-purple-500 focus-visible:outline 
                   focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600"
                 >
-                  Check out our Curriculum
+                 {redirectPath === '/students/cart' ? 'Return to Cart' : 'Check out our Curriculum'}
                 </button>
               </Link>
             </div>

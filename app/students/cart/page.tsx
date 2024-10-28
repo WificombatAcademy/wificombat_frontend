@@ -7,7 +7,7 @@ import BreadcrumbsWrapper from '@/app/utils/breadcrumbsWrapper';
 import Modal from '@/app/utils/modal';
 import { formatPrice } from '@/app/utils/types-and-links';
 import axios from 'axios';
-import { getCookie } from 'cookies-next';
+import { getCookie, setCookie } from 'cookies-next';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react'
@@ -44,6 +44,7 @@ const Page = (props: Props) => {
 
     if (!userId) {
         // Redirect to registration if user_id is not found
+        setCookie('redirect_from', '/students/cart', { path: '/' });
         window.location.href = "/registration"; // Update the redirect path as needed
         return;
     }
