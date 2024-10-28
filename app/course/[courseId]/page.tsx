@@ -70,10 +70,8 @@ const Page = ({ params }: any) => {
       setIsModalOpen(false); // Close the modal after clearing
   };
 
-  console.log("Course:" ,course)
 
 const handleBuyNow = async (item: any, purchaseType: string = "full_course") => {
-  console.log("Module Details:", item);
   const userId = getCookie("user_id"); // Get the user ID from cookies
 
   if (!userId) {
