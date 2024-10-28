@@ -47,20 +47,26 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const [cartQuantity, setCartQuantity] = useState(0);
   const [isNotificationDisplayed, setIsNotificationDisplayed] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // Load cart from localStorage on initialization
+  // Load cart from localStorage on initialization, only on the client side
   useEffect(() => {
-    const storedCart = localStorage.getItem('cart');
-    if (storedCart) {
-      setCart(JSON.parse(storedCart));
+    if (typeof window !== 'undefined') {
+      const storedCart = localStorage.getItem('cart');
+      if (storedCart) {
+        setCart(JSON.parse(storedCart));
+      }
+      setIsLoading(false); // Set loading to false after initial load
     }
   }, []);
 
   // Update cart quantity and persist cart to localStorage whenever it changes
   useEffect(() => {
-    setCartQuantity(cart.reduce((acc, item) => acc + item.quantity, 0));
-    localStorage.setItem('cart', JSON.stringify(cart));
-  }, [cart]);
+    if (!isLoading) {
+      setCartQuantity(cart.reduce((acc, item) => acc + item.quantity, 0));
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+  }, [cart, isLoading]);
 
   const addItemToCart = (item: CartItem) => {
     setCart((prevCart) => {

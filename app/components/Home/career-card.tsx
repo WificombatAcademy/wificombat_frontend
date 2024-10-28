@@ -1,10 +1,8 @@
 "use client"
 
 import { useCart } from "@/app/context/CartContext";
-import Modal from "@/app/utils/modal";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import toast from "react-hot-toast";
 import { FaPlus } from "react-icons/fa6";
 
@@ -26,12 +24,14 @@ type Props = {
     curriculum?: boolean;
     type?: 'course' | 'module';
     viewCourse?: boolean;
+    handleBuyNow: (item: any, purchaseType?: string) => void;
 }
 
-const CareerCard = ({ bgColor ,desc, linkTo, level, subject, item, type, viewCourse,
+const CareerCard = ({ bgColor ,desc, linkTo, level, subject, item, type, viewCourse, handleBuyNow,
     textWhite, pathways, image, pathwayImage, curriculum, price, moduleImage, moduleSubject }: Props) => {
 
         const { addItemToCart, removeItemFromCart, isInCart, cart, setIsModalOpen } = useCart();
+
 
         const handleAddToCart = () => {        
             if (item) { // Check if item is defined
@@ -215,7 +215,9 @@ const CareerCard = ({ bgColor ,desc, linkTo, level, subject, item, type, viewCou
                                         </button>
                                     </div>
                     
-                                    <button className="w-full basis-[50%]">
+                                    <button
+                                    onClick={handleBuyNow}
+                                    className="w-full basis-[50%]">
                                         <p className="w-full bg-black-500 font-semibold py-2 text-white 
                                         text-center transition ease-in-out duration-300 hover:bg-opacity-80 rounded-lg"> 
                                             Buy Now
@@ -232,7 +234,9 @@ const CareerCard = ({ bgColor ,desc, linkTo, level, subject, item, type, viewCou
                                         Add to Cart
                                     </button>
 
-                                    <button className="w-full basis-[50%]">
+                                    <button
+                                    onClick={handleBuyNow}
+                                    className="w-full basis-[50%]">
                                         <p className="w-full bg-black-500 font-semibold py-2 text-white 
                                         text-center transition ease-in-out duration-300 hover:bg-opacity-80 rounded-lg"> 
                                             Buy Now

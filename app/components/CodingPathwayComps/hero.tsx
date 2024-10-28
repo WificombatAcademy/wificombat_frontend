@@ -1,11 +1,13 @@
 import { useCart } from "@/app/context/CartContext";
 import { merriweather } from "@/app/fonts"
+import useHandleBuy from "@/app/hooks/useHandleBuy";
 import { Breadcrumbs } from "@/app/utils/breadcrumb";
 import BreadcrumbsWrapper from "@/app/utils/breadcrumbsWrapper";
 import Cart from "@/app/utils/cart";
 import { formatPrice } from "@/app/utils/types-and-links";
 import Image from "next/image"
 import Link from "next/link"
+import { MouseEventHandler } from "react";
 import toast from "react-hot-toast";
 
 type Props = {
@@ -20,9 +22,11 @@ type Props = {
     widthStyle?: string;
     course?: any;
     type?: 'course' | 'module';
-}
+    handleBuyNow: MouseEventHandler<HTMLButtonElement>;
+} 
 
 export const PathwayHero = ({
+    handleBuyNow,
     bgColor, 
     image, 
     desc, 
@@ -34,7 +38,7 @@ export const PathwayHero = ({
     type,
     coursePage,
     course }: Props) => {
-    const { addItemToCart, isInCart, removeItemFromCart, isNotificationDisplayed } = useCart();
+    const { addItemToCart, isInCart, removeItemFromCart } = useCart();
 
     const handleAddToCart = (course: any) => {
         
@@ -124,6 +128,7 @@ export const PathwayHero = ({
                             ) : (
                                 <div className="flex items-center gap-6 h-[4rem]">
                                     <button 
+                                    onClick={handleBuyNow}
                                         className={`${buttonWhite ? "bg-white text-black-500" :
                                             "bg-[#131314] text-white focus-visible:outline-black"} 
                                             rounded-lg px-8 md:px-12 py-3 font-medium shadow-sm 

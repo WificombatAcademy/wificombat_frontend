@@ -74,7 +74,7 @@ function RecommendationContent() {
 
                 <div className="relative z-[5] w-[90%] md:w-[70%] lg:w-[65%] mx-auto">
                     <h1 className="pt-14 md:pt-20 2xl:pt-28 text-2xl lg:text-4xl font-bold text-center">
-                        {userName ? capitalizeName(userName) : "Your"}{userName ? "'s" : ""} Assessment
+                        {userName ? capitalizeName(userName):"Your"}{userName?"'s" : ""} Assessment
                     </h1>
                     <h1 className="relative z-[412] mt-4 text-center text-xl md:text-2xl lg:text-3xl font-medium">
                         {recommendation.pathway.reason || "No reason provided"}

@@ -18,9 +18,11 @@ type Props = {
     courseLevel: string;
     courseId: string; 
     totalModules: number;
+    handleBuyNow: (item: any, purchaseType?: string) => void;
 }
 
-const Modules = ({ modules, pricePerModule, courseLevel, courseId, totalModules }: Props) => {
+const Modules = ({ modules, pricePerModule, courseLevel, courseId, totalModules, handleBuyNow }: Props) => {
+
 
   return (
     <section>
@@ -70,6 +72,7 @@ const Modules = ({ modules, pricePerModule, courseLevel, courseId, totalModules 
                     items-center justify-center overflow-visible"
                     >
                         <CareerCard
+                            handleBuyNow={() => handleBuyNow(module, "single_module")}
                             curriculum={true}
                             pathway={module.title}
                             moduleSubject={module.title}
@@ -78,7 +81,7 @@ const Modules = ({ modules, pricePerModule, courseLevel, courseId, totalModules 
                             desc={`Whether you're starting or advancing, our modules 
                                 offer a comprehensive and engaging learning experience.`}
                             price={formatPrice(pricePerModule.toFixed(2))}
-                            item={{...module, course_id: courseId, totalModules }} 
+                            item={{...module, course_id: courseId, price:pricePerModule.toFixed(2), totalModules }} 
                             type='module'
                         />
                     </SwiperSlide>
