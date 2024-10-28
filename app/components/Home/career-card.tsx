@@ -24,7 +24,7 @@ type Props = {
     curriculum?: boolean;
     type?: 'course' | 'module';
     viewCourse?: boolean;
-    handleBuyNow: (item: any, purchaseType?: string) => void;
+    handleBuyNow?: (item: any, purchaseType?: string) => void;
 }
 
 const CareerCard = ({ bgColor ,desc, linkTo, level, subject, item, type, viewCourse, handleBuyNow,
