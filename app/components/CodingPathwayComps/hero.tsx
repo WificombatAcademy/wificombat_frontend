@@ -22,7 +22,7 @@ type Props = {
     widthStyle?: string;
     course?: any;
     type?: 'course' | 'module';
-    handleBuyNow: MouseEventHandler<HTMLButtonElement>;
+    handleBuyNow?: MouseEventHandler<HTMLButtonElement>;
 } 
 
 export const PathwayHero = ({
