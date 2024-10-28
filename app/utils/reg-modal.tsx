@@ -11,7 +11,7 @@ const RegModal = () => {
 
   useEffect(() => {
     // Check if the user came from the cart
-    const cameFromCart = getCookie('redirect_from') === '/students/cart';
+    const cameFromCart = decodeURIComponent(getCookie('redirect_from') as string) === '/students/cart';
     if (cameFromCart) {
       setRedirectPath('/students/cart');
       deleteCookie('redirect_from'); // Clear cookie after setting redirect path
