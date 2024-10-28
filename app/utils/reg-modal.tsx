@@ -47,7 +47,7 @@ const RegModal = () => {
                 Your account has been created successfully
               </p>
 
-              <Link href={`/students/curriculum`} onClick={handleModalClose}>
+              <Link href={`${redirectPath === '/students/cart' ? "/students/cart" : "/students/curriculum"}`} onClick={handleModalClose}>
                 <button
                   className="mt-10 flex w-full justify-center rounded-md disabled:bg-[#B1B1B4] active:bg-[#131314] bg-[#131314] 
                   p-4 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-purple-500 focus-visible:outline 
