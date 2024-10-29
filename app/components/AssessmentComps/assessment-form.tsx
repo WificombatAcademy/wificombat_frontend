@@ -165,14 +165,36 @@ const AssessmentForm = () => {
         setSubmitting(true)
         try {
             const content = `
-            <h1>Recommended Pathway</h1>
-            <h4>Hi, ${name}</h4>
-            <p>We have analyzed your responses and based on that, we recommend the following pathway:</p>
-            <h2>${pathwayData.pathway.pathway_recommendation.name} Pathway</h2>
+            <h1>Your Personalised Learning Journey with WiFiCombat eLearn</h1>
+
+            <h4>Hi ${name},</h4>
+            <p><strong>Your Personalised Learning Journey Starts Here</strong></p>
+            <p>We've analysed your assessment results and crafted a tailored learning path to help you reach your full potential.</p>
+            
+            <h2>Recommended Pathway:</h2>
+            <h3>${pathwayData.pathway.pathway_recommendation.name} Pathway</h3>
             <p>${pathwayData.pathway.pathway_recommendation.description}</p>
-            <p><b>Outlook:</b> ${pathwayData.pathway.pathway_recommendation.pathway_outlook}</p>
-            <p>Click the button below to register and learn more:</p>
-            `;
+
+            <h3>Why ${pathwayData.pathway.pathway_recommendation.name}?</h3>
+            <p>${pathwayData.pathway.pathway_recommendation.pathway_outlook}</p>
+            
+            <p><strong>Take the Next Step</strong></p>
+            <p>Ready to embark on your ${pathwayData.pathway.pathway_recommendation.name} journey? Click the button below to register and explore our comprehensive courses:</p>
+            <a href="https://wificombat-elearning.vercel.app/registration" style="background-color:#131314;color:white;padding:10px 20px;text-align:center;text-decoration:none;display:inline-block;border-radius:5px;">
+                Start Your ${pathwayData.pathway.pathway_recommendation.name} Journey
+            </a>
+
+            <p><strong>Your Success is Our Mission</strong></p>
+            <p>At WiFiCombat eLearn, we're committed to empowering learners like you. With our expert-led courses and personalised support, you'll gain the skills and knowledge to thrive in the tech industry.</p>
+
+            <p>Best regards,</p>
+            <p>The WiFiCombat eLearn Team</p>
+            <img src="https://wificombat-elearning.vercel.app/wificombat.svg" alt="Company Logo" style="width:100px;height:auto;"/>
+            <p><a href="https://https://wificombat-elearning.vercel.app/">Visit Our Website</a> | Contact: info@wificombatacademy.com</p>
+
+
+             <p>If the button above doesn't work, you can try this one:</p>
+        `;
         
             // Sending the email
             await axios.post(
