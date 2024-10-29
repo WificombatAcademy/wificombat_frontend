@@ -239,7 +239,7 @@ const Page = (props: Props) => {
         height={1200}
         className='w-full'
         />
-        <h2>{modalMessage}</h2>
+        <h2 className='w-[95%] mx-auto text-lg font-medium text-center'>{modalMessage}</h2>
         {/* Optionally show a loading spinner here */}
       </Modal>
 

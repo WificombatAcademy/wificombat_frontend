@@ -140,6 +140,12 @@ const StudentInfo = ({
                     ${errors.student?.class ? "focus:border-red-500" : "focus:border-black"}`}
                     >
                     <option value="" className="text-gray-600">Select Class</option>
+                    <option value="Primary 1" className="text-gray-600">Primary 1</option>
+                    <option value="Primary 2" className="text-gray-600">Primary 2</option>
+                    <option value="Primary 3" className="text-gray-600">Primary 3</option>
+                    <option value="Primary 4" className="text-gray-600">Primary 4</option>
+                    <option value="Primary 5" className="text-gray-600">Primary 5</option>
+                    <option value="Primary 6" className="text-gray-600">Primary 6</option>
                     <option value="JSS1" className="text-gray-600">JSS 1 / Grade 7 / Year 7</option>
                     <option value="JSS2" className="text-gray-600">JSS 2 / Grade 8 / Year 8</option>
                     <option value="JSS3" className="text-gray-600">JSS 3 / Grade 9 / Year 9</option>
