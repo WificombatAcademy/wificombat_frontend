@@ -193,7 +193,7 @@ const AssessmentForm = () => {
             <p><a href="https://https://wificombat-elearning.vercel.app/">Visit Our Website</a> | Contact: info@wificombatacademy.com</p>
 
 
-             <p>If the button above doesn't work, you can try this one:</p>
+             <p>Click the button below to register and learn more:</p>
         `;
         
             // Sending the email

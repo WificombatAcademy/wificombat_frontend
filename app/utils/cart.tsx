@@ -14,7 +14,7 @@ const Cart = (props: Props) => {
   const cartQuantity = cart.reduce((total, item) => total + item.quantity, 0);
 
   return (
-    <div className="absolute top-4 lg:top-7 right-5 lg:right-20 p-2 bg-white rounded-lg">
+    <div className="z-[15] absolute top-4 lg:top-7 right-5 lg:right-20 p-2 bg-white rounded-lg">
       <Link href="/students/cart">
         <div className="">
           <IoCartOutline size={26} className="text-black-500" />
