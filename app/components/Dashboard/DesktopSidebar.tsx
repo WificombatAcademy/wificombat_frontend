@@ -161,10 +161,10 @@ const DesktopSidebar = () => {
         href={`/`}
         className="flex h-16 shrink-0 items-center">
          <Image
-            src={`/assets/auth/logo.svg`}
+            src={`/assets/auth/wificomlog.jpg`}
             alt={`logo`}
-            width={60}
-            height={60}
+            width={90}
+            height={90}
             className="mt-5 object-contain text-neutral-400"
           />
         </Link>

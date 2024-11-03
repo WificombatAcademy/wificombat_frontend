@@ -95,10 +95,10 @@ const SideBar = ({ sidebarOpen, setSidebarOpen }: Props) => {
               flex grow flex-col gap-y-5 overflow-y-auto bg-[#BC00DD] px-6 pb-4 ring-1 ring-white/10`}>
                 <div className="mt-3 flex h-16 shrink-0 items-center">
                 <Image
-                  src={`/assets/auth/logo.svg`}
+                  src={`/assets/auth/wificomlog.jpg`}
                   alt={`logo`}
-                  width={60}
-                  height={60}
+                  width={90}
+                  height={90}
                   className="object-contain text-neutral-400"
                 />
                 </div>

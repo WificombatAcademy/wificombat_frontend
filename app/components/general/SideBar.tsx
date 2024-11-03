@@ -100,11 +100,10 @@ const MobileSideBar = ({ sidebarOpen, setSidebarOpen }: Props) => {
               <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-[#0C0C0D] px-6 pb-4 ring-1 ring-white/10">
                 <div className="flex h-16 shrink-0 items-center">
                   <Image
-                    src="/logo_wifi.png"
+                    src="/wificomlogo.jpg"
                     alt="homepage"
-                    className="mt-6 md:h-24 w-24 mb-4 px-2.5 py-2 object-contain"
-                    width={"96"}
-                    height={"96"}
+                    width={100}
+                    height={100}
                   />
                 </div>
                 <nav className="flex flex-1 flex-col">

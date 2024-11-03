@@ -76,10 +76,10 @@ export const ReportCard  = () => {
                 <header className="w-full py-3 px-4 md:px-6 lg:px-8 bg-purple-300 text-white flex items-center justify-between">
                     <div className="basis-[30%] lg:basis-[35%]">
                         <Image
-                            src={`/assets/auth/logo.svg`}
+                            src={`/assets/auth/wificomlog.jpg`}
                             alt={`logo`}
-                            width={93}
-                            height={93}
+                            width={90}
+                            height={90}
                             className="w-[60px] my-auto lg:w-[93px] object-contain text-neutral-400"
                         />
                     </div>

@@ -46,11 +46,10 @@ const [studentsPopupVisible, setStudentsPopupVisible] = useState(false);
       lg:justify-center gap-4 max-lg:pr-4 lg:pr-44 min-[1200px]:pr-32">
           <Link href="/">
           <Image
-            src="/logo_wifi.png"
+            src="/wificomlogo.jpg"
             alt="homepage"
-            className="mr-24 md:h-24 w-24 px-2.5 py-2 object-contain"
-            width={"96"}
-            height={"96"}
+            width={200}
+            height={200}
           />
         </Link>
         <div className="flex mr-32 gap-3"> 
