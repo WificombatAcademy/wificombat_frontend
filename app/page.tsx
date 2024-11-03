@@ -11,6 +11,7 @@ import { Hero } from "./components/Home/hero";
 import Impact from "./components/Home/Impact";
 import { SchoolCurriculum } from "./components/Home/school-curriculum";
 import { Testimonials } from "./components/Home/testimonials";
+import {Partner} from "./components/Home/partner"
 
 export default function Home() {
   return (
@@ -27,6 +28,7 @@ export default function Home() {
       <Testimonials />
       <Community />
       <FAQ />
+      <Partner/>
       <Footer />
     </div>
   );

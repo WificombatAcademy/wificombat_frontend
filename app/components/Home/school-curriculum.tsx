@@ -13,10 +13,7 @@ export const SchoolCurriculum = ({dontShowOnboarding}: Props) => {
 
       <div className="w-[93%] md:w-[90%] lg:w-[88%] mx-auto">
         <p className="md:w-[80%] lg:w-[70%] mx-auto mt-6 md:mt-9 lg:mt-12 text-center font-medium">
-          Lorem ipsum dolor sit amet consectetur. Facilisis arcu adipiscing mi
-          ullamcorper. A aliquet non pellentesque vulputate. Malesuada ac lacus
-          commodo orci nunc nascetur ac sapien. Dignissim ut fames eros est
-          volutpat. Eu in euismod elit dui. Arcu aliquet nunc ali.
+        The Career Pathway School Curriculum on the WiFiCombat eLearn platform is designed to equip students with essential tech skills through a structured program that aligns with their academic journey, preparing them for future careers in fields like coding, AI, robotics, and multimedia
         </p>
 
         <div className="mt-14 md:mt-24 mb-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9">

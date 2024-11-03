@@ -10,46 +10,64 @@ import { useState } from "react";
 import { FaRegClock } from "react-icons/fa";
 import Link from "next/link";
 import HeadingDesign from "../general/HeaderDesign";
+import Image from "next/image";
+import { RiH3 } from "react-icons/ri";
 
 const coursesData = [
   {
     id: 1,
-    level: "Beginner",
+    level: "Level 1",
     duration: "4 weeks",
     title: "Coding fundamental 1 (Lightbot and Mblock)",
+    context:"This pathway covers everything from concept art and storytelling to coding and game mechanics.",
     link: "/registration",
+    image:"/course_one.png",
+     note:"Note: Access for 6 weeks"
+
   },
 
   {
     id: 2,
-    level: "Beginner",
+    level: "Level 1",
     duration: "4 weeks",
     title: "Coding fundamental 2 (Lightbot and Mblock)",
+    context:"This pathway covers everything from concept art and storytelling to coding and game mechanics.",
     link: "/registration",
+    image:"/course_one.png",
+    note:"Note: Access for 6 weeks"
   },
 
   {
     id: 3,
-    level: "Beginner",
+    level: "Level 1",
     duration: "4 weeks",
     title: "Coding fundamental 3 (Lightbot and Mblock)",
+    context:"This pathway covers everything from concept art and storytelling to coding and game mechanics.",
     link: "/registration",
+    image:"/course_three.png",
+    note:"Note: Access for 6 weeks"
   },
 
   {
     id: 4,
-    level: "Beginner",
+    level: "Level 1",
     duration: "4 weeks",
     title: "Pictoblox",
+    context:"This pathway covers everything from concept art and storytelling to coding and game mechanics.",
     link: "/registration",
+    image:"/course_one.png",
+    note:"Note: Access for 6 weeks"
   },
 
   {
     id: 5,
-    level: "Beginner",
+    level: "Level 1",
     duration: "4 weeks",
     title: "Bitsbox 1",
+    context:"This pathway covers everything from concept art and storytelling to coding and game mechanics.",
     link: "/registration",
+    image:"/course_one.png",
+    note:"Note: Access for 6 weeks"
   },
 ];
 
@@ -109,13 +127,19 @@ export const HomeCourses = () => {
                   index === activeSlide ? "absolute" : "hidden"
                 }`}
               >
-                <div className="flex-shrink-0 absolute w-full h-[550px] md:h-[500px] lg:h-[550px] bottom-0 bg-purple-500 left-5 rounded-2xl max-lg:hidden"></div>
+                <div className="flex-shrink-0 absolute w-full h-[550px] md:h-[500px] lg:h-[550px] bottom-0 left-5 rounded-2xl max-lg:hidden"></div>
               </div>
               <div className="z-[2] relative h-[550px] md:h-[500px] lg:h-[550px] bg-white p-6 text-2xl shadow-lg rounded-2xl">
-                <div className="w-full h-[240px] bg-blue-500 rounded-2xl border border-purple-500"></div>
+               <Image
+                  src={course.image}
+                  alt= {course.title}
+                  width= {"400"}
+                  height={"177"}
+                  className="rounded-lg"
+               />
 
                 <div className="mt-4 w-full flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-black-600">
+                  {/* <div className="flex items-center gap-2 text-black-600">
                     <svg
                       width="24"
                       height="24"
@@ -131,30 +155,42 @@ export const HomeCourses = () => {
                     <p className="font-semibold text-sm lg:text-lg">
                       {course.level}
                     </p>
-                  </div>
+                  </div> */}
 
-                  <div className="flex items-center gap-2 text-black-600">
+                  {/* <div className="flex items-center gap-2 text-black-600">
                     <FaRegClock />
                     <p className="font-semibold text-sm lg:text-lg">
                       {course.duration}
                     </p>
-                  </div>
+                  </div> */}
                 </div>
 
-                <div className="mt-5">
+                <div className="mt-3">
                   <h4 className="text-black-500 font-semibold">
                     {course.title}
                   </h4>
                 </div>
-
-                <div className="mt-5 md:mt-7">
+                <div className="mt-3">
+                  <p className="text-black-500 font-semibold">
+                    {course.level}
+                  </p>
+                </div>
+                <div className="mt-3">
+                  <p className="text-black-500 font-thin text-sm">
+                    {course.context}
+                  </p>
+                </div>
+                <div className="mt-3">
+                  <p className="text-black-500 font-semibold">
+                    {course.note}
+                  </p>
+                </div>
+                <div className="w-[326.33px] h-[40px] mt-8 md:mt-7">
                   <Link
                     href={course.link}
-                    className={`py-4 px-8 rounded-lg text-base 
+                    className={`py-4 px-8 rounded-lg text-base bg-black-500 text-white
                              ${
-                               index === activeSlide
-                                 ? "bg-black-500 text-white"
-                                 : "text-black border border-black-500 "
+                               index === activeSlide    
                              }`}
                   >
                     View Course

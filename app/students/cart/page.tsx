@@ -42,14 +42,14 @@ const Page = (props: Props) => {
       <div className='relative mt-8 lg:mt-20 w-[93%] md:w-[90%] lg:w-[88%] mx-auto text-black-500'>
             <Breadcrumbs homeLabel='Home' lightMode={true} />
           
-            <div className='pt-7 md:pt-4 w-[90%] mx-auto'>
-              <h1 className='mt-7 lg:mt-0 font-semibold text-3xl lg:text-4xl text-center'>Cart</h1>
+            <div className='pt-7  md:pt-4 w-[90%] mx-auto'>
+              <h1 className='mt-4 lg:mt-0 font-semibold text-3xl lg:text-4xl text-center'>Cart</h1>
               <p className='text-center mt-3 font-medium'>
                 You can buy all the courses or module on the cart or buy one at a time. </p>
             </div>
 
             {cart.length === 0 ? (
-            <div className='mt-5 lg:h-[50vh] w-[90%] mx-auto flex items-center justify-center flex-col gap-4 text-center'>
+            <div className='mt-16 lg:h-[50vh] w-[90%] mx-auto flex items-center justify-center flex-col gap-4 text-center'>
               <div className='mx-auto flex items-center justify-center'>
                 <Image 
                     src={'/empty-cart.gif'} 

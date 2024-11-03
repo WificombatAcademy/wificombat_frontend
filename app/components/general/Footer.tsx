@@ -120,8 +120,8 @@ const Footer = () => {
           </div>
         </div>
       </div>
-
-      <div className="bg-white px-4 py-6 sm:flex sm:items-center sm:justify-between lg:px-24 lg:py-8">
+      <div className="bg-white px-1 py-2 sm:flex sm:items-center sm:justify-between lg:px-24 lg:py-8">
+      {/* <div className="bg-white px-4 py-6 sm:flex sm:items-center sm:justify-between lg:px-24 lg:py-8">
         <span className="text-sm text-black sm:text-center">
           <span>©</span>
           2024{" "}
@@ -202,8 +202,8 @@ const Footer = () => {
             </svg>
             <span className="sr-only">LinkedIn account</span>
           </Link>
+        </div> */}
         </div>
-      </div>
     </footer>
   );
 };

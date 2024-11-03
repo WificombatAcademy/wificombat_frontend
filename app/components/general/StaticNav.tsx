@@ -32,6 +32,17 @@ const StaticNav = (props: Props) => {
       <MobileSideBar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       <ul className="mx-auto flex lg:w-fit items-center justify-between 
       lg:justify-center gap-4 max-lg:pr-4 lg:pr-44 min-[1200px]:pr-32">
+       <Link href="/">
+          <Image
+            src="/logo_wifi.png"
+            alt="homepage"
+            className="mr-24 md:h-24 w-24 px-2.5 py-2 object-contain"
+            width={"96"}
+            height={"96"}
+            
+          />
+        </Link>
+        <div className="flex mr-32 gap-3"> 
         <Link
           href="/features"
           onClick={() => scrollToView("features")}
@@ -74,15 +85,6 @@ const StaticNav = (props: Props) => {
           </li>
           {schoolsPopupVisible && <Popup links={schoolLinks} />}
         </div>
-        <Link href="/">
-          <Image
-            src="/wificombat.svg"
-            alt="homepage"
-            className="md:h-24 w-24 px-2.5 py-2 object-contain"
-            width={"96"}
-            height={"96"}
-          />
-        </Link>
         <Link
           href="/portfolio-and-projects"
           onClick={() => scrollToView("portfolio-and-projects")}
@@ -105,7 +107,7 @@ const StaticNav = (props: Props) => {
         >
           Play Games
         </Link>
-
+        </div>
         <div className="flex items-center gap-3 lg:absolute right-[3%] xl:right-[5%] 2xl:right-[7%] ">
           <Link
             href="/assessment"
