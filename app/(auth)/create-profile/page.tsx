@@ -18,6 +18,7 @@ import { useMain } from "@/app/context/MainContext";
 import SchoolStudentInfo from "@/app/components/RegistrationComps/SchoolStudentInfo";
 import SchoolTeacherInfo from "@/app/components/RegistrationComps/SchoolTeacherInfo";
 import StudentAdministratorInfo from "@/app/components/RegistrationComps/SchoolAdministratorInfo";
+import { setCookie } from "cookies-next";
 
 enum STEPS {
   STUDENT_INFO = 0,
@@ -327,6 +328,17 @@ const Profile = () => {
       if (response.data.success === false) {
         toast.error(response.data.message || "Registration failed. Please try again.");
       } else {
+        setCookie("session_id", response.data.session_id, {
+          // httpOnly: true, 
+          secure: true, 
+          sameSite: "strict",
+        });
+
+        setCookie("user_id", response.data.user_id, {
+          // httpOnly: true, 
+          secure: true, 
+          sameSite: "strict",
+        });
         if (paymentOption === 'payLater') {
           setPaymentOption("payLater");
           setSuccessfulReg(true);

@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 
 type CartItem = {
   id: string;
+  course_id?: string;
   subject?: string;
   title?: string;
   name?: string;
@@ -21,7 +22,10 @@ type CartContextType = {
   removeItemFromCart: (id: string) => void;
   cartQuantity: number;
   isInCart: (id: string) => boolean;
+  clearCart: () => void;
   isNotificationDisplayed: boolean;
+  isModalOpen: boolean;
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>
 };
 
 type CartProviderProps = {
@@ -42,20 +46,27 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [cartQuantity, setCartQuantity] = useState(0);
   const [isNotificationDisplayed, setIsNotificationDisplayed] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // Load cart from localStorage on initialization
+  // Load cart from localStorage on initialization, only on the client side
   useEffect(() => {
-    const storedCart = localStorage.getItem('cart');
-    if (storedCart) {
-      setCart(JSON.parse(storedCart));
+    if (typeof window !== 'undefined') {
+      const storedCart = localStorage.getItem('cart');
+      if (storedCart) {
+        setCart(JSON.parse(storedCart));
+      }
+      setIsLoading(false); // Set loading to false after initial load
     }
   }, []);
 
   // Update cart quantity and persist cart to localStorage whenever it changes
   useEffect(() => {
-    setCartQuantity(cart.reduce((acc, item) => acc + item.quantity, 0));
-    localStorage.setItem('cart', JSON.stringify(cart));
-  }, [cart]);
+    if (!isLoading) {
+      setCartQuantity(cart.reduce((acc, item) => acc + item.quantity, 0));
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+  }, [cart, isLoading]);
 
   const addItemToCart = (item: CartItem) => {
     setCart((prevCart) => {
@@ -86,23 +97,22 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
           (cartItem) => cartItem.type === 'course' && cartItem.id === item.details.course_id
         );
 
-        if (courseInCart) {
+        if (courseInCart && item.type === 'module') {
           // Notify the user that they cannot add a module if the course is already in the cart
-          toast.error('The course has already been added to the cart. You cannot add individual modules.');
+          // toast.error('The course has already been added to the cart. You cannot add individual modules.');
           return prevCart; // Do not add the module
         }
 
-        // Check if all modules of the course are already in the cart
+         // Get the number of modules of this course already in the cart
         const modulesInCart = prevCart.filter(
-          (cartItem) => cartItem.type === 'module' && cartItem.details?.course_id === item.details.id
+          (cartItem) => cartItem.type === 'module' && cartItem.details?.course_id === item.details.course_id
         );
 
-        const totalModules = item.details?.totalModules || 0;
-
+        // Check if adding this module would mean all modules are in the cart
+        const totalModules = item.details.totalModules;
         if (modulesInCart.length + 1 === totalModules) {
-          // Notify the user that they should add the full course instead of all modules
           toast.error('You are trying to add all modules. Please add the full course instead.');
-          return prevCart; // Do not add the last module
+          return prevCart;
         }
       }
 
@@ -128,12 +138,26 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     });
   };
 
+  const clearCart = () => {
+    setCart([]); // Clear the cart state
+    localStorage.removeItem('cart'); // Remove cart from localStorage
+  };
+
   const isInCart = (id: string) => {
     return cart.some((item) => item.id === id);
   };
 
   return (
-    <CartContext.Provider value={{ cart, addItemToCart, removeItemFromCart, cartQuantity, isInCart, isNotificationDisplayed }}>
+    <CartContext.Provider value={{ 
+      cart, 
+      addItemToCart, 
+      removeItemFromCart, 
+      clearCart,
+      cartQuantity, 
+      isInCart, 
+      isNotificationDisplayed,
+      isModalOpen, 
+      setIsModalOpen }}>
       {children}
     </CartContext.Provider>
   );

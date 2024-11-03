@@ -4,17 +4,23 @@ import GeneralNavbar from '@/app/components/general/GeneralNavbar';
 import { useCart } from '@/app/context/CartContext';
 import { Breadcrumbs } from '@/app/utils/breadcrumb'
 import BreadcrumbsWrapper from '@/app/utils/breadcrumbsWrapper';
+import Modal from '@/app/utils/modal';
 import { formatPrice } from '@/app/utils/types-and-links';
+import axios from 'axios';
+import { getCookie, setCookie } from 'cookies-next';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react'
+import React, { useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast';
 import { HiMiniTag } from "react-icons/hi2";
 
 type Props = {}
 
 const Page = (props: Props) => {
-  const { cart, removeItemFromCart } = useCart(); // Access cart and remove function
+  const { cart, removeItemFromCart,  } = useCart(); // Access cart and remove function
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
+  const [paymentLink, setPaymentLink] = useState('');
 
   // Remove item from cart handler
   const handleRemove = (id: string) => {
@@ -33,9 +39,75 @@ const Page = (props: Props) => {
     return `${baseUrl}${imagePath}`;
   };
 
+  const handleBuy = async (item?: any) => {
+    const userId = getCookie("user_id"); // Get the user ID from cookies
+
+    if (!userId) {
+        // Redirect to registration if user_id is not found
+        setCookie('redirect_from', '/students/cart', { path: '/' });
+        window.location.href = "/registration"; // Update the redirect path as needed
+        return;
+    }
+
+    setIsModalOpen(true);
+    setModalMessage('Processing payment...');
+
+    // Prepare the payload for the order
+    let modules = item?.type === 'module' ? [item] : cart.filter(cartItem => cartItem.type === 'module');
+    let course = item?.type === 'course' ? item : cart.find(cartItem => cartItem.type === 'course');
+    let courseId = course?.id;
+    let courseName = course?.subject; // or any other field that contains the course name
+    let coursePrice = item?.type === 'module' ? 0 : parseFloat(course?.price || '0'); // Set to 0 if it's a module purchase
+    let modulesTotalPrice = modules.reduce((total, module) => {
+      const price = parseFloat(module.price.replace(/[^\d.]/g, '')) || 0; // Remove any non-numeric characters
+      return total + price;
+  }, 0);
+  let finalPrice = item?.type === 'course' 
+  ? coursePrice // Use only the course price if buying a course
+  : coursePrice + modulesTotalPrice; 
+
+    const payload = {
+        user_id: userId,
+        course: {
+            course_id: courseId,
+            course_name: courseName,
+        },
+        course_price: coursePrice,
+        modules_total_price: modulesTotalPrice,
+        final_price: finalPrice,
+        payment_method: "card", // Or however you want to handle payment method
+        purchase_type: item ? (item.type === 'module' ? "single_module" : "full_course") : 
+        (modules.length <= 0 ? "full_course" : "single_module"),
+        status: "pending",
+        modules: modules.map(module => ({
+            module_id: module.id,
+            module_name: module.name, // or whatever field contains the module name
+            price: (module.price),
+        })),
+    };
+
+    try {
+        const response = await axios.post("https://wificombatacademy.com/api/v2/order/", payload, {});
+        const { message, payment_link } = response.data;
+        setModalMessage(message);
+        setPaymentLink(payment_link);
+        toast.success(message);
+
+        // Redirect to payment link
+        window.location.href = payment_link;
+    } catch (error) {
+        console.error("Error placing order:", error);
+        toast.error('Failed to place order. Please try again later.');
+    } finally {
+        setIsModalOpen(false);
+    }
+};
+
+
   return (
     <BreadcrumbsWrapper>
     <Toaster />
+
     <div className="mx-auto relative container w-full max-w-[4000px]">
       <GeneralNavbar />
 
@@ -62,10 +134,11 @@ const Page = (props: Props) => {
               <p className="text-lg">Your cart is empty.</p>
               <Link href="/students/curriculum"
               className='bg-black-500 text-white px-8 py-3 rounded-xl
-              transition-colors duration-300 hover:opacity-90'>Go back to courses</Link>
+              transition-colors duration-300 hover:opacity-90'>Go back to Curriculum</Link>
             </div>
-          ) : (
-            <div className={`mt-5 grid grid-cols-1 gap-8 ${cart.length > 1 ? 'h-[70vh]' : ''} overflow-y-scroll`}>
+               ) : (
+            <div className={`mt-5 grid grid-cols-1 gap-8 ${cart.length > 1 ? 'h-[70vh]' : ''} 
+              overflow-y-scroll`}>
               {cart.map((item) => (
                 <div key={item.id} className="flex lg:flex-row items-start
                 bg-transparent border border-black-100 rounded-3xl max-md:px-4 p-6 max-md:gap-2 gap-6">
@@ -130,7 +203,9 @@ const Page = (props: Props) => {
                         Remove from Cart
                       </button>
                       
-                      <button className="bg-black-500 text-white px-4 py-2 max-lg:py-3 
+                      <button
+                      onClick={() => handleBuy(item)}
+                      className="bg-black-500 text-white px-4 py-2 max-lg:py-3 
                       rounded-lg hover:bg-black-600 text-center">
                         Buy Now
                       </button>
@@ -139,20 +214,34 @@ const Page = (props: Props) => {
 
                   </div>
               ))}
+
+            {cart.length > 1 && <div className='py-7 w-[90%] mx-auto flex items-center justify-center'>
+            <button 
+              onClick={handleBuy} 
+              className={`bg-black-500 text-white px-8 md:px-16 py-2 max-lg:py-3 
+              rounded-lg hover:bg-black-600 text-center`}
+            >
+              Buy All
+            </button>
+          </div>}
             </div>
+
+            
           )}
-
-      {cart.length > 1 && <div className='py-7 w-[90%] mx-auto flex items-center justify-center'>
-        <button 
-          className={`bg-black-500 text-white px-8 md:px-16 py-2 max-lg:py-3 
-          rounded-lg hover:bg-black-600 text-center`}
-        >
-          Buy All
-        </button>
-      </div>}
-
+      </div>
     </div>
-    </div>
+
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <Image 
+        src={`/processing_payment.gif`}
+        alt='processing payment'
+        width={1600}
+        height={1200}
+        className='w-full'
+        />
+        <h2 className='w-[95%] mx-auto text-lg font-medium text-center'>{modalMessage}</h2>
+        {/* Optionally show a loading spinner here */}
+      </Modal>
 
     </BreadcrumbsWrapper>
   )

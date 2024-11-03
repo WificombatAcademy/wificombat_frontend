@@ -165,15 +165,43 @@ const AssessmentForm = () => {
         setSubmitting(true)
         try {
             const content = `
-            <h1>Recommended Pathway</h1>
-            <h4>Hi, ${name}</h4>
-            <p>We have analyzed your responses and based on that, we recommend the following pathway:</p>
-            <h2>Pathway Title</h2>
-            <p>${pathwayData.pathway.description}</p>
-            <p><b>Skills:</b> ${pathwayData.pathway.skills}</p>
-            <p><b>Outlook:</b> ${pathwayData.pathway.outlook}</p>
-            <p>Click the button below to register and learn more:</p>
-            `;
+    <div style="background-color: #f4f4f4; padding: 20px; display: flex; justify-content: center;">
+
+        <div style="background-color: #ffffff; padding: 30px; max-width: 600px; width: 100%; border-radius: 12px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); text-align: center; font-family: Arial, sans-serif; color: #333333;">
+    
+        <h1 style="color: #4CAF50; margin-bottom: 20px;">Your Personalised Learning Journey with WiFiCombat eLearn</h1>
+
+        <h2>Hi ${name},</h2>
+        <p><strong>Your Personalised Learning Journey Starts Here</strong></p>
+        <p>We've analysed your assessment results and crafted a tailored learning path to help you reach your full potential.</p>
+        
+        <h2>Recommended Pathway:</h2>
+        <h3 style="color: #4CAF50;">${pathwayData.pathway.pathway_recommendation.name} Pathway</h3>
+        <p>${pathwayData.pathway.pathway_recommendation.description}</p>
+
+        <h3>Why ${pathwayData.pathway.pathway_recommendation.name}?</h3>
+        <p>${pathwayData.pathway.pathway_recommendation.pathway_outlook}</p>
+        
+        <p><strong>Take the Next Step</strong></p>
+        <p>Ready to embark on your ${pathwayData.pathway.pathway_recommendation.name} journey? Click the button below to register and explore our comprehensive courses:</p>
+        
+        <a href="https://wificombatacademy.com/registration" style="background-color: #131314; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; display: inline-block; font-size: 16px; margin-top: 10px;">
+            Start Your ${pathwayData.pathway.pathway_recommendation.name} Journey
+        </a>
+
+        <p><strong>Your Success is Our Mission</strong></p>
+        <p>At WiFiCombat eLearn, we're committed to empowering learners like you. With our expert-led courses and personalised support, you'll gain the skills and knowledge to thrive in the tech industry.</p>
+
+       <p>Best regards,</p>
+            <p>The WiFiCombat eLearn Team</p>
+            <img src="https://wificombat-elearning.vercel.app/wificombat.svg" alt="Company Logo" style="width:100px;height:auto;"/>
+            <p><a href="https://https://wificombat-elearning.vercel.app/">Visit Our Website</a> | Contact: info@wificombatacademy.com</p>
+
+        <p>Click the button below to register and learn more:</p>
+
+        </div>
+    </div>
+        `;
         
             // Sending the email
             await axios.post(
@@ -220,7 +248,7 @@ const AssessmentForm = () => {
 
                     const emailSent = await sendRecommendationEmail(email, selectedPathwayData);
 
-                    if (!emailSent) {
+                    if (emailSent) {
                         const pathwayDataEncoded = encodeURIComponent(JSON.stringify(selectedPathwayData));
 
                         // Build the URL string manually
