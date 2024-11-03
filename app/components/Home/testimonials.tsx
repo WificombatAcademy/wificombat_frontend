@@ -8,42 +8,37 @@ import "swiper/css/autoplay";
 import { useState } from "react";
 import { merriweather } from "@/app/fonts";
 
-
 const testimonialData = [
 
-  {  name: "Temitayo Asani",
-    role: "Alumni studying Mechatronics Engineering in the USA",
-    testimonial: "Temitayo's tech journey began at WiFiCombat Academy in 2015, where she honed her programming skills after teaching herself to code from the age of 12. At the academy, she developed her ability to build apps, which earned her the prestigious Oracle Student Recognition Award. She attended the WiFiCombat Career Workshop, where she and her team completed an SDGs project and co-founded the NGO 'Never Your Fault,' an organization dedicated to eradicating child marriage in Nigeria. This initiative gained significant international attention, with coverage from media outlets such as CNN, BBC, the Malala Foundation, and Cosmopolitan. Her accomplishments continue at university, where she and her team successfully built a spacecraft, further showcasing her exceptional talents in the tech field. Temitayo credits WiFiCombat Academy as a key influence in shaping her path, providing her with the necessary skills and mentorship to excel in her tech career.'WiFiCombat Academy not only equips you with the skills to begin your tech journey, but it also connects you with mentors who guide you in fulfilling your tech career aspirations.'",
-    image: "/WhatsApp_wifi.png",
-    },
-   { name:"Ayomide Tejuoso", 
-    role: "Alumini of the Wificombat Academy First Class  student in Art & Design, from the Univesity of La Head Geneva", 
-    testimonial:"Winner for Best Student Award ;Prix Tremplin Leenaards 2024 / HEAD pour les Arts visuels (trois prix différents seront décernés) Ayomide Tejuoso, a Nigerian artist and alumna of WiFiCombat Academy, has carved a name for herself in the contemporary art world. After attending edutech classes at the academy from the age of 11 to 17, she developed a strong foundation in digital tools like Photoshop and web design, which sparked her passion for creativity. By the age of 15, Ayomide began her artistic journey, working on digital art and photography projects in Lagos , Johannesburg.Italy, Amsterdam,UK and Geneva Over the past seven years, she has garnered significant recognition, winning prestigious awards such as Foam Talent 2021, PhotoVogue Festival 2021, and the VoiceHq Photo Vogue Festival NFT residency in 2022. Her work has also been featured in exhibitions at Rele Gallery, Affinity Gallery, and in publications like Homeschool and New Currency magazines. Ayomide and her team did the PhotoVogue Campaign 2023 Ayomide sees her art as a tool for revolution and community building. WiFiCombat Academy played a vital role in helping her find her artistic voice,",
-    image: "/WhatsApp_wifi2.png",
+  { name:"Esther Howard", 
+    role: "Alumni", 
+    testimonial:"Lorem ipsum dolor sit amet consectetur. Aliquam ut amet eget mi faucibus ultrices mattis proin habitant. Sit quis rhoncus placerat ut ultricies aliquam. Non mauris lacus massa dis. Habitasse viverra blandit tincidunt ",
+    image: "/testimonials.jpeg",
     },
 
-  { name:"Tobi Tejuoso", 
-    role: "Alumini of the Wificombat", 
-    testimonial:'Tobi Tejuoso a photographer and studying film production in the UK started his journey at a very young age at the age of 7 years at the Wificombat Academy.He used the platform to horn his skills especially in the multimedia design arm of theWificombat Academy.  The Academy placed him in top production  companies were he built his skills in film  production and had been part of several  NETFLIX FILMS He also built his photography skills and was offered internship in a top creative industry in the UK. He had the opportunity to shoot LIAM PAYNE ALBUM ,  NOCTA ( Nike  Campaigm) ,  OFFWHITE SKATE  EXHIBITION In his words" Wificombat Academy prepared me for the opportunities I have"',
-    image: "/WhatsApp_wifi3.png",
+  { name:"Micheal Howard", 
+    role: "Alumni", 
+    testimonial:"Lorem ipsum dolor sit amet consectetur. Aliquam ut amet eget mi faucibus ultrices mattis proin habitant. Sit quis rhoncus placerat ut ultricies aliquam. Non mauris lacus massa dis. Habitasse viverra blandit tincidunt ",
+    image: "/testimonials.jpeg",
     },
 
-  { name:"Kudirat Abiola", 
-    role: "Alumina of Wificombat and a Studebt at the London School Of Economics", 
-    testimonial:"Launched the “Never Your Fault” Campaign Child Bride Marriage in Nigeria that had international publicity from CNN, BBC, Malala Foundation 400,000 Petition Pass the Bill  to raise the age  of marriage in Nigera Scholarship to ALA and LSE She attended a transformative career workshop hosted by the academy, which provided her with valuable skills in research, public speaking, and personal branding.",
-    image: "/WhatsApp_wifi4.png",
+  { name:"Benjamin Howard", 
+    role: "Alumni 2", 
+    testimonial:"Lorem ipsum dolor sit amet consectetur. Aliquam ut amet eget mi faucibus ultrices mattis proin habitant. Sit quis rhoncus placerat ut ultricies aliquam. Non mauris lacus massa dis. Habitasse viverra blandit tincidunt ",
+    image: "/testimonials.jpeg",
     },
 
-  { name:"Wonderful Adeneken", 
-    role: "Alumina of Wificombat Academy Senior Frontend Engineer and Javascript Engineer", 
-    testimonial:"Wonderful attended the Wificombat Academy when he was just 13 years from 2015 - 2017 were he was introduced to Coding. He won the best student at the academy were He was  offered   an internship with a top  tech company in Lagos. He has horned his skills over the years and was a facilitator at the academy. Wonderful is a top software engineer and has worked with multi national firms across the world.",
-    image: "/WhatsApp_wifi5.png",
+  { name:"James Howard", 
+    role: "Alumni", 
+    testimonial:"Lorem ipsum dolor sit amet consectetur. Aliquam ut amet eget mi faucibus ultrices mattis proin habitant. Sit quis rhoncus placerat ut ultricies aliquam. Non mauris lacus massa dis. Habitasse viverra blandit tincidunt ",
+    image: "/testimonials.jpeg",
     },
-    { name:"Mariam Hamzat", 
-      role: "Mobile App Developer", 
-      testimonial:"Mariam Hamzat is a graduate at the Federal University of Technology, Akure. She studied software development with a focus on mobile development using the Flutter framework. Her journey into tech began six years ago when she attended a four-week boot camp sponsored by WiFiCombat Academy. Currently, Mariam works as a mobile developer and serves as the community manager at her school, holding the role of GDSC Lead. She also worked as a Program Manager at the Wificombat Academy building the Wificombat Elearning platform. ",
-      image: "/WhatsApp_wifi6.png",
-      },
+
+  { name:"Rebecca Howard", 
+    role: "Alumni", 
+    testimonial:"Lorem ipsum dolor sit amet consectetur. Aliquam ut amet eget mi faucibus ultrices mattis proin habitant. Sit quis rhoncus placerat ut ultricies aliquam. Non mauris lacus massa dis. Habitasse viverra blandit tincidunt ",
+    image: "/testimonials.jpeg",
+    },
 
 ];
 
@@ -89,42 +84,40 @@ export const Testimonials = () => {
                         <SwiperSlide 
                         key={index}
                         className={``}>
-                        <div className="gap-5">  
-                        <div className="">  
-                        <Image
-                          src={testimonial.image}
-                          alt={testimonial.name}
-                          width={300}
-                          height={500}
-                          className="rounded-l-lg"
-                         />
-                          <div className="bg-white text-black-500 py-4 px-6 rounded-r-lg">
+                           <div className="bg-white text-black-500 rounded-xl py-3 px-4">
                                 <div className="flex items-center gap-4">
                                     <div
                                     key={index}
                                     className={`relative max-[350px]:w-[55px] max-[350px]:h-[55px] w-[60px] h-[60px] 
-                                        md:w-[80px] md:h-[80px] lg:w-[90px] lg:h-[90px] rounded-full
-                                        ${index === activeSlide}`}
+                                        md:w-[80px] md:h-[80px] lg:w-[90px] lg:h-[90px] rounded-full border-4
+                                        ${index === activeSlide ? "border-4 border-purple-500": ""}`}
                                     >
+                                        <div className="image-container w-full h-full">
+                                            <Image
+                                            width={320}
+                                            height={480}
+                                            src={testimonial.image}
+                                            alt={`testimonial ${index + 1}`}
+                                            className="object-cover w-full h-full rounded-full"
+                                            />
+                                        </div>
                                     </div>
 
                                    <div>
-                                        <h2 className="mt-6  -ml-24 md:mt-8 text-2xl md:text-3xl font-semibold">
+                                        <h2 className="mt-6 md:mt-8 text-2xl md:text-3xl font-semibold">
                                         {testimonial.name}
                                         </h2>
-                                        <h4 className="mt-5   -ml-24 font-semibold text-lg md:text-xl">{testimonial.role}</h4>
+                                        <h4 className="mt-5 text-lg md:text-xl">{testimonial.role}</h4>
                                    </div>
                                 </div>
 
-                                <div className="mt-4 flex  py-4 flex-col md:flex-row gap-4 md:gap-2">
+                                <div className="mt-4 flex flex-col md:flex-row gap-4 md:gap-2">
                                     <FaQuoteLeft size={40} className="flex-shrink-0 max-md:mx-auto" />
-                                    <p className="text-left  mt-6 font-raleway text-[16px] font-normal">
+                                    <p className="font-medium md:text-">
                                     {testimonial.testimonial}{" "}
                                     </p>
                                 </div>
-                                </div>
-                                </div>
-                                </div>
+                           </div>
                         </SwiperSlide>
                     ))}
                 
