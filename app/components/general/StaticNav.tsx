@@ -30,17 +30,17 @@ const StaticNav = (props: Props) => {
       `}
     >
       <MobileSideBar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-      <ul className="mx-auto flex lg:w-fit items-center justify-between 
+      <ul className="mx-auto p-4 flex lg:w-fit items-center justify-between 
       lg:justify-center gap-4 max-lg:pr-4 lg:pr-44 min-[1200px]:pr-32">
        <Link href="/">
           <Image
-            src="/wificomlogo.jpg"
+            src="/E-learn_logo.png"
             alt="homepage"
             width={200}
-            height={200} 
+            height={200}
           />
         </Link>
-        <div className="flex mr-32 gap-3"> 
+        <div className="flex mr-40 gap-3"> 
         <Link
           href="/features"
           onClick={() => scrollToView("features")}
