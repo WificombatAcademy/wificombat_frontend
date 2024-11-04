@@ -18,7 +18,7 @@ const coursesData = [
     id: 1,
     level: "Level 1",
     duration: "4 weeks",
-    title: "Coding fundamental 1 (Lightbot and Mblock)",
+    title: "Coding fundamental 1",
     context:"This pathway covers everything from concept art and storytelling to coding and game mechanics.",
     link: "/registration",
     image:"/course_one.png",
@@ -30,10 +30,10 @@ const coursesData = [
     id: 2,
     level: "Level 1",
     duration: "4 weeks",
-    title: "Coding fundamental 2 (Lightbot and Mblock)",
+    title: "Coding fundamental 2",
     context:"This pathway covers everything from concept art and storytelling to coding and game mechanics.",
     link: "/registration",
-    image:"/course_one.png",
+    image:"/course_two.png",
     note:"Note: Access for 6 weeks"
   },
 
@@ -41,7 +41,7 @@ const coursesData = [
     id: 3,
     level: "Level 1",
     duration: "4 weeks",
-    title: "Coding fundamental 3 (Lightbot and Mblock)",
+    title: "Coding fundamental 3",
     context:"This pathway covers everything from concept art and storytelling to coding and game mechanics.",
     link: "/registration",
     image:"/course_three.png",
@@ -52,7 +52,7 @@ const coursesData = [
     id: 4,
     level: "Level 1",
     duration: "4 weeks",
-    title: "Pictoblox",
+    title: "Coding fundamental 4",
     context:"This pathway covers everything from concept art and storytelling to coding and game mechanics.",
     link: "/registration",
     image:"/course_one.png",
@@ -63,7 +63,7 @@ const coursesData = [
     id: 5,
     level: "Level 1",
     duration: "4 weeks",
-    title: "Bitsbox 1",
+    title: "Coding fundamental 5",
     context:"This pathway covers everything from concept art and storytelling to coding and game mechanics.",
     link: "/registration",
     image:"/course_one.png",
@@ -129,13 +129,13 @@ export const HomeCourses = () => {
               >
                 <div className="flex-shrink-0 absolute w-full h-[550px] md:h-[500px] lg:h-[550px] bottom-0 left-5 rounded-2xl max-lg:hidden"></div>
               </div>
-              <div className="z-[2] relative h-[550px] md:h-[500px] lg:h-[550px] bg-white p-6 text-2xl shadow-lg rounded-2xl">
+              <div className="z-[2] relative h-[500px] md:h-[450px] lg:h-[500px] bg-white p-6 text-2xl shadow-lg rounded-2xl">
                <Image
                   src={course.image}
                   alt= {course.title}
-                  width= {"400"}
-                  height={"177"}
-                  className="rounded-lg"
+                  width= {500}
+                  height={500}
+                  className="h-44 rounded-lg"
                />
 
                 <div className="mt-4 w-full flex items-center justify-between">
@@ -165,12 +165,12 @@ export const HomeCourses = () => {
                   </div> */}
                 </div>
 
-                <div className="mt-3">
+                <div className="mt-2">
                   <h4 className="text-black-500 font-semibold">
                     {course.title}
                   </h4>
                 </div>
-                <div className="mt-3">
+                <div className="mt-4">
                   <p className="text-black-500 font-semibold">
                     {course.level}
                   </p>
@@ -181,14 +181,14 @@ export const HomeCourses = () => {
                   </p>
                 </div>
                 <div className="mt-3">
-                  <p className="text-black-500 font-semibold">
+                  <p className="text-black-500 text-sm font-semibold">
                     {course.note}
                   </p>
                 </div>
-                <div className="w-[326.33px] h-[40px] mt-8 md:mt-7">
+                <div className="flex justify-center items-center h-[20px] mt-10 md:mt-7">
                   <Link
                     href={course.link}
-                    className={`py-4 px-8 rounded-lg text-base bg-black-500 text-white
+                    className={`w-full max-w-[400px] h-[40px] mt-8 flex justify-center items-center py-4 px-8 rounded-lg text-base bg-black-500 text-white
                              ${
                                index === activeSlide    
                              }`}

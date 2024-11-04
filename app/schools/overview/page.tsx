@@ -13,9 +13,8 @@ export default function Page() {
     <div className="mx-auto relative container w-full max-w-[2000px]">
       <GeneralNavbar />
       <StudentsHero 
-      headerOne="Lorem ipsum dolor sit amet consectetur."
-      headerTwo="Lorem ipsum dolor sit amet consectetur. A integer viverra libero sit. Adipiscing vel 
-      at non platea posuere massa porttitor. Viverra purus luctus posuere massa neque laoreet sed viverra."
+      headerOne="Empower Your Students With Career Pathway"
+      headerTwo="Our platform provides schools with a comprehensive solution to guide students towards successful careers. Easily register your school and purchase career pathways tailored to your students' needs. Our user-friendly platform enables teachers to deliver engaging lessons and track student progress."
       text="school-overview.png"
       bgColor={true}/>
       <TeachAndLearnWithWifi/>

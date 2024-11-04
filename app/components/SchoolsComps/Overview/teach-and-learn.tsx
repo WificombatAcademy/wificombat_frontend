@@ -2,9 +2,12 @@ import Image from "next/image"
 import HeadingDesign from "../../general/HeaderDesign"
 
 const courseslist =  [
-    "Lorem ipsum dolor sit amet consectetur. Etiam in ut",
-    "Lorem ipsum dolor sit amet consectetur. Etiam in ut",
-    "Lorem ipsum dolor sit amet consectetur. Etiam in ut",
+    "Access to engaging and interactive lessons",
+    "Teachers can track student progress",
+    "Students can explore a variety of career pathways",
+    "Learn from experienced educators",
+    "Engage in interactive learning activities",
+    "Access personalized support"
   ]
 
 export const TeachAndLearnWithWifi = () => {
@@ -57,16 +60,16 @@ export const TeachAndLearnWithWifi = () => {
                 </div>
 
                 <div className="grid grid-cols-1 gap-5">
-                    <h4 className="font-semibold mb-2 text-black-500 text-2xl md:text-3xl">Lorem ipsum dolor sit am. </h4>
+                    <h4 className="font-semibold mb-2 whitespace-nowrap text-black-500 text-2xl md:text-3xl">Collaborative Learning Experience</h4>
                     {courseslist.map((list, index) => (
-                      <ul key={index} className="flex gap-2 list-disc">
-                        {/* <Image
+                      <ul key={index} className="flex whitespace-nowrap gap-2 list-none">
+                        <Image
                           width={24}
                           height={24}
                           src={`/star-1.svg`}
                           alt="star"
                           className="object-contain aspect-auto"
-                        /> */}
+                        />
                         <li className="md:w-[80%] text-black-500 md:text-lg ml-4">{list}</li>
                       </ul>
                     ))}

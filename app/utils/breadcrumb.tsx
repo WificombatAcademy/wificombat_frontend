@@ -7,7 +7,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { BreadcrumbsProps } from "./types-and-links";
 import { Suspense } from "react";
 
-export const Breadcrumbs = ({ homeLabel, homeIcon = "/assets/auth/logo.svg", lightMode }: BreadcrumbsProps) => {
+export const Breadcrumbs = ({ homeLabel, homeIcon = "/assets/auth/wificomlog.jpg", lightMode }: BreadcrumbsProps) => {
     const pathname = usePathname();
     const searchParams = useSearchParams();
     const pathnames = pathname.split("/").filter((x) => x);
@@ -32,8 +32,8 @@ export const Breadcrumbs = ({ homeLabel, homeIcon = "/assets/auth/logo.svg", lig
                     <Image
                         src={homeIcon}
                         alt={homeLabel}
-                        width={20}
-                        height={20}
+                        width={40}
+                        height={40}
                         className="w-7 object-contain text-neutral-400"
                     />
                 </Link>

@@ -12,9 +12,8 @@ export default function Page() {
       <GeneralNavbar />
       <StudentsHero 
       text="school-curriculum.png"
-       headerOne="Lorem ipsum dolor sit amet consectetur."
-       headerTwo="Lorem ipsum dolor sit amet consectetur. A integer viverra libero sit. Adipiscing vel 
-       at non platea posuere massa porttitor. Viverra purus luctus posuere massa neque laoreet sed viverra."
+       headerOne="Comprehensive Curriculum for Future Success"
+       headerTwo="Our curriculum is designed to equip students with the knowledge and skills they need to thrive in the 21st century. Our experienced teachers are dedicated to providing a stimulating and engaging learning environment that fosters critical thinking, creativity, and problem-solving."
       bgColor={true}/>
       <CareerPathwayCurriculum schoolCurriculum/>
       <LearningOutcomes/>

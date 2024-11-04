@@ -52,9 +52,8 @@ const Footer = () => {
               </span>
             </Link>
 
-            <p className="m my-6 max-w-md text-xl text-white">
-              We offer free consultation, you can book a consultation section
-              with us{" "}
+            <p className="m my-6 max-w-md text-xl text-white font-normal leading-8">
+            Join the WifiCombat eLearn community and unlock your potential. Elevate your education today.{" "}
             </p>
 
             <Link href={`/assessment`}>
@@ -109,7 +108,7 @@ const Footer = () => {
                         key={getInTouchLink.id}
                         className="mb-3 lg:mb-4 lg:text-lg"
                       >
-                        <Link href={`/`} className="hover:underline">
+                        <Link href={`/`} className="whitespace-nowrap hover:underline">
                           {getInTouchLink.id}
                         </Link>
                       </li>

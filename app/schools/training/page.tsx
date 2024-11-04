@@ -11,9 +11,9 @@ export default function Page() {
       <GeneralNavbar />
       <StudentsHero 
       text="school-training.png"
-      headerOne="Lorem ipsum dolor sit amet consectetur."
-      headerTwo="Lorem ipsum dolor sit amet consectetur. A integer viverra libero sit. Adipiscing vel 
-      at non platea posuere massa porttitor. Viverra purus luctus posuere massa neque laoreet sed viverra."
+      headerOne="WiFiCombat eLearn: Empowering Teachers to Transform Education"
+      headerTwo="At WiFiCombat eLearn, we believe that teachers are at the heart of the learning experience. Our platform is designed not 
+       only to enrich students but also to provide teachers with powerful tools, resources, and support to enhance their teaching journey."
       bgColor={true}/>
       <Impact />
       <FAQ noSpace/>
