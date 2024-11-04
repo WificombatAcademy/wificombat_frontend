@@ -79,7 +79,7 @@ export const PortfolioCard = () => {
                  <header className="w-full py-3 px-4 md:px-6 lg:px-8 bg-purple-500 text-white flex items-center justify-between">
                     <div className="basis-[30%] lg:basis-[35%]">
                         <Image
-                            src={`/assets/auth/logo.svg`}
+                            src={`/assets/auth/wificomlog.jpg`}
                             alt={`logo`}
                             width={93}
                             height={93}
