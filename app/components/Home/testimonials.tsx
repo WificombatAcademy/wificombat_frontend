@@ -58,7 +58,7 @@ export const Testimonials = () => {
           <Swiper
             autoplay={{ delay: 10000 }}
             modules={[Autoplay]}
-            spaceBetween={400}
+            spaceBetween={700}
             slidesPerView="auto"
             breakpoints={{
               320: {
