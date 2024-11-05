@@ -161,7 +161,7 @@ const DesktopSidebar = () => {
         href={`/`}
         className="flex h-16 shrink-0 items-center">
          <Image
-            src={`/assets/auth/wificomlog.jpg`}
+            src={`/assets/auth/E-learn_logo_sidebar.png`}
             alt={`logo`}
             width={90}
             height={90}

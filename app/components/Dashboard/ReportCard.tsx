@@ -76,7 +76,7 @@ export const ReportCard  = () => {
                 <header className="w-full py-3 px-4 md:px-6 lg:px-8 bg-purple-300 text-white flex items-center justify-between">
                     <div className="basis-[30%] lg:basis-[35%]">
                         <Image
-                            src={`/assets/auth/wificomlog.jpg`}
+                            src={`/assets/auth/E-learn_logo_sidebar.png`}
                             alt={`logo`}
                             width={90}
                             height={90}
