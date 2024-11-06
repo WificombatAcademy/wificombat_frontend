@@ -8,7 +8,7 @@ export const IntroducingCareerPath = () => {
 
       <div className="w-[93%] md:w-[90%] lg:w-[88%] mx-auto">
         <p className="md:w-[88%] mx-auto mt-6 md:mt-9 lg:mt-12 md:text-2xl text-center font-medium">
-        The WiFiCombat eLearn platform's Career Pathway feature guides students in discovering their ideal tech careers through personalized assessments and tailored learning resources.
+        The WiFiCombat eLearn platform&apos;s Career Pathway feature guides students in discovering their ideal tech careers through personalized assessments and tailored learning resources.
 
         </p>
 
