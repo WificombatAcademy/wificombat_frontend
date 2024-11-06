@@ -4,7 +4,7 @@ import { StudentsHero } from "@/app/components/StudentsComps/Overview/hero";
 import { PortfolioBenefit } from "../components/PortfolioProject/keybenefit";
 import { PortfolioEnhance } from "../components/PortfolioProject/portfolioEnhance";
 import { Prepare } from "../components/PortfolioProject/prepare";
-import { PortfolioManagement } from "../components/PortfolioProject/portfoliomanagement";
+import { PortfolioManagement } from "../components/PortfolioProject/portfolioManagement";
 export default function Page() {
     return (
         <div className="mx-auto relative container w-full max-w-[2000px]">
@@ -17,12 +17,11 @@ export default function Page() {
       btnColor={false}
       textColor={false}
       />
-     <PortfolioManagement/>
+      <PortfolioManagement/>
       <PortfolioBenefit/>
       <PortfolioEnhance/>
       <Prepare/>
-
-            <Footer />
+      <Footer />
         </div>
     )
 }
