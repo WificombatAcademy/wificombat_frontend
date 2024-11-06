@@ -114,7 +114,7 @@ const Login = () => {
         <div className="absolute inset-0 bg-[#26002C80] opacity-90 rounded-tr-[100px]">
           <Image
             className="absolute top-10 left-10"
-            src="/assets/auth/wificomlog.jpg"
+            src="/assets/auth/E-learn_logo_sidebar.png"
             width={54}
             height={54}
             alt=""

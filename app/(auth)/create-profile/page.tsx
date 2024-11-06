@@ -496,7 +496,7 @@ const Profile = () => {
             <a href="/">
             <Image
               className="absolute top-10 left-10"
-              src="/assets/auth/logo.svg"
+              src="/assets/auth/E-learn_logo_sidebar.png"
               width={54}
               height={54}
               alt=""
