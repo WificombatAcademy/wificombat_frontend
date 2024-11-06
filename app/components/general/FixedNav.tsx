@@ -50,6 +50,7 @@ const [studentsPopupVisible, setStudentsPopupVisible] = useState(false);
             alt="homepage"
             width={200}
             height={200}
+            className="mr-36"
           />
         </Link>
         <div className="flex mr-40 gap-3"> 

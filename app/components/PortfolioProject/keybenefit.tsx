@@ -3,7 +3,7 @@ import HeadingDesign from "../../components/general/HeaderDesign"
 
 export const PortfolioBenefit = () => {
     return (
-       <section> 
+       <section className="-mt-14"> 
          <HeadingDesign heading="KEY BENEFITS OF PORTFOLIO MANAGEMENT FEATURE" />
         <div className="w-[93%] md:w-[80%] lg:w-[85%] mx-auto mt-20 mb-24 space-y-9 md:space-y-32 lg:space-y-40">
             <OnboardingCard

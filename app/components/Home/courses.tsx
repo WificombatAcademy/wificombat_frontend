@@ -20,7 +20,7 @@ const coursesData = [
     duration: "4 weeks",
     title: "Coding fundamental 1",
     context:"This pathway covers everything from concept art and storytelling to coding and game mechanics.",
-    link: "/registration",
+    link: "/course",
     image:"/course_one.png",
      note:"Note: Access for 6 weeks"
 
@@ -32,7 +32,7 @@ const coursesData = [
     duration: "4 weeks",
     title: "Coding fundamental 2",
     context:"This pathway covers everything from concept art and storytelling to coding and game mechanics.",
-    link: "/registration",
+    link: "/course",
     image:"/course_two.png",
     note:"Note: Access for 6 weeks"
   },
@@ -43,7 +43,7 @@ const coursesData = [
     duration: "4 weeks",
     title: "Coding fundamental 3",
     context:"This pathway covers everything from concept art and storytelling to coding and game mechanics.",
-    link: "/registration",
+    link: "/course",
     image:"/course_three.png",
     note:"Note: Access for 6 weeks"
   },
@@ -54,7 +54,7 @@ const coursesData = [
     duration: "4 weeks",
     title: "Coding fundamental 4",
     context:"This pathway covers everything from concept art and storytelling to coding and game mechanics.",
-    link: "/registration",
+    link: "/course",
     image:"/course_one.png",
     note:"Note: Access for 6 weeks"
   },
@@ -65,7 +65,7 @@ const coursesData = [
     duration: "4 weeks",
     title: "Coding fundamental 5",
     context:"This pathway covers everything from concept art and storytelling to coding and game mechanics.",
-    link: "/registration",
+    link: "/course",
     image:"/course_one.png",
     note:"Note: Access for 6 weeks"
   },
