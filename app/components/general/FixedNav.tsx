@@ -50,7 +50,6 @@ const [studentsPopupVisible, setStudentsPopupVisible] = useState(false);
             alt="homepage"
             width={200}
             height={200}
-            className="mr-36"
           />
         </Link>
         <div className="flex mr-40 gap-3"> 
@@ -101,7 +100,7 @@ const [studentsPopupVisible, setStudentsPopupVisible] = useState(false);
           onClick={() => scrollToView("portfolio-and-projects")}
           className={`px-2.5 py-2 text-sm min-[1200px]:text-base min-[1400px]:text-lg capitalize
              text-white hover:text-[#0784C3] max-lg:hidden ${
-            pathname === "/portfolioandprojects"
+            pathname === "/portfolio-and-projects"
               ? "border-b-4 border-blue-500"
               : ""
           }`}
