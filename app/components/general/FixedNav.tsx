@@ -101,7 +101,7 @@ const [studentsPopupVisible, setStudentsPopupVisible] = useState(false);
           onClick={() => scrollToView("portfolio-and-projects")}
           className={`px-2.5 py-2 text-sm min-[1200px]:text-base min-[1400px]:text-lg capitalize
              text-white hover:text-[#0784C3] max-lg:hidden ${
-            pathname === "/portfolio-and-projects"
+            pathname === "/portfolioandprojects"
               ? "border-b-4 border-blue-500"
               : ""
           }`}

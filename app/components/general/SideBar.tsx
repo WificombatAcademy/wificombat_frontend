@@ -13,7 +13,7 @@ export const navigation = [
   { name: "Features", href: "/features" },
   { name: "Students", href: "#" },
   { name: "Schools", href: "#" },
-  { name: "Portfolio & Projects", href: "/portfolio-and-projects" },
+  { name: "Portfolio & Projects", href: "/portfolioandprojects" },
   // { name: "Play Games", href: "/play-games" },
   { name: "Login", href: "/login" },
   { name: "Take Assessment", href: "/assessment" },
