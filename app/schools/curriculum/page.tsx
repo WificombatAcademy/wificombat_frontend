@@ -14,7 +14,7 @@ export default function Page() {
       text="school-curriculum.png"
        headerOne="Comprehensive Curriculum for Future Success"
        headerTwo="Our curriculum is designed to equip students with the knowledge and skills they need to thrive in the 21st century. Our experienced teachers are dedicated to providing a stimulating and engaging learning environment that fosters critical thinking, creativity, and problem-solving."
-       bgColor={true}/>
+       bgColor="blue"/>
       <CareerPathwayCurriculum schoolCurriculum/>
       <LearningOutcomes/>
       <DesignedAndBuilt />

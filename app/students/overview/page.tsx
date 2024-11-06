@@ -17,7 +17,11 @@ export default function Page() {
       headerOne="Empower K-12 Students with a Tech Pathway."
       headerTwo="Join a global network of schools offering top-notch education in coding, multimedia design, AI, 
       gaming, robotics, and IoT. Our platform provides the curriculum, tools, and guidance to help students 
-      apply their skills and thrive in diverse tech industries. "/>
+      apply their skills and thrive in diverse tech industries. "
+      bgColor="purple"
+      btnColor={true}
+      textColor={true}
+      />
       <TechSkill />
       <EmpowerLearningJourney />
       <IntroducingCareerPath />

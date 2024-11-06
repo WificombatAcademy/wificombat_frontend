@@ -8,8 +8,8 @@ export const IntroducingCareerPath = () => {
 
       <div className="w-[93%] md:w-[90%] lg:w-[88%] mx-auto">
         <p className="md:w-[88%] mx-auto mt-6 md:mt-9 lg:mt-12 md:text-2xl text-center font-medium">
-          Lorem ipsum dolor sit amet consectetur. A ornare rhoncus ipsum
-          consequat facilisis maecenas bibendum euismod velit. Purus com
+        The WiFiCombat eLearn platform's Career Pathway feature guides students in discovering their ideal tech careers through personalized assessments and tailored learning resources.
+
         </p>
 
         <div className="mt-14 md:mt-24 mb-20 grid grid-cols-1 lg:grid-cols-3 gap-9">

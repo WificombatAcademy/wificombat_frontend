@@ -13,7 +13,11 @@ export default function Page() {
       text="student-curriculum.png"
       headerOne="Explore Our Tech Career Pathway Curriculum."
       headerTwo="Discover a curriculum designed to guide K-12 students through essential tech skills. 
-      From coding to AI and robotics, we provide the tools and resources to prepare them for exciting tech careers."/>
+      From coding to AI and robotics, we provide the tools and resources to prepare them for exciting tech careers."
+      bgColor="purple"
+      btnColor={true}
+      textColor={true}
+      />
       <CareerPathwayCurriculum />
       <LearningOutcomes/>
       <CurriculumCertification />

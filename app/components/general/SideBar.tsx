@@ -14,7 +14,7 @@ export const navigation = [
   { name: "Students", href: "#" },
   { name: "Schools", href: "#" },
   { name: "Portfolio & Projects", href: "/portfolio-and-projects" },
-  { name: "Play Games", href: "/play-games" },
+  // { name: "Play Games", href: "/play-games" },
   { name: "Login", href: "/login" },
   { name: "Take Assessment", href: "/assessment" },
 ];

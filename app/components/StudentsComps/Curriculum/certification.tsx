@@ -31,9 +31,8 @@ export const CurriculumCertification = () => {
 
                <div className="w-[93%] md:w-[90%] lg:w-[88%] mx-auto">
                     <h3 className="w-[90%] mx-auto text-center text-2xl md:text-4xl font-semibold">Certification</h3>
-                    <p className="mt-9 md:w-[80%] lg:w-[65%] mx-auto text-center">Lorem ipsum dolor sit amet consectetur. Cras aliquam at tincidunt fermentum quis ultricies leo. 
-                        Accumsan tortor nunc facilisi posuere sapien in massa felis laoreet. Egestas accumsan in arcu 
-                        integer ut quisque mollis et nec. Massa interdum </p>
+                    <p className="mt-9 md:w-[80%] lg:w-[65%] mx-auto text-center">The WiFiCombat eLearn platform offers certificates upon course completion, providing students with official recognition of their newly acquired tech skills and achievements.
+                    </p>
                </div>
 
 

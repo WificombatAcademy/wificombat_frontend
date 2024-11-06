@@ -32,8 +32,8 @@ const slides = [
     bgColor: "bg-blue-500", buttonBlack: true, img:"/hero-5.png", width:"w-[90%]" },
 
     {heading1: "Navigate the  Techprenuership Career Pathway", 
-     heading2: `Lorem ipsum dolor sit amet consectetur. Nunc et aenean imperdiet dignissim suspendisse in. Pretium ante adipiscing sed amet eget sed in. Parturient t`,
-    bgColor: "bg-yellow-500", buttonBlack: true, img:"/hero-6.png", width:"w-[90%]" },
+     heading2: `Our Techpreneurship Pathway provides a comprehensive curriculum designed to equip you with the essential skills and knowledge needed to thrive in the dynamic world of technology. From identifying market trends to building sustainable business models,`,
+     bgColor: "bg-yellow-500", buttonBlack: true, img:"/hero-6.png", width:"w-[90%]" },
 ]
 
 export const Hero = () => {

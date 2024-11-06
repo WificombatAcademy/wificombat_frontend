@@ -4,23 +4,27 @@ import BreadcrumbsWrapper from "@/app/utils/breadcrumbsWrapper";
 import Cart from "@/app/utils/cart";
 import Image from "next/image";
 import Link from "next/link"
+import { boolean } from "zod";
 
 type Props = {
-    bgColor ?: boolean;
+    bgColor?: "blue" | "purple" | "black";
     headerOne: string;
     headerTwo: string;
     text: string;
     whiteButton?: boolean;
+    btnColor ?: boolean;
+    textColor ?: boolean;
+    
 }
 
-export const StudentsHero = ({bgColor, headerOne, headerTwo, text}: Props) => {
+export const StudentsHero = ({bgColor, headerOne, headerTwo, text, btnColor, textColor}: Props) => {
     return (
         <BreadcrumbsWrapper>
         <section 
         id="home"
         className="text-white">
             <div className={`relative isolate overflow-hidden pb-[2rem] lg:pb-[7rem] md:py-[7rem] lg:py-[10rem] 
-                ${bgColor ?  "bg-blue-500" : "bg-purple-500"}`}>
+                 ${bgColor === "blue" ? "bg-blue-500" : bgColor === "purple" ? "bg-purple-500" : "bg-black"}`}>
                     <Cart/>
                 <div className={`relative max-lg:mt-[5rem] w-[93%] md:w-[80%] lg:w-[85%] mx-auto 
                 max-lg:h-full h-[16rem] xl:h-[20rem] 2xl:h-[24rem] 
@@ -41,8 +45,8 @@ export const StudentsHero = ({bgColor, headerOne, headerTwo, text}: Props) => {
                             <>
                             <Link 
                             href={`/registration`}
-                            className="px-16 py-5 font-medium text-white shadow-sm bg-black-500 rounded-lg 
-                            transition duration-300 hover:bg-opacity-90">
+                            className={`px-16 py-5 font-medium shadow-sm rounded-lg 
+                            transition duration-300 hover:bg-opacity-90  ${btnColor ? "bg-black-500" : "bg-white"} ${textColor ?"text-white": "text-black"}`}>
                                 Register
                             </Link>
                             </>

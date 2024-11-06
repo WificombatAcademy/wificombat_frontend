@@ -38,6 +38,7 @@ const StaticNav = (props: Props) => {
             alt="homepage"
             width={200}
             height={200}
+            className="mr-36"
           />
         </Link>
         <div className="flex mr-40 gap-3"> 
@@ -95,7 +96,7 @@ const StaticNav = (props: Props) => {
         >
           Portfolio & Projects
         </Link>
-        <Link
+        {/* <Link
           href="/play-games"
           onClick={() => scrollToView("play-games")}
           className={`px-2.5 py-2 text-sm min-[1200px]:text-base min-[1400px]:text-lg capitalize
@@ -104,7 +105,7 @@ const StaticNav = (props: Props) => {
           }`}
         >
           Play Games
-        </Link>
+        </Link> */}
         </div>
         <div className="flex items-center gap-3 lg:absolute right-[3%] xl:right-[5%] 2xl:right-[7%] ">
           <Link
