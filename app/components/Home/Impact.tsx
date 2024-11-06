@@ -2,10 +2,10 @@
 import { useEffect, useRef, useState } from "react";
 
 const serviceTab = [
-  { id: 1, currentValue: "20,000", maxValue: 400, title: "Students" },
-  { id: 2, currentValue: "300", maxValue: 400, title: "Programs" },
-  { id: 3, currentValue: "500", maxValue: 400, title: "Schools" },
-  { id: 4, currentValue: "50,000", maxValue: 400, title: "Projects" },
+  { id: 1, currentValue: "20,000", percentage: 85, title: "Students" },
+  { id: 2, currentValue: "300", percentage: 75, title: "Programs" },
+  { id: 3, currentValue: "500", percentage: 90, title: "Schools" },
+  { id: 4, currentValue: "50,000", percentage: 95, title: "Projects" },
 ];
 
 const Impact = () => {
@@ -19,20 +19,19 @@ const Impact = () => {
 
       <div className="my-16 h-full w-full md:w-[90%] lg:w-[88%] mx-auto">
         <div className="flex flex-col justify-center gap-6 max-sm:flex-row max-sm:flex-wrap lg:flex-row lg:justify-around">
-          {serviceTab.map((x, index) => (
+          {serviceTab.map((item) => (
             <CircularProgressBar
-              key={x.id}
-              startDegree={0}
-              endDegree={66}
+              key={item.id}
+              startPercentage={0}
+              endPercentage={item.percentage}
               gradientColors={["#BC00DD", "#BC00DD"]}
-              size={25}
-              width={500}
-              strokeWidth={1.6}
-              className="mx-auto text-red-500 max-sm:w-28"
+              size={200}
+              strokeWidth={12}
+              className="mx-auto w-48"
             >
-              <div style={{ fontSize: 9, marginTop: -5 }} className="flex flex-col gap-px">
-                <strong>{x.currentValue}+</strong>
-                <span className="text-lg">{x.title}</span>
+              <div className="flex flex-col gap-2 text-center">
+                <strong className="text-2xl">{item.currentValue}+</strong>
+                <span className="text-lg">{item.title}</span>
               </div>
             </CircularProgressBar>
           ))}
@@ -45,41 +44,35 @@ const Impact = () => {
 export default Impact;
 
 interface CircularProgressBarProps {
-  startDegree: number;
-  endDegree: number;
+  startPercentage: number;
+  endPercentage: number;
   gradientColors: string[];
   children: React.ReactNode;
   size: number;
-  width: number;
   strokeWidth: number;
   className?: string;
-  animationDuration?: number; // new prop to control animation speed
+  animationDuration?: number;
 }
 
 const CircularProgressBar = ({
-  startDegree,
-  endDegree,
+  startPercentage,
+  endPercentage,
   gradientColors,
   children,
   size,
-  width,
   strokeWidth,
   className,
-  animationDuration = 2, // default duration
+  animationDuration = 2,
 }: CircularProgressBarProps) => {
-  const [progress, setProgress] = useState(startDegree);
+  const [progress, setProgress] = useState(startPercentage);
   const ref = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
-    // Check if the animation has already occurred in sessionStorage
-    const impactAnimate = sessionStorage.getItem("impactAnimate");
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && impactAnimate !== "true") {
-            setProgress(endDegree); // set progress to endDegree when element is in view
-            sessionStorage.setItem("impactAnimate", "true"); // mark animation as done
+          if (entry.isIntersecting) {
+            setProgress(endPercentage);
           }
         });
       },
@@ -95,53 +88,65 @@ const CircularProgressBar = ({
         observer.unobserve(ref.current);
       }
     };
-  }, [startDegree, endDegree]);
+  }, [endPercentage]);
 
-  const gradientId = `gradient-${Math.random()}`; // Ensure unique gradient ID
-  const gradientStops = gradientColors.map((color, index) => (
-    <stop key={index} offset={`${(index / (gradientColors.length - 1)) * 100}%`} stopColor={color} />
-  ));
+  const radius = (size - strokeWidth) / 2;
+  const circumference = 2 * Math.PI * radius;
+  const progressOffset = ((100 - progress) / 100) * circumference;
+
+  const gradientId = `gradient-${Math.random().toString(36).substr(2, 9)}`;
 
   return (
-    <svg
-      ref={ref}
-      viewBox={`0 0 ${size} ${size}`}
-      className={`circular-progress-bar ${className}`}
-      fill="transparent"
-      width={width}
-    >
-      <defs>
-        <linearGradient id={gradientId} gradientTransform="rotate(90)">
-          {gradientStops}
-        </linearGradient>
-      </defs>
-      <path
-        stroke="#f2f2f2"
-        d={`M${size / 2} ${size / 36}
-          a ${size / 2.4} ${size / 2.4} 0 0 1 0 ${size / 1.2}
-          a ${size / 2.4} ${size / 2.4} 0 0 1 0 -${size / 1.2}`}
-        strokeWidth={strokeWidth}
-      />
-      <path
-        className="circle"
-        stroke={`url(#${gradientId})`}
-        d={`M${size / 2} ${size / 36}
-          a ${size / 2.4} ${size / 2.4} 0 0 1 0 ${size / 1.2}
-          a ${size / 2.4} ${size / 2.4} 0 0 1 0 -${size / 1.2}`}
-        style={{
-          strokeDasharray: `${progress * 0.66}, 100`,
-          transition: `stroke-dasharray ${animationDuration}s ease-in-out`,
-        }}
-        strokeWidth={strokeWidth}
-      />
-      <foreignObject x="0" y="0" width={size} height={size}>
-        <div
-          className="flex h-full items-center justify-center text-black"
-          style={{ transform: "scale(0.2)" }}
-        >
-          {children}
-        </div>
-      </foreignObject>
-    </svg>
+    <div className={`relative ${className}`}>
+      <svg
+        ref={ref}
+        width={size}
+        height={size}
+        viewBox={`0 0 ${size} ${size}`}
+        className="transform rotate-90"
+      >
+        <defs>
+          <linearGradient id={gradientId} gradientTransform="rotate(90)">
+            {gradientColors.map((color, index) => (
+              <stop
+                key={index}
+                offset={`${(index / (gradientColors.length - 1)) * 100}%`}
+                stopColor={color}
+              />
+            ))}
+          </linearGradient>
+        </defs>
+        
+        {/* Background circle */}
+        <circle
+          cx={size / 2}
+          cy={size / 2}
+          r={radius}
+          stroke="#f2f2f2"
+          strokeWidth={strokeWidth}
+          fill="none"
+        />
+        
+        {/* Progress circle */}
+        <circle
+          cx={size / 2}
+          cy={size / 2}
+          r={radius}
+          stroke={`url(#${gradientId})`}
+          strokeWidth={strokeWidth}
+          strokeDasharray={circumference}
+          strokeDashoffset={progressOffset}
+          fill="none"
+          style={{
+            transition: `stroke-dashoffset ${animationDuration}s ease-in-out`,
+          }}
+        />
+      </svg>
+      
+      <div className="absolute inset-0 flex items-center justify-center">
+        {children}
+      </div>
+    </div>
   );
 };
+
