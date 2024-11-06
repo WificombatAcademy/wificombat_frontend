@@ -1,5 +1,5 @@
 import Image from "next/image";
-import HeadingDesign from "../../components/general/HeaderDesign"
+import HeadingDesign from "../general/HeaderDesign"
 
 const outcomes = [
     {desc: "Technical expertise through documented projects and assignments", bgImage: "/mdi_laptop.png"},
