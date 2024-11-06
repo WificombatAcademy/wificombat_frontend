@@ -17,9 +17,9 @@ export default function Page() {
       btnColor={false}
       textColor={false}
       />
-      {/* <PortfolioManagement/> */}
+      <PortfolioManagement/>
       <PortfolioBenefit/>
-      {/* <PortfolioEnhance/> */}
+      <PortfolioEnhance/>
       <Prepare/>
       <Footer />
         </div>
