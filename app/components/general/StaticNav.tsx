@@ -36,12 +36,12 @@ const StaticNav = (props: Props) => {
           <Image
             src="/E-learn_logo.png"
             alt="homepage"
-            width={200}
-            height={200}
+            width={150}
+            height={150}
             className="mr-36"
           />
         </Link>
-        <div className="flex mr-40 gap-3"> 
+        <div className="flex mr-64 gap-3"> 
         <Link
           href="/features"
           onClick={() => scrollToView("features")}

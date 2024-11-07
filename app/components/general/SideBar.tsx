@@ -102,8 +102,8 @@ const MobileSideBar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                   <Image
                     src="/E-learn_logo.png"
                     alt="homepage"
-                    width={200}
-                    height={200}
+                    width={150}
+                    height={150}
                     className="mt-3"
                   />
                 </div>
