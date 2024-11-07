@@ -85,10 +85,10 @@ return (
     </p>
 
     <Swiper
-      freeMode={true}
-      slidesPerGroup={1}
-      slidesPerView={"auto"}
-      centeredSlides={true}
+      // freeMode={true}
+      // slidesPerGroup={1}
+      // slidesPerView={"auto"}
+      // centeredSlides={true}
       navigation={{
         nextEl: ".courses-swiper-button-next",
         prevEl: ".courses-swiper-button-prev",
@@ -96,19 +96,21 @@ return (
       pagination={{ clickable: true, el: ".courses-swiper-pagination" }}
       breakpoints={{
         320: { slidesPerView: 1, spaceBetween: 20 },
-        640: { slidesPerView: 1, spaceBetween: 10 },
+        640: { slidesPerView: 2, spaceBetween: 10 },
         1000: { slidesPerView: 3, spaceBetween: 30 },
+        1300: { slidesPerView:4, spaceBetween: 30,
+          },
       }}
       loop={true}
       modules={[FreeMode, Navigation, Pagination]}
       onActiveIndexChange={(swiper) => setActiveSlide(swiper.realIndex)}
-      className="mt-16 w-[93%] md:w-[90%] lg:w-[88%] mx-auto flex items-center justify-center"
+      className="mt-16 w-[93%] md:w-[90%] lg:w-[88%] mx-auto flex items-center justify-center overflow-visible"
     >
       {courses.length > 0 &&
         courses
           .filter((course) => course.level === selectedLevel)
           .map((course, index) => (
-            <SwiperSlide key={course.id} className="pt-5 md:pt-12 pb-8 flex items-center justify-center">
+            <SwiperSlide key={course.id} className="pt-5 md:pt-12 pb-8 flex items-center justify-center overflow-visible">
               <CareerCard
                 key={index}
                 curriculum={true}
