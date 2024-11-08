@@ -59,16 +59,11 @@ export const Testimonials = () => {
             autoplay={{ delay: 10000 }}
             modules={[Autoplay]}
             spaceBetween={30}
-            slidesPerView={1}
+            slidesPerView={1.3}
             breakpoints={{
-              640: {
-                slidesPerView: 1,
-                spaceBetween: 20,
-              },
-              1024: {
-                slidesPerView: 1,
-                spaceBetween: 30,
-              },
+              320: { slidesPerView: 1.1, spaceBetween: 15 },
+              640: { slidesPerView: 1.2, spaceBetween: 20 },
+              1000: { slidesPerView: 1.3, spaceBetween: 30 },
               1440: {
                 slidesPerView: 2,
                 spaceBetween: 40,
@@ -79,7 +74,8 @@ export const Testimonials = () => {
           >
             {testimonialData.map((testimonial, index) => (
               <SwiperSlide key={index}>
-                <div className="flex flex-col md:flex-row bg-white rounded-xl overflow-hidden min-h-[600px] max-w-[1000px] mx-auto">
+                
+                <div className="flex flex-col md:flex-row bg-white rounded-xl overflow-hidden min-h-[600px] max-w-[1000px]">
                   <div className="w-full md:w-2/5 h-[300px] md:h-auto relative">
                     <Image
                       src={testimonial.image}
