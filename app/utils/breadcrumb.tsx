@@ -24,7 +24,7 @@ export const Breadcrumbs = ({ homeLabel, homeIcon = "/assets/auth/mono-logo.png"
 
     return (
         <Suspense>
-        <div className={`absolute w-full left-0 
+        <div className={`absolute w-full left-0
         ${isCoursePage ? 'top-[1rem]' : 'top-[-1rem]'} lg:top-[-3rem] flex items-center gap-3`}>
             {/* Home link */}
             <div className="flex items-center gap-2">
@@ -79,7 +79,7 @@ export const Breadcrumbs = ({ homeLabel, homeIcon = "/assets/auth/mono-logo.png"
                                     <h3 className={`text-lg cursor-pointer ${notActiveTextColor}`}>{label}</h3>
                                 </Link>
                             ) : (
-                                <h3 className={`text-lg cursor-pointer ${activeTextColor}`}>{label}</h3>
+                                <h3 className={`text-lg font-bold cursor-pointer ${activeTextColor}`}>{label}</h3>
                             )}
                             {!isLast && <IoIosArrowForward className={notActiveTextColor} />}
                         </div>

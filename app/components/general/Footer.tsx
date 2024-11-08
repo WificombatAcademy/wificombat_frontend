@@ -75,7 +75,7 @@ const Footer = () => {
                         key={pathway.id}
                         className="mb-3 lg:mb-4 lg:text-lg"
                       >
-                        <Link href={`/`} className="hover:underline">
+                        <Link href={`/${pathway.link}`} className="hover:underline">
                           {pathway.id}
                         </Link>
                       </li>

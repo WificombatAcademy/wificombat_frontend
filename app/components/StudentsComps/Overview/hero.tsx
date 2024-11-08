@@ -31,11 +31,11 @@ export const StudentsHero = ({bgColor, headerOne, headerTwo, text, btnColor, tex
                     flex flex-col md:flex-row md:items-center md:justify-between gap-10`}>
                     <div className="w-full md:basis-[50%] relative">
                         <Breadcrumbs homeLabel="Home"/>
-                        <h1 className={`${merriweather.className} 
-                            text-3xl md:text-4xl lg:text-5xl 2xl:text-6xl 
+                        <p className={`${merriweather.className} 
+                            text-5xl md:text-4xl lg:text-5xl 2xl:text-6xl 
                             max-md:leading-[45px] lg:leading-[67.2px] 2xl:leading-[78px] font-bold max-lg:pt-8`}>
                             {headerOne}
-                        </h1>
+                        </p>
 
                         <p className="mt-5 font-semibold text-lg md:text-xl lg:w-[85%]">
                             {headerTwo}
