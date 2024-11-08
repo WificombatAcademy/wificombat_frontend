@@ -16,7 +16,10 @@ export default function Page() {
       headerOne="Empower Your Students With Career Pathway"
       headerTwo="Our platform provides schools with a comprehensive solution to guide students towards successful careers. Easily register your school and purchase career pathways tailored to your students' needs. Our user-friendly platform enables teachers to deliver engaging lessons and track student progress."
       text="school-overview.png"
-      bgColor="blue"/>
+      bgColor="blue"
+      btnColor={true}
+      textColor={true}
+      />
       <TeachAndLearnWithWifi/>
       <EmpowerLearningJourney />
       <SchoolCurriculum dontShowOnboarding />

@@ -32,23 +32,23 @@ export const BenefitOfTeachers = () => {
           desc="WiFiCombat eLearn offers an extensive collection of multimedia resources, including videos, simulations, coding exercises, and interactive quizzes, that help teachers create more engaging and effective lessons. This diverse content allows teachers to cater to different learning styles, helping students grasp complex concepts in fun and innovative ways."
           title="Access to Engaging and Interactive Content"
           col={true}
-          image="/skill-3.png"
+          image="/mdi_content.png"
           />
            <BenefitCard
           borderColor="border-black-300"
-          bgColor="bg-black-300"
+          bgColor="bg-yellow-100"
           desc="With our platform's built-in assessment tools, teachers can instantly gauge student understanding and provide immediate feedback. This allows for timely interventions, ensuring that no student falls behind. Teachers can also customize assessments to fit their unique curriculum needs and track each student’s growth throughout the year."
           title="Real Time Assessment and Feedback"
           col={true}
-          image="/skill-3.png"
+          image="/mdi_clock.png"
           />
            <BenefitCard
           borderColor="border-black-300"
-          bgColor="bg-black-300"
+          bgColor="bg-blue-200"
           desc="WiFiCombat eLearn fosters a collaborative environment where teachers can connect with other educators both locally and globally. This opens up opportunities to share ideas, lesson plans, and teaching strategies, creating a supportive community of educators dedicated to improving learning outcomes."
           title="Collaboration and Networking"
           col={true}
-          image="/skill-3.png"
+          image="/mdi_account.png"
           />
         </div>
       </div>

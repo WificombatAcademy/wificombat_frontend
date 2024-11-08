@@ -17,7 +17,7 @@ export default function Page() {
       <PathwayHero
       image="/hero-6.png"
       widthStyle="w-full object-contain"
-      desc="Lorem ipsum dolor sit amet consectetur. Nunc et aenean imperdiet dignissim suspendisse in. Pretium ante adipiscing sed amet eget sed in. Parturient"
+      desc="Our Techpreneurship Pathway provides a comprehensive curriculum designed to equip you with the essential skills and knowledge needed to thrive in the dynamic world of technology. From identifying market trends to building sustainable business models,"
       header="Navigate the Techprenuership Career Pathway"
        bgColor="bg-yellow-500" 
        />
@@ -40,7 +40,7 @@ export default function Page() {
       <Outcomes outcomes={outcomes} />
       <TechprenuershipOnboarding />
       <TodayComp 
-      desc="Lorem ipsum dolor sit amet consectetur. Senectus in consequat egestas faucibus morbi pulvinar nec ac. Morbi phasellus sed augue neque ac nibh varius vitae sagittis." 
+      desc="Develop practical skills and hands-on experience in tech entrepreneurship. Our program offers a blend of theoretical knowledge and practical projects to help you apply your learning to real-world challenges." 
       header="Start Learning About Techprenuership Today!" 
       linkto="/schools/pricing-plan" />
       <Footer />

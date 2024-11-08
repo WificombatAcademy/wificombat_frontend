@@ -41,7 +41,7 @@ export const Outcomes = ({outcomes} : Props) => {
                             </div>
                                 </div> 
 
-                                <h3 className="mt-4 font-semibold text-lg md:text-2xl">{outcome.title}</h3>
+                                <h3 className="mt-4  whitespace-nowrap mr-3 font-semibold text-lg md:text-2xl">{outcome.title}</h3>
                                 <p className="mt-4">{outcome.desc}</p>
                             </div>
                         ))}

@@ -50,10 +50,10 @@ export const schoolLinks = [
   ]
 
   export const outcomes = [
-    {title:"Ac cum facilisi", desc:"Pharetra in pellentesque fringilla viverra laoreet consequat tincidunt. Viverra auctor sed ornare ullamcorper in est magna interdum vitae. Egestas elementum est at neque eget et."},
-    {title:"Iaculis sollicitudin eget", desc:"Hac lacus sed egestas commodo nisl bibendum. Pellentesque in fermentum et scelerisque nunc. Ullamcorper tellus arcu sem amet massa pellentesque scelerisque."},
-    {title:"Purus molestie quam", desc:"Quisque vestibulum diam tempus scelerisque consequat. Suscipit mauris sit nisi dapibus diam tellus vel mi. Fringilla bibendum pellentesque eu nisl."},
-    {title:"Arcu duis platea", desc:"Varius commodo lobortis sit morbi sollicitudin porttitor leo proin sed. Proin pretium accumsan eget arcu leo nisi. Etiam quis neque purus nunc massa."},
+    {title:"Entrepreneurial Principles", desc:"Students will be able to explain key entrepreneurial concepts, such as innovation, business planning, and market research", bgImage:"/assets/pathway/Vector1.png"},
+    {title:"Problem Solving", desc:"Students will develop critical thinking and problem-solving skills by identifying challenges and proposing technology-driven solutions.", bgImage:"/assets/pathway/Vector2.png"},
+    {title:"Project Management", desc:"Students will learn to plan, execute, and evaluate projects, including setting goals, timelines, and assessing risks.", bgImage:"/assets/pathway/Vector3.png"},
+    {title:"Business Model Creation", desc:"Students will create a basic business model for a tech startup, including product/service offerings, target market, and revenue streams.", bgImage:"/assets/pathway/Vector4.png"},
   ]
 
 

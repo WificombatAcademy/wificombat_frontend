@@ -15,11 +15,11 @@ export const Prepare = () => {
                 </div>
 
                 <div className="w-full md:basis-[50%]">
-                    <h3 className="md:w-[90%] font-semibold text-lg md:text-3xl">
+                    <p className="md:w-[90%] font-semibold text-[30px] md:text-3xl">
                     Preparing For The Future
-                    </h3>
+                    </p>
 
-                    <p className="mt-4 md:mt-6 md:w-[90%] lg:w-[85%] md:text-xl text-black-700 leading-8">
+                    <p className="mt-4 md:mt-6 text-[20px]  leading-[30px] text-left md:w-[90%] lg:w-[85%] md:text-xl text-black-700">
                     Students who actively use the Portfolio Management feature are better prepared to transition into the next stages of their academic or professional careers. Whether they are applying to colleges, 
 seeking internships, or entering the workforce, the portfolio serves as a professional tool that demonstrates their capabilities and readiness for future opportunities.
 
