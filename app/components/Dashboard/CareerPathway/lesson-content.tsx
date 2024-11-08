@@ -1,5 +1,5 @@
 "use client"
-import { merriweather } from '@/app/fonts';
+import { merriweather, raleway } from '@/app/fonts';
 import Image from 'next/image';
 import React, { useEffect } from 'react'
 import { RiLoader4Fill } from 'react-icons/ri';
@@ -41,8 +41,9 @@ const LessonContent = ({
     
   return (
     <>
-    <div className="lesson-container relative mt-5 p-5 h-[24rem] lg:h-[110%] mb-6 bg-white shadow overflow-y-auto overflow-x-hidden rounded-3xl">
-        <div className="sticky w-full inset-0 h-[45vh] bg-white flex items-center justify-center">
+    <div className="lesson-container relative mt-5 p-5 h-[24rem] lg:h-[110%] mb-6 bg-white
+     shadow overflow-y-auto overflow-x-auto rounded-3xl">
+        {/* <div className="sticky w-full inset-0 h-[45vh] bg-white flex items-center justify-center">
             <Image 
             src={`/logo.png`}
             alt='background'
@@ -50,7 +51,7 @@ const LessonContent = ({
             height={80}
             className='w-[90%] h-full object-contain invert-[100%] opacity-10'
             />
-        </div>
+        </div> */}
         {selectedContent.length > 0 ? (
             <div className='absolute top-0 left-0 w-full'>
             <div className='relative z-[1] top-3 left-0 px-3'>
@@ -58,7 +59,7 @@ const LessonContent = ({
                     Lesson Note for Lesson {lessonIndex}</h3>
                 {/* Display current slide */}
                 <div 
-                className='bg-transparent'
+                className={`${raleway.className}  bg-transparent`}
                 dangerouslySetInnerHTML={{ __html: selectedContent[currentSlide] }} />
 
                 {/* Navigation Buttons lg:fixed lg:w-[52%] right-0  */}

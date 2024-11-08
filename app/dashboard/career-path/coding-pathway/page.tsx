@@ -90,7 +90,8 @@ const Page = () => {
                                 {filteredCourses.map((course, ind) => (
                                     <div key={ind} className="flex flex-col gap-8">
                                         <div className="flex items-center justify-between gap-6">
-                                            <h6 className="text-[#131314] text-xl md:text-[28px] font-bold">{course.subject}</h6>
+                                            <h6 className="text-[#131314] text-xl md:text-[28px] font-bold">
+                                                {course.subject}</h6>
                                             <div>
                                                 <Link href={`/dashboard/report-card/course_${ind + 1}`}>
                                                     <button 
@@ -114,20 +115,23 @@ const Page = () => {
 
                                                     <Link href={!(module.unlocked) ? 
                                                         `/dashboard/career-path/coding-pathway/${course.course_id}/${module.id}` 
-                                                        : ""} className="rounded-2xl  bg-blue-500">
-                                                        <button disabled={module.unlocked} className="relative w-full 
-                                                        h-[150px] md:h-[190px] lg:h-[215px] disabled:cursor-not-allowed">
-                                                            {module.unlocked && <div className="absolute inset-0 
-                                                            bg-[#B1B1B4]/30 rounded-2xl"></div>}
-                                                            {/* <Image 
+                                                        : ""} className="rounded-2xl">
+                                                        <button disabled={module.unlocked} className="relative w-full
+                                                        h-[150px] md:h-[190px] lg:h-[215px] flex items-center justify-center overflow-hidden bg-blue-500
+                                                         rounded-2xl disabled:cursor-not-allowed">
+                                                            {module.unlocked &&  <div className="absolute
+                                                            bg-[#B1B1B4]/30 border-4 border-black rounded-2xl"></div>}
+                                                            <div className="">
+                                                            <Image 
                                                                 src={(module.cimage !== "") ? 
                                                                     module.cimage :
                                                                      `/assets/dashboard/course.png`}
                                                                 alt={module.thumbnail}
-                                                                width={282}
-                                                                height={215}
-                                                                className="w-full h-full object-cover bg-gray-50 border rounded-2xl"
-                                                            /> */}
+                                                                width={400}
+                                                                height={400}
+                                                                className="w-full object-cover bg-cover bg-no-repeat"
+                                                            />
+                                                            </div>
                                                         </button>
                                                     </Link>
 
@@ -142,10 +146,10 @@ const Page = () => {
                                                         <div className="mt-2 font-medium">
                                                             <h3>{module.desc}</h3>
                                                         </div>
-                                                        <div className="mt-2 flex flex-wrap gap-3 md:gap-5 text-black-600">
-                                                            <div>{module.lessons} {module.lessons > 1 ? "Lessons" : "Lesson"}</div>
-                                                            <div>{module.quiz} Quiz</div>
-                                                            <div>1 {module.assignment > 1 ? "Assignments" : "Assignment"}
+                                                        <div className="mt-2 flex text-xs lg:text-sm gap-3 md:gap-5 text-black-600">
+                                                            <div>{module.num_lessons} {module.lessons > 1 ? "Lessons" : "Lesson"}</div>
+                                                            <div>{module.num_quizzes} Quiz</div>
+                                                            <div>1 {module.num_assignments > 1 ? "Assignments" : "Assignment"}
                                                             </div>
                                                         </div>
                                                     </div>

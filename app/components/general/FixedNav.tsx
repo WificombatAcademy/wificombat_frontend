@@ -12,6 +12,8 @@ import { usePathname } from "next/navigation";
 import Popup, { PopupProps } from "./Popup";
 import { schoolLinks, studentLinks } from "@/app/utils/types-and-links";
 import MobileSideBar from "./SideBar";
+import { getCookie } from "cookies-next";
+import { FaUserCircle } from "react-icons/fa";
 
 type Props = {};
 
@@ -24,6 +26,7 @@ const [studentsPopupVisible, setStudentsPopupVisible] = useState(false);
   const { isVisible } = useNavbarVisibility();
 
   const controls = useAnimation();
+  const session = getCookie('session_id') || getCookie('user_id');
 
   useEffect(() => {
     if (isVisible) {
@@ -131,14 +134,14 @@ const [studentsPopupVisible, setStudentsPopupVisible] = useState(false);
           </Link>
 
           <Link
-            href="/login"
+            href={"/login"}
             className={`px-8 py-2 text-sm min-[1200px]:text-base min-[1400px]:text-lg capitalize
-               bg-white font-bold 
+              ${session ? "bg-white font-bold flex items-center gap-2" : "bg-white font-bold"}
               rounded-lg max-lg:hidden transition-colors duration-300 hover:bg-opacity-90 cursor-pointer
             }`}
           >
-            Login
-          </Link>
+            {session ? <> Dashboard <FaUserCircle /></> : "Login"}
+        </Link>
         </div>
         
         <div className="pr-3">

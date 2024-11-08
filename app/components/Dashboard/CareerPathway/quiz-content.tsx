@@ -7,31 +7,59 @@ import { IoCheckmark } from 'react-icons/io5';
 
 type Props = {
   quizData: any[];
+  setQuizData: Dispatch<any>;
   activeLessonIndex: number;
   setActiveLessonIndex: Dispatch<SetStateAction<number>>;
   moduleDetails: any[];
+  handleVideoClick: () => void;
   setShowAssignment: Dispatch<SetStateAction<boolean>>;
   setIsQuizMode: Dispatch<SetStateAction<boolean>>;
   setIsLessonMode: Dispatch<SetStateAction<boolean>>;
   setIsAssignmentMode: Dispatch<SetStateAction<boolean>>;
+  setIsVideoMode: Dispatch<SetStateAction<boolean>>;
 };
 
-const QuizContent = ({ quizData, activeLessonIndex, setActiveLessonIndex,
-     moduleDetails, setShowAssignment, setIsQuizMode, setIsLessonMode, setIsAssignmentMode }: Props) => {
+const QuizContent = ({ quizData, activeLessonIndex, setActiveLessonIndex, handleVideoClick, setQuizData,
+    moduleDetails, setShowAssignment, setIsQuizMode, setIsLessonMode, setIsAssignmentMode, setIsVideoMode }: Props) => {
   const [currentQuizQuestion, setCurrentQuizQuestion] = useState(0);
+  const [originalQuizData, setOriginalQuizData] = useState(quizData);
   const [quizAnswers, setQuizAnswers] = useState<{ [key: number]: string }>({});
   const [quizSubmitted, setQuizSubmitted] = useState(false);
   const [score, setScore] = useState(0);
+  const [missedQuestions, setMissedQuestions] = useState<number[]>([]);
   const [reviewMode, setReviewMode] = useState(false);
+  const [retakeAttempts, setRetakeAttempts] = useState(0);
+  const [retakeMode, setRetakeMode] = useState(false);
 
-  // Handle option selection
-const handleOptionSelect = (questionIndex: number, selectedOptionIndex: number | string) => {
-  setQuizAnswers((prevAnswers) => ({
-    ...prevAnswers,
-    [questionIndex]: selectedOptionIndex.toString(), // Convert selected option index to string
-  }));
-};
+    // console.log("quiz data", quizData);
+    // console.log("new questions",missedQuestions)
 
+    // Handle option selection
+  const handleOptionSelect = (questionIndex: number, selectedOptionIndex: number | string) => {
+    setQuizAnswers((prevAnswers) => ({
+      ...prevAnswers,
+      [questionIndex]: selectedOptionIndex.toString(), // Convert selected option index to string
+    }));
+  };
+
+  const handleKeyPress = (event: KeyboardEvent) => {
+    if (event.key === "Enter") {
+      // Check if it's the end of the regular quiz or the retake quiz
+      const isEndOfQuiz = currentQuizQuestion === quizData.length - 1;
+      const isEndOfRetake = retakeMode && currentQuizQuestion === missedQuestions.length - 1;
+  
+      if (isEndOfQuiz || isEndOfRetake) {
+        handleSubmitQuiz(); // Submit quiz at the end of either mode
+      } else {
+        handleNextQuizQuestion(); // Move to the next question
+      }
+    }
+  };  
+
+  React.useEffect(() => {
+    window.addEventListener("keydown", handleKeyPress);
+    return () => window.removeEventListener("keydown", handleKeyPress);
+  }, [currentQuizQuestion, quizAnswers]);
 
   // Navigate to the next question
   const handleNextQuizQuestion = () => {
@@ -57,46 +85,65 @@ const handleOptionSelect = (questionIndex: number, selectedOptionIndex: number |
   // Handle quiz submission and calculate the score
   const handleSubmitQuiz = () => {
     if (!quizAnswers[currentQuizQuestion]) {
-        toast.error('Please answer the question before submitting.');
-        return;
+      toast.error('Please answer the question before submitting.');
+      return;
     }
 
+    const incorrectQuestions: number[] = [];
     let correctAnswers = 0;
 
     quizData.forEach((question, index) => {
-        const userAnswer = quizAnswers[index];
+      const userAnswer = quizAnswers[index];
 
-        if (question.type === 'multiple-choice') {
-            // Use the correct index to compare with the selected option
-            const userAnswerIndex = parseInt(quizAnswers[index]) + 1;
-            const correctAnswerIndex = parseInt(question.correct_answer); // The correct answer index from the API
+      const isCorrect = question.type === 'multiple-choice'
+        ? parseInt(quizAnswers[index]) + 1 === parseInt(question.correct_answer)
+       : (userAnswer && userAnswer.trim().toLowerCase()) === question.correct_answer.trim().toLowerCase();
 
-            // console.log("user answer:", userAnswer)
-            // console.log("Right answer from data:", correctAnswerIndex)
-
-            if (userAnswerIndex === correctAnswerIndex) {
-                correctAnswers += 1;
-            }
-        } else if (question.type === 'fill-in-the-gap') {
-            // Check if the user's answer matches the correct answer for fill-in-the-gap questions
-            if (userAnswer.trim().toLowerCase() === question.correct_answer.trim().toLowerCase()) {
-                correctAnswers += 1;
-            }
+        if (isCorrect) {
+          correctAnswers += 1;
+        } else {
+          incorrectQuestions.push(index);
         }
-    });
+      });
 
     const totalScore = (correctAnswers / quizData.length) * 100;
     setScore(totalScore);
+    setMissedQuestions(incorrectQuestions);
     setQuizSubmitted(true);
 
     if (totalScore >= 75) {
         toast.success("You passed! You can now proceed to the next lesson.");
     } else {
-        toast.error("You failed. Please restart the course from the beginning.");
-        setCurrentQuizQuestion(0); // Reset quiz
+      if(retakeAttempts < 1) toast.error("You failed. Please retake the quiz.");
+        // setCurrentQuizQuestion(0); // Reset quiz
         setQuizAnswers({}); // Clear answers
+        if (retakeAttempts >= 1) {
+          setRetakeMode(false); // Disable retake mode after one attempt
+          toast.error("Maximum retakes reached. You can now only review.");
+        } else {
+          setRetakeMode(true);
+        }    
     }
 };
+
+  const handleRetakeQuiz = () => {
+    if (retakeAttempts >= 1) {
+      toast.error("You have reached the maximum retake attempts. You can now only review.");
+      setRetakeMode(false);
+      setReviewMode(true);
+      return;
+    }
+
+    setCurrentQuizQuestion(0);
+    setRetakeAttempts(retakeAttempts + 1);
+    setQuizSubmitted(false);
+
+    // Filter quiz data to only missed questions for retake
+    const missedQuizData = quizData.filter((_, index) => missedQuestions.includes(index));
+    // console.log("filtered missed",missedQuizData)
+    setMissedQuestions(missedQuizData);
+    setQuizData(missedQuizData);
+  };
 
 
   const handleProceedToNextLesson = () => {
@@ -104,10 +151,13 @@ const handleOptionSelect = (questionIndex: number, selectedOptionIndex: number |
       setActiveLessonIndex(activeLessonIndex + 1);
       setIsQuizMode(false);
       setIsAssignmentMode(false);
-      setIsLessonMode(true);
+      setIsLessonMode(false);
+      setIsVideoMode(true);
+      handleVideoClick();
     } else {
       // Show assignment when last lesson is reached
       setIsQuizMode(false);
+      setIsVideoMode(false);
       setIsLessonMode(false);
       setIsAssignmentMode(false);
       setShowAssignment(true);
@@ -116,7 +166,8 @@ const handleOptionSelect = (questionIndex: number, selectedOptionIndex: number |
 
   if (reviewMode) {
     return <FlashCardReview 
-    quizData={quizData} 
+    quizData={originalQuizData} 
+    userAnswers={quizAnswers}
     handleProceedToNextLesson={handleProceedToNextLesson} />;
   }
   
@@ -128,8 +179,8 @@ const handleOptionSelect = (questionIndex: number, selectedOptionIndex: number |
           className="w-full md:w-[80%] mx-auto bg-white mt-4 lg:mt-9 py-9 px-6 text-black-500 
           border border-purple-300 rounded-3xl"
         >
-          <div className="flex items-center justify-between">
-            <div>(Timer)</div>
+          <div className="flex items-center justify-center">
+            {/* <div>(Timer)</div> */}
             <div>
               <h2 className={`text-lg lg:text-2xl font-semibold ${merriweather.className}`}>
                 Quiz
@@ -265,10 +316,10 @@ const handleOptionSelect = (questionIndex: number, selectedOptionIndex: number |
             </button>
 
             <div>
-              <h2 className="">{currentQuizQuestion + 1} of {quizData.length}</h2>
+              <h2 className="">{currentQuizQuestion + 1} of {retakeMode ? missedQuestions.length : quizData.length}</h2>
             </div>
 
-            {currentQuizQuestion === quizData.length - 1 ? (
+            {(retakeMode ? currentQuizQuestion === missedQuestions.length - 1 : currentQuizQuestion === quizData.length - 1) ? (
               <button
                 onClick={handleSubmitQuiz}
                 className="px-4 py-2 bg-black-500 text-white border border-black-500 rounded-lg"
@@ -308,7 +359,12 @@ const handleOptionSelect = (questionIndex: number, selectedOptionIndex: number |
           </h2>
 
           <div className="">
-              <h2 className="text-lg md:text-xl text-black-600 ">You just scored {Math.round(score)}%.</h2>
+              <h2 className="text-lg md:text-xl text-black-600 ">You 
+              {score >= 75 ? ' passed' : ' failed'} with a score of {Math.round(score)}%</h2>
+              {score < 100 && <p className='mt-1'>You got question(s)
+                <span className='text-red-500'>
+                &nbsp;{missedQuestions.map((questionIndex) => questionIndex + 1).join(', ')}
+                </span> wrong.</p>}
 
             <div className='mt-5 flex items-center justify-center gap-5'>
                 {score >= 75 &&
@@ -316,8 +372,7 @@ const handleOptionSelect = (questionIndex: number, selectedOptionIndex: number |
                onClick={() => setReviewMode(true)}
                className='mt-4 px-4 py-2 bg-transparent text-center border border-black-500 rounded-lg'>
                 Review Quiz
-               </button>
-               }
+               </button>}
 
                 <button
                 className="mt-4 px-4 py-2 bg-black-500 text-white border border-black-500 rounded-lg"
@@ -326,9 +381,10 @@ const handleOptionSelect = (questionIndex: number, selectedOptionIndex: number |
                     // Proceed to next lesson or review quiz
                     // Add navigation logic here to go to the next lesson
                     handleProceedToNextLesson();
+                    } else if (retakeMode) {
+                      handleRetakeQuiz();
                     } else {
-                    setCurrentQuizQuestion(0); // Reset to beginning if failed
-                    setQuizSubmitted(false);
+                      setReviewMode(true);
                     }
                 }}
                 >
@@ -336,7 +392,7 @@ const handleOptionSelect = (questionIndex: number, selectedOptionIndex: number |
                 ? activeLessonIndex === moduleDetails.length - 1
                   ? "Proceed to Assignment" // Show this text if it's the last lesson
                   : "Proceed to Next Lesson"
-                : "Restart Quiz"}
+                : retakeMode ? "Retake Quiz" : "Review Quiz"}
                 </button>
 
             </div>

@@ -19,6 +19,7 @@ type Props = {
     textWhite?: boolean;
     pathways?: string[];
     image?: string;
+    imageNoFlex?: boolean;
     moduleImage?: string;
     pathwayImage?: string;
     curriculum?: boolean;
@@ -28,7 +29,7 @@ type Props = {
 }
 
 const CareerCard = ({ bgColor ,desc, linkTo, level, subject, item, type, viewCourse, handleBuyNow,
-    textWhite, pathways, image, pathwayImage, curriculum, price, moduleImage, moduleSubject }: Props) => {
+    textWhite, pathways, image, pathwayImage, curriculum, price, moduleImage, moduleSubject, imageNoFlex }: Props) => {
 
         const { addItemToCart, removeItemFromCart, isInCart, cart, setIsModalOpen } = useCart();
 
@@ -116,7 +117,7 @@ const CareerCard = ({ bgColor ,desc, linkTo, level, subject, item, type, viewCou
                 ${curriculum ? "h-[200px] min-[2000px]:h-[300px]" : "h-[250px] min-[2000px]:h-[330px]" } 
                      px-4 flex items-end rounded-tl-2xl rounded-tr-2xl
                     ${bgColor ?? "bg-blue-500"}
-                    ${image && "flex items-center justify-center"}
+                    ${(image && !imageNoFlex) && "flex items-center justify-center"}
                      `}>
 
                     {pathwayImage &&
@@ -130,12 +131,14 @@ const CareerCard = ({ bgColor ,desc, linkTo, level, subject, item, type, viewCou
                     }
 
                     {image && 
-                     <Link href={linkTo ?? ''} className="flex items-center justify-center">
+                     <Link href={linkTo ?? ''} className="w-full h-full flex items-center justify-center">
                         {/* <div className="absolute inset-0 bg-gray-50 rounded-tl-2xl rounded-tr-2xl"> */}
-                            <Image src={image} alt="pathway"
-                            width={300} height={300}
-                            className="w-full h-full object-contain" 
-                            />
+                            <div className="w-full h-[90%] flex items-center justify-center overflow-hidden">
+                                <Image src={image} alt="pathway"
+                                width={300} height={300}
+                                className="w-full object-contain" 
+                                />
+                            </div>
                         {/* </div> */}
                     </Link>
                     }
