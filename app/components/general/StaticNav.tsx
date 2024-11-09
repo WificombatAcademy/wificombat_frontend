@@ -269,7 +269,8 @@ const StaticNav = (props: Props) => {
                 ${session ? "bg-white font-bold flex items-center gap-2" : "bg-white font-bold"}
                 rounded-lg transition-colors duration-300 hover:bg-opacity-90`}
             >
-              {session ? <> Dashboard <FaUserCircle /></> : "Login"}
+              {/* {session ?  "Login"  : <> Dashboard <FaUserCircle /></>} */}
+              Login
             </Link>
           </div>
 
