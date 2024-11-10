@@ -110,7 +110,7 @@ return (
         courses
           .filter((course) => course.level === selectedLevel)
           .map((course, index) => (
-            <SwiperSlide key={course.id} className="pt-5 md:pt-12 pb-8 flex items-center justify-center overflow-visible">
+            <SwiperSlide key={course.id} className="pt-5 md:pt-12 pb-8 flex items-center justify-center overflow-visible sm:flex-row">
               <CareerCard
                 key={index}
                 curriculum={true}

@@ -276,13 +276,16 @@ const StaticNav = (props: Props) => {
 
           {/* Mobile Menu Button */}
           <div className="flex lg:hidden">
-            <button
+            {/* <button
               type="button"
               onClick={() => setSidebarOpen(true)}
               className="text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-            >
-              <RiMenu2Line size={25} />
-            </button>
+            > */}
+              <RiMenu2Line size={25}
+                 onClick={() => setSidebarOpen(true)}
+                 className="text-gray-300 lg:hidden"
+              />
+            {/* </button> */}
           </div>
         </div>
       </div>

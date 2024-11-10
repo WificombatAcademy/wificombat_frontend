@@ -153,17 +153,6 @@ export const CareerPathwayCurriculum = ({schoolCurriculum}: CareerPathwayCurricu
                 {courses
                   .filter((course) => course.level === selectedLevel)
                   .map((course, index) => (
-                    // <Link
-                    //   href={{
-                    //     pathname: `/course/${course.course_id}`,
-                    //     query: { 
-                    //       title: course.title, 
-                    //       subject: course.subject, 
-                    //       image: course.image, 
-                    //       description: course.note }
-                    //   }}
-                    //   key={index}
-                    // >
                       <CareerCard
                         key={index}
                         curriculum={true}
