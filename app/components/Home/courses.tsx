@@ -111,6 +111,7 @@ return (
           .filter((course) => course.level === selectedLevel)
           .map((course, index) => (
             <SwiperSlide key={course.id} className="pt-5 md:pt-12 pb-8 flex items-center justify-center overflow-visible sm:flex-row">
+            
               <CareerCard
                 key={index}
                 curriculum={true}
@@ -122,8 +123,9 @@ return (
                 linkTo={`/course/${course.course_id}`}
                 item={{ ...course, id: course.course_id }}
                 viewCourse={true}
-                
+                className="w-[1000px]"
               />
+             
             </SwiperSlide>
           ))}
     </Swiper>

@@ -24,7 +24,6 @@ const VideoContent = ({ videoCode, lessonIndex, lessonTitle, onNext }: Props) =>
                <p className='mt-3'>Lesson {lessonIndex}</p>
             </div>
         </div>
-
         <div className='w-full flex items-center justify-end'>
             <button
             onClick={onNext} 

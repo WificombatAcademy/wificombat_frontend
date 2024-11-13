@@ -58,16 +58,16 @@ export const Testimonials = () => {
           <Swiper
             autoplay={{ delay: 10000 }}
             modules={[Autoplay]}
-            spaceBetween={30}
-            slidesPerView={1.3}
+            spaceBetween={20} // Reduced the default space between slides
+            slidesPerView={1.1}
             breakpoints={{
-              320: { slidesPerView: 1.1, spaceBetween: 15 },
-              640: { slidesPerView: 1.2, spaceBetween: 20 },
-              1000: { slidesPerView: 1.3, spaceBetween: 30 },
-              1440: {
-                slidesPerView: 2,
-                spaceBetween: 40,
-              },
+    320: { slidesPerView: 1, spaceBetween: 10 }, // Reduced space for mobile devices
+    640: { slidesPerView: 1.5, spaceBetween: 15 }, // Reduced space for medium devices
+    1000: { slidesPerView: 1.1, spaceBetween: 20 }, // Reduced space for larger devices
+    1440: {
+      slidesPerView: 2,
+      spaceBetween: 30, // Smaller space for larger screens
+    },
             }}
             onActiveIndexChange={(swiper) => setActiveSlide(swiper.realIndex)}
             className="!px-4"
@@ -75,21 +75,20 @@ export const Testimonials = () => {
             {testimonialData.map((testimonial, index) => (
               <SwiperSlide key={index}>
                 
-                <div className="flex flex-col md:flex-row bg-white rounded-xl overflow-hidden min-h-[600px] max-w-[1000px]">
-                  <div className="w-full md:w-2/5 h-[300px] md:h-auto relative">
+                <div className="flex flex-col w-[1343px] h-[524px] md:flex-row rounded-xl overflow-hidden sm:flex sm:flex-col">
                     <Image
                       src={testimonial.image}
                       alt={`${testimonial.name}'s testimonial`}
-                      fill
+                      width={294}
+                      height={524}
                       className="object-cover"
                     />
-                  </div>
-                  <div className="w-full md:w-3/5 p-8 text-black text-left">
-                    <h2 className="font-semibold text-xl md:text-2xl">{testimonial.name}</h2>
+                  <div className="flex flex-col w-full md:w-3/5 p-8 bg-white text-black rounded-r-lg text-left">
+                    <h2 className="font-semibold text-xl md:text-2x">{testimonial.name}</h2>
                     <h4 className="font-medium text-base md:text-lg text-black-600 mt-2">{testimonial.role}</h4>
-                    <div className="mt-6">
+                    <div className="mt-6 flex items-start">
                       <FaQuoteLeft size={40} className="flex-shrink-0 max-md:mx-auto" />
-                      <p className="text-base md:text-lg leading-relaxed text-black-500">
+                      <p className="mt-4 ml-3 text-base font-normal leading-6 text-left decoration-skip-ink-none text-black-500">
                         {testimonial.testimonial}
                       </p>
                     </div>
@@ -104,4 +103,7 @@ export const Testimonials = () => {
   );
 };
 
+
+
+// {module.id}
 
