@@ -33,6 +33,10 @@ const Page = ({ params }: any) => {
   const [isAssignmentMode, setIsAssignmentMode] = useState(false);
   const [quizData, setQuizData] = useState<any>(null);
   const [quizLoading, setQuizLoading] = useState(false);
+  const [selectedAssignment, setSelectedAssignment] = useState<any[]>([]);
+  const [currentAssigmnet, setCurrentAssignment] = useState(0)
+  const [activeAssignmentIndex, setActiveAssignmentIndex] = useState(0)
+  const [currentAssignmentSlide, setCurrentAssignmnentSlide] = useState(0); // Track the current slide
 
   // Fetch module details
   useEffect(() => {
@@ -123,6 +127,20 @@ const Page = ({ params }: any) => {
     });
   }
 
+  const handleAssignmentClick = (index: number, assignment: string) => {
+    setIsVideoMode(false);
+    setIsQuizMode(false);
+    setIsAssignmentMode(true);
+    setIsLessonMode(false);
+    const splitAssignmnet = assignment .split("***"); // Split content into slides
+    setSelectedAssignment(splitAssignmnet); // Store slides in state
+    setCurrentAssignment(0); // Reset to first slide
+    setActiveAssignmentIndex(index);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
   // Handle slide navigation
   const handleNextSlide = () => {
     if (currentSlide < selectedContent.length - 1) {
@@ -174,7 +192,7 @@ const Page = ({ params }: any) => {
   return (
     <>
       <Toaster />
-      <SideBar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+      {/* <SideBar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} /> */}
       <div
         className={`${raleway.className} relative h-screen lg:overflow-hidden`}
       >
@@ -213,7 +231,7 @@ const Page = ({ params }: any) => {
                       <div className="mt-4 text-sm flex gap-3 items-center">
                         <p>{numberOfLessons} Lessons</p>
                         <p>{numberOfQuizzes} Quiz</p>
-                        <p>1 Assignment</p>
+                        <p>{numberOfAssignments} Assignment</p>
                       </div>
 
                       {/* MODULE PLAN */}
@@ -307,6 +325,24 @@ const Page = ({ params }: any) => {
                                   </p>
                                 </div>
 
+                                <div>
+                                  <p
+                                    className={`mt-5 cursor-pointer
+                                  ${
+                                    activeLessonIndex  === index && (isAssignmentMode &&!isLessonMode && !isQuizMode && !isVideoMode)
+                                      ? "text-purple-500"
+                                      : ""
+                                  }`}
+                                    // onClick={() =>
+                                    //   handleLessonClick(index, details.content)
+                                    // }
+                                    onClick={() => handleAssignmentClick(index, details.assignment)}
+                                  >
+                                    Assignmnent
+                                  </p>
+                                 
+                                </div>
+
                                 {/* <div>
                                 <p className="font-medium cursor-pointer">Assignment</p>
                               </div> */}
@@ -333,7 +369,7 @@ const Page = ({ params }: any) => {
                           )}
                         </div>
 
-                        <div className="ml-[5%]">
+                        {/* <div className="ml-[5%]">
                           <h2
                             className={`text-lg font-medium cursor-pointer ${
                               isAssignmentMode ? "text-purple-500" : ""
@@ -347,7 +383,7 @@ const Page = ({ params }: any) => {
                           >
                             Assignment
                           </h2>
-                        </div>
+                        </div> */}
                       </div>
 
                       <div>
@@ -413,7 +449,14 @@ const Page = ({ params }: any) => {
                   {/* QUIZ CONTENT */}
 
                   {/* ASSIGNMENT CONTENT */}
-                  {isAssignmentMode && <AssignmentContent />}
+                  {isAssignmentMode && 
+                  <AssignmentContent
+                    currentAssignmentSlide={currentAssignmentSlide}
+                    selectedAssignment={selectedAssignment}
+                    isQuizMode={isQuizMode}
+                    loadingQuiz={quizLoading}
+                    lessonIndex={activeLessonIndex + 1} // Pass the lesson number (1-based index)
+                    assignmnetIndex={0} currentAssignment={0}                  />}
                   {/* ASSIGNMENT CONTENT */}
                 </div>
                 {/* Content Section */}
@@ -427,3 +470,287 @@ const Page = ({ params }: any) => {
 };
 
 export default Page;
+
+
+
+// "use client";
+
+// import { useState, useEffect } from "react";
+// import { IoMdArrowDropdown, IoMdArrowDropright } from "react-icons/io";
+// import { SlLockOpen } from "react-icons/sl";
+// import DashboardHeader from "@/app/components/Dashboard/DashboardHeader";
+// import SideBar from "@/app/components/Dashboard/SideBar";
+// import { useMain } from "@/app/context/MainContext";
+// import { useDashboardStore } from "@/app/context/useDashboardStore";
+// import { raleway } from "@/app/fonts";
+// import axiosInstance from "@/app/utils/auth-interceptor";
+// import Loader from "@/app/utils/loader";
+// import { API_VERSION_ONE } from "@/app/utils/types-and-links";
+// import LessonContent from "@/app/components/Dashboard/CareerPathway/lesson-content";
+// import toast, { Toaster } from "react-hot-toast";
+// import QuizContent from "@/app/components/Dashboard/CareerPathway/quiz-content";
+// import { IoChevronBackOutline } from "react-icons/io5";
+// import AssignmentContent from "@/app/components/Dashboard/CareerPathway/assignment-content";
+// import VideoContent from "@/app/components/Dashboard/CareerPathway/video-content";
+
+// const Page = ({ params }: any) => {
+//   const [sidebarOpen, setSidebarOpen] = useState(false);
+//   const { toggleSidebar } = useMain();
+//   const dashboardData = useDashboardStore((state) => state.dashboardData);
+//   const [moduleDetails, setModuleDetails] = useState<any[]>([]);
+//   const [loading, setLoading] = useState(true);
+//   const [selectedContent, setSelectedContent] = useState<any[]>([]);
+//   const [activeLessonIndex, setActiveLessonIndex] = useState(0);
+//   const [currentSlide, setCurrentSlide] = useState(0);
+//   const [contentMode, setContentMode] = useState<'video' | 'lesson' | 'quiz' | 'assignment'>('video');
+//   const [quizData, setQuizData] = useState<any>(null);
+//   const [quizLoading, setQuizLoading] = useState(false);
+
+//   useEffect(() => {
+//     const fetchModuleDetails = async () => {
+//       try {
+//         const response = await axiosInstance.get(
+//           `${API_VERSION_ONE}/module/${params.moduleId}/lessons`
+//         );
+//         setModuleDetails(response.data);
+//         setLoading(false);
+
+//         if (response.data.length > 0) {
+//           const firstLessonVideoCode = response.data[0].video_code;
+//           setSelectedContent([firstLessonVideoCode]);
+//         }
+//       } catch (error) {
+//         console.error("Error fetching moduleDetails:", error);
+//         setLoading(false);
+//       }
+//     };
+
+//     fetchModuleDetails();
+//   }, [params.moduleId]);
+
+//   const fetchQuiz = async (lessonIndex: number) => {
+//     setQuizLoading(true);
+//     try {
+//       const response = await axiosInstance.get(
+//         moduleDetails[lessonIndex].quiz_url
+//       );
+//       setQuizData(response.data);
+//       setActiveLessonIndex(lessonIndex);
+//       setContentMode('quiz');
+//       setQuizLoading(false);
+//       scrollToTop();
+//     } catch (error: any) {
+//       console.error("Error fetching quiz:", error);
+//       toast.error("Error fetching quiz");
+//       setQuizLoading(false);
+//     }
+//   };
+
+//   const handleLessonClick = (index: number, content: string) => {
+//     setContentMode('lesson');
+//     const splitContent = content.split("***");
+//     setSelectedContent(splitContent);
+//     setCurrentSlide(0);
+//     setActiveLessonIndex(index);
+//     scrollToTop();
+//   };
+
+//   const handleVideoClick = (lessonIndex: number) => {
+//     setContentMode('video');
+//     setActiveLessonIndex(lessonIndex);
+//     const videoCode = moduleDetails[lessonIndex].video_code;
+//     setSelectedContent([videoCode]);
+//     scrollToTop();
+//   };
+
+//   const handleAssignmentClick = (lessonIndex: number) => {
+//     setContentMode('assignment');
+//     setActiveLessonIndex(lessonIndex);
+//     scrollToTop();
+//   };
+
+//   const scrollToTop = () => {
+//     window.scrollTo({ top: 0, behavior: "smooth" });
+//   };
+
+//   const handleVideoNext = () => {
+//     setContentMode('lesson');
+//     const lessonContent = moduleDetails[activeLessonIndex].content.split("***");
+//     setSelectedContent(lessonContent);
+//     setCurrentSlide(0);
+//   };
+
+//   const handleNextSlide = () => {
+//     if (currentSlide < selectedContent.length - 1) {
+//       setCurrentSlide(currentSlide + 1);
+//     } else if (moduleDetails[activeLessonIndex].quiz_url) {
+//       setContentMode('quiz');
+//     }
+//   };
+
+//   const handlePrevSlide = () => {
+//     if (currentSlide > 0) {
+//       setCurrentSlide(currentSlide - 1);
+//     }
+//   };
+
+//   if (loading) return <div className="overflow-hidden"><Loader noDesign /></div>;
+//   if (moduleDetails.length === 0) return <div className="overflow-hidden"><Loader noCourses isError noDesign /></div>;
+
+//   const moduleTitle = moduleDetails[0]?.module || "";
+//   const numberOfLessons = moduleDetails.length;
+//   const numberOfQuizzes = moduleDetails.filter((detail) => detail.quiz_url).length;
+
+//   return (
+//     <>
+//       <Toaster />
+//       <SideBar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+//       <div className={`${raleway.className} relative h-screen lg:overflow-hidden`}>
+//         <div className={`${toggleSidebar ? "lg:pl-36" : "lg:pl-64"} transition-all duration-500 ease-in-out pb-4`}>
+//           <DashboardHeader setSidebarOpen={setSidebarOpen} name={dashboardData?.username} />
+
+//           <main className="h-full">
+//             <div className="h-full space-y-10">
+//               <div className="h-full flex max-lg:flex-col-reverse max-lg:gap-6">
+//                 {/* Sidebar Section */}
+//                 <div className="w-full h-full lg:h-screen lg:w-[40%] xl:w-[35%]">
+//                   <div className="h-[83%] w-full px-4 sm:px-6 lg:px-8 pb-4 overflow-scroll">
+//                     {/* Module Info */}
+//                     <div className="lg:ml-[12%]">
+//                       <div className="mt-5 text-sm flex gap-3 items-center">
+//                         <a href="/dashboard/career-path/coding-pathway">
+//                           <div className="relative border border-[#5F5F5F1A] p-2 cursor-pointer font-bold rounded-lg shadow-sm">
+//                             <IoChevronBackOutline size={20} />
+//                           </div>
+//                         </a>
+//                         <h1 className="text-xl font-medium">{moduleTitle}</h1>
+//                       </div>
+
+//                       <div className="mt-4 text-sm flex gap-3 items-center">
+//                         <p>{numberOfLessons} Lessons</p>
+//                         <p>{numberOfQuizzes} Quiz</p>
+//                       </div>
+//                     </div>
+
+//                     {/* Lessons List */}
+//                     {moduleDetails.map((details, index) => (
+//                       <div key={index} className="mt-4 w-full flex items-stretch justify-between overflow-hidden">
+//                         <div className="w-full flex items-start gap-2">
+//                           <div className="flex-shrink-0 cursor-pointer" onClick={() => handleLessonClick(index, details.content)}>
+//                             {details.locked ? <IoMdArrowDropright size={25} /> : <IoMdArrowDropdown size={25} />}
+//                           </div>
+
+//                           <div className="ml-[5%]">
+//                             <h2 className="text-lg font-medium">Lesson {index + 1}</h2>
+//                             {!details.locked && (
+//                               <div className="space-y-5 font-medium">
+//                                 <div>
+//                                   <p
+//                                     className={`mt-5 cursor-pointer ${activeLessonIndex === index && contentMode === 'video' ? "text-purple-500" : ""}`}
+//                                     onClick={() => handleVideoClick(index)}
+//                                   >
+//                                     {details.title}
+//                                   </p>
+//                                   <p className="text-sm text-black-600">Video: 2:00 mins</p>
+//                                 </div>
+
+//                                 <div>
+//                                   <p
+//                                     className={`mt-5 cursor-pointer ${activeLessonIndex === index && contentMode === 'lesson' ? "text-purple-500" : ""}`}
+//                                     onClick={() => handleLessonClick(index, details.content)}
+//                                   >
+//                                     Lesson note
+//                                   </p>
+//                                   <p className="text-sm text-black-600">Reading: 2:00 mins</p>
+//                                 </div>
+
+//                                 <div>
+//                                   <p
+//                                     className={`cursor-pointer ${activeLessonIndex === index && contentMode === 'quiz' ? "text-purple-500" : ""}`}
+//                                     onClick={() => fetchQuiz(index)}
+//                                   >
+//                                     Quiz
+//                                   </p>
+//                                   <p className="text-sm text-black-600">1:00 mins</p>
+//                                 </div>
+
+//                                 <div>
+//                                   <p
+//                                     className={`cursor-pointer ${activeLessonIndex === index && contentMode === 'assignment' ? "text-purple-500" : ""}`}
+//                                     onClick={() => handleAssignmentClick(index)}
+//                                   >
+//                                     Assignment
+//                                   </p>
+//                                   <p className="text-sm text-black-600">30:00 mins</p>
+//                                 </div>
+//                               </div>
+//                             )}
+//                           </div>
+//                         </div>
+
+//                         <div>
+//                           <SlLockOpen size={20} />
+//                         </div>
+//                       </div>
+//                     ))}
+//                   </div>
+//                 </div>
+
+//                 {/* Content Section */}
+//                 <div className="relative w-full lg:h-[83vh] lg:w-[60%] xl:w-[65%] bg-[#F9F9FF] px-4 pb-16 sm:px-6 lg:px-8 space-y-4 overflow-hidden">
+//                   {contentMode === 'video' && (
+//                     <VideoContent 
+//                       videoCode={selectedContent}
+//                       lessonTitle={moduleDetails[activeLessonIndex].title}
+//                       lessonIndex={activeLessonIndex + 1}
+//                       setIsVideoMode={() => setContentMode('video')}
+//                       setIsLessonMode={() => setContentMode('lesson')}
+//                       onNext={handleVideoNext}
+//                     />
+//                   )}
+
+//                   {contentMode === 'lesson' && (
+//                     <LessonContent
+//                       currentSlide={currentSlide}
+//                       handleNextSlide={handleNextSlide}
+//                       handlePrevSlide={handlePrevSlide}
+//                       selectedContent={selectedContent}
+//                       fetchQuiz={() => fetchQuiz(activeLessonIndex)}
+//                       isQuizMode={contentMode === 'quiz'}
+//                       loadingQuiz={quizLoading}
+//                       lessonTitle={moduleDetails[activeLessonIndex].title}
+//                       lessonIndex={activeLessonIndex + 1}
+//                       totalSlides={selectedContent.length}
+//                     />
+//                   )}
+
+//                   {contentMode === 'quiz' && (
+//                     <QuizContent
+//                       quizData={quizData}
+//                       setQuizData={setQuizData}
+//                       activeLessonIndex={activeLessonIndex}
+//                       moduleDetails={moduleDetails}
+//                       setActiveLessonIndex={setActiveLessonIndex}
+//                       setShowAssignment={() => setContentMode('assignment')}
+//                       setIsLessonMode={() => setContentMode('lesson')}
+//                       setIsQuizMode={() => setContentMode('quiz')}
+//                       setIsVideoMode={() => setContentMode('video')}
+//                       setIsAssignmentMode={() => setContentMode('assignment')}
+//                       handleVideoClick={() => handleVideoClick(activeLessonIndex + 1)}
+//                     />
+//                   )}
+
+//                   {contentMode === 'assignment' && (
+//                     <AssignmentContent lesson ={moduleDetails[activeLessonIndex]} />
+//                   )}
+//                 </div>
+//               </div>
+//             </div>
+//           </main>
+//         </div>
+//       </div>
+//     </>
+//   );
+// };
+
+// export default Page;

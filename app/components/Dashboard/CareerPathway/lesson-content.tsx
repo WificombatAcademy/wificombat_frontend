@@ -65,14 +65,7 @@ const LessonContent = ({
                 {/* Navigation Buttons lg:fixed lg:w-[52%] right-0  */}
                 <div className="z-[1] relative px-4 sm:px-6 lg:px-8 py-8">
                     <div className="mt-4 flex justify-end">
-                        {/* <button
-                        onClick={handlePrevSlide}
-                        disabled={currentSlide === 0}
-                        className="px-4 py-2 bg-transparent border border-black-500 rounded-lg 
-                        disabled:bg-gray-200 disabled:border-none disabled:cursor-not-allowed"
-                        >
-                        Previous
-                        </button> */}
+                     
                         {!(currentSlide === selectedContent.length - 1) &&
                         <button
                         onClick={handleNextSlide}
@@ -106,20 +99,6 @@ const LessonContent = ({
             )}
 
             </div>
-
-        {/* LESSON DETAILS */}
-        {/* <div>
-            <div className='w-full flex items-center justify-between gap-3 lg:text-xl font-semibold'>
-                <h2 className="">{lessonTitle}</h2>
-                <p className="">
-                 {currentSlide + 1}/{totalSlides} Slides
-                </p>
-            </div>
-            <div>
-                <p className='text-black-600'> Lesson {lessonIndex}</p>
-            </div>
-        </div> */}
-        {/* LESSON DETAILS */}
         
     </>
   )

@@ -180,3 +180,5 @@ export default Page;
     const response = await axiosInstance.get(`${API_VERSION_ONE}/course/${courseId}/modules`);
     return response.data;
 };
+
+

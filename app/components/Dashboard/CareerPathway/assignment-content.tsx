@@ -1,165 +1,115 @@
-// import { merriweather } from '@/app/fonts'
-// import React from 'react'
+import React, { useState, useEffect } from 'react';
+import { raleway } from "@/app/fonts";
 
-// type Props = {}
+type AssignmentContentProps = {
+  currentAssignment : number;
+  selectedAssignment: any[];
+  isQuizMode: boolean;
+  loadingQuiz: boolean;
+  lessonIndex: number;
+  assignmnetIndex: number;
+  currentAssignmentSlide:number;
+};
 
-// const AssignmentContent = (props: Props) => {
-//   return (
-//     <div
-//     className="w-full md:w-[80%] mx-auto h-[75vh] bg-white 
-//     mt-4 lg:mt-9 py-9 px-6 text-black-500 rounded-3xl">
-//         <h2 className={`${merriweather.className} text-xl lg:text-2xl font-semibold text-center`}>Assignment</h2>
-//     </div>
-//   )
-// }
+const AssignmentContent: React.FC<AssignmentContentProps> = ({
+  currentAssignment,
+  selectedAssignment,
+  isQuizMode,
+  loadingQuiz,
+  lessonIndex,
+  assignmnetIndex,
+  currentAssignmentSlide,
+}) => {
 
-// export default AssignmentContent
-
-import { merriweather } from '@/app/fonts';
-import React, { useState } from 'react';
-
-type Props = {}
-
-const AssignmentContent = (props: Props) => {
-  const [description, setDescription] = useState("");
-  const [file, setFile] = useState<File | null>(null);
-  const [step, setStep] = useState(1); // Track the current step
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      setFile(e.target.files[0]);
+  useEffect(() => {
+    // Scroll to the top of the content area when lesson or content changes
+    const contentAssignment = document.querySelector('.assignment'); // Adjust the selector to target your content wrapper
+    if (contentAssignment) {
+        contentAssignment.scrollTop = 0;
     }
-  };
+}, [assignmnetIndex, selectedAssignment]);
 
-  const handleDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setDescription(e.target.value);
-  };
-
-  const handleNextStep = () => {
-    setStep(2);
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!file) {
-      alert("Please upload a document.");
-      return;
-    }
-
-    // Submission logic, such as sending data to an API
-    console.log("Submitted description:", description);
-    console.log("Submitted file:", file);
-
-    alert("Assignment submitted successfully!");
-  };
 
   return (
-    <div
-      className="w-full md:w-[80%] mx-auto h-auto bg-white 
-      mt-4 lg:mt-9 py-9 px-6 text-black-500 rounded-3xl"
-    >
-      <h2 className={`${merriweather.className} text-xl lg:text-2xl font-semibold text-center`}>
-        Assignment
-      </h2>
+    <>
+    {/* <div className="relative  bg-scroll lg:h-full">
 
-      {step === 1 && (
-        <div className="mt-8">
-          {/* Assignment Question Page */}
-          <div className="mb-6">
-            <h3 className="text-lg font-semibold">Assignment Question:</h3>
-            <p className="mt-2 text-gray-700">
-              Please complete the following assignment by providing a description and uploading your document.
-            </p>
+      {selectedAssignment.length > 0 ? (
+          <div>
+          <div
+            dangerouslySetInnerHTML={{ __html: selectedAssignment}}
+            className="mt-7 md:mt-9 rounded-2xl"
+          />
+          <div className="mt-4">
+            <h4 className={`${raleway.className} font-bold lg:text-lg`}>Assignment {assignmnetIndex + 1}</h4>
+            <p className={`${raleway.className} mt-3`}>Lesson {lessonIndex}</p>
           </div>
-          
-          <button
-            onClick={handleNextStep}
-            className="w-full bg-black-500  text-white font-semibold py-2 px-4 rounded-lg mt-6"
-          >
-            Submit
-          </button>
         </div>
+        <div className="w-full flex items-center justify-between">
+        </div>
+    
+        
       )}
+      </div> */}
 
-      {step === 2 && (
-        <form onSubmit={handleSubmit} className="mt-8">
-          {/* File Upload and Description Page */}
-          <div className="mb-6">
-            <label className="block text-gray-700 font-semibold mb-2" htmlFor="file">
-              Upload Document:
-            </label>
-            <input
-              type="file"
-              id="file"
-              onChange={handleFileChange}
-              className="border border-gray-300 rounded-lg p-2 w-full"
-              required
+<div className="lesson-container relative mt-5 p-5 h-[24rem] lg:h-[110%] mb-6 bg-white
+     shadow overflow-y-auto overflow-x-auto rounded-3xl">
+        {/* <div className="sticky w-full inset-0 h-[45vh] bg-white flex items-center justify-center">
+            <Image 
+            src={`/logo.png`}
+            alt='background'
+            width={80}
+            height={80}
+            className='w-[90%] h-full object-contain invert-[100%] opacity-10'
             />
-          </div>
+        </div> */}
+        {selectedAssignment.length > 0 ? (
+            <div className='absolute top-0 left-0 w-full'>
+            <div className='relative z-[1] top-3 left-0 px-3'>
+                {/* Display current slide */}
+                <div 
+                className={`${raleway.className}  bg-transparent`}
+                dangerouslySetInnerHTML={{ __html: selectedAssignment[currentAssignmentSlide] }} />
 
-          <div className="mb-6">
-            <label className="block text-gray-700 font-semibold mb-2" htmlFor="description">
-              Description:
-            </label>
-            <textarea
-              id="description"
-              value={description}
-              onChange={handleDescriptionChange}
-              className="border border-gray-300 rounded-lg p-2 w-full h-32"
-              placeholder="Describe your assignment..."
-              required
-            />
-          </div>
+                {/* Navigation Buttons lg:fixed lg:w-[52%] right-0  */}
+                <div className="z-[1] relative px-4 sm:px-6 lg:px-8 py-8">
+                    <div className="mt-4 flex justify-end">
+                     
+                        {!(currentAssignmentSlide === selectedAssignment.length - 1) &&
+                        <button
+                       
+                        disabled={currentAssignmentSlide === selectedAssignment.length - 1}
+                        className="px-4 py-2 bg-transparent border border-black-500 rounded-lg 
+                        disabled:bg-gray-200 disabled:border-none disabled:cursor-not-allowed"
+                        >
+                        Next
+                        </button>}
 
-          <button
-            type="submit"
-            className="w-full bg-black-500text-white font-semibold py-2 px-4 rounded-lg"
-          >
-            Submit
-          </button>
-        </form>
-      )}
-      {step === 2 && (
-        <form onSubmit={handleSubmit} className="mt-8">
-          {/* File Upload and Description Page */}
-          <div className="mb-6">
-            <label className="block text-gray-700 font-semibold mb-2" htmlFor="file">
-              Upload Document:
-            </label>
-            <input
-              type="file"
-              id="file"
-              onChange={handleFileChange}
-              className="border border-gray-300 rounded-lg p-2 w-full"
-              required
-            />
-          </div>
+                        {!isQuizMode && currentAssignmentSlide === selectedAssignment.length - 1 &&
+                        <button
+                 
+                        className={`px-4 ${loadingQuiz && 'px-12'} py-2 bg-black-500 text-white border border-black-500 
+                        flex items-center justify-center text-center rounded-lg 
+                        disabled:bg-gray-200 disabled:border-none disabled:cursor-not-allowed`}
+                        >
+                            Submit
+                        </button>}
+                    </div>
+                </div>
+                {/* Navigation Buttons */}
 
-          <div className="mb-6">
-            <label className="block text-gray-700 font-semibold mb-2" htmlFor="description">
-              Description:
-            </label>
-            <textarea
-              id="description"
-              value={description}
-              onChange={handleDescriptionChange}
-              className="border border-gray-300 rounded-lg p-2 w-full h-32"
-              placeholder="Describe your assignment..."
-              required
-            />
-          </div>
+            </div>
+            </div>
+            ) : (
+                <p className='m-auto text-center'>Select a lesson to view its content.</p>
+            )}
 
-          <button
-            type="submit"
-            className="w-full bg-black-500text-white font-semibold py-2 px-4 rounded-lg"
-          >
-            Submit
-          </button>
-        </form>
-      )}
-    </div>
+            </div>
+    </>
   );
-}
+};
 
 export default AssignmentContent;
+
+
+
