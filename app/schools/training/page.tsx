@@ -1,12 +1,9 @@
 import Footer from "@/app/components/general/Footer";
 import GeneralNavbar from "@/app/components/general/GeneralNavbar";
-// import { FAQ } from "@/app/components/Home/faq";
-// import { Breadcrumbs } from "@/app/utils/breadcrumb";
-// import Impact from "@/app/components/Home/Impact";
-// import { JoinOtherSchools } from "@/app/components/SchoolsComps/Overview/other-schools";
 import { BenefitOfTeachers } from "@/app/components/SchoolsComps/Overview/benefit-teachers";
 import { Training } from "@/app/components/StudentsComps/training/training";
 import { StudentsHero } from "@/app/components/StudentsComps/Overview/hero";
+import { OnboardingTeachers } from "@/app/components/StudentsComps/training/onboarding-teachers";
 
 export default function Page() {
   return (
@@ -23,9 +20,7 @@ export default function Page() {
       />
       <Training/>
       <BenefitOfTeachers/>
-      {/* <Impact /> */}
-      {/* <FAQ noSpace/> */}
-      {/* <JoinOtherSchools /> */}
+      <OnboardingTeachers/>
       <Footer />
     </div>
   );

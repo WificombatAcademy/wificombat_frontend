@@ -37,7 +37,7 @@ export default function Page() {
       <Outcomes outcomes={outcomes} />
       <MultimediaOnboarding />
       <TodayComp 
-      desc="Lorem ipsum dolor sit amet consectetur. Senectus in consequat egestas faucibus morbi pulvinar nec ac. Morbi phasellus sed augue neque ac nibh varius vitae sagittis." 
+      desc="Unleash your creativity and bring your visions to life. Our Multimedia Design program equips you with the skills and tools to create stunning visuals and interactive experiences. Start your journey today!" 
       header="Start Multimedia Design Today!" 
       linkto="/schools/pricing-plan" />
       <Footer />

@@ -36,8 +36,7 @@ export default function Page() {
       <CodingOnboarding />
       <TodayComp
         header="Start Coding Today"
-        desc="Lorem ipsum dolor sit amet consectetur. Senectus in 
-           consequat egestas faucibus morbi pulvinar nec ac. Morbi phasellus sed augue neque ac nibh varius vitae sagittis."
+        desc="Start your coding journey today and unlock a world of endless possibilities. Learn from experienced instructors and build amazing projects."
         linkto="/schools/pricing-plan"
       />
       <Footer />

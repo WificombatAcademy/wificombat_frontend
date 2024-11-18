@@ -2,13 +2,9 @@ import Image from "next/image"
 import HeadingDesign from "../../general/HeaderDesign"
 
 const training =  [
-    "Access to engaging and interactive lessons",
-    "Teachers can track student progress",
-    "Students can explore a variety of career pathways",
-    "Learn from experienced educators",
-    "Engage in interactive learning activities",
-    "Access personalized support"
-  ]
+    "The platform also encourages collaboration and creativity, giving teachers the flexibility to create custom lesson plans, share content with colleagues, and foster a more dynamic learning environment. By leveraging the latest in educational technology, teachers can enhance the learning experience and help students reach their full potential."
+]
+  
 
 export const Training = () => {
     return (
@@ -22,7 +18,7 @@ export const Training = () => {
                     <div className="relative md:top-8 w-[8rem] h-[8rem] md:w-[15rem] md:h-[15rem]">
                         <div className="polygon w-full h-full">
                             <Image 
-                            src={`/teach-and-learn-1.png`}
+                            src={`/teamzz.png`}
                             alt="skill"
                             width={414}
                             height={427}
@@ -37,13 +33,15 @@ export const Training = () => {
                 </div>
 
                 <div className="grid grid-cols-1 gap-5">
-                    <h4 className="font-semibold mb-2 whitespace-nowrap text-black-500 text-2xl md:text-3xl">Collaborative Learning Experience</h4>
-                    {training.map((list, index) => (
-                      <div key={index} className="flex whitespace-nowrap gap-2 list-none">
-            
-                        <p className="md:w-[80%] text-black-500 md:text-lg ml-4">{list}</p>
+                    <h4 className="font-semibold mb-2  text-black-500 text-2xl md:text-3xl">What Teachers Gain from Using WiFiCombat eLearn</h4>
+                 
+                      <div className="gap-2 list-none">
+                      <p className="md:w-[80%] text-black-500 md:text-lg ml-4">By integrating WiFiCombat eLearn into their classrooms, teachers can revolutionize the way they engage with their students. The platform offers a vast library of interactive learning resources across various subjects, making lessons more engaging and personalized for every student. With real-time progress tracking and advanced data analytics, teachers can easily monitor student performance, identify learning gaps, and adjust their teaching strategies to meet the needs of 
+each learner.
+ </p>
+                        <p className="md:w-[80%] text-black-500 md:text-lg ml-4">The platform also encourages collaboration and creativity, giving teachers the flexibility to create custom lesson plans, share content with colleagues, and foster a more dynamic learning environment. By leveraging the latest in educational technology, teachers can enhance the learning experience and help students reach their full potential.</p>
                       </div>
-                    ))}
+    
                 </div>
             </div>
         </section>

@@ -36,7 +36,7 @@ export default function Page() {
       <Outcomes outcomes={outcomes} />
       <RoboticsOnboarding />
       <TodayComp 
-      desc="Lorem ipsum dolor sit amet consectetur. Senectus in consequat egestas faucibus morbi pulvinar nec ac. Morbi phasellus sed augue neque ac nibh varius vitae sagittis." 
+      desc="Embark on an exciting journey into the world of robotics and IoT. Our program provides you with the skills and knowledge to design, build, and program innovative robotic systems. Start your adventure today!" 
       header="Start Learning Robotics and IOT Today!" 
       linkto="/schools/pricing-plan" />
       <Footer />

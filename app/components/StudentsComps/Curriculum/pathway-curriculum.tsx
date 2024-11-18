@@ -160,7 +160,7 @@ export const CareerPathwayCurriculum = ({schoolCurriculum}: CareerPathwayCurricu
                         // price={formatPrice(course.price)}
                         subject={course.subject}
                         image={`https://wificombatacademy.com/${course.image}`}
-                        imageNoFlex={true}
+                      
                         level={course.level}
                         desc={`Our courses provide interactive lessons, expert guidance, and flexible learning options`} 
                         // desc={truncateDescription(course.note)} 

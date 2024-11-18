@@ -5,13 +5,13 @@ const pathwayData = [
   { id: "Gaming", link: "gaming-pathway" },
   { id: "Multimedia", link: "multimedia-pathway" },
   { id: "Robotics and IOT ", link: "robotics-pathway" },
-  { id: "Artificial Intelligence", link: "artificial-pathway" },
+  { id: "Artificial Intelligence", link: "ai-pathway" },
   { id: "Techprenuership", link: "techprenuership-pathway" },
 ];
 
 const featuresData = [
   { id: "Gamification", link: "features" },
-  { id: "Portfolio", link: "" },
+  { id: "Portfolio", link: "portfolio-and-projects" },
   { id: "Curriculum", link: "" },
   { id: "Mentorship", link: "" },
 ];
@@ -86,7 +86,7 @@ const Footer = () => {
                         key={features.id}
                         className="mb-3 lg:mb-4 lg:text-lg"
                       >
-                        <Link href={`/`} className="hover:underline">
+                        <Link href={`/${features.link}`} className="hover:underline">
                           {features.id}
                         </Link>
                       </li>

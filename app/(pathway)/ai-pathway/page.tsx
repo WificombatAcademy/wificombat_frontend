@@ -46,8 +46,7 @@ export default function Page() {
       <AIOnboarding />
 
       <TodayComp 
-      desc="Lorem ipsum dolor sit amet consectetur. Senectus in consequat egestas 
-      faucibus morbi pulvinar nec ac. Morbi phasellus sed augue neque ac nibh varius vitae sagittis." 
+      desc="Embark on a transformative journey into the world of artificial intelligence. Our program equips you with the skills and knowledge to develop intelligent systems and applications. Start your AI adventure today!" 
       header="Start Learning Artifical Intelligence Today!" 
       linkto="/schools/pricing-plan" />
 

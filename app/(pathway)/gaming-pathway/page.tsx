@@ -33,7 +33,7 @@ export default function Page() {
       <Outcomes outcomes={gamingOutcomes} />
       <GamingOnboarding />
       <TodayComp 
-      desc="Lorem ipsum dolor sit amet consectetur. Senectus in consequat egestas faucibus morbi pulvinar nec ac. Morbi phasellus sed augue neque ac nibh varius vitae sagittis." 
+      desc="Unleash your creativity and bring your gaming ideas to life. Our Gaming Pathway provides you with the tools, skills, and knowledge you need to become a game developer. Start building your own games today!" 
       header="Start Building Your Own Games Today!" 
       linkto="/schools/pricing-plan" />
       <Footer />
