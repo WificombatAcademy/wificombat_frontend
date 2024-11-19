@@ -15,7 +15,9 @@ export const OnboardingTeachers = () => {
             <HeadingDesignTwo 
              heading="HOW WE ASSIST IN ONBOARDING TEACHERS"
              />
-
+             <div>
+                <p className="text-base font-normal leading-6 text-center">We are dedicated to ensuring that teachers have everything they need to succeed with WiFiCombat eLearn. Our onboarding process includes</p>
+             </div>
             <div className="flex flex-col mt-16 mb-20 w-[93%] md:w-[90%] lg:w-[88%] mx-auto
             lg:flex-row lg:items-center lg:justify-center gap-10 md:gap-14 xl:gap-32">
                  <div className="grid grid-cols-1 gap-5">

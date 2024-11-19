@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Link from "next/link";
 import { raleway } from "@/app/fonts";
 
 type AssignmentContentProps = {
@@ -48,26 +49,17 @@ const AssignmentContent: React.FC<AssignmentContentProps> = ({
                 <div className="z-[1] relative px-4 sm:px-6 lg:px-8 py-8">
                     <div className="mt-4 flex justify-end">
                      
-                        {!(currentAssignmentSlide === selectedAssignment.length - 1) &&
-                        <button
-                       
-                        disabled={currentAssignmentSlide === selectedAssignment.length - 1}
-                        className="px-4 py-2 bg-transparent border border-black-500 rounded-lg 
-                        disabled:bg-gray-200 disabled:border-none disabled:cursor-not-allowed"
-                        >
-                        Next
-                        </button>
-                        }
+                      
 
                         {!isQuizMode && currentAssignmentSlide === selectedAssignment.length - 1 &&
-                        <button
-                      
+                        <Link
+                         href="/submit"
                         className={`px-4 ${loadingQuiz && 'px-12'} py-2 bg-black-500 text-white border border-black-500 
                         flex items-center justify-center text-center rounded-lg 
                         disabled:bg-gray-200 disabled:border-none disabled:cursor-not-allowed`}
                         >
                             Submit
-                        </button>}
+                        </Link>}
                     </div>
                 </div>
 

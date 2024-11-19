@@ -5,7 +5,7 @@ import DashboardHeader from "@/app/components/Dashboard/DashboardHeader";
 import { useMain } from "@/app/context/MainContext";
 type Props = {}
 
-const  SubmitAssignment= (props: Props) => {
+const  SubmitAssignment = (props: Props) => {
   const [description, setDescription] = useState("");
   const [file, setFile] = useState<File | null>(null);
   const [step, setStep] = useState(1); // Track the current step
@@ -100,6 +100,8 @@ const  SubmitAssignment= (props: Props) => {
     </>
   );
 }
+
+export default SubmitAssignment;
 
 
 
