@@ -225,7 +225,7 @@ const OtpModal = ({ isOpen, onClose }: ModalProps) => {
     const validateOtp = async () => {
         try {
             setIsVerifyingLoading(true);
-            const response = await axiosInstance.post("https://wificombatacademy.com/api/v2/otp/", {
+            const response = await axiosInstance.post(`https://wificombatacademy.com/api/v2/otp/`, {
                 email: mail,
                 action: 'validate',
                 otp
@@ -256,7 +256,7 @@ const OtpModal = ({ isOpen, onClose }: ModalProps) => {
     const resendOtp = async () => {
         try {
             setIsResendCodeLoading(true);
-            const response = await axiosInstance.post("https://wificombatacademy.com/api/v2/otp/", {
+            const response = await axiosInstance.post(`https://wificombatacademy.com/api/v2/otp/1`, {
                 email: mail,
                 action: 'resend'
             });
