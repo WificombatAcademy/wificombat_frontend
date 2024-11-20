@@ -225,11 +225,11 @@ const OtpModal = ({ isOpen, onClose }: ModalProps) => {
     const validateOtp = async () => {
         try {
             setIsVerifyingLoading(true);
-            const response = await axiosInstance.post(`${API}/otp/, {
+            const response = await axiosInstance.post("https://wificombatacademy.com/api/v2/otp/", {
                 email: mail,
                 action: 'validate',
                 otp
-            }`);
+            });
 
             // Check if the API returned an error in the body even with a 200 status code
             if (response.data && response.data.code === "OTP_INVALID") {
@@ -256,10 +256,10 @@ const OtpModal = ({ isOpen, onClose }: ModalProps) => {
     const resendOtp = async () => {
         try {
             setIsResendCodeLoading(true);
-            const response = await axiosInstance.post(`${API}/otp/, {
+            const response = await axiosInstance.post("https://wificombatacademy.com/api/v2/otp/", {
                 email: mail,
                 action: 'resend'
-            }`);
+            });
 
             toast.success('OTP resent');
             setIsResendCodeLoading(false);
