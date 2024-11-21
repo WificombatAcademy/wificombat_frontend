@@ -8,6 +8,7 @@ export const schoolLinks = [
   export const studentLinks = [
     { href: "/students/overview", label: "Overview" },
     { href: "/students/curriculum", label: "Curriculum" },
+    {href:  "/students/free-courses", label:"Free Courses"},
     // { href: "/students/pricing", label: "Pricing Plan" },
   ];
 

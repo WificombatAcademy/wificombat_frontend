@@ -19,7 +19,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+          <html lang="en">
+      <head>
+        {/* Favicon Link */}
+        <link
+          rel="icon"
+          href="/logo2.ico" 
+          type="image/x-icon"
+        />
+      </head>
       <Providers>
         <AuthProvider>
           <CartProvider>

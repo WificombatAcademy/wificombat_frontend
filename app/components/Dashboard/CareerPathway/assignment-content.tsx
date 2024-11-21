@@ -53,7 +53,7 @@ const AssignmentContent: React.FC<AssignmentContentProps> = ({
 
                         {!isQuizMode && currentAssignmentSlide === selectedAssignment.length - 1 &&
                         <Link
-                         href="/submit"
+                         href="/dashboard/career-path/submit"
                         className={`px-4 ${loadingQuiz && 'px-12'} py-2 bg-black-500 text-white border border-black-500 
                         flex items-center justify-center text-center rounded-lg 
                         disabled:bg-gray-200 disabled:border-none disabled:cursor-not-allowed`}

@@ -12,7 +12,7 @@ import OtpModal from "../../utils/otp-modal";
 import { useMain } from "@/app/context/MainContext";
 import { IoIosArrowDown } from "react-icons/io";
 import { useAuth } from "@/app/context/AuthContext";
-import { API } from "@/app/utils/types-and-links";
+import { API } from "@/app/utils/types-and-links"; 
 import toast, { Toaster } from "react-hot-toast";
 import axiosInstance from "@/app/utils/auth-interceptor";
 
