@@ -2,9 +2,8 @@ import { merriweather } from "@/app/fonts";
 import { Breadcrumbs } from "@/app/utils/breadcrumb";
 import BreadcrumbsWrapper from "@/app/utils/breadcrumbsWrapper";
 import Cart from "@/app/utils/cart";
-import Image from "next/image";
 import Link from "next/link"
-import { boolean } from "zod";
+
 
 type Props = {
     bgColor?: "blue" | "purple" | "black";
@@ -25,17 +24,21 @@ export const ContactHero = ({bgColor, headerOne, textColor}: Props) => {
                  ${bgColor === "blue" ? "bg-blue-500" : bgColor === "purple" ? "bg-purple-500" : "bg-black"}`}>
                     <Cart/>
                 <div className={`relative max-lg:mt-[5rem] w-[93%] md:w-[80%] lg:w-[85%] mx-auto 
-                max-lg:h-full h-[16rem] xl:h-[20rem] 2xl:h-[24rem] 
-                    flex flex-col md:flex-row md:items-center md:justify-between gap-10`}>
+                  -mt-60  max-lg:h-full h-[16rem] xl:h-[20rem] 2xl:h-[24rem] 
+                    flex flex-coln items-center justify-center md:flex-row md:items-center md:justify-between gap-10`}>
                     <div className="w-full md:basis-[50%] relative">
                         <Breadcrumbs homeLabel={""}/>
-                        <div className="py-10 md:py-14 lg:py-20">
-                        <p className={`${merriweather.className} 
-                              text-5xl md:text-4xl lg:text-5xl 2xl:text-6xl 
-                            max-md:leading-[45px] lg:leading-[67.2px] 2xl:leading-[78px] font-bold max-lg:pt-8`}>
+                    </div>
+                    </div>
+                         <div className="-mt-10">
+                             <p className={`
+                             ${merriweather.className}
+                             justify-center text-5xl font-bold leading-[67.2px] text-center  max-[330px]:gap-5 gap-12 sm:mt-0 max-[330px]:justify-between sm:justify-center`}>
                             {headerOne}
-                        </p>
-                        <div className="mt-4 flex max-[330px]:gap-5 gap-12 sm:mt-0 max-[330px]:justify-between sm:justify-center">
+                            </p>
+                    
+                        
+        <div className="mt-4 justify-center flex max-[330px]:gap-5 gap-12 sm:mt-0 max-[330px]:justify-between sm:justify-center">
            <Link
             target="_blank"
             href="https://x.com/wificombat?s=21&t=_aWwVHjPihXSjRGFLWUMZU5DU1e1nPmEl6wz_Sl4IF0"
@@ -109,9 +112,6 @@ export const ContactHero = ({bgColor, headerOne, textColor}: Props) => {
           </Link>
         </div>
                       </div>
-                    
-                    </div>
-                </div>
             </div>
         </section>
         </BreadcrumbsWrapper>

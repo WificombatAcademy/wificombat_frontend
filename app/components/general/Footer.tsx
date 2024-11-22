@@ -26,10 +26,10 @@ const companyData = [
 
 const getInTouch = [
   { id: "Contact Us", link: "contact-us" },
-  { id: "FAQs", link: "FAQs" },
+  { id: "FAQs", link: "faqs" },
   { id: "Security", link: "" },
-  { id: "Privacy Policy", link: "" },
-  { id: "Terms and Conditions", link: "" },
+  { id: "Privacy Policy", link: "privacy-policy" },
+  { id: "Terms and Conditions", link: "terms-and-conditions" },
 ];
 
 
