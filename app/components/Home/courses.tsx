@@ -15,61 +15,43 @@ import HeadingDesign from "../general/HeaderDesign";
 import Image from "next/image";
 import { RiH3 } from "react-icons/ri";
 import axiosInstance from "@/app/utils/auth-interceptor";
-import CareerCard from "./career-card";
+import FreeCourseCard from "../StudentsComps/free-courses/free-card";
+
+
+interface FreeCourse {
+  price: string;
+  course_id: string;
+  level: string;
+  subject: string;
+  note: string;
+  image: string;
+  
+}
 
 
 
-
-type CareerPathwayCurriculumProps = {
-  schoolCurriculum?: boolean;
-};
-
-export const HomeCourses = ({schoolCurriculum}: CareerPathwayCurriculumProps) => {
-  const [activePathIndex, setActivePathIndex] = useState(0);
+export const HomeCourses = () => {
   const [activeSlide, setActiveSlide] = useState(0);
-  const [pathways, setPathways] = useState<any[]>([]);
-  const [courses, setCourses] = useState<any[]>([]);
-  const [pathwaysLoading, setPathwaysLoading] = useState(true);
-  const [selectedLevel, setSelectedLevel] = useState<CurriculumLevel>("Beginner");
-  const headingText = schoolCurriculum ? "school curriculum" : "career pathway curriculum";
-  // const activePath = pathways[activePathIndex];
-
+  const [courses, setCourses] = useState<FreeCourse[]>([]);
+  const [coursesLoading, setCoursesLoading] = useState(true);
+  const [selectedLevel, setSelectedLevel] = useState<CurriculumLevel>("Intermediate");
 
   useEffect(() => {
-    const fetchPathways = async () => {
-      setPathwaysLoading(true);
+    const fetchFreeCourses = async () => {
+      setCoursesLoading(true);
       try {
-        const response = await axiosInstance.get(`${API_VERSION_ONE}/career-pathways`);
-        setPathways(response.data); // Set fetched pathways to state
-        if (response.data.length > 0) {
-          fetchCourses(response.data[5].pathway_id); // Fetch courses for the first pathway by default
-        }
+        const response = await axiosInstance.get<FreeCourse[]>(`${API_VERSION_ONE}/freecourses`);
+        setCourses(response.data);
       } catch (error) {
-        console.error("Error fetching pathways:", error);
+        console.error("Error fetching free courses:", error);
       } finally {
-        setPathwaysLoading(false); // Done loading
+        setCoursesLoading(false);
       }
     };
 
-    fetchPathways();
+    fetchFreeCourses();
   }, []);
-
-
-  const fetchCourses = async (pathwayId: string) => {
-    try {
-    const response = await axiosInstance.get(`${API_VERSION_ONE}/career-pathway/${pathwayId}/courses`);
-    setCourses(response.data); // Set fetched courses to state
-  } catch (error) {
-    console.error("Error fetching courses:", error);
-  }
-};
-
-const handlePathwayClick = (index: number, pathwayId: string) => {
-  setActivePathIndex(index);
-  fetchCourses(pathwayId); // Fetch courses when a pathway is clicked
-};
-
-
+ 
 // Ensure the courses are rendered correctly within SwiperSlide without extra { }
 
 return (
@@ -84,7 +66,7 @@ return (
       From beginners to advanced learners, our courses cater to all levels. Explore our curriculum and take the next step in your tech career journey.
     </p>
 
-    <Swiper
+    {/* <Swiper
       // freeMode={true}
       // slidesPerGroup={1}
       // slidesPerView={"auto"}
@@ -141,7 +123,80 @@ return (
       <div className="courses-swiper-button-next bg-blue-50 w-9 h-9 md:w-14 md:h-14 rounded flex items-center justify-center transition duration-500 ease-in-out hover:bg-blue-100 cursor-pointer">
         <GrFormNext size={28} />
       </div>
-    </div>
+    </div> */}
+
+
+<Swiper
+          navigation={{
+            nextEl: ".courses-swiper-button-next",
+            prevEl: ".courses-swiper-button-prev",
+          }}
+          pagination={{ clickable: true, el: ".modules-swiper-pagination" }}
+          breakpoints={{
+            320: {
+              slidesPerView: 1,
+              spaceBetween: 20,
+            },
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 10,
+            },
+            1000: {
+              slidesPerView: 3,
+              spaceBetween: 30,
+            },
+            1300: {
+              slidesPerView: 4,
+              spaceBetween: 30,
+            },
+          }}
+          loop={true}
+          modules={[Navigation, Pagination]}
+          className="mt-16 w-[93%] md:w-[90%] lg:w-[88%] 
+          mx-auto flex items-center justify-center overflow-visible"
+        >
+          {courses.length > 0 &&
+            courses
+              .filter((course) => course.level === selectedLevel)
+              .map((course, index) => (
+                <SwiperSlide 
+                  key={course.course_id} 
+                  className="pt-5 md:pt-12 pb-8 flex items-center justify-center overflow-visible sm:flex-row"
+                >
+                  <FreeCourseCard
+                    key={course.course_id}
+                    freecourse={course.subject}
+                    subject={course.subject}
+                    curriculum={true}
+                    image={`https://wificombatacademy.com${course.image}`}
+                    level={course.level}
+                    desc={course.note.replace(/<\/?[^>]+(>|$)/g, "")} // Strip HTML tags
+                    linkTo={`/free-course/${course.course_id}`}
+                    viewCourse={true}
+                    price={course.price === "0.00" ? "Free" : course.price}
+            
+                  />
+                </SwiperSlide>
+              ))}
+        </Swiper>
+
+        <div className="relative w-[93%] md:w-[90%] lg:w-[88%] mx-auto mt-8 md:mt-12 flex items-center justify-between">
+          <div className="courses-swiper-button-prev bg-transparent w-9 h-9 md:w-14 md:h-14 
+          rounded flex items-center justify-center transition duration-500 ease-in-out
+           max-m cursor-pointer">
+            <GrFormPrevious size={28} />
+          </div>
+
+          <div className="flex items-center gap-2 md:gap-3">
+            <div className={`modules-swiper-pagination`}></div>
+          </div>
+
+          <div className="courses-swiper-button-next bg-transparent w-9 h-9 md:w-14 md:h-14 
+          rounded flex items-center justify-center transition duration-500 ease-in-out
+           max-m cursor-pointer">
+            <GrFormNext size={28} />
+          </div>
+        </div>
   </div>
 </section>
 )}

@@ -2,8 +2,8 @@ import GeneralNavbar from "@/app/components/general/GeneralNavbar"
 import { StudentsHero } from "@/app/components/StudentsComps/Overview/hero"
 import Footer from "@/app/components/general/Footer"
 import { FAQ } from "@/app/components/Home/faq"
-import { BePart } from "@/app/components/StudentsComps/free-courses/be-part"
-import { CoursePage } from "@/app/components/StudentsComps/free-courses/course-page"
+import { BePart } from "@/app/components/StudentsComps/free-courses/be-part" 
+import {FreeCourses} from "@/app/components/StudentsComps/free-courses/free-course"
 export default function Page() {
   return (
     <>
@@ -17,7 +17,8 @@ export default function Page() {
        btnColor={true}
        textColor={true}
        />
-       <CoursePage/>
+       {/* <CoursePage/> */}
+       <FreeCourses/>
       <FAQ noSpace={true}/>
       <BePart/>
       <Footer />

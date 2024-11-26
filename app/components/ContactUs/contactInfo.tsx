@@ -5,7 +5,7 @@
 export const ContactInfo = () => {
     return (
         <>
-        <div className="flex items-center justify-center gap-24">
+        <div className='flex items-center h-72 justify-center gap-80  bg-[url("/bbbbbb.png")] p-4'>
         <div>
             <p className="text-custom-lg font-semibold leading-custom-lg">Contact Info</p>
             <p className="">We are always happy to assist you</p>

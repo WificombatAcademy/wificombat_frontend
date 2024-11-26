@@ -483,6 +483,7 @@ export const techpreneurshipSteps = [
   export const API = process.env.NEXT_PUBLIC_BASE_URL_2;
   export const API_VERSION_ONE = process.env.NEXT_PUBLIC_BASE_URL_1;
   export const API_VERSION_THREE = process.env.NEXT_PUBLIC_BASE_URL_3;
+  export const API_VERSION_FOUR = process.env.NEXT_PUBLIC_BASE_URL_4
 
 
   // Utility to generate UUID
