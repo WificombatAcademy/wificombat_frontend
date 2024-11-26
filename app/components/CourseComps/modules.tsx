@@ -89,7 +89,7 @@ const Modules = ({ modules, pricePerModule, courseLevel, courseId, totalModules,
                 </Swiper>
 
                 <div className="relative w-[93%] md:w-[90%] lg:w-[88%] mx-auto mt-8 md:mt-12 flex items-center justify-between">
-                    <div className="courses-swiper-button-prev bg-transparent w-9 h-9 md:w-14 md:h-14 
+                    <div className="courses-swiper-button-pre bg-blue-200 bg-transparent w-9 h-9 md:w-14 md:h-14 
                     rounded flex items-center justify-center transition duration-500 ease-in-out
                      max-m cursor-pointer">
                         <GrFormPrevious size={28} />
@@ -99,7 +99,7 @@ const Modules = ({ modules, pricePerModule, courseLevel, courseId, totalModules,
                         <div className={`modules-swiper-pagination`}></div>
                     </div>
 
-                    <div className="courses-swiper-button-next bg-transparent w-9 h-9 md:w-14 md:h-14 
+                    <div className="courses-swiper-button-next bg-blue-200 bg-transparent w-9 h-9 md:w-14 md:h-14 
                     rounded flex items-center justify-center transition duration-500 ease-in-out
                      max-m cursor-pointer">
                         <GrFormNext size={28} />

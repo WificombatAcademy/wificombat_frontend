@@ -65,8 +65,80 @@ return (
     <p className="mt-5 w-[95%] md:w-[75%] lg:w-[65%] mx-auto text-center text-lg md:text-xl">
       From beginners to advanced learners, our courses cater to all levels. Explore our curriculum and take the next step in your tech career journey.
     </p>
+<Swiper
+          navigation={{
+            nextEl: ".courses-swiper-button-next",
+            prevEl: ".courses-swiper-button-prev",
+          }}
+          pagination={{ clickable: true, el: ".modules-swiper-pagination" }}
+          breakpoints={{
+            320: {
+              slidesPerView: 1,
+              spaceBetween: 20,
+            },
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 10,
+            },
+            1000: {
+              slidesPerView: 3,
+              spaceBetween: 30,
+            },
+            1300: {
+              slidesPerView: 4,
+              spaceBetween: 30,
+            },
+          }}
+          loop={true}
+          modules={[Navigation, Pagination]}
+          className="mt-16 w-[93%] md:w-[90%] lg:w-[88%] 
+          mx-auto flex items-center justify-center overflow-visible"
+        >
+          {courses && courses.map((course) => (
+                     <SwiperSlide 
+                       key={course.course_id} 
+                       className="pt-5 md:pt-12 pb-8 flex items-center justify-center overflow-visible sm:flex-row"
+                                >
+                  <FreeCourseCard
+                    key={course.course_id}
+                    freecourse={course.subject}
+                    subject={course.subject}
+                    curriculum={true}
+                    image={`https://wificombatacademy.com${course.image}`}
+                    level={course.level}
+                    desc={course.note.replace(/<\/?[^>]+(>|$)/g, "")} // Strip HTML tags
+                    linkTo={`/free-course/${course.course_id}`}
+                    viewCourse={true}
+                    price={course.price === "0.00" ? "Free" : course.price}
+            
+                  />
+                </SwiperSlide>
+              ))}
+        </Swiper>
 
-    {/* <Swiper
+        <div className="relative w-[93%] md:w-[90%] lg:w-[88%] mx-auto mt-8 md:mt-12 flex items-center justify-between">
+          <div className="courses-swiper-button-prev bg-transparent w-9 h-9 md:w-14 md:h-14 
+          rounded flex items-center  bg-blue-200 justify-center transition duration-500 ease-in-out
+           max-m cursor-pointer">
+            <GrFormPrevious size={28} />
+          </div>
+
+          <div className="flex items-center gap-2 md:gap-3">
+            <div className={`modules-swiper-pagination`}></div>
+          </div>
+
+          <div className="courses-swiper-button-next bg-blue-200 bg-transparent w-9 h-9 md:w-14 md:h-14 
+          rounded flex items-center justify-center transition duration-500 ease-in-out
+           max-m cursor-pointer">
+            <GrFormNext size={28} />
+          </div>
+        </div>
+  </div>
+</section>
+)}
+
+
+ {/* <Swiper
       // freeMode={true}
       // slidesPerGroup={1}
       // slidesPerView={"auto"}
@@ -124,79 +196,3 @@ return (
         <GrFormNext size={28} />
       </div>
     </div> */}
-
-
-<Swiper
-          navigation={{
-            nextEl: ".courses-swiper-button-next",
-            prevEl: ".courses-swiper-button-prev",
-          }}
-          pagination={{ clickable: true, el: ".modules-swiper-pagination" }}
-          breakpoints={{
-            320: {
-              slidesPerView: 1,
-              spaceBetween: 20,
-            },
-            640: {
-              slidesPerView: 2,
-              spaceBetween: 10,
-            },
-            1000: {
-              slidesPerView: 3,
-              spaceBetween: 30,
-            },
-            1300: {
-              slidesPerView: 4,
-              spaceBetween: 30,
-            },
-          }}
-          loop={true}
-          modules={[Navigation, Pagination]}
-          className="mt-16 w-[93%] md:w-[90%] lg:w-[88%] 
-          mx-auto flex items-center justify-center overflow-visible"
-        >
-          {courses.length > 0 &&
-            courses
-              .filter((course) => course.level === selectedLevel)
-              .map((course, index) => (
-                <SwiperSlide 
-                  key={course.course_id} 
-                  className="pt-5 md:pt-12 pb-8 flex items-center justify-center overflow-visible sm:flex-row"
-                >
-                  <FreeCourseCard
-                    key={course.course_id}
-                    freecourse={course.subject}
-                    subject={course.subject}
-                    curriculum={true}
-                    image={`https://wificombatacademy.com${course.image}`}
-                    level={course.level}
-                    desc={course.note.replace(/<\/?[^>]+(>|$)/g, "")} // Strip HTML tags
-                    linkTo={`/free-course/${course.course_id}`}
-                    viewCourse={true}
-                    price={course.price === "0.00" ? "Free" : course.price}
-            
-                  />
-                </SwiperSlide>
-              ))}
-        </Swiper>
-
-        <div className="relative w-[93%] md:w-[90%] lg:w-[88%] mx-auto mt-8 md:mt-12 flex items-center justify-between">
-          <div className="courses-swiper-button-prev bg-transparent w-9 h-9 md:w-14 md:h-14 
-          rounded flex items-center justify-center transition duration-500 ease-in-out
-           max-m cursor-pointer">
-            <GrFormPrevious size={28} />
-          </div>
-
-          <div className="flex items-center gap-2 md:gap-3">
-            <div className={`modules-swiper-pagination`}></div>
-          </div>
-
-          <div className="courses-swiper-button-next bg-transparent w-9 h-9 md:w-14 md:h-14 
-          rounded flex items-center justify-center transition duration-500 ease-in-out
-           max-m cursor-pointer">
-            <GrFormNext size={28} />
-          </div>
-        </div>
-  </div>
-</section>
-)}

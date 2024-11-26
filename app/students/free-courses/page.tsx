@@ -18,7 +18,7 @@ export default function Page() {
        textColor={true}
        />
        {/* <CoursePage/> */}
-       <FreeCourses/>
+      <FreeCourses/>
       <FAQ noSpace={true}/>
       <BePart/>
       <Footer />
