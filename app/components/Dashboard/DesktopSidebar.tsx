@@ -7,11 +7,14 @@ import { HiOutlineTrophy } from "react-icons/hi2";
 import { IoBookOutline } from "react-icons/io5";
 import { IoMdArrowDropup, IoMdArrowDropdown } from "react-icons/io"
 import {
+  MdGroups,
   MdOutlineAccountCircle,
   MdOutlineDashboard,
   MdOutlineKeyboardDoubleArrowLeft,
   MdOutlineKeyboardDoubleArrowRight,
   MdOutlineLogout,
+  MdVideoCall,
+  MdVideocam,
 } from "react-icons/md";
 import { motion } from "framer-motion";
 import { normalizePath } from "@/app/utils/paths";
@@ -63,13 +66,20 @@ export const navigation = [
     current: false,
     comingSoon: false,
   },
-  // {
-  //   name: "Mentorship",
-  //   href: "/",
-  //   icon: MdGroups,
-  //   current: false,
-  //   comingSoon: false,
-  // },
+  {
+    name: "Mentorship",
+    href: "/",
+    icon: MdGroups,
+    current: false,
+    comingSoon: false,
+  },
+  {
+    name: "Video Library",
+    href: "/",
+    icon: MdVideocam,
+    current: false,
+    comingSoon: false,
+  },
 ];
 
 const DesktopSidebar = () => {

@@ -9,7 +9,7 @@ import Footer from "../../components/general/Footer";
 import GeneralNavbar from "../../components/general/GeneralNavbar";
 import { outcomes, techpreneurshipSteps } from "../../utils/types-and-links";
 import { TechprenuershipOnboarding } from "../../components/OnboardingComps/techpreneurship-onboarding";
-
+import Image from "next/image"
 export default function Page() {
   return (
     <div className="mx-auto relative container w-full max-w-[2000px]">
@@ -37,6 +37,13 @@ export default function Page() {
         resilience, preparing students to launch their own tech startups and shape the future of innovation "
       />
       <PathwayRoadmap title="Techprenuership" steps={techpreneurshipSteps}/>
+      <Image 
+        src="/ROADMAP3b.png"
+        alt=""
+        width={500}
+        height={500}
+        className="w-full"
+      />
       <Outcomes outcomes={outcomes} />
       <TechprenuershipOnboarding />
       <TodayComp 

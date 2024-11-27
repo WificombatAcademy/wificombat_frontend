@@ -17,7 +17,8 @@ export default function Page() {
       bgColor="blue"
       btnColor={true}
       textColor={true}
-      />
+      /> 
+      
       <Training/>
       <BenefitOfTeachers/>
       <OnboardingTeachers/>

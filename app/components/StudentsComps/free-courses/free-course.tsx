@@ -104,7 +104,7 @@ export const FreeCourses = () => {
                     image={`https://wificombatacademy.com${course.image}`}
                     level={course.level}
                     // desc={course.note.replace(/<\/?[^>]+(>|$)/g, "")} // Strip HTML tags
-                    desc="This pathway covers everything from concept art and storytelling to coding and game mechanics."
+                    desc=""
                     linkTo={`/free-course/${course.course_id}`}
                     viewCourse={true}
                     price={course.price === "0.00" ? "Free" : course.price}

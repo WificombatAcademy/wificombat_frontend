@@ -14,10 +14,10 @@ export const CareerPathway = () => {
       <div className="mt-12 md:mt-16 lg:mt-20 xl:mt-[5.5rem] mb-20 w-[93%] md:w-[90%] lg:w-[88%] mx-auto">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-10 lg:gap-16">
           <div className="w-full md:basis-[50%]">
-            <h3 className="md:w-[90%] font-semibold text-lg md:text-3xl">
+            <p className="md:w-[90%] font-semibold  text-[30px] md:text-3xl">
               Career Pathway for Tech: Empowering Kids to Find Their Path in
               Technology
-            </h3>
+            </p>
 
             <p className="mt-4 md:mt-6 md:w-[90%] lg:w-[85%] md:text-xl text-black-700 leading-8">
               <span className="font-semibold">
