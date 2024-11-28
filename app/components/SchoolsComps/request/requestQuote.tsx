@@ -59,7 +59,7 @@ export const RequestQuote = () => {
              <div>
                <form className="space-y-6">
                  <>
-                 <div className="flex gap-x-9">
+                 <div className="flex flex-col gap-3 lg:flex-row lg:gap-x-9">
                  <div className="w-full">
                      <label
                        htmlFor="email"
@@ -71,7 +71,7 @@ export const RequestQuote = () => {
                        <input
                          type="text"
                          placeholder="John"
-                         className="block outline-none w-56 rounded-md border border-gray-600 py-4 px-4 shadow-sm ring-1 
+                         className="block outline-none w-full lg:w-56 rounded-md border border-gray-600 py-4 px-4 shadow-sm ring-1 
                            ring-inset ring-gray-300 placeholder:text-gray-700 focus:ring-2 focus:ring-inset 
                            focus:ring-[#B1B1B4] sm:text-sm sm:leading-6"
                        />
@@ -92,7 +92,7 @@ export const RequestQuote = () => {
                        <input
                          type="text"
                          placeholder="Jesse"
-                         className="block outline-none w-56 rounded-md border border-gray-600 py-4 px-4 shadow-sm ring-1 
+                         className="block outline-none w-full lg:w-56 rounded-md border border-gray-600 py-4 px-4 shadow-sm ring-1 
                            ring-inset ring-gray-300 placeholder:text-gray-700 focus:ring-2 focus:ring-inset 
                            focus:ring-[#B1B1B4] sm:text-sm sm:leading-6"
                        />
@@ -287,7 +287,7 @@ export const RequestQuote = () => {
                          <p className="text-[#F00101]">
                      
                          </p>
-                         <div className="flex gap-x-4 mt-4">
+                         <div className="flex flex-col  gap-3 lg:flex-row lg:gap-x-4 lg:mt-4">
                      <div className="w-full">
                      <label
                        htmlFor="email"
@@ -299,7 +299,7 @@ export const RequestQuote = () => {
                        <input
                          type="text"
                          placeholder="Nigeria"
-                         className="block outline-none w-60 rounded-md border border-gray-600 py-4 px-4 shadow-sm ring-1 
+                         className="block outline-none  w-full lg:w-60 rounded-md border border-gray-600 py-4 px-4 shadow-sm ring-1 
                            ring-inset ring-gray-300 placeholder:text-gray-700 focus:ring-2 focus:ring-inset 
                            focus:ring-[#B1B1B4] sm:text-sm sm:leading-6"
                        />
@@ -320,7 +320,7 @@ export const RequestQuote = () => {
                        <input
                          type="text"
                          placeholder="Lagos"
-                         className="block outline-none w-60 rounded-md border border-gray-600 py-4 px-4 shadow-sm ring-1 
+                         className="block outline-none w-full lg:w-60 rounded-md border border-gray-600 py-4 px-4 shadow-sm ring-1 
                            ring-inset ring-gray-300 placeholder:text-gray-700 focus:ring-2 focus:ring-inset 
                            focus:ring-[#B1B1B4] sm:text-sm sm:leading-6"
                        />
@@ -331,7 +331,7 @@ export const RequestQuote = () => {
                      </div>
                    </div>
                    </div>
-                   <div className="flex gap-x-4 mt-4">
+                   <div className="flex flex-col lg:flex-row lg:gap-x-4 mt-4">
                      <div className="w-full">
                      <label
                        htmlFor="email"
@@ -343,7 +343,7 @@ export const RequestQuote = () => {
                        <input
                          type="text"
                          placeholder="gateway"
-                         className="block outline-none w-72 rounded-md border border-gray-600 py-4 px-4 shadow-sm ring-1 
+                         className="block outline-none w-full lg:w-72 rounded-md border border-gray-600 py-4 px-4 shadow-sm ring-1 
                            ring-inset ring-gray-300 placeholder:text-gray-700 focus:ring-2 focus:ring-inset 
                            focus:ring-[#B1B1B4] sm:text-sm sm:leading-6"
                        />
@@ -364,7 +364,7 @@ export const RequestQuote = () => {
                        <input
                          type="text"
                          placeholder="012345"
-                         className="block outline-none w-48 rounded-md border border-gray-600 py-4 px-4 shadow-sm ring-1 
+                         className="block outline-none w-full lg:w-48 rounded-md border border-gray-600 py-4 px-4 shadow-sm ring-1 
                            ring-inset ring-gray-300 placeholder:text-gray-700 focus:ring-2 focus:ring-inset 
                            focus:ring-[#B1B1B4] sm:text-sm sm:leading-6"
                        />
@@ -377,11 +377,11 @@ export const RequestQuote = () => {
                    </div>
                      </div>
                    </div>
-                   <div className="flex mt-14 gap-x-8">
+                   <div className="flex flex-col gap-4 lg:flex-row lg:mt-14 lg:gap-x-8">
                      <button
                        type="submit"
                        onClick={handleNextStepThree}
-                       className="flex w-72 justify-center rounded-md text-black  disabled:bg-[#B1B1B4] active:bg-[#131314] border-2 border-black  bg-white 
+                       className="flex  w-full lg:w-72 justify-center rounded-md text-black  disabled:bg-[#B1B1B4] active:bg-[#131314] border-2 border-black  bg-white 
                        p-4 text-sm font-semibold leading-6  shadow-sm hover:text-[#B1B1B4] hover:border-[#B1B1B4]  focus-visible:outline 
                        focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#B1B1B4]"
                      >
@@ -390,7 +390,7 @@ export const RequestQuote = () => {
 
                      <button
                        type="submit"
-                       className="flex w-72 justify-center rounded-md disabled:bg-[#B1B1B4] active:bg-[#131314] bg-[#131314] 
+                       className="flex w-full lg:w-72 justify-center rounded-md disabled:bg-[#B1B1B4] active:bg-[#131314] bg-[#131314] 
                        p-4 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#B1B1B4] focus-visible:outline 
                        focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#B1B1B4]"
                      >
@@ -496,10 +496,10 @@ export const RequestQuote = () => {
                  </p>
              </div>
            </div>
-           <div className="flex mt-14 gap-x-8">
+           <div className="flex flex-col gap-4 lg:flex-row lg:mt-14 lg:gap-x-8">
              <button
                type="submit"
-               className="flex w-72 justify-center rounded-md text-black  disabled:bg-[#B1B1B4] active:bg-[#131314] border-2 border-black  bg-white 
+               className="flex w-full lg:w-72 justify-center rounded-md text-black  disabled:bg-[#B1B1B4] active:bg-[#131314] border-2 border-black  bg-white 
                p-4 text-sm font-semibold leading-6  shadow-sm hover:text-[#B1B1B4] focus-visible:outline  hover:border-[#B1B1B4]
                focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#B1B1B4]"
              >
@@ -508,7 +508,7 @@ export const RequestQuote = () => {
 
              <button
                type="submit"
-               className="flex w-72 justify-center rounded-md disabled:bg-[#B1B1B4] active:bg-[#131314] bg-[#131314] 
+               className="flex w-full lg:w-72 justify-center rounded-md disabled:bg-[#B1B1B4] active:bg-[#131314] bg-[#131314] 
                p-4 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#B1B1B4] focus-visible:outline 
                focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#B1B1B4]"
              >
