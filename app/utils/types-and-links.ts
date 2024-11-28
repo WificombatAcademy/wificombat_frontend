@@ -2,7 +2,7 @@ export const schoolLinks = [
     { href: "/schools/overview", label: "Overview" },
     { href: "/schools/curriculum", label: "School Curriculum" },
     { href: "/schools/training", label: "Training" },
-    { href: "", label: "Request a Quote" },
+    { href: "/schools/request-quote", label: "Request a Quote" },
   ];
 
   export const studentLinks = [

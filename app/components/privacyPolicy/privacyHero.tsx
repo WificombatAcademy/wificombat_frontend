@@ -37,9 +37,9 @@ export const PrivacyHero = ({bgColor, headerOne, headerTwo}: Props) => {
                     </div>
 
                     </div>
-                    <div className="-mt-14">
+                    <div className="mt-2 lg:-mt-10">
                         <p className={`${merriweather.className} 
-                           text-center  text-5xl md:text-4xl lg:text-5xl 2xl:text-6xl 
+                           text-center  text-[16px] md:text-4xl lg:text-5xl 2xl:text-6xl 
                             max-md:leading-[45px] lg:leading-[67.2px] 2xl:leading-[78px] font-bold max-lg:pt-8`}>
                             {headerOne}
                         </p>

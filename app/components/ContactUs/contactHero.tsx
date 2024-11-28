@@ -30,15 +30,16 @@ export const ContactHero = ({bgColor, headerOne, textColor}: Props) => {
                         <Breadcrumbs homeLabel={""}/>
                     </div>
                     </div>
-                         <div className="-mt-10">
+                         <div className="mt-2 lg:-mt-10">
                              <p className={`
                              ${merriweather.className}
-                             justify-center text-5xl font-bold leading-[67.2px] text-center  max-[330px]:gap-5 gap-12 sm:mt-0 max-[330px]:justify-between sm:justify-center`}>
+ text-center   text-[16px] md:text-3xl lg:text-5xl 2xl:text-6xl 
+                            lg:leading-[67.2px] 2xl:leading-[78px]  font-bold max-lg:pt-8`}>
                             {headerOne}
                             </p>
                     
                         
-        <div className="mt-4 justify-center flex max-[330px]:gap-5 gap-12 sm:mt-0 max-[330px]:justify-between sm:justify-center">
+        <div className="mt-4 justify-center gap-2 flex max-[330px]:gap-5 lg:gap-12 sm:mt-0 max-[330px]:justify-between sm:justify-center">
            <Link
             target="_blank"
             href="https://x.com/wificombat?s=21&t=_aWwVHjPihXSjRGFLWUMZU5DU1e1nPmEl6wz_Sl4IF0"
