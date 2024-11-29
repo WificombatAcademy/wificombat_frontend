@@ -13,7 +13,6 @@ import {
   MdOutlineKeyboardDoubleArrowLeft,
   MdOutlineKeyboardDoubleArrowRight,
   MdOutlineLogout,
-  MdVideoCall,
   MdVideocam,
 } from "react-icons/md";
 import { motion } from "framer-motion";
@@ -141,7 +140,7 @@ const DesktopSidebar = () => {
   return (
     <div className={`hidden lg:fixed lg:inset-y-0 z-50 lg:flex lg:flex-col 
     transition duration-700 ease-in-out ${toggleSidebar ? "w-fit" : "lg:w-64"}`}>
-
+{/* bg-[#BC00DD] */}
       <motion.div 
       initial="full"
       animate={toggleSidebar ? "iconsOnly" : "full"}

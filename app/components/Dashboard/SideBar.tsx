@@ -91,6 +91,7 @@ const SideBar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                 </div>
               </Transition.Child>
               {/* Sidebar component, swap this element with another sidebar if you like */}
+              {/* bg-[#BC00DD] */}
               <div className={`${raleway.className} 
               flex grow flex-col gap-y-5 overflow-y-auto bg-[#BC00DD] px-6 pb-4 ring-1 ring-white/10`}>
                 <div className="mt-3 flex h-16 shrink-0 items-center">
