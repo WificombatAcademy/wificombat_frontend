@@ -7,7 +7,7 @@ import { TodayComp } from "../../components/CodingPathwayComps/today-comp";
 import { WhyCodingPathway } from "../../components/CodingPathwayComps/why-coding";
 import Footer from "../../components/general/Footer";
 import GeneralNavbar from "../../components/general/GeneralNavbar";
-import { iotSteps, outcomes, } from "../../utils/types-and-links";
+import { iotSteps, robotComes } from "../../utils/types-and-links";
 import { RoboticsOnboarding } from "../../components/OnboardingComps/robotics-onboarding";
 
 export default function Page() {
@@ -33,7 +33,7 @@ export default function Page() {
         the skills to build and control intelligent systems."
       />
       <PathwayRoadmap title="Robotics and Iot" steps={iotSteps}/>
-      <Outcomes outcomes={outcomes} />
+      <Outcomes outcomes={robotComes} />
       <RoboticsOnboarding />
       <TodayComp 
       desc="Embark on an exciting journey into the world of robotics and IoT. Our program provides you with the skills and knowledge to design, build, and program innovative robotic systems. Start your adventure today!" 

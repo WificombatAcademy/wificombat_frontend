@@ -7,7 +7,7 @@ import { TodayComp } from "../../components/CodingPathwayComps/today-comp";
 import { WhyCodingPathway } from "../../components/CodingPathwayComps/why-coding";
 import Footer from "../../components/general/Footer";
 import GeneralNavbar from "../../components/general/GeneralNavbar";
-import { outcomes, techpreneurshipSteps } from "../../utils/types-and-links";
+import { techComes, techpreneurshipSteps } from "../../utils/types-and-links";
 import { TechprenuershipOnboarding } from "../../components/OnboardingComps/techpreneurship-onboarding";
 import Image from "next/image"
 export default function Page() {
@@ -44,7 +44,7 @@ export default function Page() {
         height={500}
         className="w-full"
       />
-      <Outcomes outcomes={outcomes} />
+      <Outcomes outcomes={techComes} />
       <TechprenuershipOnboarding />
       <TodayComp 
       desc="Develop practical skills and hands-on experience in tech entrepreneurship. Our program offers a blend of theoretical knowledge and practical projects to help you apply your learning to real-world challenges." 

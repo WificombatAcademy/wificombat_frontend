@@ -1,5 +1,6 @@
 "use client"
 // import { Toaster } from "react-hot-toast";
+// import { getCountries, getStates } from "@/app/utils/countriesApi";
 import Image from "next/image";
 import { IoChevronBackOutline } from "react-icons/io5";
 import React, {useState} from 'react';
@@ -17,6 +18,13 @@ export const RequestQuote = () => {
 
     const handleNextStepThree = () => {
       setStep(3)
+    }
+    const preStep = () => {
+      setStep(1)
+    }
+
+    const previousStep = () => {
+         setStep(2)
     }
 
 
@@ -200,7 +208,9 @@ export const RequestQuote = () => {
 
 { step === 2 && (
    <div className="relative w-full flex flex-col lg:flex-none overflow-y-auto lg:basis-[50%] mx-auto py-10 px-4 md:px-10 lg:pl-20">
-   <IoChevronBackOutline className="relative lg:absolute left-0 lg:top-7 max-lg:mb-3 border border-[#5F5F5F1A] p-5 w-14 h-14 cursor-pointer font-bold rounded-lg shadow-sm" />
+   <IoChevronBackOutline
+   onClick={preStep}
+    className="relative lg:absolute left-0 lg:top-7 max-lg:mb-3 border border-[#5F5F5F1A] p-5 w-14 h-14 cursor-pointer font-bold rounded-lg shadow-sm" />
       <div className="flex items-center gap-14 ">
        <div className="">
          <h2 className="text-2xl font-bold leading-9 tracking-tight text-gray-900">
@@ -408,7 +418,9 @@ export const RequestQuote = () => {
   )}
 {  step === 3 && (
    <div className="relative w-full  flex flex-col lg:flex-none overflow-y-auto lg:basis-[50%] mx-auto py-10 px-4 md:px-10 lg:pl-20">
-   <IoChevronBackOutline className="relative lg:absolute left-0 lg:top-7 max-lg:mb-3 border border-[#5F5F5F1A] p-5 w-14 h-14 cursor-pointer font-bold rounded-lg shadow-sm" />
+   <IoChevronBackOutline 
+   onClick={previousStep}
+   className="relative lg:absolute left-0 lg:top-7 max-lg:mb-3 border border-[#5F5F5F1A] p-5 w-14 h-14 cursor-pointer font-bold rounded-lg shadow-sm" />
       <div className="flex items-center gap-14 ">
        <div className="">
          <h2 className="text-2xl font-bold leading-9 tracking-tight text-gray-900">

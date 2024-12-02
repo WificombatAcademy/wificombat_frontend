@@ -10,12 +10,15 @@ import { FAQ } from '@/app/components/Home/faq'
 import { useCart } from '@/app/context/CartContext'
 import Loader from '@/app/utils/loader'
 import Modal, { FullScreenModal } from '@/app/utils/modal'
-import { API } from '@/app/utils/types-and-links'
+import { API, multimediaSteps, workSteps } from '@/app/utils/types-and-links'
 import axios from 'axios'
 import { getCookie, setCookie } from 'cookies-next'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast'
+import { HowItWork } from '@/app/components/CourseComps/howItWork'
+import { OutCome } from '@/app/components/CourseComps/outComes'
+
 
 type Props = {}
 
@@ -185,7 +188,8 @@ const handleBuyNow = async (item: any, purchaseType: string = "full_course") => 
           courseId={course.course_id}
           totalModules={totalModules}  
           />
-
+        <OutCome />
+          <HowItWork steps={workSteps} title="HOW IT WORKS"/>
           <TodayComp 
           desc="Start your coding journey today and unlock a world of endless possibilities. Learn from experienced instructors and build amazing projects." 
           header="Start Coding Today!" 

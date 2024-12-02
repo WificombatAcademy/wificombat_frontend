@@ -241,8 +241,14 @@ const Login = () => {
                     <span className="text-sm text-[#131314]">
                       Dont have an account?
                     </span>
-                    <Link
+                    {/* <Link
                       href="/signup"
+                      className="text-blue-600 hover:underline"
+                    >
+                      Sign up
+                    </Link> */}
+                    <Link
+                      href="/registration"
                       className="text-blue-600 hover:underline"
                     >
                       Sign up

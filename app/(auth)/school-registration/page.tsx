@@ -18,13 +18,21 @@ export default function Page() {
     const router = useRouter();
 
     const handleRoleSelection = (role: string) => {
-        if (role === "Teacher" || role === "Administrator") {
-            toast.error(`${role} registration is coming soon!`);
-        } else {
-            setSelectedRole(role);
-            router.push("/signup");
+        if (role === "Teacher" || role === "Student"){
+            toast.error(`${role} registration is coming soon!`)
+        }else{
+             setSelectedRole(role);
+             router.push("/signup") 
         }
-    };
+    }
+    // const handleRoleSelection = (role: string) => {
+    //     if (role === "Teacher" || role === "Administrator") {
+    //         toast.error(`${role} registration is coming soon!`);
+    //     } else {
+    //         setSelectedRole(role);
+    //         router.push("/signup");
+    //     }
+    // };
 
     return (
         <div className="mx-auto relative container w-full max-w-[2000px]">

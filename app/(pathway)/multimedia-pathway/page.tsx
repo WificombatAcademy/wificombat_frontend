@@ -7,7 +7,7 @@ import { TodayComp } from "../../components/CodingPathwayComps/today-comp";
 import { WhyCodingPathway } from "../../components/CodingPathwayComps/why-coding";
 import Footer from "../../components/general/Footer";
 import GeneralNavbar from "../../components/general/GeneralNavbar";
-import { outcomes, multimediaPathwayImages, multimediaSteps } from "../../utils/types-and-links";
+import { multiComes, multimediaPathwayImages, multimediaSteps } from "../../utils/types-and-links";
 import { MultimediaOnboarding } from "../../components/OnboardingComps/multimedia-onboarding";
 
 export default function Page() {
@@ -34,7 +34,7 @@ export default function Page() {
         into impactful visual and auditory experiences."
       />
       <PathwayRoadmap title="Multimedia" steps={multimediaSteps}/>
-      <Outcomes outcomes={outcomes} />
+      <Outcomes outcomes={multiComes} />
       <MultimediaOnboarding />
       <TodayComp 
       desc="Unleash your creativity and bring your visions to life. Our Multimedia Design program equips you with the skills and tools to create stunning visuals and interactive experiences. Start your journey today!" 

@@ -50,12 +50,38 @@ export const schoolLinks = [
     {title:"3D Modeling and Animation", desc:"Visual Design: Students will learn the basics of creating 3D models, textures, and animations, and how to integrate these elements into their games.", bgImage:"/assets/pathway/gaming-outcome-4.png"},
   ]
 
-  export const outcomes = [
-    {title:"Entrepreneurial Principles", desc:"Students will be able to explain key entrepreneurial concepts, such as innovation, business planning, and market research", bgImage:"/assets/pathway/Vector1.png"},
+  export const multiComes = [
+    {title:"Fundamental Concepts", desc:"Students will understand key principles of multimedia design, including visual composition, color theory, typography, and audio integration.", bgImage:"/assets/pathway/mdi_monitor-small.png"},
+    {title:"Software Proficiency", desc:"Students will develop proficiency in multimedia design tools and software (e.g., Photoshop, Blender) for creating graphics, videos, and animations.", bgImage:"/assets/pathway/mdi_blender-software.png"},
+    {title:"Content Creation", desc:"Students will demonstrate the ability to create original multimedia content, including graphics, audio recordings, and video productions.", bgImage:"/assets/pathway/Vector2.png"},
+    {title:"Project Development", desc:"Students will apply design principles to develop a multimedia project from concept to completion, including planning, execution, and evaluation.", bgImage:"/assets/pathway/Vector3.png"},
+  ]
+
+  export const robotComes = [
+    {title:"Application Area", desc:"Students will apply design principles to develop a multimedia project from concept to completion, including planning, execution, and evaluation.", bgImage:"/assets/pathway/mdi_application-edit-outline.png"},
+    {title:"Hands-on Building", desc:"Students will develop hands-on skills by assembling and programming basic IoT devices and robotic kits (e.g., Arduino, Raspberry Pi, LEGO Mindstorms).", bgImage:"/assets/pathway/mdi_hand-coin-outline.png"},
+    {title:"Project Development", desc:"Students will design and develop a functional IoT project or robotic system, integrating hardware and software components to solve a specific problem.", bgImage:"/assets/pathway/Vector3.png"},
+    {title:"Data Collection & Analysis", desc:"Students will collect data from IoT devices and analyze it to derive meaningful insights, demonstrating an understanding of data-driven decision-making.", bgImage:"/assets/pathway/mdi_database-check-outline.png"},
+  ]
+
+  
+  export const aiComes = [
+    {title:"Application of AI", desc:"Students will identify various applications of AI in everyday life, such as virtual assistants, recommendation systems, and autonomous vehicles.", bgImage:"/assets/pathway/mdi_state-machine.png"},
+    {title:"Programming Basics", desc:"Students will learn the basics of programming languages commonly used in AI, such as Python or Scratch, to develop simple AI projects.", bgImage:"/assets/pathway/mdi_code-block-tags.png"},
+    {title:"Problem Solving With AI", desc:"Students will use AI techniques to solve real-world problems, such as developing a chatbot or creating a predictive model based on data.", bgImage:"/assets/pathway/mdi_console.png"},
+    {title:"Data Literacy", desc:"Students will develop skills in data collection, analysis, and interpretation, recognizing the importance of data in AI systems.", bgImage:"/assets/pathway/mdi_database-outline.png"},
+  ]
+
+  export const techComes = [
+    {title:"Entrepreneurial Principles", desc:"Students will be able to explain key entrepreneurial concepts, such as innovation, business planning, and market research.", bgImage:"/assets/pathway/Vector1.png"},
     {title:"Problem Solving", desc:"Students will develop critical thinking and problem-solving skills by identifying challenges and proposing technology-driven solutions.", bgImage:"/assets/pathway/Vector2.png"},
     {title:"Project Management", desc:"Students will learn to plan, execute, and evaluate projects, including setting goals, timelines, and assessing risks.", bgImage:"/assets/pathway/Vector3.png"},
     {title:"Business Model Creation", desc:"Students will create a basic business model for a tech startup, including product/service offerings, target market, and revenue streams.", bgImage:"/assets/pathway/Vector4.png"},
   ]
+
+
+
+
 
 
 export const codingCourseslist = [
@@ -101,6 +127,16 @@ export const techpreneurshipSteps = [
   { stepNumber: 3, title: "Key Stage 3", description: "Junior High School", courseslist: codingCourseslist , image:"/teen-girl.png"},
   { stepNumber: 4, title: "Key Stage 4", description: "Senior High School", courseslist: codingCourseslist , image:"/teen-girl.png"},
 ];
+
+
+export const workSteps = [
+  { stepNumber: 1, title: "Start Course", description: "After registration and purchase, access your course instantly through the dashboard. Simply navigate to Career Pathway to begin exploring the course modules."},
+  { stepNumber: 2, title: "Take The Modules", description: "Begin with Module 1, as modules unlock sequentially upon completion. Each module contains specific lessons to guide your learning journey."},
+  { stepNumber: 3, title: "Attempt The Quizzes", description: "Complete watching the lesson videos to unlock the quiz section. Each lesson's quiz becomes available once you've finished viewing its video content."},
+  { stepNumber: 4, title: "Do Assignment", description: "Access the module assignment after completing all lesson videos and quizzes. The assignment unlocks automatically once you've finished the entire module content."},
+  { stepNumber: 5, title: "Attempt Project", description: "Start working on your final project after completing all course modules. The project unlocks automatically once you've mastered all module content."},
+  { stepNumber: 6, title: "Earn Certificate", description: "Receive your course certificate upon successful completion of all modules, assignments, and the final project. This certifies your mastery of the course content."},
+]
 
   export const pathway = [
     'Coding',

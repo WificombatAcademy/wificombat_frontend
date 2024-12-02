@@ -74,7 +74,7 @@ export const navigation = [
   },
   {
     name: "Video Library",
-    href: "/",
+    href: "/dashboard/video-library",
     icon: MdVideocam,
     current: false,
     comingSoon: false,

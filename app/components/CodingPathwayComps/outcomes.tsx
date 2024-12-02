@@ -19,7 +19,7 @@ export const Outcomes = ({outcomes} : Props) => {
             flex flex-col gap-10 lg:gap-16 xl:gap-24 md:flex-row md:items-center md:justify-between">
 
                 <div className="w-full">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                         {outcomes.map((outcome, index) => (
                             <div 
                             key={index}
@@ -41,7 +41,7 @@ export const Outcomes = ({outcomes} : Props) => {
                             </div>
                                 </div> 
 
-                                <h3 className="mt-4  whitespace-nowrap mr-3 font-semibold text-lg md:text-2xl">{outcome.title}</h3>
+                                <h3 className="mt-4  whitespace-nowrap mr-3 font-semibold text-[24px] md:text-2xl">{outcome.title}</h3>
                                 <p className="mt-4">{outcome.desc}</p>
                             </div>
                         ))}

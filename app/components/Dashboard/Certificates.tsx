@@ -1,5 +1,6 @@
 import React from 'react'
 import { MdOutlineFileDownload } from 'react-icons/md'
+import Image from "next/image"
 
 type Props = {}
 
@@ -22,19 +23,73 @@ const Certificates = (props: Props) => {
         <h2 className='mt-4 text-lg'>Beginner: Level 1</h2>
 
         <div className='mt-5 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
+            {/* <Card3
+             /> */}
+                 <Image
+                            src="/certificate.png"
+                            alt={`logo`}
+                            width={500}
+                            height={500}
+                            className="w-full my-auto lg:w-[93px] object-contain text-neutral-400"
+                        />
+                          <Image
+                            src="/certificate.png"
+                            alt={`logo`}
+                            width={500}
+                            height={500}
+                            className="w-full my-auto lg:w-[93px] object-contain text-neutral-400"
+                        />
+                          <Image
+                            src="/certificate.png"
+                            alt={`logo`}
+                            width={500}
+                            height={500}
+                            className="w-full my-auto lg:w-[93px] object-contain text-neutral-400"
+                        />
+                          <Image
+                            src="/certificate.png"
+                            alt={`logo`}
+                            width={500}
+                            height={500}
+                            className="w-full my-auto lg:w-[93px] object-contain text-neutral-400"
+                        />
+            {/* <Card />
             <Card />
-            <Card />
-            <Card />
-            <Card />
+            <Card /> */}
         </div>
 
         <h2 className='mt-4 text-lg'>Beginner: Level 2</h2>
 
         <div className='mt-5 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
+            {/* <Card />
             <Card />
             <Card />
-            <Card />
-            <Card />
+            <Card /> */}
+              <Image
+                            src="/certificate.png"
+                            alt={`logo`}
+                            width={500}
+                            height={500}
+                            className="w-full my-auto lg:w-[93px] object-contain text-neutral-400"
+                        />  <Image
+                        src="/certificate.png"
+                        alt={`logo`}
+                        width={500}
+                        height={500}
+                        className="w-full my-auto lg:w-[93px] object-contain text-neutral-400"
+                    />  <Image
+                    src="/certificate.png"
+                    alt={`logo`}
+                    width={500}
+                            height={500}
+                    className="w-full my-auto lg:w-[93px] object-contain text-neutral-400"
+                />  <Image
+                src="/certificate.png"
+                alt={`logo`}
+                width={500}
+                height={500}
+                className="w-full my-auto lg:w-[93px] object-contain text-neutral-400"
+            />
         </div>
     </div>
   )
